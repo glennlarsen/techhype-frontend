@@ -1,0 +1,31 @@
+export const content = {
+  en: {
+    heading1: "The Next",
+    heading2: "Generation",
+    heading3: "Business Card.",
+    subHeading: "Tap and Share Your Contact Info.",
+    noticeButton: "Get Notified",
+    commingSoon: "Comming Soon!",
+    modalHeading: "Receive Notice When Techhype Launch",
+    modalInput: "Email",
+    modalButton: "Get Notice",
+    modalInputError: "Please enter a valid email",
+    ModalConfirmation:
+      "Thank you! We will send you an email when Techhype is launched.",
+    submitError: "An error occured, Please try again later",
+  },
+  no: {
+    heading1: "Den Neste",
+    heading2: "Generasjonen",
+    heading3: "Visittkort.",
+    subHeading: "Tap og Del Din Kontaktinfo.",
+    noticeButton: "Bli Varslet",
+    commingSoon: "Kommer Snart!",
+    modalHeading: "Motta Varsel Når Techhype Lanseres",
+    modalInput: "E-post",
+    modalButton: "Få Varsel",
+    modalInputError: "Vennligst fyll inn en gyldig E-post",
+    ModalConfirmation: "Takk! Vi sender deg en E-post når Techhype er lansert.",
+    submitError: "En feil oppstod, vennligst prøv igjen senere",
+  },
+};

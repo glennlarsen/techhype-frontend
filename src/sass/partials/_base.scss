@@ -1,0 +1,34 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: $color-darker;
+  color: white;
+  font-family: $font-primary;
+  line-height: 1.6;
+}
+
+.wrapper {
+  flex: 1 0 auto;
+}
+
+img {
+  width: 100%;
+}
