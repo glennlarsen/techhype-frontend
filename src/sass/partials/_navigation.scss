@@ -36,6 +36,7 @@
     gap: 1.5em;
 
     svg:hover {
+      transition: 0.2s ease-in-out;
       fill: $color-hover;
     }
   }
