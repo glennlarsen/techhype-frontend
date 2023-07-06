@@ -6,21 +6,59 @@ import {
   UilBars,
 } from "@iconscout/react-unicons";
 import Logo from "logo/logo.png";
+import LogoNoText from "logo/logo-no-text.png";
 import LanguageSelector from "components/LanguageSelector";
 import { LangContext } from "utils/LangContext";
+
+function debounce(func, delay) {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
 
 function Navigation() {
   const [lang, setLang] = useContext(LangContext);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  console.log(isScrolled);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const closeMenu = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setMobileMenuOpen(false);
+      setIsClosing(false);
+    }, 600); // Adjust the delay to match the slide-up animation duration
+  };
+
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
   };
+
+  useEffect(() => {
+    const handleScroll = debounce(() => {
+      const scrollPosition = window.scrollY;
+      const scrollThreshold = 100; // Adjust this value as needed
+
+      setIsScrolled(scrollPosition > scrollThreshold);
+    }, 40); // Adjust the debounce delay as needed
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -30,17 +68,17 @@ function Navigation() {
   }, []);
 
   return (
-    <div className="nav-container">
+    <div className={`nav-container${isScrolled ? " scrolled" : ""}`}>
       <div className="navigation container-inner">
-        <img src={Logo} className="logo" />
-        {windowWidth <= 900 ? (
-              ""
-            ) : (
-              <LanguageSelector />
-            )}
-        <div className={`mobile-menu ${isMobileMenuOpen ? "open" : ""}`}>
-        <LanguageSelector />
-          <div className="close-button" onClick={toggleMobileMenu}>
+        <img src={isScrolled ? LogoNoText : Logo} className="logo" />
+        {windowWidth <= 900 ? "" : <LanguageSelector />}
+        <div
+          className={`mobile-menu ${isMobileMenuOpen ? "open" : ""} ${
+            isClosing ? "close" : ""
+          }`}
+        >
+          <LanguageSelector />
+          <div className="close-button" onClick={closeMenu}>
             <span>&times;</span>
           </div>
           <nav>
