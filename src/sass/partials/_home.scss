@@ -1,25 +1,37 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1em;
-  align-items: center;
-  min-height: 700px;
+  padding-top: 1em;
+  min-height: 800px;
   background: url("../../patterns/background.jpg") no-repeat;
   background-size: 700px;
   background-position: center center;
+  background-color: $color-darker;
+
+  @media only screen and (max-width: 1200px) {
+    background-size: 500px;
+    padding-top: 0;
+    padding-bottom: 2em;
+    min-height: 0;
+  }
+
+  @media only screen and (max-width: 900px) {
+    background-size: 400px;
+    background-position: center top 5%;
+  }
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   @media only screen and (max-width: 1200px) {
     align-items: end;
-    background-size: 500px;
-    margin-top: 0;
     min-height: 0;
   }
 
   @media only screen and (max-width: 900px) {
     flex-direction: column-reverse;
     align-items: center;
-    background-size: 400px;
-    background-position: center top 5%;
   }
 }
 
@@ -36,17 +48,6 @@
   @media only screen and (max-width: 900px) {
     width: 350px;
     height: 350px;
-  }
-}
-
-.comming-soon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 2rem;
-
-  @media only screen and (max-width: 900px) {
-    font-size: 1.3rem;
   }
 }
 
@@ -75,4 +76,71 @@
 
 .notification-close {
   @include closeButton(10px, 10px, $color-hover);
+}
+
+.howItWorks {
+  text-align: center;
+
+  h2 {
+    background: transparent linear-gradient(90deg, #249ca3 0%, #70f4da 100%) 0%
+      0% no-repeat padding-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .how-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 2em;
+    padding: 0 1.5em;
+
+    @media only screen and (max-width: 900px) {
+      flex-direction: column;
+    }
+  }
+
+  .techhype-card-icon {
+    border: 2px solid $color-primary;
+    border-radius: 6px;
+    padding: 12px 10px;
+    color: $color-primary;
+  }
+
+  .number-circle {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: $color-primary;
+    border-radius: 50%;
+    color: $color-dark;
+    margin-right: 12px;
+  }
+
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(-4px);
+    }
+    40% {
+      transform: translateX(4px);
+    }
+    60% {
+      transform: translateX(-4px);
+    }
+    80% {
+      transform: translateX(4px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .shake-card:hover {
+    animation: shake 0.4s;
+  }
 }

@@ -18,27 +18,20 @@ const LanguageSelector = (props) => {
   };
 
   return (
-    <Box sx={{ minWidth: 60 }} className="language-selector">
+    <Box sx={{ minWidth: 50 }} className="language-selector">
       <FormControl variant="standard" fullWidth>
-        <InputLabel
-          id="language-select-input-label"
-          sx={{
-            "&.MuiInputLabel-root.Mui-focused": { color: "#54d4c6" },
-          }}
-        >
-          Language
-        </InputLabel>
         <Select
           labelId="language-select-label"
           id="language-select"
           value={lang}
           label="Language"
           onChange={handleChangeSelect}
+          IconComponent={() => null} // Remove the arrow icon
           sx={{
             ":after": { borderBottomColor: "#54d4c6" },
           }}
         >
-          <MenuItem value="no" sx={{ backgroundColor: "#1f2427",}}>
+          <MenuItem value="no">
             <NO />
           </MenuItem>
           <MenuItem value="en">
