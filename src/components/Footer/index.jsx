@@ -1,26 +1,29 @@
-import React from "react";
+import { useContext } from "react";
 import LogoLong from "logo/logo-long.png";
+import { LangContext } from "utils/LangContext";
+import { content } from "constants/content";
 
 function Footer() {
+  const [lang, setLang] = useContext(LangContext);
+
   return (
     <footer>
       <div className="footer-container container-inner">
         <div className="footer-links">
-          <strong>Links</strong>
-          <a href="#">Get Started</a>
-          <a href="#">How It Works</a>
-          <a href="#">Reviews</a>
-          <a href="#">Contact Us</a>
-          <a href="#">Login</a>
+          <strong>{content[lang]["footerHeading"]}</strong>
+          <a href="#">{content[lang]["footerLink1"]}</a>
+          <a href="#">{content[lang]["footerLink2"]}</a>
+          <a href="#">{content[lang]["footerLink3"]}</a>
+          <a href="#">{content[lang]["footerLink4"]}</a>
+          <a href="#">{content[lang]["footerLink5"]}</a>
         </div>
         <div className="footer-info">
           <img src={LogoLong} alt="Techhype Logo" />
-          Contactless Business card using NFC technology to simplify networking
-          and sharing contact details.
+          {content[lang]["footerInfo"]}
         </div>
       </div>
       <div className="footer-line">
-        <p>Copyright ©Techhype 2023. All rights reserved.</p>
+        <p>{content[lang]["copyRights"]}</p>
       </div>
     </footer>
   );
