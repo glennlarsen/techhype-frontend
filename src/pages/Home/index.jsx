@@ -96,9 +96,9 @@ function Home() {
       </section>
 
       <section className="reviews">
-        <h2>Reviews</h2>
+        <h2>{content[lang]["reviewsHeading"]}</h2>
         <p className="reviews-subheading">
-          Hear what others say about Techhype
+        {content[lang]["reviewsSubHeading"]}
         </p>
         <div className="reviews-container container-inner">
           <Card width="100%" className="shake-card">
@@ -119,7 +119,7 @@ function Home() {
             </p>
             <img src={Håkon} alt="Håkon Ekseth" />
             <strong>Håkon E.</strong>
-            <span>Verified Customer</span>
+            <span>{content[lang]["verifiedCustomer"]}</span>
           </Card>
           <Card width="100%" className="shake-card">
             <Rating
@@ -139,7 +139,7 @@ function Home() {
             </p>
             <img src={Glenn} alt="Håkon Ekseth" />
             <strong>Glenn L.</strong>
-            <span>Verified Customer</span>
+            <span>{content[lang]["verifiedCustomer"]}</span>
           </Card>
           <Card width="100%" className="shake-card">
             <Rating
@@ -160,14 +160,14 @@ function Home() {
             </p>
             <img src={Kim} alt="Håkon Ekseth" />
             <strong>Kim H.</strong>
-            <span>Verified Customer</span>
+            <span>{content[lang]["verifiedCustomer"]}</span>
           </Card>
         </div>
-        <Button size="small">More Reviews</Button>
+        <Button size="small">{content[lang]["moreReviewsButton"]}</Button>
       </section>
 
       <section className="clients">
-        <h3>Companies Using Techhype</h3>
+        <h3>{content[lang]["clientsHeading"]}</h3>
         <div className="clients-container container-inner">
           <ReactSimplyCarousel
             activeSlideIndex={activeSlideIndex}

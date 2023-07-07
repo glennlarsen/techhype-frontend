@@ -25,6 +25,11 @@ export const content = {
     createProfileButton: "Sign Up",
     goHeading: "Tap, Share & Go!",
     goText: "It's that simple! Share who you are and what you do with one quick tap.",
+    reviewsHeading: "Reviews",
+    reviewsSubHeading: "Hear what others say about Techhype",
+    verifiedCustomer: "Verified Customer",
+    moreReviewsButton: "More Reviews",
+    clientsHeading: "Companies Using Techhype",
   },
   no: {
     heading1: "Den Neste",
@@ -52,5 +57,10 @@ export const content = {
     createProfileButton: "Registrer deg",
     goHeading: "Tap, Del og Gå!",
     goText: "Det er så enkelt! Del hvem du er og hva du gjør med bare ett raskt trykk.",
+    reviewsHeading: "Anmeldelser",
+    reviewsSubHeading: "Hør hva andre synes om Techhype",
+    verifiedCustomer: "Verifisert Kunde",
+    moreReviewsButton: "Flere Anmeldelser",
+    clientsHeading: "Bedrifter som bruker Techhype",
   },
 };
