@@ -71,7 +71,9 @@ function Navigation() {
   return (
     <div className={`nav-container${isScrolled ? " scrolled" : ""}`}>
       <div className="navigation container-inner">
+        <a href="#">
         <img src={isScrolled ? LogoNoText : Logo} className="logo" />
+        </a>
         <TabletAndDesktop>
         <LanguageSelector />
           </TabletAndDesktop> 

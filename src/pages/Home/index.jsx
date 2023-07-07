@@ -137,7 +137,7 @@ function Home() {
               design and interactive features have definitely helped me leave a
               lasting impression on potential clients."{" "}
             </p>
-            <img src={Glenn} alt="Håkon Ekseth" />
+            <img src={Glenn} alt="Glenn Larsen" />
             <strong>Glenn L.</strong>
             <span>{content[lang]["verifiedCustomer"]}</span>
           </Card>
@@ -158,7 +158,7 @@ function Home() {
               I've streamlined my networking efforts and made a great impression
               on prospects."{" "}
             </p>
-            <img src={Kim} alt="Håkon Ekseth" />
+            <img src={Kim} alt="Kim Hamre" />
             <strong>Kim H.</strong>
             <span>{content[lang]["verifiedCustomer"]}</span>
           </Card>
