@@ -9,6 +9,7 @@ import Logo from "logo/logo.png";
 import LogoNoText from "logo/logo-no-text.png";
 import LanguageSelector from "components/LanguageSelector";
 import { LangContext } from "utils/LangContext";
+import { Mobile, TabletAndDesktop } from "components/ScreenViewSize";
 
 function debounce(func, delay) {
   let timeoutId;
@@ -71,7 +72,9 @@ function Navigation() {
     <div className={`nav-container${isScrolled ? " scrolled" : ""}`}>
       <div className="navigation container-inner">
         <img src={isScrolled ? LogoNoText : Logo} className="logo" />
-        {windowWidth <= 900 ? "" : <LanguageSelector />}
+        <TabletAndDesktop>
+        <LanguageSelector />
+          </TabletAndDesktop> 
         <div
           className={`mobile-menu ${isMobileMenuOpen ? "open" : ""} ${
             isClosing ? "close" : ""
@@ -99,14 +102,14 @@ function Navigation() {
             {windowWidth <= 900 ? (
               <UilUserCircle size={28} color="white" />
             ) : (
-              <UilUserCircle size={40} color="white" />
+              <UilUserCircle size={38} color="white" />
             )}
           </a>
           <a href="#">
             {windowWidth <= 900 ? (
               <UilShoppingBag size={28} color="white" />
             ) : (
-              <UilShoppingBag size={40} color="white" />
+              <UilShoppingBag size={38} color="white" />
             )}
           </a>
         </div>

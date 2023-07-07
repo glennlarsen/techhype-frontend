@@ -1,3 +1,4 @@
+//Header section
 .header {
   padding-top: 1em;
   min-height: 800px;
@@ -77,13 +78,12 @@
 .notification-close {
   @include closeButton(10px, 10px, $color-hover);
 }
-
+//How it works section
 .howItWorks {
   text-align: center;
 
   h2 {
-    background: transparent linear-gradient(90deg, #249ca3 0%, #70f4da 100%) 0%
-      0% no-repeat padding-box;
+    background: -webkit-linear-gradient(45deg, $color-hover 0%, #70f4da 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -93,7 +93,7 @@
     justify-content: space-evenly;
     align-items: center;
     gap: 2em;
-    padding: 0 1.5em;
+    padding: 0 1.5em 4em 1.5em;
 
     @media only screen and (max-width: 900px) {
       flex-direction: column;
@@ -119,6 +119,14 @@
     margin-right: 12px;
   }
 
+  .placeholder-button {
+    height: 51px;
+
+    @media only screen and (max-width: 900px) {
+      display: none;
+    }
+  }
+
   @keyframes shake {
     0% {
       transform: translateX(0);
@@ -142,5 +150,87 @@
 
   .shake-card:hover {
     animation: shake 0.4s;
+  }
+}
+
+//Reviews section
+.reviews {
+  background-color: $color-dark;
+  text-align: center;
+  padding-bottom: 3em;
+  padding-top: 0.5em;
+
+  h2 {
+    margin-bottom: 0;
+  }
+
+  .reviews-subheading {
+    margin-top: 0.5em;
+    margin-bottom: 3em;
+    background: -webkit-linear-gradient(45deg, $color-hover 0%, #70f4da 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  .reviews-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 2em;
+    padding: 0 1.5em 3em 1.5em;
+
+    @media only screen and (max-width: 900px) {
+      flex-direction: column;
+    }
+
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+}
+
+//Clients section
+
+.clients {
+  text-align: center;
+  color: $color-dark;
+
+  .clients-container {
+    padding: 0 1em;
+
+    svg:hover {
+      transition: .3s ease-in-out;
+      color: $color-hover;
+    }
+  }
+
+  .client-box-container {
+    width: 300px;
+    height: 200px;
+    border: 20px solid white;
+    line-height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1em;
+  }
+
+  .client-box-inner {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 1px 20px #00000029;
+    border-radius: 10px;
+    display: flex;
+    padding: 2em;
+    width: 100%;
+
+    img {
+      max-height: 110px;
+      object-fit: contain;
+    }
   }
 }
