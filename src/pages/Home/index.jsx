@@ -75,6 +75,7 @@ function Home() {
     >
       <section className="header">
         <div className="header-container container-inner">
+        <Fade left>
           <div className="heading">
             <h1>
               {content[lang]["heading1"]}{" "}
@@ -86,12 +87,17 @@ function Home() {
             <p>{content[lang]["subHeading"]}</p>
             <Button>{content[lang]["getStartedButton"]}</Button>
           </div>
+          </Fade>
+          <Fade right>
           <PhoneAnimation />
+          </Fade>
         </div>
       </section>
 
       <section className="howItWorks" id="howItWorks">
+      <Fade bottom>
         <h2>{content[lang]["howHeading"]}</h2>
+        </Fade>
         <div className="how-container container-inner">
           <Fade bottom>
             <Card
@@ -145,10 +151,14 @@ function Home() {
       </section>
 
       <section className="reviews" id="reviews">
+      <Fade bottom>
         <h2>{content[lang]["reviewsHeading"]}</h2>
+        </Fade>
+        <Fade bottom>
         <p className="reviews-subheading">
           {content[lang]["reviewsSubHeading"]}
         </p>
+        </Fade>
         <div className="reviews-container container-inner">
           <Fade bottom>
             <Card width="100%">
@@ -222,7 +232,9 @@ function Home() {
       </section>
 
       <section className="clients">
+      <Fade bottom>
         <h3>{content[lang]["clientsHeading"]}</h3>
+        </Fade>
         <div className="clients-container container-inner">
           <Fade bottom>
             <ReactSimplyCarousel

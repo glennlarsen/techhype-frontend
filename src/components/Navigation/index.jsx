@@ -79,7 +79,7 @@ function Navigation({ scrollToSection }) {
         </a>
         <TabletAndDesktop>
         <LanguageSelector />
-          </TabletAndDesktop> 
+          </TabletAndDesktop>
         <div
           className={`mobile-menu ${isMobileMenuOpen ? "open" : ""} ${
             isClosing ? "close" : ""
