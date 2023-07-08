@@ -133,10 +133,10 @@ function Home() {
         {content[lang]["reviewsSubHeading"]}
         </p>
         <div className="reviews-container container-inner">
-          <Card width="100%" className="shake-card">
+          <Card width="100%">
             <Rating
               name="review"
-              value="5"
+              value={5}
               readOnly
               precision={0.5}
               emptyIcon={
@@ -153,10 +153,10 @@ function Home() {
             <strong>Håkon E.</strong>
             <span>{content[lang]["verifiedCustomer"]}</span>
           </Card>
-          <Card width="100%" className="shake-card">
+          <Card width="100%">
             <Rating
               name="review"
-              value="4.7"
+              value={4.7}
               readOnly
               precision={0.5}
               emptyIcon={
@@ -173,10 +173,10 @@ function Home() {
             <strong>Glenn L.</strong>
             <span>{content[lang]["verifiedCustomer"]}</span>
           </Card>
-          <Card width="100%" className="shake-card">
+          <Card width="100%">
             <Rating
               name="review"
-              value="5"
+              value={5}
               readOnly
               precision={0.5}
               emptyIcon={
