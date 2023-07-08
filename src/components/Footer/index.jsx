@@ -3,7 +3,7 @@ import LogoLong from "logo/logo-long.png";
 import { LangContext } from "utils/LangContext";
 import { content } from "constants/content";
 
-function Footer() {
+function Footer( { scrollToSection } ) {
   const [lang, setLang] = useContext(LangContext);
 
   return (
@@ -12,8 +12,8 @@ function Footer() {
         <div className="footer-links">
           <strong>{content[lang]["footerHeading"]}</strong>
           <a href="#">{content[lang]["footerLink1"]}</a>
-          <a href="#">{content[lang]["footerLink2"]}</a>
-          <a href="#">{content[lang]["footerLink3"]}</a>
+          <a href="#" onClick={() => scrollToSection("howItWorks")}>{content[lang]["footerLink2"]}</a>
+          <a href="#" onClick={() => scrollToSection("reviews")}>{content[lang]["footerLink3"]}</a>
           <a href="#">{content[lang]["footerLink4"]}</a>
           <a href="#">{content[lang]["footerLink5"]}</a>
         </div>

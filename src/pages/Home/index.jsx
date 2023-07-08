@@ -36,8 +36,40 @@ function Home() {
     };
   }, []);
 
+  const handleScrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const offset = 100; // Adjust the offset as desired
+      const targetOffset = section.offsetTop - offset;
+      const initialOffset = window.pageYOffset || document.documentElement.scrollTop;
+      const distance = targetOffset - initialOffset;
+      const duration = 800; // Adjust the duration as desired (in milliseconds)
+      const startTime = performance.now();
+  
+      const scrollStep = (timestamp) => {
+        const elapsedTime = timestamp - startTime;
+        const progress = Math.min(elapsedTime / duration, 1);
+        const easing = easeInOutQuad(progress);
+        window.scrollTo(0, initialOffset + distance * easing);
+  
+        if (elapsedTime < duration) {
+          requestAnimationFrame(scrollStep);
+        }
+      };
+  
+      const easeInOutQuad = (t) => {
+        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      };
+  
+      requestAnimationFrame(scrollStep);
+    }
+  };
+  
+  
+
   return (
     <Layout
+    scrollToSection={handleScrollToSection}
       page="Home"
       description="Techhype is the next Generation digital Business Card. Tap and Share your contact details in one second."
     >
@@ -58,7 +90,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="howItWorks">
+      <section className="howItWorks" id="howItWorks">
         <h2>{content[lang]["howHeading"]}</h2>
         <div className="how-container container-inner">
           <Card minHeight={windowWidth <= 900 ? "none" : "397px"} width="100%">
@@ -95,7 +127,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="reviews">
+      <section className="reviews" id="reviews">
         <h2>{content[lang]["reviewsHeading"]}</h2>
         <p className="reviews-subheading">
         {content[lang]["reviewsSubHeading"]}

@@ -21,14 +21,12 @@ function debounce(func, delay) {
   };
 }
 
-function Navigation() {
+function Navigation({ scrollToSection }) {
   const [lang, setLang] = useContext(LangContext);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isScrolled, setIsScrolled] = useState(false);
-
-  console.log(isScrolled);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -45,6 +43,11 @@ function Navigation() {
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
   };
+
+  const handleLinkClick = (section) => {
+    closeMenu();
+    scrollToSection(section);
+  }
 
   useEffect(() => {
     const handleScroll = debounce(() => {
@@ -88,15 +91,15 @@ function Navigation() {
           </div>
           <nav>
             <a href="#">{content[lang]["menuItem1"]}</a>
-            <a href="#">{content[lang]["menuItem2"]}</a>
-            <a href="#">{content[lang]["menuItem3"]}</a>
+            <a href="#" onClick={() => handleLinkClick("howItWorks")}>{content[lang]["menuItem2"]}</a>
+            <a href="#" onClick={() => handleLinkClick("reviews")}>{content[lang]["menuItem3"]}</a>
             <a href="#">{content[lang]["menuItem4"]}</a>
           </nav>
         </div>
         <nav className="desktop-menu">
           <a href="#">{content[lang]["menuItem1"]}</a>
-          <a href="#">{content[lang]["menuItem2"]}</a>
-          <a href="#">{content[lang]["menuItem3"]}</a>
+          <a href="#" onClick={() => scrollToSection("howItWorks")}>{content[lang]["menuItem2"]}</a>
+          <a href="#" onClick={() => scrollToSection("reviews")}>{content[lang]["menuItem3"]}</a>
           <a href="#">{content[lang]["menuItem4"]}</a>
         </nav>
         <div className="nav-icons">

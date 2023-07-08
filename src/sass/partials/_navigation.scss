@@ -2,6 +2,11 @@
   width: 100%;
   background-color: $color-darker;
   transition: all 0.3s ease;
+
+  a:first-child {
+    display: flex;
+    align-items: center;
+  }
 }
 
 @media (min-width: 900px) {
