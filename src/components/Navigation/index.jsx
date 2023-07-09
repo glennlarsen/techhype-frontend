@@ -47,7 +47,7 @@ function Navigation({ scrollToSection }) {
   const handleLinkClick = (section) => {
     closeMenu();
     scrollToSection(section);
-  }
+  };
 
   useEffect(() => {
     const handleScroll = debounce(() => {
@@ -55,7 +55,7 @@ function Navigation({ scrollToSection }) {
       const scrollThreshold = 10; // Adjust this value as needed
 
       setIsScrolled(scrollPosition > scrollThreshold);
-    }, 40); // Adjust the debounce delay as needed
+    }, 50); // Adjust the debounce delay as needed
 
     window.addEventListener("scroll", handleScroll);
 
@@ -72,14 +72,14 @@ function Navigation({ scrollToSection }) {
   }, []);
 
   return (
-    <div className={`nav-container${isScrolled ? " scrolled" : ""}`}>
+    <div className={`nav-container${isScrolled ? " scrolled fade-in" : ""}`}>
       <div className="navigation container-inner">
-        <a href="#">
-        <img src={isScrolled ? LogoNoText : Logo} className="logo" />
+        <a href="/">
+          <img src={isScrolled ? LogoNoText : Logo} className="logo" />
         </a>
         <TabletAndDesktop>
-        <LanguageSelector />
-          </TabletAndDesktop>
+          <LanguageSelector />
+        </TabletAndDesktop>
         <div
           className={`mobile-menu ${isMobileMenuOpen ? "open" : ""} ${
             isClosing ? "close" : ""
@@ -91,15 +91,23 @@ function Navigation({ scrollToSection }) {
           </div>
           <nav>
             <a href="#">{content[lang]["menuItem1"]}</a>
-            <a href="#" onClick={() => handleLinkClick("howItWorks")}>{content[lang]["menuItem2"]}</a>
-            <a href="#" onClick={() => handleLinkClick("reviews")}>{content[lang]["menuItem3"]}</a>
+            <a href="/" onClick={() => handleLinkClick("howItWorks")}>
+              {content[lang]["menuItem2"]}
+            </a>
+            <a href="#" onClick={() => handleLinkClick("reviews")}>
+              {content[lang]["menuItem3"]}
+            </a>
             <a href="#">{content[lang]["menuItem4"]}</a>
           </nav>
         </div>
         <nav className="desktop-menu">
           <a href="#">{content[lang]["menuItem1"]}</a>
-          <a href="#" onClick={() => scrollToSection("howItWorks")}>{content[lang]["menuItem2"]}</a>
-          <a href="#" onClick={() => scrollToSection("reviews")}>{content[lang]["menuItem3"]}</a>
+          <a href="#" onClick={() => scrollToSection("howItWorks")}>
+            {content[lang]["menuItem2"]}
+          </a>
+          <a href="#" onClick={() => scrollToSection("reviews")}>
+            {content[lang]["menuItem3"]}
+          </a>
           <a href="#">{content[lang]["menuItem4"]}</a>
         </nav>
         <div className="nav-icons">

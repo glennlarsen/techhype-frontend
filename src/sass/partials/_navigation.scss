@@ -1,7 +1,6 @@
 .nav-container {
   width: 100%;
   background-color: $color-darker;
-  transition: all 0.3s ease;
 
   a {
     display: flex;
@@ -16,10 +15,11 @@
 
 .nav-container.scrolled {
   position: sticky;
-  top: 0;
+  top: -72;
+  opacity: 0.2;
   z-index: 100;
   background-color: $color-dark;
-  box-shadow: 0 -6px 10px 5px rgba(0,0,0,0.5);
+  box-shadow: 0 -6px 10px 5px rgba(0, 0, 0, 0.5);
 
   .logo {
     width: 40px;
@@ -33,6 +33,23 @@
 
   .navigation {
     padding: 1em;
+  }
+
+  &.fade-in {
+    animation: fadeDown 0.6s ease forwards;
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    top: -72;
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    top: 0;
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

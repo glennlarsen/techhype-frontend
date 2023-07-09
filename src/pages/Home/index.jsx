@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import Layout from "components/Layout";
 import PhoneAnimation from "components/PhoneAnimation";
 import { Button, Card } from "techhype-components";
@@ -22,14 +23,16 @@ import Techhype from "images/techhype.png";
 import Fade from "react-reveal/Fade";
 import NfcCard from "images/nfc-card.jpeg";
 
-import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
-import RecyclingIcon from '@mui/icons-material/Recycling';
+import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import RecyclingIcon from "@mui/icons-material/Recycling";
 
 function Home() {
   const [lang, setLang] = useContext(LangContext);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
@@ -43,6 +46,11 @@ function Home() {
   }, []);
 
   const handleScrollToSection = (sectionId) => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      return;
+    }
+
     const section = document.getElementById(sectionId);
     if (section) {
       const offset = 100; // Adjust the offset as desired
@@ -156,34 +164,32 @@ function Home() {
         </div>
       </section>
 
-      <section className="why">
-        <div className="why-container container-inner">
+      <section className="benefits">
+        <div className="benefits-container container-inner">
           <Fade bottom>
-            <div className="why-image">
+            <div className="benefits-image">
               <img src={NfcCard} alt="NFC Card model" />
             </div>
           </Fade>
           <Fade right>
-            <div className="why-text">
-              <p className="pre-heading">{content[lang]["whyPreHeading"]}</p>
-              <h2>{content[lang]["whyHeading"]}</h2>
-              <p>
-                Simplify networking and leave a lasting impression with a
-                digital NFC business card. Instantly share your contact details
-                with a tap, eliminating the need for outdated paper cards.
+            <div className="benefits-text">
+              <p className="pre-heading">
+                {content[lang]["benefitsPreHeading"]}
               </p>
-              <div className="why-icons">
+              <h2>{content[lang]["benefitsHeading"]}</h2>
+              <p>{content[lang]["benefitsParagraph"]}</p>
+              <div className="benefits-icons">
                 <div>
                   <WorkOutlineIcon sx={{ color: "#54d4c6" }} />
-                <span>professional</span>
+                  <span>{content[lang]["benefitsIcon1"]}</span>
                 </div>
                 <div>
                   <CreditCardIcon sx={{ color: "#54d4c6" }} />
-                <span>easy</span>
+                  <span>{content[lang]["benefitsIcon2"]}</span>
                 </div>
                 <div>
                   <RecyclingIcon sx={{ color: "#54d4c6" }} />
-                <span>sustainable</span>
+                  <span>{content[lang]["benefitsIcon3"]}</span>
                 </div>
               </div>
             </div>
