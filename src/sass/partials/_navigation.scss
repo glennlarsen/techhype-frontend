@@ -7,35 +7,32 @@
     display: flex;
     align-items: center;
   }
+
+  svg {
+    height: 27px;
+    width: 27px;
+  }
 }
 
-@media (min-width: 900px) {
-  .nav-container.scrolled {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background-color: $color-dark;
+.nav-container.scrolled {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: $color-dark;
+  box-shadow: 0 -6px 10px 5px rgba(0,0,0,0.5);
 
-    .logo {
-      width: 50px;
-    }
+  .logo {
+    width: 40px;
+  }
 
+  @media (min-width: 900px) {
     .language-selector {
       display: none;
     }
+  }
 
-    .navigation {
-      padding: 1em;
-
-      a {
-        font-size: 1rem;
-      }
-
-      svg {
-        height: 30px;
-        width: 30px;
-      }
-    }
+  .navigation {
+    padding: 1em;
   }
 }
 
@@ -48,7 +45,7 @@
 
   @media (max-width: 900px) {
     padding: 1em 1em 0 1em;
-    }
+  }
 
   .desktop-menu {
     display: flex;
@@ -57,7 +54,7 @@
     a {
       text-decoration: none;
       color: white;
-      font-size: 20px;
+      font-size: 1rem;
       font-weight: bold;
       transition: 0.2s ease-in-out;
 
@@ -110,7 +107,7 @@
       a {
         text-decoration: none;
         color: white;
-        font-size: 24px;
+        font-size: 1.5rem;
         font-weight: bold;
         transition: 0.2s ease-in-out;
 
@@ -155,10 +152,10 @@
 }
 
 .logo {
-  width: 100px;
+  width: 75px;
 
   @media only screen and (max-width: 900px) {
-    width: 80px;
+    width: 60px;
   }
 
   @media only screen and (max-width: 600px) {

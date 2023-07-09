@@ -81,17 +81,19 @@
 //How it works section
 .howItWorks {
   text-align: center;
+  padding: 2em 0;
 
   h2 {
     background: -webkit-linear-gradient(45deg, $color-hover 0%, #70f4da 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    margin-top: 0.2em;
   }
 
   .how-container {
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: stretch;
     gap: 2em;
     padding: 0 1.5em 4em 1.5em;
 
@@ -100,6 +102,7 @@
     }
 
     .react-reveal {
+      display: flex;
       width: 100%;
     }
   }
@@ -157,11 +160,83 @@
   }
 }
 
+//section why
+.why {
+  background: $color-light;
+  color: $color-dark;
+  padding: 5em 1.5em;
+
+  @media only screen and (max-width: 900px) {
+    padding: 3em 1.5em;
+  }
+
+  h2 {
+    margin-top: 0.2em;
+  }
+
+  .why-container {
+    display: flex;
+    gap: 2em;
+    align-items: center;
+    width: 100%;
+
+    @media only screen and (max-width: 900px) {
+      flex-direction: column-reverse;
+    }
+
+    .why-image {
+      padding: 1em 1.5em;
+    }
+
+    img, .why-image {
+      border-radius: 10px;
+    }
+
+    .why-text {
+      text-align: center;
+      padding: 1.5em;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      span {
+        text-transform: uppercase;
+        font-size: 13px;
+        font-weight: 700;
+      }
+    }
+
+    .why-text,
+    .why-image {
+      flex: 1;
+    }
+
+    .why-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+      padding-top: 1em;
+
+      @media only screen and (max-width: 400px) {
+        flex-direction: column;
+        width: auto;
+        margin: 0 auto;
+      }
+
+      &>div {
+        display: flex;
+        align-items: center;
+        gap: .5em;
+      }
+    }
+  }
+}
+
 //Reviews section
 .reviews {
   background-color: $color-dark;
   text-align: center;
-  padding-bottom: 3em;
+  padding-bottom: 4em;
   padding-top: 0.5em;
 
   h2 {
@@ -181,7 +256,7 @@
   .reviews-container {
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: stretch;
     gap: 2em;
     padding: 0 1.5em 3em 1.5em;
 
@@ -195,6 +270,10 @@
       border-radius: 50%;
       object-fit: cover;
     }
+
+    .react-reveal {
+      display: flex;
+    }
   }
 }
 
@@ -204,6 +283,11 @@
   text-align: center;
   color: $color-dark;
   padding-bottom: 4em;
+  padding-top: 2em;
+
+  H3 {
+    margin-top: 0.2em;
+  }
 
   .clients-container {
     padding: 0 1em;

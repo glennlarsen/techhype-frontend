@@ -52,7 +52,7 @@ function Navigation({ scrollToSection }) {
   useEffect(() => {
     const handleScroll = debounce(() => {
       const scrollPosition = window.scrollY;
-      const scrollThreshold = 100; // Adjust this value as needed
+      const scrollThreshold = 10; // Adjust this value as needed
 
       setIsScrolled(scrollPosition > scrollThreshold);
     }, 40); // Adjust the debounce delay as needed

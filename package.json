@@ -32,7 +32,7 @@
     "react-scripts": "^5.0.1",
     "react-simply-carousel": "^9.0.3",
     "sass": "^1.59.2",
-    "techhype-components": "^1.19.6",
+    "techhype-components": "^1.20.6",
     "web-vitals": "^2.1.4",
     "yup": "^1.1.1"
   },

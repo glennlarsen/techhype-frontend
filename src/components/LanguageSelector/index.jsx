@@ -18,7 +18,7 @@ const LanguageSelector = (props) => {
   };
 
   return (
-    <Box sx={{ minWidth: 50 }} className="language-selector">
+    <Box sx={{ minWidth: 48 }} className="language-selector">
       <FormControl variant="standard" fullWidth>
         <Select
           labelId="language-select-label"

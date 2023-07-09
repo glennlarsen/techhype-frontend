@@ -20,6 +20,11 @@ import Frydenbo from "images/frydenbo.jpg";
 import Hamre from "images/hamre.png";
 import Techhype from "images/techhype.png";
 import Fade from "react-reveal/Fade";
+import NfcCard from "images/nfc-card.jpeg";
+
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import RecyclingIcon from '@mui/icons-material/Recycling';
 
 function Home() {
   const [lang, setLang] = useContext(LangContext);
@@ -96,14 +101,15 @@ function Home() {
 
       <section className="howItWorks" id="howItWorks">
         <Fade bottom>
+          <p className="pre-heading">{content[lang]["howPreHeading"]}</p>
           <h2>{content[lang]["howHeading"]}</h2>
         </Fade>
         <div className="how-container container-inner">
           <Fade bottom width="100%">
             <Card
-              minHeight={windowWidth <= 900 ? "none" : "397px"}
+              minheight={windowWidth <= 900 ? "none" : "397px"}
               width="100%"
-              minWidth={windowWidth <= 1300 ? "none" : "397px"}
+              minwidth={windowWidth <= 1300 ? "none" : "397px"}
             >
               <div className="techhype-card-icon">Techhype</div>
               <h3>
@@ -116,9 +122,9 @@ function Home() {
           </Fade>
           <Fade bottom width="100%">
             <Card
-              minHeight={windowWidth <= 900 ? "none" : "397px"}
+              minheight={windowWidth <= 900 ? "none" : "397px"}
               width="100%"
-              minWidth={windowWidth <= 1300 ? "none" : "397px"}
+              minwidth={windowWidth <= 1300 ? "none" : "397px"}
             >
               <UilUser size={50} color="#54d4c6" />
               <h3>
@@ -133,10 +139,10 @@ function Home() {
           </Fade>
           <Fade bottom>
             <Card
-              minHeight={windowWidth <= 900 ? "none" : "397px"}
+              minheight={windowWidth <= 900 ? "none" : "397px"}
               width="100%"
               className="shake-card"
-              minWidth={windowWidth <= 1300 ? "none" : "397px"}
+              minwidth={windowWidth <= 1300 ? "none" : "397px"}
             >
               <UilMobileVibrate size={50} color="#54d4c6" />
               <h3>
@@ -146,6 +152,41 @@ function Home() {
               <p>{content[lang]["goText"]}</p>
               <div className="placeholder-button"></div>
             </Card>
+          </Fade>
+        </div>
+      </section>
+
+      <section className="why">
+        <div className="why-container container-inner">
+          <Fade bottom>
+            <div className="why-image">
+              <img src={NfcCard} alt="NFC Card model" />
+            </div>
+          </Fade>
+          <Fade right>
+            <div className="why-text">
+              <p className="pre-heading">{content[lang]["whyPreHeading"]}</p>
+              <h2>{content[lang]["whyHeading"]}</h2>
+              <p>
+                Simplify networking and leave a lasting impression with a
+                digital NFC business card. Instantly share your contact details
+                with a tap, eliminating the need for outdated paper cards.
+              </p>
+              <div className="why-icons">
+                <div>
+                  <WorkOutlineIcon sx={{ color: "#54d4c6" }} />
+                <span>professional</span>
+                </div>
+                <div>
+                  <CreditCardIcon sx={{ color: "#54d4c6" }} />
+                <span>easy</span>
+                </div>
+                <div>
+                  <RecyclingIcon sx={{ color: "#54d4c6" }} />
+                <span>sustainable</span>
+                </div>
+              </div>
+            </div>
           </Fade>
         </div>
       </section>
@@ -233,10 +274,11 @@ function Home() {
 
       <section className="clients">
         <Fade bottom>
+          <p className="pre-heading">{content[lang]["clientsPreHeading"]}</p>
           <h3>{content[lang]["clientsHeading"]}</h3>
         </Fade>
         <div className="clients-container container-inner">
-          <Fade bottom>
+          <Fade left>
             <ReactSimplyCarousel
               activeSlideIndex={activeSlideIndex}
               onRequestChange={setActiveSlideIndex}
