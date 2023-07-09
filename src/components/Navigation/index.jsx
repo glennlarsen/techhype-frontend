@@ -91,7 +91,7 @@ function Navigation({ scrollToSection }) {
           </div>
           <nav>
             <a href="#">{content[lang]["menuItem1"]}</a>
-            <a href="/" onClick={() => handleLinkClick("howItWorks")}>
+            <a href="#" onClick={() => handleLinkClick("howItWorks")}>
               {content[lang]["menuItem2"]}
             </a>
             <a href="#" onClick={() => handleLinkClick("reviews")}>

@@ -1,6 +1,7 @@
 .nav-container {
   width: 100%;
   background-color: $color-darker;
+  transition: all .3s ease;
 
   a {
     display: flex;
@@ -15,8 +16,8 @@
 
 .nav-container.scrolled {
   position: sticky;
-  top: -72;
-  opacity: 0.2;
+  top: 0;
+  opacity: 0.8;
   z-index: 100;
   background-color: $color-dark;
   box-shadow: 0 -6px 10px 5px rgba(0, 0, 0, 0.5);
@@ -42,8 +43,8 @@
 
 @keyframes fadeDown {
   from {
-    top: -72;
-    opacity: 0;
+    top: -20;
+    opacity: .8;
     transform: translateY(-10px);
   }
   to {
@@ -206,7 +207,7 @@
 //Animations for the mobile menu
 @keyframes slideDown {
   from {
-    top: -100%;
+    top: -100vh;
   }
   to {
     top: 0;
@@ -218,6 +219,6 @@
     top: 0;
   }
   to {
-    top: -100%;
+    top: -100vh;
   }
 }
