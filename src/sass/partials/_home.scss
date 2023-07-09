@@ -98,6 +98,10 @@
     @media only screen and (max-width: 900px) {
       flex-direction: column;
     }
+
+    .react-reveal {
+      width: 100%;
+    }
   }
 
   .techhype-card-icon {
@@ -205,7 +209,7 @@
     padding: 0 1em;
 
     svg:hover {
-      transition: .3s ease-in-out;
+      transition: 0.3s ease-in-out;
       color: $color-hover;
     }
   }

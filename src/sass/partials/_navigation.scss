@@ -46,6 +46,10 @@
   padding: 2em 1em 1em 1em;
   position: relative;
 
+  @media (max-width: 900px) {
+    padding: 1em 1em 0 1em;
+    }
+
   .desktop-menu {
     display: flex;
     gap: 60px;

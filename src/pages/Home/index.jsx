@@ -75,35 +75,35 @@ function Home() {
     >
       <section className="header">
         <div className="header-container container-inner">
-        <Fade left>
-          <div className="heading">
-            <h1>
-              {content[lang]["heading1"]}{" "}
-              <span className="gradient-title">
-                {content[lang]["heading2"]}
-              </span>{" "}
-              {content[lang]["heading3"]}
-            </h1>
-            <p>{content[lang]["subHeading"]}</p>
-            <Button>{content[lang]["getStartedButton"]}</Button>
-          </div>
+          <Fade left>
+            <div className="heading">
+              <h1>
+                {content[lang]["heading1"]}{" "}
+                <span className="gradient-title">
+                  {content[lang]["heading2"]}
+                </span>{" "}
+                {content[lang]["heading3"]}
+              </h1>
+              <p>{content[lang]["subHeading"]}</p>
+              <Button>{content[lang]["getStartedButton"]}</Button>
+            </div>
           </Fade>
           <Fade right>
-          <PhoneAnimation />
+            <PhoneAnimation />
           </Fade>
         </div>
       </section>
 
       <section className="howItWorks" id="howItWorks">
-      <Fade bottom>
-        <h2>{content[lang]["howHeading"]}</h2>
+        <Fade bottom>
+          <h2>{content[lang]["howHeading"]}</h2>
         </Fade>
         <div className="how-container container-inner">
-          <Fade bottom>
+          <Fade bottom width="100%">
             <Card
               minHeight={windowWidth <= 900 ? "none" : "397px"}
               width="100%"
-              minWidth="397px"
+              minWidth={windowWidth <= 1300 ? "none" : "397px"}
             >
               <div className="techhype-card-icon">Techhype</div>
               <h3>
@@ -114,11 +114,11 @@ function Home() {
               <Button size="small">{content[lang]["purchaseButton"]}</Button>
             </Card>
           </Fade>
-          <Fade bottom>
+          <Fade bottom width="100%">
             <Card
               minHeight={windowWidth <= 900 ? "none" : "397px"}
               width="100%"
-              minWidth="397px"
+              minWidth={windowWidth <= 1300 ? "none" : "397px"}
             >
               <UilUser size={50} color="#54d4c6" />
               <h3>
@@ -136,7 +136,7 @@ function Home() {
               minHeight={windowWidth <= 900 ? "none" : "397px"}
               width="100%"
               className="shake-card"
-              minWidth="397px"
+              minWidth={windowWidth <= 1300 ? "none" : "397px"}
             >
               <UilMobileVibrate size={50} color="#54d4c6" />
               <h3>
@@ -151,13 +151,13 @@ function Home() {
       </section>
 
       <section className="reviews" id="reviews">
-      <Fade bottom>
-        <h2>{content[lang]["reviewsHeading"]}</h2>
+        <Fade bottom>
+          <h2>{content[lang]["reviewsHeading"]}</h2>
         </Fade>
         <Fade bottom>
-        <p className="reviews-subheading">
-          {content[lang]["reviewsSubHeading"]}
-        </p>
+          <p className="reviews-subheading">
+            {content[lang]["reviewsSubHeading"]}
+          </p>
         </Fade>
         <div className="reviews-container container-inner">
           <Fade bottom>
@@ -232,8 +232,8 @@ function Home() {
       </section>
 
       <section className="clients">
-      <Fade bottom>
-        <h3>{content[lang]["clientsHeading"]}</h3>
+        <Fade bottom>
+          <h3>{content[lang]["clientsHeading"]}</h3>
         </Fade>
         <div className="clients-container container-inner">
           <Fade bottom>
