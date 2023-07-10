@@ -12,12 +12,12 @@
     height: 27px;
     width: 27px;
   }
+
 }
 
 .nav-container.scrolled {
   position: sticky;
   top: 0;
-  opacity: 0.8;
   z-index: 100;
   background-color: $color-dark;
   box-shadow: 0 -6px 10px 5px rgba(0, 0, 0, 0.5);
@@ -39,13 +39,14 @@
   &.fade-in {
     animation: fadeDown 0.6s ease forwards;
   }
+
 }
 
 @keyframes fadeDown {
   from {
     top: -20;
-    opacity: .8;
-    transform: translateY(-10px);
+    opacity: .99;
+    transform: translateY(-15px);
   }
   to {
     top: 0;

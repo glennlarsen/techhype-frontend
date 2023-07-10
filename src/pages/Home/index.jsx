@@ -127,8 +127,7 @@ function Home() {
               <p>{content[lang]["purchaseText"]}</p>
               <Button size="small">{content[lang]["purchaseButton"]}</Button>
             </Card>
-          </Fade>
-          <Fade bottom width="100%">
+
             <Card
               minheight={windowWidth <= 900 ? "none" : "397px"}
               width="100%"
@@ -144,8 +143,7 @@ function Home() {
                 {content[lang]["createProfileButton"]}
               </Button>
             </Card>
-          </Fade>
-          <Fade bottom>
+
             <Card
               minheight={windowWidth <= 900 ? "none" : "397px"}
               width="100%"
