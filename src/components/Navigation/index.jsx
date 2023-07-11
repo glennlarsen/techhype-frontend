@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { content } from "constants/content";
 import {
   UilUserCircle,
@@ -44,11 +45,6 @@ function Navigation({ scrollToSection }) {
     setWindowWidth(window.innerWidth);
   };
 
-  const handleLinkClick = (section) => {
-    closeMenu();
-    scrollToSection(section);
-  };
-
   useEffect(() => {
     const handleScroll = debounce(() => {
       const scrollPosition = window.scrollY;
@@ -71,12 +67,14 @@ function Navigation({ scrollToSection }) {
     };
   }, []);
 
+
+
   return (
     <div className={`nav-container${isScrolled ? " scrolled fade-in" : ""}`}>
       <div className="navigation container-inner">
-        <a href="/">
+        <Link to="/">
           <img src={isScrolled ? LogoNoText : Logo} className="logo" />
-        </a>
+        </Link>
         <TabletAndDesktop>
           <LanguageSelector />
         </TabletAndDesktop>
@@ -90,41 +88,41 @@ function Navigation({ scrollToSection }) {
             <span>&times;</span>
           </div>
           <nav>
-            <a href="#">{content[lang]["menuItem1"]}</a>
-            <a href="#" onClick={() => handleLinkClick("howItWorks")}>
+            <Link to="#">{content[lang]["menuItem1"]}</Link>
+            <Link to="/#howItWorks" onClick={() => {closeMenu()}}>
               {content[lang]["menuItem2"]}
-            </a>
-            <a href="#" onClick={() => handleLinkClick("reviews")}>
+            </Link>
+            <Link to="/#reviews" onClick={() => {closeMenu()}}>
               {content[lang]["menuItem3"]}
-            </a>
-            <a href="#">{content[lang]["menuItem4"]}</a>
+            </Link>
+            <Link to="/contact">{content[lang]["menuItem4"]}</Link>
           </nav>
         </div>
         <nav className="desktop-menu">
-          <a href="#">{content[lang]["menuItem1"]}</a>
-          <a href="#" onClick={() => scrollToSection("howItWorks")}>
+          <Link to="#">{content[lang]["menuItem1"]}</Link>
+          <Link to="/#howItWorks">
             {content[lang]["menuItem2"]}
-          </a>
-          <a href="#" onClick={() => scrollToSection("reviews")}>
+          </Link>
+          <Link to="/#reviews">
             {content[lang]["menuItem3"]}
-          </a>
-          <a href="#">{content[lang]["menuItem4"]}</a>
+          </Link>
+          <Link to="/contact">{content[lang]["menuItem4"]}</Link>
         </nav>
         <div className="nav-icons">
-          <a href="#">
+          <Link to="#">
             {windowWidth <= 900 ? (
               <UilUserCircle size={28} color="white" />
             ) : (
               <UilUserCircle size={38} color="white" />
             )}
-          </a>
-          <a href="#">
+          </Link>
+          <Link to="#">
             {windowWidth <= 900 ? (
               <UilShoppingBag size={28} color="white" />
             ) : (
               <UilShoppingBag size={38} color="white" />
             )}
-          </a>
+          </Link>
         </div>
         <div className="burger-menu" onClick={toggleMobileMenu}>
           <UilBars size={32} />

@@ -31,8 +31,7 @@ function Home() {
   const [lang, setLang] = useContext(LangContext);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const navigate = useNavigate();
-  const location = useLocation();
+  let location = useLocation();
 
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
@@ -45,44 +44,19 @@ function Home() {
     };
   }, []);
 
-  const handleScrollToSection = (sectionId) => {
-    if (location.pathname !== "/") {
-      navigate("/");
-      return;
-    }
-
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const offset = 100; // Adjust the offset as desired
-      const targetOffset = section.offsetTop - offset;
-      const initialOffset =
-        window.pageYOffset || document.documentElement.scrollTop;
-      const distance = targetOffset - initialOffset;
-      const duration = 800; // Adjust the duration as desired (in milliseconds)
-      const startTime = performance.now();
-
-      const scrollStep = (timestamp) => {
-        const elapsedTime = timestamp - startTime;
-        const progress = Math.min(elapsedTime / duration, 1);
-        const easing = easeInOutQuad(progress);
-        window.scrollTo(0, initialOffset + distance * easing);
-
-        if (elapsedTime < duration) {
-          requestAnimationFrame(scrollStep);
-        }
-      };
-
-      const easeInOutQuad = (t) => {
-        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-      };
-
-      requestAnimationFrame(scrollStep);
-    }
-  };
+  useEffect(()=> {
+    if (location.hash) {
+      let elem = document.getElementById(location.hash.slice(1))
+      if(elem) {
+        elem.scrollIntoView({behavior: "smooth"})
+               }          
+        } else {
+  window.scrollTo({top:0,left:0, behavior: "smooth"})
+                }
+    }, [location,])
 
   return (
     <Layout
-      scrollToSection={handleScrollToSection}
       page="Home"
       description="Techhype is the next Generation digital Business Card. Tap and Share your contact details in one second."
     >
@@ -101,7 +75,7 @@ function Home() {
               <Button>{content[lang]["getStartedButton"]}</Button>
             </div>
           </Fade>
-          <Fade right>
+          <Fade>
             <PhoneAnimation />
           </Fade>
         </div>

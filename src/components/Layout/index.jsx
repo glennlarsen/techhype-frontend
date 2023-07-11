@@ -2,14 +2,14 @@ import Footer from "components/Footer";
 import Navigation from "components/Navigation";
 import Head from "components/Head";
 
-function Layout({ page, description, children, scrollToSection }) {
+function Layout({ page, description, children }) {
   return (
     <>
       <Head page={page} description={description} />
       <div className="wrapper">
-        <Navigation scrollToSection={scrollToSection} />
+        <Navigation />
         {children}
-        <Footer scrollToSection={scrollToSection} />
+        <Footer />
       </div>
     </>
   );
