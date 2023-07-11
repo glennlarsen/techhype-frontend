@@ -9,8 +9,8 @@ function Layout({ page, description, children }) {
       <div className="wrapper">
         <Navigation />
         {children}
-        <Footer />
       </div>
+      <Footer />
     </>
   );
 }

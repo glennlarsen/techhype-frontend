@@ -44,16 +44,29 @@ function Home() {
     };
   }, []);
 
-  useEffect(()=> {
+  useEffect(() => {
+    const calculateOffset = () => {
+      // Calculate your offset here if needed
+      return -72; // height of the sticky navigation
+    };
+  
     if (location.hash) {
-      let elem = document.getElementById(location.hash.slice(1))
-      if(elem) {
-        elem.scrollIntoView({behavior: "smooth"})
-               }          
-        } else {
-  window.scrollTo({top:0,left:0, behavior: "smooth"})
-                }
-    }, [location,])
+      const sectionId = location.hash.slice(1);
+      const sectionElement = document.getElementById(sectionId);
+      if (sectionElement) {
+        const offset = calculateOffset();
+        const options = {
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest',
+          top: sectionElement.getBoundingClientRect().top + window.scrollY + offset,
+        };
+        window.scrollTo(options);
+      }
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+  }, [location]);
 
   return (
     <Layout

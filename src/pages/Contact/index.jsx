@@ -7,10 +7,11 @@ function Contact() {
       page="Contact"
       description="Techhype is the next Generation digital Business Card. Tap and Share your contact details in one second."
     >
-    <div className="container-inner contact-container">
-        <h1>Contact Us</h1>
-    </div>
-
+      <section className="contact">
+        <div className="container-inner contact-container">
+          <h1>Contact Us</h1>
+        </div>
+      </section>
     </Layout>
   );
 }
