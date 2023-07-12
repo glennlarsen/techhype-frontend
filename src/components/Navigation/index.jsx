@@ -89,13 +89,13 @@ function Navigation() {
           </div>
           <nav>
             <Link to="#">{content[lang]["menuItem1"]}</Link>
-            <Link to="/#howItWorks" onClick={() => {closeMenu()}}>
+            <Link to="/#howItWorks" className={location.pathname === "/" && location.hash === "#howItWorks" ? "active" : ""} onClick={() => {closeMenu()}}>
               {content[lang]["menuItem2"]}
             </Link>
-            <Link to="/#reviews" onClick={() => {closeMenu()}}>
+            <Link to="/#reviews" className={location.pathname === "/" && location.hash === "#reviews" ? "active" : ""} onClick={() => {closeMenu()}}>
               {content[lang]["menuItem3"]}
             </Link>
-            <Link to="/contact">{content[lang]["menuItem4"]}</Link>
+            <Link to="/contact" className={location.pathname === "/contact" ? "active" : ""}>{content[lang]["menuItem4"]}</Link>
           </nav>
         </div>
         <nav className="desktop-menu">
