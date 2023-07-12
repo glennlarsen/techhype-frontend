@@ -1,9 +1,16 @@
 .contact {
-    background: $color-darker;
-    height: 100%;
-    padding: 1.5em;
+  background: $color-darker;
+  padding: 2em 1.5em;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
 }
 
 .contact-container {
-    text-align: center;
+  text-align: center;
+
+  .contact-heading {
+    max-width: 500px;
+    margin: 0 auto;
+  }
 }

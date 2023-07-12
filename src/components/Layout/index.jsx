@@ -7,7 +7,7 @@ function Layout({ page, description, children }) {
     <>
       <Head page={page} description={description} />
       <div className="wrapper">
-        <Navigation />
+        <Navigation  />
         {children}
       </div>
       <Footer />

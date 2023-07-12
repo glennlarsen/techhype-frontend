@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from "react";
 import Layout from "components/Layout";
+import ContactForm from "components/ContactForm";
 
 function Contact() {
   return (
@@ -9,7 +9,14 @@ function Contact() {
     >
       <section className="contact">
         <div className="container-inner contact-container">
-          <h1>Contact Us</h1>
+          <div className="contact-heading">
+            <h1>Contact Us</h1>
+            <p>
+              Do you have a question or need help with an order? Just fill out
+              the form fields below.
+            </p>
+          </div>
+          <ContactForm />
         </div>
       </section>
     </Layout>

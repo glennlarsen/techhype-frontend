@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useContext, useState, useEffect, useRef } from "react";
+import { Link, useLocation, useNavigate  } from "react-router-dom";
 import { content } from "constants/content";
 import {
   UilUserCircle,
@@ -22,12 +22,14 @@ function debounce(func, delay) {
   };
 }
 
-function Navigation({ scrollToSection }) {
+function Navigation() {
   const [lang, setLang] = useContext(LangContext);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -67,8 +69,6 @@ function Navigation({ scrollToSection }) {
     };
   }, []);
 
-
-
   return (
     <div className={`nav-container${isScrolled ? " scrolled fade-in" : ""}`}>
       <div className="navigation container-inner">
@@ -100,13 +100,13 @@ function Navigation({ scrollToSection }) {
         </div>
         <nav className="desktop-menu">
           <Link to="#">{content[lang]["menuItem1"]}</Link>
-          <Link to="/#howItWorks">
+          <Link to="/#howItWorks" className={location.pathname === "/" && location.hash === "#howItWorks" ? "active" : ""}>
             {content[lang]["menuItem2"]}
           </Link>
-          <Link to="/#reviews">
+          <Link to="/#reviews" className={location.pathname === "/" && location.hash === "#reviews" ? "active" : ""}>
             {content[lang]["menuItem3"]}
           </Link>
-          <Link to="/contact">{content[lang]["menuItem4"]}</Link>
+          <Link to="/contact" className={location.pathname === "/contact" ? "active" : ""}>{content[lang]["menuItem4"]}</Link>
         </nav>
         <div className="nav-icons">
           <Link to="#">

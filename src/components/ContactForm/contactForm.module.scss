@@ -1,0 +1,15 @@
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  width: 95%;
+  gap: 1.5em;
+  margin: 0 auto;
+  padding: 1em 0;
+}
+
+h2 svg {
+  @media screen and (min-width: 830px) {
+    font-size: 2rem !important;
+  }
+}
