@@ -1,7 +1,12 @@
+import React, { useContext, useState } from "react";
 import Layout from "components/Layout";
 import ContactForm from "components/ContactForm";
+import { LangContext } from "utils/LangContext";
+import { content } from "constants/content";
 
 function Contact() {
+  const [lang, setLang] = useContext(LangContext);
+
   return (
     <Layout
       page="Contact"
@@ -10,10 +15,9 @@ function Contact() {
       <section className="contact">
         <div className="container-inner contact-container">
           <div className="contact-heading">
-            <h1>Contact Us</h1>
+            <h1>{content[lang]["contactHeading"]}</h1>
             <p>
-              Do you have a question or need help with an order? Just fill out
-              the form fields below.
+              {content[lang]["contactSubHeading"]}
             </p>
           </div>
           <ContactForm />

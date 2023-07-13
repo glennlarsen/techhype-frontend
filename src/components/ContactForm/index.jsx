@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import styles from "./contactForm.module.scss";
 import schemaContact from "./schemaContact";
@@ -7,6 +7,8 @@ import InputsTheme from "components/forms/InputsTheme";
 import AlertMessage from "components/forms/AlertMessage";
 import { Button } from "techhype-components";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { LangContext } from "utils/LangContext";
+import { content } from "constants/content";
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -21,6 +23,7 @@ const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [lang, setLang] = useContext(LangContext);
 
   const {
     register,
@@ -55,8 +58,8 @@ const ContactForm = () => {
     return (
       <AlertMessage
         variant="error"
-        title="Error"
-        message="An error occured, Please try again later"
+        title={content[lang]["error"]}
+        message={content[lang]["submitError"]}
       />
     );
   }
@@ -70,7 +73,9 @@ const ContactForm = () => {
     >
       <InputsTheme>
         <FormControl variant="standard">
-          <InputLabel id="subject-label">I need help with..</InputLabel>
+          <InputLabel id="subject-label">
+            {content[lang]["selectLabel"]}
+          </InputLabel>
           <Controller
             render={({ field }) => (
               <Select
@@ -80,8 +85,8 @@ const ContactForm = () => {
                 }}
                 {...field}
               >
-                <MenuItem value={1}>General Inquiry</MenuItem>
-                <MenuItem value={2}>My Current Order</MenuItem>
+                <MenuItem value={1}>{content[lang]["selectOption1"]}</MenuItem>
+                <MenuItem value={2}>{content[lang]["selectOption2"]}</MenuItem>
               </Select>
             )}
             name="subject"
@@ -90,7 +95,7 @@ const ContactForm = () => {
           />
         </FormControl>
         <TextField
-          label={"Name"}
+          label={content[lang]["nameLabel"]}
           id="name"
           variant={"standard"}
           type="text"
@@ -110,7 +115,7 @@ const ContactForm = () => {
           }
         />
         <TextField
-          label={"Email"}
+          label={content[lang]["emailLabel"]}
           id="email"
           variant={"standard"}
           type="email"
@@ -131,11 +136,11 @@ const ContactForm = () => {
         />
 
         <TextField
-          label={"Phone"}
+          label={content[lang]["phoneLabel"]}
           id="phone"
           variant={"standard"}
           type="number"
-          placeholder="Optional"
+          placeholder={content[lang]["phonePlaceholder"]}
           {...register("phone")}
           error={Boolean(errors.phone)}
           helperText={errors.phone ? errors.phone.message : ""}
@@ -154,12 +159,12 @@ const ContactForm = () => {
 
         <TextField
           id="message"
-          label="Message"
+          label={content[lang]["messageLabel"]}
           multiline
           variant={"standard"}
           rows={5}
           type="text"
-          placeholder="Write your message here..."
+          placeholder={content[lang]["messagePlaceholder"]}
           {...register("message")}
           error={Boolean(errors.message)}
           helperText={errors.message ? errors.message.message : ""}
@@ -183,7 +188,7 @@ const ContactForm = () => {
           message="Thank you for your message. We will get back to you shortly."
         />
       )}
-      <Button type="submit">Send</Button>
+      <Button type="submit">{content[lang]["contactButton"]}</Button>
     </Box>
   );
 };
