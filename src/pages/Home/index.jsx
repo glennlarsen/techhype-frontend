@@ -21,7 +21,7 @@ import Frydenbo from "images/frydenbo.jpg";
 import Hamre from "images/hamre.png";
 import Techhype from "images/techhype.png";
 import Fade from "react-reveal/Fade";
-import NfcCard from "images/nfc-card.jpeg";
+import NfcCard from "images/nfc-card.png";
 
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
