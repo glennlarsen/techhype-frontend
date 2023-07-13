@@ -52,6 +52,10 @@ function Navigation() {
       const scrollPosition = window.scrollY;
       const scrollThreshold = 10; // Adjust this value as needed
 
+      if(scrollPosition < 1) {
+        window.location.hash = "";
+      }
+
       setIsScrolled(scrollPosition > scrollThreshold);
     }, 50); // Adjust the debounce delay as needed
 
@@ -61,6 +65,7 @@ function Navigation() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -88,7 +93,7 @@ function Navigation() {
             <span>&times;</span>
           </div>
           <nav>
-            <Link to="#">{content[lang]["menuItem1"]}</Link>
+            <Link to="#"className={location.pathname === "/getStarted" ? "active" : ""}>{content[lang]["menuItem1"]}</Link>
             <Link to="/#howItWorks" className={location.pathname === "/" && location.hash === "#howItWorks" ? "active" : ""} onClick={() => {closeMenu()}}>
               {content[lang]["menuItem2"]}
             </Link>
@@ -99,7 +104,7 @@ function Navigation() {
           </nav>
         </div>
         <nav className="desktop-menu">
-          <Link to="#">{content[lang]["menuItem1"]}</Link>
+          <Link to="#" className={location.pathname === "/getStarted" ? "active" : ""}>{content[lang]["menuItem1"]}</Link>
           <Link to="/#howItWorks" className={location.pathname === "/" && location.hash === "#howItWorks" ? "active" : ""}>
             {content[lang]["menuItem2"]}
           </Link>

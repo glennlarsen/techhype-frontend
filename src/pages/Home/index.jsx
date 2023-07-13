@@ -26,6 +26,7 @@ import NfcCard from "images/nfc-card.jpeg";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import RecyclingIcon from "@mui/icons-material/Recycling";
+import MainHeading from "components/typography/MainHeading";
 
 function Home() {
   const [lang, setLang] = useContext(LangContext);
@@ -49,22 +50,25 @@ function Home() {
       // Calculate your offset here if needed
       return -72; // height of the sticky navigation
     };
-  
+
     if (location.hash) {
       const sectionId = location.hash.slice(1);
       const sectionElement = document.getElementById(sectionId);
       if (sectionElement) {
         const offset = calculateOffset();
         const options = {
-          behavior: 'smooth',
-          block: 'start',
-          inline: 'nearest',
-          top: sectionElement.getBoundingClientRect().top + window.scrollY + offset,
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest",
+          top:
+            sectionElement.getBoundingClientRect().top +
+            window.scrollY +
+            offset,
         };
         window.scrollTo(options);
       }
     } else {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }
   }, [location]);
 
@@ -73,20 +77,16 @@ function Home() {
       page="Home"
       description="Techhype is the next Generation digital Business Card. Tap and Share your contact details in one second."
     >
-      <section className="header">
+      <section className="header" id="header">
         <div className="header-container container-inner">
           <Fade left>
-            <div className="heading">
-              <h1>
-                {content[lang]["heading1"]}{" "}
-                <span className="gradient-title">
-                  {content[lang]["heading2"]}
-                </span>{" "}
-                {content[lang]["heading3"]}
-              </h1>
-              <p>{content[lang]["subHeading"]}</p>
-              <Button>{content[lang]["getStartedButton"]}</Button>
-            </div>
+            <MainHeading
+              heading1={content[lang]["heading1"]}
+              heading2={content[lang]["heading2"]}
+              heading3={content[lang]["heading3"]}
+              text={content[lang]["subHeading"]}
+              button={content[lang]["getStartedButton"]}
+            />
           </Fade>
           <Fade>
             <PhoneAnimation />
@@ -149,7 +149,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="benefits">
+      <section className="benefits" id="benefits">
         <div className="benefits-container container-inner">
           <Fade bottom>
             <div className="benefits-image">
@@ -263,7 +263,7 @@ function Home() {
         <Button size="small">{content[lang]["moreReviewsButton"]}</Button>
       </section>
 
-      <section className="clients">
+      <section className="clients" id="clients">
         <Fade bottom>
           <p className="pre-heading">{content[lang]["clientsPreHeading"]}</p>
           <h3>{content[lang]["clientsHeading"]}</h3>
