@@ -78,7 +78,6 @@
       position: relative;
       display: inline-block;
 
-
       &.active {
         &::after {
           width: 100%;
@@ -99,7 +98,6 @@
       }
 
       &:hover {
-
         &::after {
           width: 100%;
           right: auto; /* Updated: Reset the right position on hover */
@@ -166,7 +164,7 @@
             left: 0;
           }
         }
-  
+
         &::after {
           content: "";
           position: absolute;
@@ -177,14 +175,9 @@
           background-color: $color-hover;
           transition: width 0.6s cubic-bezier(0.2, 0.85, 0.32, 1.2);
         }
-  
+
         &:hover {
-  
-          &::after {
-            width: 100%;
-            right: auto; /* Updated: Reset the right position on hover */
-            left: 0; /* Added: Set the left position on hover */
-          }
+          color: $color-hover;
         }
       }
     }
@@ -192,7 +185,7 @@
     .close-button {
       position: absolute;
       top: 0.6em;
-      right: 1em;
+      right: 0.8em;
       cursor: pointer;
       color: white;
       font-size: 38px;
@@ -216,8 +209,10 @@
       cursor: pointer;
       transition: 0.2s ease-in-out;
 
-      &:hover {
-        color: $color-hover;
+      &:hover .burger-lines,
+      &:hover .burger-lines:after,
+      &:hover .burger-lines:before {
+        background-color: $color-hover;
       }
     }
   }
@@ -253,7 +248,7 @@
 
   @media only screen and (max-width: 900px) {
     left: 1.5em;
-    top: 2.5em;
+    top: 2em;
     right: auto;
   }
 }

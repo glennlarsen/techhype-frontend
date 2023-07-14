@@ -33,6 +33,7 @@ function Home() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   let location = useLocation();
+  const navigate = useNavigate();
 
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
@@ -112,7 +113,7 @@ function Home() {
                 {content[lang]["purchaseHeading"]}
               </h3>
               <p>{content[lang]["purchaseText"]}</p>
-              <Button size="small">{content[lang]["purchaseButton"]}</Button>
+              <Button onClick={() => navigate("/shop")} size="small">{content[lang]["purchaseButton"]}</Button>
             </Card>
 
             <Card

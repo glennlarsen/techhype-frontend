@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { Link, useLocation, useNavigate  } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { content } from "constants/content";
 import {
   UilUserCircle,
@@ -11,6 +11,8 @@ import LogoNoText from "logo/logo-no-text.png";
 import LanguageSelector from "components/LanguageSelector";
 import { LangContext } from "utils/LangContext";
 import { Mobile, TabletAndDesktop } from "components/ScreenViewSize";
+import Burger from "@animated-burgers/burger-rotate";
+import "@animated-burgers/burger-rotate/dist/styles.css";
 
 function debounce(func, delay) {
   let timeoutId;
@@ -52,7 +54,7 @@ function Navigation() {
       const scrollPosition = window.scrollY;
       const scrollThreshold = 10; // Adjust this value as needed
 
-      if(scrollPosition < 1) {
+      if (scrollPosition < 1) {
         window.location.hash = "";
       }
 
@@ -65,7 +67,6 @@ function Navigation() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -93,25 +94,79 @@ function Navigation() {
             <span>&times;</span>
           </div>
           <nav>
-            <Link to="#"className={location.pathname === "/getStarted" ? "active" : ""}>{content[lang]["menuItem1"]}</Link>
-            <Link to="/#howItWorks" className={location.pathname === "/" && location.hash === "#howItWorks" ? "active" : ""} onClick={() => {closeMenu()}}>
+            <Link
+              to="/shop"
+              className={location.pathname === "/shop" ? "active" : ""}
+            >
+              {content[lang]["menuItem1"]}
+            </Link>
+            <Link
+              to="/#howItWorks"
+              className={
+                location.pathname === "/" && location.hash === "#howItWorks"
+                  ? "active"
+                  : ""
+              }
+              onClick={() => {
+                closeMenu();
+              }}
+            >
               {content[lang]["menuItem2"]}
             </Link>
-            <Link to="/#reviews" className={location.pathname === "/" && location.hash === "#reviews" ? "active" : ""} onClick={() => {closeMenu()}}>
+            <Link
+              to="/#reviews"
+              className={
+                location.pathname === "/" && location.hash === "#reviews"
+                  ? "active"
+                  : ""
+              }
+              onClick={() => {
+                closeMenu();
+              }}
+            >
               {content[lang]["menuItem3"]}
             </Link>
-            <Link to="/contact" className={location.pathname === "/contact" ? "active" : ""}>{content[lang]["menuItem4"]}</Link>
+            <Link
+              to="/contact"
+              className={location.pathname === "/contact" ? "active" : ""}
+            >
+              {content[lang]["menuItem4"]}
+            </Link>
           </nav>
         </div>
         <nav className="desktop-menu">
-          <Link to="#" className={location.pathname === "/getStarted" ? "active" : ""}>{content[lang]["menuItem1"]}</Link>
-          <Link to="/#howItWorks" className={location.pathname === "/" && location.hash === "#howItWorks" ? "active" : ""}>
+          <Link
+            to="/shop"
+            className={location.pathname === "/shop" ? "active" : ""}
+          >
+            {content[lang]["menuItem1"]}
+          </Link>
+          <Link
+            to="/#howItWorks"
+            className={
+              location.pathname === "/" && location.hash === "#howItWorks"
+                ? "active"
+                : ""
+            }
+          >
             {content[lang]["menuItem2"]}
           </Link>
-          <Link to="/#reviews" className={location.pathname === "/" && location.hash === "#reviews" ? "active" : ""}>
+          <Link
+            to="/#reviews"
+            className={
+              location.pathname === "/" && location.hash === "#reviews"
+                ? "active"
+                : ""
+            }
+          >
             {content[lang]["menuItem3"]}
           </Link>
-          <Link to="/contact" className={location.pathname === "/contact" ? "active" : ""}>{content[lang]["menuItem4"]}</Link>
+          <Link
+            to="/contact"
+            className={location.pathname === "/contact" ? "active" : ""}
+          >
+            {content[lang]["menuItem4"]}
+          </Link>
         </nav>
         <div className="nav-icons">
           <Link to="#">
@@ -130,7 +185,9 @@ function Navigation() {
           </Link>
         </div>
         <div className="burger-menu" onClick={toggleMobileMenu}>
-          <UilBars size={32} />
+          <div class="burger burger-rotate" style={{"font-size": "10px"}}>
+            <div class="burger-lines"></div>
+          </div>
         </div>
       </div>
     </div>

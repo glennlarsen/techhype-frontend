@@ -10,17 +10,15 @@ function Contact() {
   return (
     <Layout
       page="Contact"
-      description="Techhype is the next Generation digital Business Card. Tap and Share your contact details in one second."
+      description="Feel free to contact our team for any inqueries about your order or to get more information about Techhype cards."
     >
       <section className="contact">
         <div className="container-inner contact-container">
           <div className="contact-heading">
             <h1>{content[lang]["contactHeading"]}</h1>
-            <p>
-              {content[lang]["contactSubHeading"]}
-            </p>
+            <p>{content[lang]["contactSubHeading"]}</p>
           </div>
-          <ContactForm />
+            <ContactForm />
         </div>
       </section>
     </Layout>
