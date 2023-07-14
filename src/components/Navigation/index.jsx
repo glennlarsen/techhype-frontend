@@ -185,8 +185,8 @@ function Navigation() {
           </Link>
         </div>
         <div className="burger-menu" onClick={toggleMobileMenu}>
-          <div class="burger burger-rotate" style={{"font-size": "10px"}}>
-            <div class="burger-lines"></div>
+          <div className="burger burger-rotate" style={{"fontSize": "10px"}}>
+            <div className="burger-lines"></div>
           </div>
         </div>
       </div>

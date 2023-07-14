@@ -9,7 +9,7 @@ import { Button } from "techhype-components";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LangContext } from "utils/LangContext";
 import { content } from "constants/content";
-import Fade from "react-reveal/Fade";
+import { Fade } from "react-awesome-reveal";
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -66,7 +66,7 @@ const ContactForm = () => {
   }
 
   return (
-    <Fade top>
+    <Fade direction="down" triggerOnce duration="800">
     <Box
       className={styles.contactForm}
       component="form"

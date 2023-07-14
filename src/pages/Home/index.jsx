@@ -20,7 +20,7 @@ import Demokratene from "images/demokratene.png";
 import Frydenbo from "images/frydenbo.jpg";
 import Hamre from "images/hamre.png";
 import Techhype from "images/techhype.png";
-import Fade from "react-reveal/Fade";
+import { Fade } from "react-awesome-reveal";
 import NfcCard from "images/nfc-card.png";
 
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
@@ -80,7 +80,7 @@ function Home() {
     >
       <section className="header" id="header">
         <div className="header-container container-inner">
-          <Fade left>
+          <Fade direction="left" triggerOnce>
             <MainHeading
               heading1={content[lang]["heading1"]}
               heading2={content[lang]["heading2"]}
@@ -89,22 +89,23 @@ function Home() {
               button={content[lang]["getStartedButton"]}
             />
           </Fade>
-          <Fade>
+          <Fade triggerOnce>
             <PhoneAnimation />
           </Fade>
         </div>
       </section>
 
       <section className="howItWorks" id="howItWorks">
-        <Fade bottom>
+        <Fade direction="up" triggerOnce>
           <p className="pre-heading">{content[lang]["howPreHeading"]}</p>
           <h2>{content[lang]["howHeading"]}</h2>
         </Fade>
         <div className="how-container container-inner">
-          <Fade bottom width="100%">
+          <Fade direction="up" width="100%" triggerOnce>
             <Card
               minheight={windowWidth <= 900 ? "none" : "397px"}
               width="100%"
+              height="100%"
               minwidth={windowWidth <= 1300 ? "none" : "397px"}
             >
               <div className="techhype-card-icon">Techhype</div>
@@ -119,6 +120,7 @@ function Home() {
             <Card
               minheight={windowWidth <= 900 ? "none" : "397px"}
               width="100%"
+              height="100%"
               minwidth={windowWidth <= 1300 ? "none" : "397px"}
             >
               <UilUser size={50} color="#54d4c6" />
@@ -135,6 +137,7 @@ function Home() {
             <Card
               minheight={windowWidth <= 900 ? "none" : "397px"}
               width="100%"
+              height="100%"
               className="shake-card"
               minwidth={windowWidth <= 1300 ? "none" : "397px"}
             >
@@ -152,12 +155,12 @@ function Home() {
 
       <section className="benefits" id="benefits">
         <div className="benefits-container container-inner">
-          <Fade bottom>
+          <Fade direction="up" triggerOnce>
             <div className="benefits-image">
               <img src={NfcCard} alt="NFC Card model" />
             </div>
           </Fade>
-          <Fade right>
+          <Fade direction="right" triggerOnce>
             <div className="benefits-text">
               <p className="pre-heading">
                 {content[lang]["benefitsPreHeading"]}
@@ -184,17 +187,17 @@ function Home() {
       </section>
 
       <section className="reviews" id="reviews">
-        <Fade bottom>
+        <Fade direction="up" triggerOnce>
           <h2>{content[lang]["reviewsHeading"]}</h2>
         </Fade>
-        <Fade bottom>
+        <Fade direction="up" triggerOnce>
           <p className="reviews-subheading">
             {content[lang]["reviewsSubHeading"]}
           </p>
         </Fade>
         <div className="reviews-container container-inner">
-          <Fade bottom>
-            <Card width="100%">
+          <Fade direction="up" triggerOnce>
+            <Card width="100%" height="100%">
               <Rating
                 name="review"
                 value={5}
@@ -215,8 +218,8 @@ function Home() {
               <span>{content[lang]["verifiedCustomer"]}</span>
             </Card>
           </Fade>
-          <Fade bottom>
-            <Card width="100%">
+          <Fade direction="up" triggerOnce>
+            <Card width="100%" height="100%">
               <Rating
                 name="review"
                 value={4.7}
@@ -237,8 +240,8 @@ function Home() {
               <span>{content[lang]["verifiedCustomer"]}</span>
             </Card>
           </Fade>
-          <Fade bottom>
-            <Card width="100%">
+          <Fade direction="up" triggerOnce>
+            <Card width="100%" height="100%">
               <Rating
                 name="review"
                 value={5}
@@ -265,12 +268,12 @@ function Home() {
       </section>
 
       <section className="clients" id="clients">
-        <Fade bottom>
+        <Fade direction="up" triggerOnce>
           <p className="pre-heading">{content[lang]["clientsPreHeading"]}</p>
           <h3>{content[lang]["clientsHeading"]}</h3>
         </Fade>
         <div className="clients-container container-inner">
-          <Fade left>
+          <Fade direction="left" triggerOnce>
             <ReactSimplyCarousel
               activeSlideIndex={activeSlideIndex}
               onRequestChange={setActiveSlideIndex}

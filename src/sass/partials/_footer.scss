@@ -50,6 +50,7 @@ footer {
 
     img {
       width: 200px;
+      cursor: pointer;
     }
 
     @media only screen and (max-width: 740px) {
@@ -65,10 +66,12 @@ footer {
     align-items: center;
     justify-content: center;
     max-width: 1400px;
+    margin-top: 1em;
 
     @media only screen and (max-width: 1400px) {
       width: 100%;
       margin: 0 auto;
+      margin-top: 1em;
     }
 
     @media only screen and (max-width: 740px) {
