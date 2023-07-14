@@ -24,6 +24,11 @@ body {
   line-height: 1.6;
 }
 
+p {
+  font-family: $font-body;
+  letter-spacing: .12px;
+}
+
 .wrapper {
   flex: 1 0 auto;
 }

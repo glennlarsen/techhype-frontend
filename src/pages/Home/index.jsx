@@ -22,6 +22,7 @@ import Hamre from "images/hamre.png";
 import Techhype from "images/techhype.png";
 import { Fade } from "react-awesome-reveal";
 import NfcCard from "images/nfc-card.png";
+import { reviews } from "constants/reviews";
 
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
@@ -34,6 +35,13 @@ function Home() {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   let location = useLocation();
   const navigate = useNavigate();
+  const [reviewsCount, setReviewsCount] = useState(3);
+  const [showViewMoreButton, setShowViewMoreButton] = useState(true);
+
+  const handleViewMoreReviews = () => {
+    setReviewsCount(reviewsCount + 3);
+    setShowViewMoreButton(false);
+  };
 
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
@@ -114,7 +122,9 @@ function Home() {
                 {content[lang]["purchaseHeading"]}
               </h3>
               <p>{content[lang]["purchaseText"]}</p>
-              <Button onClick={() => navigate("/shop")} size="small">{content[lang]["purchaseButton"]}</Button>
+              <Button onClick={() => navigate("/shop")} size="small">
+                {content[lang]["purchaseButton"]}
+              </Button>
             </Card>
 
             <Card
@@ -196,75 +206,31 @@ function Home() {
           </p>
         </Fade>
         <div className="reviews-container container-inner">
-          <Fade direction="up" triggerOnce>
-            <Card width="100%" height="100%">
-              <Rating
-                name="review"
-                value={5}
-                readOnly
-                precision={0.5}
-                emptyIcon={
-                  <StarIcon style={{ opacity: 0.6 }} fontSize="inherit" />
-                }
-              />
-              <p>
-                "Great product which made my life so much easier. Now I dont
-                need to spend time buying and editing my business cards ever
-                again! Simple to use and fantastic customer service from the
-                Techhype team."{" "}
-              </p>
-              <img src={Håkon} alt="Håkon Ekseth" />
-              <strong>Håkon E.</strong>
-              <span>{content[lang]["verifiedCustomer"]}</span>
-            </Card>
-          </Fade>
-          <Fade direction="up" triggerOnce>
-            <Card width="100%" height="100%">
-              <Rating
-                name="review"
-                value={4.7}
-                readOnly
-                precision={0.5}
-                emptyIcon={
-                  <StarIcon style={{ opacity: 0.6 }} fontSize="inherit" />
-                }
-              />
-              <p>
-                "I am impressed with Techhype's digital business card solution!
-                It has made networking so much easier and more efficient. The
-                sleek design and interactive features have definitely helped me
-                leave a lasting impression on potential clients."{" "}
-              </p>
-              <img src={Glenn} alt="Glenn Larsen" />
-              <strong>Glenn L.</strong>
-              <span>{content[lang]["verifiedCustomer"]}</span>
-            </Card>
-          </Fade>
-          <Fade direction="up" triggerOnce>
-            <Card width="100%" height="100%">
-              <Rating
-                name="review"
-                value={5}
-                readOnly
-                precision={0.5}
-                emptyIcon={
-                  <StarIcon style={{ opacity: 0.6 }} fontSize="inherit" />
-                }
-              />
-              <p>
-                "Techhype's digital business card has revolutionized the way I
-                connect with others. It's incredibly user-friendly,
-                customizable, and has all the essential features I need. Thanks
-                to Techhype, I've streamlined my networking efforts and made a
-                great impression on prospects."{" "}
-              </p>
-              <img src={Kim} alt="Kim Hamre" />
-              <strong>Kim H.</strong>
-              <span>{content[lang]["verifiedCustomer"]}</span>
-            </Card>
-          </Fade>
+          {reviews.slice(0, reviewsCount).map((review, index) => (
+            <Fade direction="up" triggerOnce key={index}>
+              <Card width="100%" height="100%">
+                <Rating
+                  name="review"
+                  value={review.rating}
+                  readOnly
+                  precision={0.5}
+                  emptyIcon={
+                    <StarIcon style={{ opacity: 0.6 }} fontSize="inherit" />
+                  }
+                />
+                <p>{review.reviewText}</p>
+                <img src={review.image} alt="Håkon Ekseth" />
+                <strong>{review.name}</strong>
+                <span>{content[lang]["verifiedCustomer"]}</span>
+              </Card>
+            </Fade>
+          ))}
         </div>
-        <Button size="small">{content[lang]["moreReviewsButton"]}</Button>
+        {showViewMoreButton && (
+          <Button size="small" onClick={handleViewMoreReviews}>
+            {content[lang]["moreReviewsButton"]}
+          </Button>
+        )}
       </section>
 
       <section className="clients" id="clients">

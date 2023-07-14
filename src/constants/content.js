@@ -73,6 +73,8 @@ export const content = {
     messageLabel: "Message",
     messagePlaceholder: "Write your message here...",
     contactButton: "Send",
+    //Shop Page
+    shopHeading: "Choose Your Card",
   },
   no: {
     //Heading Home and navigation
@@ -147,5 +149,7 @@ export const content = {
     messageLabel: "Melding",
     messagePlaceholder: "Skriv meldingen din her...",
     contactButton: "Send",
+    //Shop Page
+    shopHeading: "Velg Ditt Kort",
   },
 };

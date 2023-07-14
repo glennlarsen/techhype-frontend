@@ -14,7 +14,7 @@ const Shop = () => {
     >
       <section className="shop">
         <div className="container-inner shop-container">
-          <h1>Shop</h1>
+          <h1>{content[lang]["shopHeading"]}</h1>
           <p>Page under Construction...</p>
         </div>
       </section>
