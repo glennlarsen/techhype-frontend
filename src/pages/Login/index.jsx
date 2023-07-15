@@ -3,17 +3,17 @@ import Layout from "components/Layout";
 import { LangContext } from "utils/LangContext";
 import { content } from "constants/content";
 
-const Shop = () => {
+const Login = () => {
   const [lang, ] = useContext(LangContext);
 
   return (
     <Layout
-      page="Shop"
-      description="Get started by purchasing your first digital business card from Techhype."
+      page="Login"
+      description="Login to your Techhype account"
     >
-      <section className="shop">
-        <div className="container-inner shop-container">
-          <h1>{content[lang]["shopHeading"]}</h1>
+      <section className="login">
+        <div className="container-inner login-container">
+          <h1>{content[lang]["loginHeading"]}</h1>
           <p>Page under Construction...</p>
         </div>
       </section>
@@ -21,4 +21,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default Login;

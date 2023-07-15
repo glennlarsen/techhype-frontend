@@ -9,9 +9,6 @@ import UilUser from "@iconscout/react-unicons/icons/uil-user";
 import { UilMobileVibrate } from "@iconscout/react-unicons";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
-import Håkon from "images/håkon.jpg";
-import Glenn from "images/glenn.jpg";
-import Kim from "images/kim.jpg";
 import ReactSimplyCarousel from "react-simply-carousel";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -30,7 +27,7 @@ import RecyclingIcon from "@mui/icons-material/Recycling";
 import MainHeading from "components/typography/MainHeading";
 
 function Home() {
-  const [lang, setLang] = useContext(LangContext);
+  const [lang, ] = useContext(LangContext);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   let location = useLocation();

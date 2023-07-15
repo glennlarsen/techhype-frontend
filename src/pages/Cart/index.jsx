@@ -3,17 +3,17 @@ import Layout from "components/Layout";
 import { LangContext } from "utils/LangContext";
 import { content } from "constants/content";
 
-const Shop = () => {
+const Cart = () => {
   const [lang, ] = useContext(LangContext);
 
   return (
     <Layout
-      page="Shop"
-      description="Get started by purchasing your first digital business card from Techhype."
+      page="Cart"
+      description="Your shopping Cart"
     >
-      <section className="shop">
-        <div className="container-inner shop-container">
-          <h1>{content[lang]["shopHeading"]}</h1>
+      <section className="cart">
+        <div className="container-inner cart-container">
+          <h1>{content[lang]["cartHeading"]}</h1>
           <p>Page under Construction...</p>
         </div>
       </section>
@@ -21,4 +21,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default Cart;

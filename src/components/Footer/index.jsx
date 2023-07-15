@@ -1,11 +1,12 @@
 import { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 import LogoLong from "logo/logo-long.png";
 import { LangContext } from "utils/LangContext";
 import { content } from "constants/content";
 import SocialMedia from "components/SocialMedia";
 
-function Footer({ scrollToSection }) {
-  const [lang, setLang] = useContext(LangContext);
+function Footer() {
+  const [lang, ] = useContext(LangContext);
 
   const handleLogoClick = () => {
     window.scrollTo({
@@ -19,15 +20,15 @@ function Footer({ scrollToSection }) {
       <div className="footer-container container-inner">
         <div className="footer-links">
           <strong>{content[lang]["footerHeading"]}</strong>
-          <a href="#">{content[lang]["footerLink1"]}</a>
-          <a href="#" onClick={() => scrollToSection("howItWorks")}>
+          <Link to="/shop">{content[lang]["footerLink1"]}</Link>
+          <Link to="/#howItWorks">
             {content[lang]["footerLink2"]}
-          </a>
-          <a href="#" onClick={() => scrollToSection("reviews")}>
+          </Link>
+          <Link to="/#reviews">
             {content[lang]["footerLink3"]}
-          </a>
-          <a href="#">{content[lang]["footerLink4"]}</a>
-          <a href="#">{content[lang]["footerLink5"]}</a>
+          </Link>
+          <Link to="/contact">{content[lang]["footerLink4"]}</Link>
+          <Link to="/login">{content[lang]["footerLink5"]}</Link>
         </div>
 
         <div className="footer-info">

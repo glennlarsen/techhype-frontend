@@ -36,3 +36,8 @@ p {
 img {
   width: 100%;
 }
+
+li .MuiButtonBase-root {
+  display: flex !important;
+  padding: inherit !important;
+}

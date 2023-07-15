@@ -1,18 +1,14 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { content } from "constants/content";
-import {
-  UilUserCircle,
-  UilShoppingBag,
-  UilBars,
-} from "@iconscout/react-unicons";
+import { UilUserCircle, UilShoppingBag } from "@iconscout/react-unicons";
 import Logo from "logo/logo.png";
 import LogoNoText from "logo/logo-no-text.png";
 import LanguageSelector from "components/LanguageSelector";
 import { LangContext } from "utils/LangContext";
-import { Mobile, TabletAndDesktop } from "components/ScreenViewSize";
-import Burger from "@animated-burgers/burger-rotate";
+import { TabletAndDesktop } from "components/ScreenViewSize";
 import "@animated-burgers/burger-rotate/dist/styles.css";
+import Tooltip from "@mui/material/Tooltip";
 
 function debounce(func, delay) {
   let timeoutId;
@@ -25,13 +21,12 @@ function debounce(func, delay) {
 }
 
 function Navigation() {
-  const [lang, setLang] = useContext(LangContext);
+  const [lang] = useContext(LangContext);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -79,7 +74,11 @@ function Navigation() {
     <div className={`nav-container${isScrolled ? " scrolled fade-in" : ""}`}>
       <div className="navigation container-inner">
         <Link to="/">
-          <img src={isScrolled ? LogoNoText : Logo} className="logo" />
+          <img
+            src={isScrolled ? LogoNoText : Logo}
+            className="logo"
+            alt="Techhype Logo"
+          />
         </Link>
         <TabletAndDesktop>
           <LanguageSelector />
@@ -169,23 +168,27 @@ function Navigation() {
           </Link>
         </nav>
         <div className="nav-icons">
-          <Link to="#">
-            {windowWidth <= 900 ? (
-              <UilUserCircle size={28} color="white" />
-            ) : (
-              <UilUserCircle size={38} color="white" />
-            )}
-          </Link>
-          <Link to="#">
-            {windowWidth <= 900 ? (
-              <UilShoppingBag size={28} color="white" />
-            ) : (
-              <UilShoppingBag size={38} color="white" />
-            )}
-          </Link>
+          <Tooltip title="Login">
+            <Link to="/login">
+              {windowWidth <= 900 ? (
+                <UilUserCircle size={28} color="white" />
+              ) : (
+                <UilUserCircle size={38} color="white" />
+              )}
+            </Link>
+          </Tooltip>
+          <Tooltip title="Cart">
+            <Link to="/cart">
+              {windowWidth <= 900 ? (
+                <UilShoppingBag size={28} color="white" />
+              ) : (
+                <UilShoppingBag size={38} color="white" />
+              )}
+            </Link>
+          </Tooltip>
         </div>
         <div className="burger-menu" onClick={toggleMobileMenu}>
-          <div className="burger burger-rotate" style={{"fontSize": "10px"}}>
+          <div className="burger burger-rotate" style={{ fontSize: "10px" }}>
             <div className="burger-lines"></div>
           </div>
         </div>

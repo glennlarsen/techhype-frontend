@@ -24,7 +24,7 @@ const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [lang, setLang] = useContext(LangContext);
+  const [lang, ] = useContext(LangContext);
 
   const {
     register,

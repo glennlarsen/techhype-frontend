@@ -3,7 +3,6 @@ import { LangContext } from "utils/LangContext";
 import { GB, NO } from "country-flag-icons/react/3x2";
 
 import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -31,10 +30,10 @@ const LanguageSelector = (props) => {
             ":after": { borderBottomColor: "#54d4c6" },
           }}
         >
-          <MenuItem value="no">
+          <MenuItem value="no" >
             <NO />
           </MenuItem>
-          <MenuItem value="en">
+          <MenuItem value="en" >
             <GB />
           </MenuItem>
         </Select>

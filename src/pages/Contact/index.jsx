@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Layout from "components/Layout";
 import ContactForm from "components/ContactForm";
 import { LangContext } from "utils/LangContext";
 import { content } from "constants/content";
 
 function Contact() {
-  const [lang, setLang] = useContext(LangContext);
+  const [lang, ] = useContext(LangContext);
 
   return (
     <Layout

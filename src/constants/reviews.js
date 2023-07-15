@@ -31,7 +31,7 @@ export const reviews = [
   {
     rating: 5,
     reviewText:
-      '\"As a small business owner, Techhype\'s digital business card has been a game-changer. It has given me a professional edge and helped me stand out in a competitive market. The ability to add videos and links to my card has been especially beneficial for showcasing my products and services.\"',
+      '"As a small business owner, Techhype\'s digital business card has been a game-changer. It has given me a professional edge and helped me stand out in a competitive market. The ability to add videos and links to my card has been especially beneficial for showcasing my products and services."',
     image: Akam,
     name: "Akam B.",
   },
