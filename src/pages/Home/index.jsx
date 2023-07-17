@@ -136,7 +136,7 @@ function Home() {
                 {content[lang]["createProfileHeading"]}
               </h3>
               <p>{content[lang]["createProfileText"]}</p>
-              <Button size="small">
+              <Button onClick={() => navigate("/login")} size="small">
                 {content[lang]["createProfileButton"]}
               </Button>
             </Card>

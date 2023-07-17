@@ -47,14 +47,14 @@ function Navigation() {
   useEffect(() => {
     const handleScroll = debounce(() => {
       const scrollPosition = window.scrollY;
-      const scrollThreshold = 10; // Adjust this value as needed
+      const scrollThreshold = 72; // Adjust this value as needed
 
       if (scrollPosition < 1) {
         window.location.hash = "";
       }
 
       setIsScrolled(scrollPosition > scrollThreshold);
-    }, 50); // Adjust the debounce delay as needed
+    }, 20); // Adjust the debounce delay as needed
 
     window.addEventListener("scroll", handleScroll);
 
@@ -71,12 +71,12 @@ function Navigation() {
   }, []);
 
   return (
-    <div className={`nav-container${isScrolled ? " scrolled fade-in" : ""}`}>
+    <div className={`nav-container${isScrolled ? " sticky " : " "}`}>
       <div className="navigation container-inner">
         <Link to="/">
           <img
             src={isScrolled ? LogoNoText : Logo}
-            className="logo"
+            className={`logo ${isScrolled ? "logo-hover" : ""}`}
             alt="Techhype Logo"
           />
         </Link>
