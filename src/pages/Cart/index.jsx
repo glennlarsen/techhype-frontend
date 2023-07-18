@@ -11,7 +11,7 @@ const Cart = () => {
       page="Cart"
       description="Your shopping Cart"
     >
-      <section className="cart">
+      <section className="cart top-overlay">
         <div className="container-inner cart-container">
           <h1>{content[lang]["cartHeading"]}</h1>
           <p>Page under Construction...</p>

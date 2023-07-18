@@ -47,7 +47,7 @@ function Navigation() {
   useEffect(() => {
     const handleScroll = debounce(() => {
       const scrollPosition = window.scrollY;
-      const scrollThreshold = 72; // Adjust this value as needed
+      const scrollThreshold = 12; // Adjust this value as needed
 
       if (scrollPosition < 1) {
         window.location.hash = "";
@@ -188,7 +188,7 @@ function Navigation() {
           </Tooltip>
         </div>
         <div className="burger-menu" onClick={toggleMobileMenu}>
-          <div className="burger burger-rotate" style={{ fontSize: "10px" }}>
+          <div className="burger burger-rotate">
             <div className="burger-lines"></div>
           </div>
         </div>

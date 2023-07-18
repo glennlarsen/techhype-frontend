@@ -11,7 +11,7 @@ const Shop = () => {
       page="Shop"
       description="Get started by purchasing your first digital business card from Techhype."
     >
-      <section className="shop">
+      <section className="shop top-overlay">
         <div className="container-inner shop-container">
           <h1>{content[lang]["shopHeading"]}</h1>
           <p>Page under Construction...</p>

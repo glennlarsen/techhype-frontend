@@ -11,7 +11,7 @@ const Login = () => {
       page="Login"
       description="Login to your Techhype account"
     >
-      <section className="login">
+      <section className="login top-overlay">
         <div className="container-inner login-container">
           <h1>{content[lang]["loginHeading"]}</h1>
           <p>Page under Construction...</p>

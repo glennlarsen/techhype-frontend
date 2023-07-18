@@ -6,7 +6,6 @@
   width: 100%;
   background-color: $color-darker;
   transition: all 0.4s ease-in-out;
-  top: -20px;
 
   a {
     display: flex;
@@ -26,15 +25,38 @@
   background-color: $color-dark;
   box-shadow: 0 -6px 10px 5px rgba(0, 0, 0, 0.5);
   transition: all 0.4s ease 0s;
-  animation: fadeDown .6s ease forwards;
+
+  @media (min-width: 900px) {
+    animation: fadeDownDesktop 0.6s ease forwards;
+  }
+
+  @media (max-width: 899px) {
+    animation: fadeDownMobile 0.6s ease forwards;
+
+    .navigation {
+      padding: 0.6em 1.5em !important;
+    }
+
+    .nav-icons {
+      gap: 2em;
+
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
 
   .navigation {
     padding: 1em;
   }
 
+  .burger {
+    font-size: 8px !important;
+  }
 
   .logo {
-    width: 40px;
+    width: 30px;
     transition: transform 0.6s ease-in-out;
     transform-origin: center;
 
@@ -52,16 +74,36 @@
   }
 }
 
-@keyframes fadeDown {
+@keyframes fadeDownDesktop {
   from {
     top: 0;
     opacity: 0;
+    height: 123px;
     background-color: $color-darker;
     transform: translateY(-100%);
   }
   to {
     top: 0;
     opacity: 1;
+    height: 62px;
+    background-color: $color-dark;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fadeDownMobile {
+  from {
+    top: 0;
+    opacity: 0;
+    height: 76px;
+    background-color: $color-darker;
+    transform: translateY(-100%);
+  }
+  to {
+    top: 0;
+    opacity: 1;
+    height: 49.19px;
     background-color: $color-dark;
     transform: translateY(0);
   }
@@ -221,7 +263,11 @@
       justify-content: flex-end;
       align-items: center;
       cursor: pointer;
-      transition: 0.2s ease-in-out;
+      transition: background-color 0.2s ease-in-out;
+
+      .burger {
+        font-size: 10px;
+      }
 
       &:hover .burger-lines,
       &:hover .burger-lines:after,

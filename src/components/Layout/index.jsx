@@ -6,10 +6,8 @@ function Layout({ page, description, children }) {
   return (
     <>
       <Head page={page} description={description} />
-      <div className="wrapper">
         <Navigation  />
         {children}
-      </div>
       <Footer />
     </>
   );
