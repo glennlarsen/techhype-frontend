@@ -106,7 +106,7 @@ function Home() {
           <h2>{content[lang]["howHeading"]}</h2>
         </Fade>
         <div className="how-container container-inner">
-          <Fade direction="up" width="100%" triggerOnce>
+          <Fade direction="up" style={{width: "100%"}} triggerOnce>
             <Card
               minheight={windowWidth <= 900 ? "none" : "397px"}
               width="100%"
