@@ -52,6 +52,9 @@ footer {
 }
 
 .top-overlay {
-  margin-top: 1em;
-}
+  margin-top: 0.8em;
 
+  @media only screen and (max-width: 900px) {
+    margin-top: 1em;
+  }
+}

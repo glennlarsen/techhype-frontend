@@ -1,7 +1,58 @@
 .shop {
-  background-color: white;
+  background-color: $color-dark;
+  height: 100%;
+  min-height: 53vh;
+
   .shop-container {
     color: $color-dark;
     text-align: center;
+    color: white;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4em;
+    padding: 0 1.5em 4em 1.5em;
+    margin: 0 auto;
+    width: fit-content;
+
+    @media only screen and (max-width: 900px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .product-item {
+      display: flex;
+      flex-direction: column;
+      max-width: fit-content;
+      padding: 1em;
+    }
+  }
+
+  .product-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      margin: 0.1em;
+      font-size: 1.2rem;
+
+      @media only screen and (max-width: 900px) {
+        font-size: 1rem;
+      }
+    }
+
+    .product-text {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      flex: 2;
+      margin-top: 0.5em;
+
+      span {
+        color: $color-primary;
+      }
+    }
   }
 }
