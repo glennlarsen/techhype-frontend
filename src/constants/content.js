@@ -75,6 +75,7 @@ export const content = {
     contactButton: "Send",
     //Shop Page
     shopHeading: "Choose Your Card",
+    productButton: "Select",
     //Login Page
     loginHeading: "Login",
     //Cart Page
@@ -155,6 +156,7 @@ export const content = {
     contactButton: "Send",
     //Shop Page
     shopHeading: "Velg Ditt Kort",
+    productButton: "Velg",
     //Login Page
     loginHeading: "Logg Inn",
     //Cart Page

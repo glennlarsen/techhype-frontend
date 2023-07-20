@@ -2,9 +2,8 @@ import React, { useContext } from "react";
 import Layout from "components/Layout";
 import { LangContext } from "utils/LangContext";
 import { content } from "constants/content";
-import WhiteCard from "images/white-card-water.png";
-import BambooCard from "images/bamboo-card.png";
-import { Button } from "techhype-components";
+import Product from "components/Product";
+import { products } from "constants/products";
 
 const Shop = () => {
   const [lang] = useContext(LangContext);
@@ -18,30 +17,13 @@ const Shop = () => {
         <div className="container-inner shop-container">
           <h1>{content[lang]["shopHeading"]}</h1>
           <div className="product-grid">
-            <div className="product-item">
-              <div className="product-image">
-                <img src={WhiteCard} alt="White Business Card" />
-              </div>
-              <div className="product-info">
-                <div className="product-text">
-                  <h2>Plastic Card White</h2>
-                  <span>299,00 NOK</span>
-                </div>
-                <Button size="small" style={{ flex: 1 }}>Select</Button>
-              </div>
-            </div>
-            <div className="product-item">
-              <div className="product-image">
-                <img src={BambooCard} alt="Bamboo Business Card" />
-              </div>
-              <div className="product-info">
-                <div className="product-text">
-                  <h2>Bamboo Wooden Card</h2>
-                  <span>399,00 NOK</span>
-                </div>
-                <Button size="small" style={{ flex: 1 }}>Select</Button>
-              </div>
-            </div>
+            {products.map((product, index) => (
+              <Product
+                name={product.name}
+                price={product.price}
+                image={product.image}
+              />
+            ))}
           </div>
         </div>
       </section>
