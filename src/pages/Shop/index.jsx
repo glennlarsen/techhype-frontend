@@ -22,6 +22,8 @@ const Shop = () => {
                 name={product.name}
                 price={product.price}
                 image={product.image}
+                id={index}
+                key={index} // Add a unique key for each product
               />
             ))}
           </div>

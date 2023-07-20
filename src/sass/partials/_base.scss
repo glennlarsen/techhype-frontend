@@ -52,3 +52,21 @@ li .MuiButtonBase-root {
   display: flex !important;
   padding: inherit !important;
 }
+
+
+@keyframes pulseAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulsate {
+  animation: pulseAnimation 2s ease-in-out infinite;
+  width: 50px;
+}
