@@ -1,0 +1,85 @@
+//image gallery third party library
+.image-gallery {
+  width: 100%;
+
+  &-slides {
+    border-radius: $border-radius-primary;
+    background: white;
+    display: flex !important;
+  }
+
+  &-slides {
+    height: 330px;
+  }
+
+  &-slide {
+    height: 330px;
+  }
+
+  &-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover !important;
+
+    @media screen and (min-width: 568px) {
+      object-fit: contain !important;
+    }
+
+  }
+
+  &-thumbnails-wrapper {
+    display: none;
+  }
+
+  &-icon:hover {
+    color: $color-hover;
+  }
+
+  &-thumbnails-container {
+    cursor: initial !important;
+    text-align: start !important;
+  }
+
+  &-thumbnail, &-thumbnail-image {
+    cursor: pointer;
+    border-radius: $border-radius-primary;
+    height: 100%;
+    height: 60px;
+  }
+
+  &-thumbnail.active, &-thumbnail:focus, &-thumbnail:hover {
+    border-color: $color-hover;
+    height: 68px;
+  }
+
+  &-thumbnail.active img, &-thumbnail img:hover {
+    border-radius: 6px;
+  }
+
+  &-fullscreen-button {
+    display: none;
+  }
+
+  @media screen and (min-width: 900px) {
+
+  &-thumbnails-wrapper {
+    display: block;
+  }
+
+  &-fullscreen-button {
+    display: block;
+  }
+
+  &-index {
+    right: 50%;
+    transform: translateX(50%);
+    top: 10px;
+    border-radius: $border-radius-primary;
+  }
+}
+}
+
+.fullscreen .image-gallery-slides, .image-gallery-slide {
+  max-height: 100% !important;
+  height: 100% !important;
+}

@@ -21,8 +21,8 @@ const Shop = () => {
               <Product
                 name={product.name}
                 price={product.price}
-                image={product.image}
-                id={index}
+                image={product.image[0]}
+                id={product.id}
                 key={index} // Add a unique key for each product
               />
             ))}

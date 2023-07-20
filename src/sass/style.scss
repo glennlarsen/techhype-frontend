@@ -1,4 +1,5 @@
 @import "./partials/variables";
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
 @import "./partials/base";
 @import "./partials/layout";
 @import "./partials/navigation";
@@ -9,5 +10,6 @@
 @import "./partials/shop";
 @import "./partials/login";
 @import "./partials/cart";
+@import "./partials/imageGallery";
 @import "./partials/productDetails";
 @import "./partials/footer";

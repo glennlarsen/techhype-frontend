@@ -1,9 +1,69 @@
 .details {
-    color: $color-dark;
-    text-align: center;
-    background-color: white;
-    padding: 1.5em;
+  color: white;
+  background-color: $color-darker;
+  padding: 1.5em;
+  padding-bottom: 3.7em;
+
+  &-item {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+
+    & > * {
+      flex: 1;
+    }
+
+    @media only screen and (max-width: 900px) {
+      flex-direction: column;
+    }
+
+    h1 {
+      margin: 0;
+    }
+  }
+
+  &-info {
+    padding: 0 1em;
+
+    .details-price {
+      color: $color-primary;
+      font-weight: bold;
+    }
+  }
+
+  &-add {
+    display: flex;
+    align-items: center;
+    margin: 1.5em 0;
+    gap: 2em;
+
+    button {
+      flex: 1;
+    }
+  }
+
+  &-text {
+    span {
+      border-bottom: 1px solid white;
+      display: block;
+      font-weight: bold;
+      margin-top: 2em;
+      position: relative;
+
+      &:first-child::after {
+        content: "x"; /* Replace "ICON" with the actual icon content or use an icon font */
+        position: absolute;
+        top: -0.5em; /* Adjust this value to position the icon above the underline */
+        right: 0;
+        color: white;
+      }
+      &:after {
+        content: "+"; /* Replace "ICON" with the actual icon content or use an icon font */
+        position: absolute;
+        top: -0.5em; /* Adjust this value to position the icon above the underline */
+        right: 0;
+        color: white;
+      }
+    }
+  }
 }
-
-
-  
