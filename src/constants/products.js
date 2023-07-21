@@ -1,9 +1,12 @@
 import WhiteCard from "images/white-card-water.png";
-import BambooCard from "images/bamboo-card.png";
 import ManyWhiteCards from "images/white-card.png";
 import CardScan from "images/white-card-scan.png";
 import WhiteCardDimensions from "images/white-card-dimensions.png";
 import WhiteCardBend from "images/white-card-bend.png";
+
+import BambooCard from "images/bamboo-card.png";
+import BambooCardStock from "images/bamboo-cards-stock.jpg";
+import WoodenCards from "images/wooden-cards.jpg";
 
 export const products = [
   {
@@ -21,7 +24,7 @@ export const products = [
   {
     id: 2,
     name: "Bamboo Wooden Card",
-    image: [BambooCard],
+    image: [BambooCard, BambooCardStock, WoodenCards],
     price: "399,00",
   },
 ];

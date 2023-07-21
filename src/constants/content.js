@@ -1,3 +1,5 @@
+import { products } from "constants/products";
+
 export const content = {
   en: {
     //Heading Home and navigation
@@ -80,6 +82,21 @@ export const content = {
     loginHeading: "Login",
     //Cart Page
     cartHeading: "Cart",
+    //BreadCrumbs
+    home: "Home",
+    shop: "Get Started",
+    //Products Details
+    quantity: "Quantity",
+    addToCart: "Add To Cart",
+    detailsAccordionHeader: "Details",
+    warrantyAccordionHeader: "Warranty",
+    FaqAccordionHeader: "FAQ's",
+    details1:
+      "Techhype is pulling the humble business card straight into the 21st century, with fully integrated NFC technology.",
+    details2:
+      "Our business cards are the perfect way to communicate with customers and business connections alike - giving you complete marketing and networking versatility. Now you are no longer limited to simply sharing your contact details. With custom actions, you can instantly transfer information or cause any action on a smartphone.",
+    details3:
+      "Upload a logo or brand image to be printed directly onto your card.",
   },
   no: {
     //Heading Home and navigation
@@ -161,5 +178,20 @@ export const content = {
     loginHeading: "Logg Inn",
     //Cart Page
     cartHeading: "Handlevogn",
+    //BreadCrumbs
+    home: "Hjem",
+    shop: "Kom i Gang",
+    //Product Details
+    quantity: "Antall",
+    addToCart: "Legg i Handlevogn",
+    detailsAccordionHeader: "Detaljer",
+    warrantyAccordionHeader: "Garanti",
+    FaqAccordionHeader: "Ofte stilte spørsmål",
+    details1:
+      "Techhype tar det beskjedne visittkortet rett inn i det 21. århundret med fullt integrert NFC-teknologi.",
+    details2:
+      "Våre visittkort er den perfekte måten å kommunisere med kunder og forretningsforbindelser - og gir deg fullstendig fleksibilitet innen markedsføring og nettverksbygging. Nå er du ikke lenger begrenset til bare å dele kontaktinformasjonen din. Med tilpassede handlinger kan du umiddelbart overføre informasjon eller utløse hvilken som helst handling på en smarttelefon.",
+    details3:
+      "Last opp en logo eller et bilde som trykkes direkte på kortet ditt.",
   },
 };

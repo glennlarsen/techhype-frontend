@@ -7,14 +7,20 @@ import { products } from "constants/products";
 import { Button } from "techhype-components";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "constants/schema";
+import { LangContext } from "utils/LangContext";
+import { content } from "constants/content";
 
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Typography from '@mui/material/Typography';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
 
 const ProductDetails = () => {
+  const [lang] = useContext(LangContext);
   const { id } = useParams(); // Get the cardId from the URL
 
   // Find the product with the matching id
@@ -77,6 +83,28 @@ const ProductDetails = () => {
     >
       <section className="details top-overlay">
         <div className="container-inner details-container">
+        <div role="presentation">
+            <Breadcrumbs
+              aria-label="breadcrumb"
+              sx={{ ol: { justifyContent: "center" } }}
+            >
+              <Link
+                underline="hover"
+                color="rgba(255, 255, 255, 0.65)"
+                href="/"
+              >
+                {content[lang]["home"]}
+              </Link>
+              <Link
+                underline="hover"
+                color="rgba(255, 255, 255, 0.65)"
+                href="/shop"
+              >
+                {content[lang]["shop"]}
+              </Link>
+              <Typography color="white">{product.name}</Typography>
+            </Breadcrumbs>
+          </div>
           <div className="details-item">
             <div className="details-images">
               <ImageCarouselGallery items={product.image} />
@@ -90,7 +118,7 @@ const ProductDetails = () => {
                 <ThemeProvider theme={selectTheme}>
                   <FormControl variant="outlined">
                     <InputLabel id="quantity-label" sx={{ color: "white" }}>
-                      Quantity
+                    {content[lang]["quantity"]}
                     </InputLabel>
                     <Controller
                       render={({ field }) => (
@@ -116,29 +144,22 @@ const ProductDetails = () => {
                     />
                   </FormControl>
                 </ThemeProvider>
-                <Button size="small">Add to Cart</Button>
+                <Button size="small">{content[lang]["addToCart"]}</Button>
               </div>
 
               <div className="details-text">
-                <span>Details</span>
+                <span>{content[lang]["detailsAccordionHeader"]}</span>
                 <p>
-                  Techhype is pulling the humble business card straight into the
-                  21st century, with fully integrated NFC technology.
+                {content[lang]["details1"]}
                 </p>
                 <p>
-                  Our business cards are the perfect way to communicate with
-                  customers and business connections alike - giving you complete
-                  marketing and networking versatility. Now you are no longer
-                  limited to simply sharing your contact details. With custom
-                  actions, you can instantly transfer information or cause any
-                  action on a smartphone.
+                {content[lang]["details2"]}
                 </p>
                 <p>
-                  Upload a logo or brand image to be printed directly onto your
-                  card.
+                {content[lang]["details3"]}
                 </p>
-                <span>Warranty</span>
-                <span>FAQ's</span>
+                <span>{content[lang]["warrantyAccordionHeader"]}</span>
+                <span>{content[lang]["FaqAccordionHeader"]}</span>
               </div>
             </div>
           </div>

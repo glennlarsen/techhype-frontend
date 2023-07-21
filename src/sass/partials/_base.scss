@@ -70,3 +70,11 @@ li .MuiButtonBase-root {
   animation: pulseAnimation 2s ease-in-out infinite;
   width: 50px;
 }
+
+.MuiBreadcrumbs-root {
+  margin: 1em 0 !important;
+}
+
+.MuiBreadcrumbs-separator {
+  color: rgba(255, 255, 255, 0.65);
+}

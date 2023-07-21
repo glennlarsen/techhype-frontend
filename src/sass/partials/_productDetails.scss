@@ -1,13 +1,14 @@
 .details {
   color: white;
   background-color: $color-darker;
-  padding: 1.5em;
+  padding: 0 1.5em;
   padding-bottom: 3.7em;
 
   &-item {
     display: flex;
     justify-content: center;
     gap: 2em;
+    margin-top: 2em;
 
     & > * {
       flex: 1;
@@ -56,6 +57,7 @@
         top: -0.5em; /* Adjust this value to position the icon above the underline */
         right: 0;
         color: white;
+        cursor: pointer;
       }
       &:after {
         content: "+"; /* Replace "ICON" with the actual icon content or use an icon font */
@@ -63,6 +65,7 @@
         top: -0.5em; /* Adjust this value to position the icon above the underline */
         right: 0;
         color: white;
+        cursor: pointer;
       }
     }
   }
