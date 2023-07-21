@@ -15,9 +15,13 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import Typography from '@mui/material/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
+import Typography from "@mui/material/Typography";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Link from "@mui/material/Link";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const ProductDetails = () => {
   const [lang] = useContext(LangContext);
@@ -83,7 +87,7 @@ const ProductDetails = () => {
     >
       <section className="details top-overlay">
         <div className="container-inner details-container">
-        <div role="presentation">
+          <div role="presentation">
             <Breadcrumbs
               aria-label="breadcrumb"
               sx={{ ol: { justifyContent: "center" } }}
@@ -118,7 +122,7 @@ const ProductDetails = () => {
                 <ThemeProvider theme={selectTheme}>
                   <FormControl variant="outlined">
                     <InputLabel id="quantity-label" sx={{ color: "white" }}>
-                    {content[lang]["quantity"]}
+                      {content[lang]["quantity"]}
                     </InputLabel>
                     <Controller
                       render={({ field }) => (
@@ -148,18 +152,69 @@ const ProductDetails = () => {
               </div>
 
               <div className="details-text">
-                <span>{content[lang]["detailsAccordionHeader"]}</span>
-                <p>
-                {content[lang]["details1"]}
-                </p>
-                <p>
-                {content[lang]["details2"]}
-                </p>
-                <p>
-                {content[lang]["details3"]}
-                </p>
-                <span>{content[lang]["warrantyAccordionHeader"]}</span>
-                <span>{content[lang]["FaqAccordionHeader"]}</span>
+                <Accordion defaultExpanded>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography variant="subtitle1" sx={{fontWeight: "bold"}}>
+                      {content[lang]["detailsAccordionHeader"]}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <p style={{marginTop: 0}}>{content[lang]["details1"]}</p>
+                    <p>{content[lang]["details2"]}</p>
+                    <p>{content[lang]["details3"]}</p>
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel2a-content"
+                    id="panel2a-header"
+                  >
+                    <Typography variant="subtitle1" sx={{fontWeight: "bold"}}>
+                      {content[lang]["warrantyAccordionHeader"]}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                    {content[lang]["warrantyText"]}
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel2a-content"
+                    id="panel2a-header"
+                  >
+                    <Typography variant="subtitle1" sx={{fontWeight: "bold"}}>
+                      {content[lang]["FaqAccordionHeader"]}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography variant="subtitle2">
+                    {content[lang]["faqQuestion1"]}
+                    </Typography>
+                    <Typography>
+                    {content[lang]["faqAnswer1"]}
+                    </Typography>
+                    <Typography variant="subtitle2" mt={2}>
+                    {content[lang]["faqQuestion2"]}
+                    </Typography>
+                    <Typography>
+                    {content[lang]["faqAnswer2"]}
+                    </Typography>
+                    <Typography variant="subtitle2" mt={2}>
+                    {content[lang]["faqQuestion3"]}
+                    </Typography>
+                    <Typography>
+                    {content[lang]["faqAnswer3"]}
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
               </div>
             </div>
           </div>

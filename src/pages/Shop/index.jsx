@@ -29,9 +29,9 @@ const Shop = () => {
                 color="rgba(255, 255, 255, 0.65)"
                 href="/"
               >
-                Home
+                {content[lang]["home"]}
               </Link>
-              <Typography color="white">Get Started</Typography>
+              <Typography color="white">{content[lang]["shop"]}</Typography>
             </Breadcrumbs>
           </div>
           <h1>{content[lang]["shopHeading"]}</h1>

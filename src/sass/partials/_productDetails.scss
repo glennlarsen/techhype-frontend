@@ -43,30 +43,5 @@
     }
   }
 
-  &-text {
-    span {
-      border-bottom: 1px solid white;
-      display: block;
-      font-weight: bold;
-      margin-top: 2em;
-      position: relative;
 
-      &:first-child::after {
-        content: "x"; /* Replace "ICON" with the actual icon content or use an icon font */
-        position: absolute;
-        top: -0.5em; /* Adjust this value to position the icon above the underline */
-        right: 0;
-        color: white;
-        cursor: pointer;
-      }
-      &:after {
-        content: "+"; /* Replace "ICON" with the actual icon content or use an icon font */
-        position: absolute;
-        top: -0.5em; /* Adjust this value to position the icon above the underline */
-        right: 0;
-        color: white;
-        cursor: pointer;
-      }
-    }
-  }
 }
