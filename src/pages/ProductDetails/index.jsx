@@ -23,20 +23,23 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import Backdrop from '@mui/material/Backdrop';
-import Fade from '@mui/material/Fade';
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import Backdrop from "@mui/material/Backdrop";
+import Fade from "@mui/material/Fade";
+import CardHeader from "@mui/material/CardHeader";
+import Avatar from "@mui/material/Avatar";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  minWidth: "300px",
-  bgcolor: 'background.paper',
+  position: "relative",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  minWidth: "270px",
+  maxWidth: "450px",
+  bgcolor: "#1f2427",
   boxShadow: 24,
-  color: 'black',
+  color: "white",
   borderRadius: "10px",
   display: "flex",
   flexDirection: "column",
@@ -266,23 +269,57 @@ const ProductDetails = () => {
         }}
       >
         <Fade in={open}>
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Added to Cart!
-          </Typography>
-          <Typography>
-            {quantity} x {product.name} ({product.price} NOK)
-          </Typography>
-          <img src={product.image[0]} alt="" />
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-           <strong>Total</strong> {parseInt(product.price) * quantity},00 NOK
-          </Typography>
-          <Button style={{background: "transparent", border: "2px solid #54d4c6", margin: "1em"}} size="small" onClick={handleClose}>Close</Button>
-          <Button size="small" onClick={(quantity) => navigate("/cart")}>Continue to Cart</Button>
-        </Box>
+          <Box sx={style}>
+            <Typography
+              id="modal-modal-title"
+              variant="h5"
+              component="h2"
+              mb={2}
+            >
+              {content[lang]["addedToCart"]}
+            </Typography>
+            <CardHeader
+              avatar={
+                <img
+                  style={{ width: "90px" }}
+                  src={product.image[0]}
+                  alt={product.name}
+                />
+              }
+              title={`${quantity} x ${product.name}`}
+              subheader={`${product.price} NOK`}
+            />
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              <strong>{content[lang]["cartTotal"]}</strong>{" "}
+              {parseInt(product.price) * quantity},00 NOK
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                gap: "1em",
+              }}
+            >
+              <Button
+                style={{
+                  background: "transparent",
+                  border: "2px solid #249ca3",
+                  margin: "1em 0",
+                  color: "white",
+                }}
+                size="small"
+                onClick={handleClose}
+              >
+                {content[lang]["closeModalButton"]}
+              </Button>
+              <Button size="small" onClick={(quantity) => navigate("/cart")}>
+                {content[lang]["GoToCartModalButton"]}
+              </Button>
+            </Box>
+          </Box>
         </Fade>
       </Modal>
-
     </Layout>
   );
 };

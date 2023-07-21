@@ -96,14 +96,23 @@ export const content = {
     details3:
       "Upload a logo or brand image to be printed directly onto your card.",
     warrantyAccordionHeader: "Warranty",
-    warrantyText: "1 year. Applies only if the card is defect. Lost or stolen card is not covered by the warranty",
+    warrantyText:
+      "1 year. Applies only if the card is defect. Lost or stolen card is not covered by the warranty",
     FaqAccordionHeader: "FAQ's",
     faqQuestion1: "Can I have several profiles in one card?",
-    faqAnswer1: "Yes, You can have up to 3 profiles on a card. Only one profile can be active at once. You can manage your profiles and their active state from your account.",
+    faqAnswer1:
+      "Yes, You can have up to 3 profiles on a card. Only one profile can be active at once. You can manage your profiles and their active state from your account.",
     faqQuestion2: "Does the card work for all SmartPhones?",
-    faqAnswer2: "Techhype Digital Business card work for all Smartphones which have NFC. Most Smartphones of newer age does have NFC.",
+    faqAnswer2:
+      "Techhype Digital Business card work for all Smartphones which have NFC. Most Smartphones of newer age does have NFC.",
     faqQuestion3: "What should I do if I lose my card?",
-    faqAnswer3: "If you lose your card you can simply go to your account and block it to make sure it won't be abused.",
+    faqAnswer3:
+      "If you lose your card you can simply go to your account and block it to make sure it won't be abused.",
+    //Added to cart modal
+    addedToCart: "Added to Cart!",
+    cartTotal: "Total",
+    closeModalButton: "Close",
+    GoToCartModalButton: "Go to Cart",
   },
   no: {
     //Heading Home and navigation
@@ -199,13 +208,22 @@ export const content = {
     details3:
       "Last opp en logo eller et bilde som trykkes direkte på kortet ditt.",
     warrantyAccordionHeader: "Garanti",
-    warrantyText: "1 år. Gjelder kun hvis kortet er defekt. Tapt eller stjålet kort dekkes ikke av garantien.",
+    warrantyText:
+      "1 år. Gjelder kun hvis kortet er defekt. Tapt eller stjålet kort dekkes ikke av garantien.",
     FaqAccordionHeader: "Ofte stilte spørsmål",
     faqQuestion1: "Kan jeg ha flere profiler på ett kort?",
-    faqAnswer1: "Ja, du kan ha opptil 3 profiler på ett kort. Kun én profil kan være aktiv om gangen. Du kan administrere profilene og deres aktive tilstand fra din konto.",
+    faqAnswer1:
+      "Ja, du kan ha opptil 3 profiler på ett kort. Kun én profil kan være aktiv om gangen. Du kan administrere profilene og deres aktive tilstand fra din konto.",
     faqQuestion2: "Fungerer kortet på alle smarttelefoner?",
-    faqAnswer2: "Techhype Digitalt Visittkort fungerer på alle smarttelefoner som har NFC. De fleste nyere smarttelefoner har NFC-teknologi.",
+    faqAnswer2:
+      "Techhype Digitalt Visittkort fungerer på alle smarttelefoner som har NFC. De fleste nyere smarttelefoner har NFC-teknologi.",
     faqQuestion3: "Hva skal jeg gjøre hvis jeg mister kortet mitt?",
-    faqAnswer3: "Hvis du mister kortet ditt, kan du enkelt gå til kontoen din og blokkere det for å sikre at det ikke blir misbrukt.",
+    faqAnswer3:
+      "Hvis du mister kortet ditt, kan du enkelt gå til kontoen din og blokkere det for å sikre at det ikke blir misbrukt.",
+    //Added to cart modal
+    addedToCart: "Lagt i Handlevogn!",
+    cartTotal: "Totalt",
+    closeModalButton: "Lukk",
+    GoToCartModalButton: "Til Handlevogn",
   },
 };
