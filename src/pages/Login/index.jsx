@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Layout from "components/Layout";
-import { LangContext } from "utils/LangContext";
+import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import Logo from "logo/logo-no-text.png";
 

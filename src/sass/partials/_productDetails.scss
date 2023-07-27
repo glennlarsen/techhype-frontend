@@ -23,8 +23,19 @@
     }
   }
 
+  &-images {
+    @media only screen and (max-width: 500px) {
+        margin-right: -1.5em;
+        margin-left: -1.5em;
+      }
+  }
+
   &-info {
     padding: 0 1em;
+
+    @media only screen and (max-width: 1200px) {
+        padding: 0;
+      }
 
     .details-price {
       color: $color-primary;

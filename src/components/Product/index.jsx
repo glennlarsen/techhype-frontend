@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { LangContext } from "utils/LangContext";
+import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import { Button } from "techhype-components";
 import { Fade } from "react-awesome-reveal";
+import { formatCurrency } from "utils/formatCurrency";
 
 const Product = ({ name, image, price, id }) => {
   const [lang] = useContext(LangContext);
@@ -18,7 +19,7 @@ const Product = ({ name, image, price, id }) => {
         <div className="product-info">
           <div className="product-text">
             <h2>{name}</h2>
-            <span>{price} NOK</span>
+            <span>{formatCurrency(price)}</span>
           </div>
           <Button
             size="small"

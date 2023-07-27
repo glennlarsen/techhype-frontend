@@ -1,16 +1,23 @@
 import React, { useContext } from "react";
 import Layout from "components/Layout";
-import { LangContext } from "utils/LangContext";
+import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import Product from "components/Product";
-import { products } from "constants/products";
+import { products } from "data/products";
 
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
-import Link from "@mui/material/Link";
+import Link from '@mui/material/Link';
+import {
+  Link as RouterLink,
+} from 'react-router-dom';
 
 const Shop = () => {
   const [lang] = useContext(LangContext);
+
+  function LinkRouter(props) {
+    return <Link {...props} component={RouterLink} />;
+  }
 
   return (
     <Layout
@@ -24,25 +31,23 @@ const Shop = () => {
               aria-label="breadcrumb"
               sx={{ ol: { justifyContent: "center" } }}
             >
-              <Link
+              <LinkRouter
                 underline="hover"
                 color="rgba(255, 255, 255, 0.65)"
-                href="/"
+                to="/"
               >
                 {content[lang]["home"]}
-              </Link>
+              </LinkRouter>
               <Typography color="white">{content[lang]["shop"]}</Typography>
             </Breadcrumbs>
           </div>
           <h1>{content[lang]["shopHeading"]}</h1>
           <div className="product-grid">
-            {products.map((product, index) => (
+            {products.map((item) => (
               <Product
-                name={product.name}
-                price={product.price}
-                image={product.image[0]}
-                id={product.id}
-                key={index} // Add a unique key for each product
+                {...item}
+                image={item.image[0]}
+                key={item.id}
               />
             ))}
           </div>

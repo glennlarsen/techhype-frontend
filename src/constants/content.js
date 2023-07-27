@@ -1,4 +1,4 @@
-import { products } from "constants/products";
+import { products } from "data/products";
 
 export const content = {
   en: {
@@ -21,6 +21,8 @@ export const content = {
     menuItem2: "How it Works",
     menuItem3: "Reviews",
     menuItem4: "Contact Us",
+    loginTooltip: "Login",
+    cartToolTip: "Cart",
     //How it works section
     howPreHeading: "3 easy steps",
     howHeading: "How It Works",
@@ -68,6 +70,7 @@ export const content = {
     selectLabel: "I need help with..",
     selectOption1: "General Inquiry",
     selectOption2: "My Current Order",
+    selectOption3: "Technical Support",
     nameLabel: "Name",
     emailLabel: "Email",
     phoneLabel: "Phone",
@@ -82,6 +85,9 @@ export const content = {
     loginHeading: "Login",
     //Cart Page
     cartHeading: "Cart",
+    cartEmpty: "You have no items in the shopping cart",
+    cartTotal: "Total",
+    cartRemove: "Remove",
     //BreadCrumbs
     home: "Home",
     shop: "Get Started",
@@ -133,6 +139,8 @@ export const content = {
     menuItem2: "Hvordan det Fungerer",
     menuItem3: "Anmeldelser",
     menuItem4: "Kontakt Oss",
+    loginTooltip: "Logg Inn",
+    cartToolTip: "Handlevogn",
     //How it works section
     howPreHeading: "3 enkle steg",
     howHeading: "Hvordan Det Fungerer",
@@ -180,6 +188,7 @@ export const content = {
     selectLabel: "Trenger hjelp med..",
     selectOption1: "Generell henvendelse",
     selectOption2: "Min bestilling",
+    selectOption3: "Teknisk Hjelp",
     nameLabel: "Navn",
     emailLabel: "E-post",
     phoneLabel: "Telefon",
@@ -194,6 +203,9 @@ export const content = {
     loginHeading: "Logg Inn",
     //Cart Page
     cartHeading: "Handlevogn",
+    cartEmpty: "Du har ingen varer i handlevognen",
+    cartTotal: "Totalt",
+    cartRemove: "Fjern",
     //BreadCrumbs
     home: "Hjem",
     shop: "Kom i Gang",

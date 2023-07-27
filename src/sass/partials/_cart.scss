@@ -1,6 +1,14 @@
 .cart {
   background-color: white;
   padding: 1.5em;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
   
   .cart-container {
     color: $color-dark;

@@ -5,10 +5,11 @@ import { UilUserCircle, UilShoppingBag } from "@iconscout/react-unicons";
 import Logo from "logo/logo.png";
 import LogoNoText from "logo/logo-no-text.png";
 import LanguageSelector from "components/LanguageSelector";
-import { LangContext } from "utils/LangContext";
+import { LangContext } from "context/LangContext";
 import { TabletAndDesktop } from "components/ScreenViewSize";
 import "@animated-burgers/burger-rotate/dist/styles.css";
 import Tooltip from "@mui/material/Tooltip";
+import { useShoppingCart } from "context/ShoppingCartContext";
 
 function debounce(func, delay) {
   let timeoutId;
@@ -27,6 +28,7 @@ function Navigation() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { cartQuantity } = useShoppingCart();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -168,7 +170,7 @@ function Navigation() {
           </Link>
         </nav>
         <div className="nav-icons">
-          <Tooltip title="Login">
+          <Tooltip title={content[lang]["loginTooltip"]}>
             <Link to="/login">
               {windowWidth <= 900 ? (
                 <UilUserCircle size={28} color="white" />
@@ -177,13 +179,17 @@ function Navigation() {
               )}
             </Link>
           </Tooltip>
-          <Tooltip title="Cart">
-            <Link to="/cart">
+          <Tooltip title={content[lang]["cartToolTip"]}>
+            <Link
+              to="/cart"
+              style={{ position: "relative", textDecoration: "none" }}
+            >
               {windowWidth <= 900 ? (
                 <UilShoppingBag size={28} color="white" />
               ) : (
                 <UilShoppingBag size={38} color="white" />
               )}
+              {cartQuantity > 0 && <div className="cart-counter">{cartQuantity}</div>}
             </Link>
           </Tooltip>
         </div>

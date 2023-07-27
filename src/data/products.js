@@ -19,12 +19,12 @@ export const products = [
       WhiteCardDimensions,
       WhiteCardBend,
     ],
-    price: "299,00",
+    price: 299,
   },
   {
     id: 2,
     name: "Bamboo Wooden Card",
     image: [BambooCard, BambooCardStock, WoodenCards],
-    price: "399,00",
+    price: 399,
   },
 ];

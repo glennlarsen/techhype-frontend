@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import LogoLong from "logo/logo-long.png";
-import { LangContext } from "utils/LangContext";
+import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import SocialMedia from "components/SocialMedia";
 

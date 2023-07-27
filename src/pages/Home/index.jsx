@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Layout from "components/Layout";
 import PhoneAnimation from "components/PhoneAnimation";
 import { Button, Card } from "techhype-components";
-import { LangContext } from "utils/LangContext";
+import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import UilUser from "@iconscout/react-unicons/icons/uil-user";
 import { UilMobileVibrate } from "@iconscout/react-unicons";
@@ -19,7 +19,7 @@ import Hamre from "images/hamre.png";
 import Techhype from "images/techhype.png";
 import { Fade } from "react-awesome-reveal";
 import NfcCard from "images/nfc-card.png";
-import { reviews } from "constants/reviews";
+import { reviews } from "data/reviews";
 
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import CreditCardIcon from "@mui/icons-material/CreditCard";

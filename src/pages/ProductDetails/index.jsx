@@ -3,13 +3,14 @@ import { useParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import Layout from "components/Layout";
 import ImageCarouselGallery from "./ImageCarouselGallery";
-import { products } from "constants/products";
+import { products } from "data/products";
 import { Button } from "techhype-components";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "constants/schema";
-import { LangContext } from "utils/LangContext";
+import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import { useNavigate } from "react-router-dom";
+import { formatCurrency } from "utils/formatCurrency";
 
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -18,7 +19,10 @@ import Select from "@mui/material/Select";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
-import Link from "@mui/material/Link";
+import Link from '@mui/material/Link';
+import {
+  Link as RouterLink,
+} from 'react-router-dom';
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -29,6 +33,7 @@ import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
+import { useShoppingCart } from "context/ShoppingCartContext";
 
 const style = {
   position: "relative",
@@ -55,6 +60,22 @@ const ProductDetails = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
+
+  function LinkRouter(props) {
+    return <Link {...props} component={RouterLink} />;
+  }
+
+  const {
+    getItemQuantity,
+    addToCart,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+  } = useShoppingCart();
+
+  const cartQuantity = getItemQuantity(id);
+
+  console.log("Cart Quantity: ", cartQuantity);
 
   // Find the product with the matching id
   const product = products.find((product) => product.id === parseInt(id, 10));
@@ -108,8 +129,8 @@ const ProductDetails = () => {
     setQuantity(event.target.value);
   };
 
-  const handleAddToCart = () => {
-    console.log(quantity);
+  const handleAddToCart = (id) => {
+    addToCart(id, quantity);
     handleOpen(quantity);
   };
 
@@ -130,20 +151,20 @@ const ProductDetails = () => {
               aria-label="breadcrumb"
               sx={{ ol: { justifyContent: "center" } }}
             >
-              <Link
+              <LinkRouter
                 underline="hover"
                 color="rgba(255, 255, 255, 0.65)"
-                href="/"
+                to="/"
               >
                 {content[lang]["home"]}
-              </Link>
-              <Link
+              </LinkRouter>
+              <LinkRouter
                 underline="hover"
                 color="rgba(255, 255, 255, 0.65)"
-                href="/shop"
+                to="/shop"
               >
                 {content[lang]["shop"]}
-              </Link>
+              </LinkRouter>
               <Typography color="white">{product.name}</Typography>
             </Breadcrumbs>
           </div>
@@ -154,7 +175,9 @@ const ProductDetails = () => {
 
             <div className="details-info">
               <h1>{product.name}</h1>
-              <span className="details-price">{product.price} NOK</span>
+              <span className="details-price">
+                {formatCurrency(product.price)}
+              </span>
 
               <div className="details-add">
                 <ThemeProvider theme={selectTheme}>
@@ -188,7 +211,7 @@ const ProductDetails = () => {
                     />
                   </FormControl>
                 </ThemeProvider>
-                <Button size="small" onClick={handleAddToCart}>
+                <Button size="small" onClick={() => handleAddToCart(id)}>
                   {content[lang]["addToCart"]}
                 </Button>
               </div>
@@ -287,11 +310,11 @@ const ProductDetails = () => {
                 />
               }
               title={`${quantity} x ${product.name}`}
-              subheader={`${product.price} NOK`}
+              subheader={formatCurrency(product.price)}
             />
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <strong>{content[lang]["cartTotal"]}</strong>{" "}
-              {parseInt(product.price) * quantity},00 NOK
+              {formatCurrency(product.price * quantity)}
             </Typography>
             <Box
               sx={{

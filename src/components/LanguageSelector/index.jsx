@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { LangContext } from "utils/LangContext";
+import { LangContext } from "context/LangContext";
 import { GB, NO } from "country-flag-icons/react/3x2";
 
 import Box from "@mui/material/Box";

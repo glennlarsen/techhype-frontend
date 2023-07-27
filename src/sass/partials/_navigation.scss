@@ -91,7 +91,6 @@
   }
 }
 
-
 @keyframes fadeDownMobile {
   from {
     top: 0;
@@ -171,9 +170,26 @@
     display: flex;
     gap: 1.5em;
 
-    svg:hover {
+    svg:hover, .cart-counter svg:hover {
       transition: 0.2s ease-in-out;
       fill: $color-hover;
+    }
+
+    .cart-counter {
+      background: $color-primary;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.7rem;
+      font-weight: bold;
+      color: $color-dark;
+      width: 17px;
+      height: 17px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(35%, -20%);
     }
   }
 

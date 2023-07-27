@@ -7,7 +7,7 @@ import InputsTheme from "components/forms/InputsTheme";
 import AlertMessage from "components/forms/AlertMessage";
 import { Button } from "techhype-components";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { LangContext } from "utils/LangContext";
+import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import { Fade } from "react-awesome-reveal";
 
@@ -89,6 +89,7 @@ const ContactForm = () => {
               >
                 <MenuItem value={1}>{content[lang]["selectOption1"]}</MenuItem>
                 <MenuItem value={2}>{content[lang]["selectOption2"]}</MenuItem>
+                <MenuItem value={3}>{content[lang]["selectOption3"]}</MenuItem>
               </Select>
             )}
             name="subject"
