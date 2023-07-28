@@ -97,6 +97,7 @@ export const content = {
     cartRemove: "Remove",
     shipping: "Shipping",
     checkout: "Checkout",
+    shippingInfo: "Free shipping for orders above 500 Kr",
     //BreadCrumbs
     home: "Home",
     shop: "Get Started",
@@ -226,6 +227,7 @@ export const content = {
     cartRemove: "Fjern",
     shipping: "Frakt",
     checkout: "Til Betaling",
+    shippingInfo: "Fri frakt for ordre over 500 Kr",
     //BreadCrumbs
     home: "Hjem",
     shop: "Kom i Gang",

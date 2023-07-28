@@ -17,20 +17,20 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 // Define your custom breakpoints
 const customBreakpoints = {
-    xs: 0, // Extra small devices (phones)
-    sm: 700, // Small devices (tablets)
-    md: 960, // Medium devices (desktops)
-    lg: 1280, // Large devices (large desktops)
-    xl: 1920, // Extra large devices (larger desktops)
-  };
-  
-  // Create a custom theme using the custom breakpoints
-  const theme = createTheme({
-    breakpoints: {
-      keys: ["xs", "sm", "md", "lg", "xl"],
-      values: customBreakpoints,
-    },
-  });
+  xs: 0, // Extra small devices (phones)
+  sm: 700, // Small devices (tablets)
+  md: 960, // Medium devices (desktops)
+  lg: 1280, // Large devices (large desktops)
+  xl: 1920, // Extra large devices (larger desktops)
+};
+
+// Create a custom theme using the custom breakpoints
+const theme = createTheme({
+  breakpoints: {
+    keys: ["xs", "sm", "md", "lg", "xl"],
+    values: customBreakpoints,
+  },
+});
 
 const CartItem = ({ id, quantity }) => {
   const [lang] = useContext(LangContext);
@@ -43,83 +43,70 @@ const CartItem = ({ id, quantity }) => {
 
   return (
     <ThemeProvider theme={theme}>
-    <Stack
-      direction={{ xs: "column", sm: "row"}}
-      alignItems={{ xs: "flex-start", sm: "center"}}
-      justifyContent="space-between"
-      spacing={2}
-    >
-      <Link to={`/shop/${id}`}>
-        <img
-          src={item.image[0]}
-          style={{
-            width: "135px",
-            height: "85px",
-            objectFit: "cover",
-            borderRadius: "10px",
-          }}
-          alt={item.name}
-        />
-        <Box sx={{ textAlign: "left" }}>
-          <Box sx={{ fontSize: "1.1rem" }}>
-            {item.name}{" "}
-            {quantity > 1 && (
-              <span style={{ fontSize: ".75rem" }}>x{quantity}</span>
-            )}
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        alignItems={{ xs: "flex-start", sm: "center" }}
+        justifyContent="space-between"
+        spacing={2}
+      >
+        <Link to={`/shop/${id}`}>
+          <img
+            src={item.image[0]}
+            style={{
+              width: "135px",
+              height: "85px",
+              objectFit: "cover",
+              borderRadius: "10px",
+            }}
+            alt={item.name}
+          />
+          <Box sx={{ textAlign: "left" }}>
+            <Box sx={{ fontSize: "1.1rem" }}>
+              {item.name}{" "}
+              {quantity > 1 && (
+                <span style={{ fontSize: ".75rem" }}>x{quantity}</span>
+              )}
+            </Box>
+            <Box sx={{ fontSize: ".80rem" }}>{formatCurrency(item.price)}</Box>
           </Box>
-          <Box sx={{ fontSize: ".80rem" }}>{formatCurrency(item.price)}</Box>
-        </Box>
-      </Link>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: ".6em",
-        }}
-      >
-        {/* Decrement button */}
-        <IconButton
-          size="small"
-          aria-label="Decrement"
-          onClick={() => decreaseCartQuantity(id)}
+        </Link>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: { xs: "100%", sm: "fit-content" },
+            gap: ".6em",
+          }}
         >
-          <RemoveIcon />
-        </IconButton>
-
-        <span>{quantity}</span>
-
-        {/* Increment button */}
-        <IconButton
-          size="small"
-          aria-label="Increment"
-          onClick={() => increaseCartQuantity(id)}
-        >
-          <AddIcon />
-        </IconButton>
-        <Button
-        className="remove-item-mobile"
-            sx={{ maxWidth: "50px", minWidth: 0, maxHeight: "25px", display: {xs: "flex", sm: "none"}, marginLeft: { xs: "1.5em"} }}
-            variant="outlined"
-            color="error"
+          {/* Decrement button */}
+          <IconButton
             size="small"
-            onClick={() => removeFromCart(id)}
+            aria-label="Decrement"
+            onClick={() => decreaseCartQuantity(id)}
           >
-            &times;
-          </Button>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          alignSelf: {xs: "flex-end", sm: "center"},
-          gap: ".6em",
-        }}
-      >
-        <div style={{ minWidth: "100px", textAlign: "right" }}>{formatCurrency(item.price * quantity)}</div>
-        <Tooltip title={content[lang]["cartRemove"]}>
+            <RemoveIcon />
+          </IconButton>
+
+          <span>{quantity}</span>
+
+          {/* Increment button */}
+          <IconButton
+            size="small"
+            aria-label="Increment"
+            onClick={() => increaseCartQuantity(id)}
+          >
+            <AddIcon />
+          </IconButton>
           <Button
-            sx={{ maxWidth: "50px", minWidth: 0, maxHeight: "25px", display: {xs: "none", sm: "flex"} }}
+            className="remove-item-mobile"
+            sx={{
+              maxWidth: "50px",
+              minWidth: 0,
+              maxHeight: "25px",
+              display: { xs: "flex", sm: "none" },
+              marginLeft: { xs: "1.5em" },
+            }}
             variant="outlined"
             color="error"
             size="small"
@@ -127,9 +114,45 @@ const CartItem = ({ id, quantity }) => {
           >
             &times;
           </Button>
-        </Tooltip>
-      </Box>
-    </Stack>
+          <div
+            style={{ minWidth: "100px", marginLeft: "auto" }}
+            className="item-price-mobile"
+          >
+            {formatCurrency(item.price * quantity)}
+          </div>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            alignSelf: { xs: "flex-end", sm: "center" },
+            gap: ".6em",
+          }}
+        >
+          <div
+            style={{ minWidth: "100px", textAlign: "right" }}
+            className="item-price-desktop"
+          >
+            {formatCurrency(item.price * quantity)}
+          </div>
+          <Tooltip title={content[lang]["cartRemove"]}>
+            <Button
+              sx={{
+                maxWidth: "50px",
+                minWidth: 0,
+                maxHeight: "25px",
+                display: { xs: "none", sm: "flex" },
+              }}
+              variant="outlined"
+              color="error"
+              size="small"
+              onClick={() => removeFromCart(id)}
+            >
+              &times;
+            </Button>
+          </Tooltip>
+        </Box>
+      </Stack>
     </ThemeProvider>
   );
 };

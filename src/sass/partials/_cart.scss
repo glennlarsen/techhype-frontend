@@ -14,10 +14,21 @@
       width: auto;
     }
   }
-  
+
   .cart-container {
     color: $color-dark;
     text-align: center;
   }
 
+  @media (min-width: 700px) {
+    .item-price-mobile {
+      display: none;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .item-price-desktop {
+      display: none;
+    }
+  }
 }

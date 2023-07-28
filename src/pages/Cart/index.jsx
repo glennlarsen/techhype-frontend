@@ -14,6 +14,8 @@ import { grey } from "@mui/material/colors";
 import { useShoppingCart } from "context/ShoppingCartContext";
 import { formatCurrency } from "utils/formatCurrency";
 import { Button } from "techhype-components";
+import HelpIcon from "@mui/icons-material/Help";
+import Tooltip from "@mui/material/Tooltip";
 
 const Cart = () => {
   const [lang] = useContext(LangContext);
@@ -37,8 +39,20 @@ const Cart = () => {
                 <Box
                   sx={{
                     marginLeft: "auto !important",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: ".2em",
                   }}
                 >
+                  <Tooltip title={content[lang]["shippingInfo"]}>
+                    <HelpIcon
+                      sx={{
+                        maxWidth: "16px",
+                        maxHeight: "16px",
+                        color: "#1f2427",
+                      }}
+                    />
+                  </Tooltip>
                   {content[lang]["shipping"]}{" "}
                   {formatCurrency(
                     cartItems.reduce((total, cartItem) => {
@@ -76,7 +90,13 @@ const Cart = () => {
                         : SHIPPING_COST)
                   )}
                 </Box>
-                <Button size="small" style={{ display: "flex", alignSelf: "end"}} onClick={() => navigate("/checkout")}>{content[lang]["checkout"]}</Button>
+                <Button
+                  size="small"
+                  style={{ display: "flex", alignSelf: "end" }}
+                  onClick={() => navigate("/checkout")}
+                >
+                  {content[lang]["checkout"]}
+                </Button>
               </>
             ) : (
               <Box
