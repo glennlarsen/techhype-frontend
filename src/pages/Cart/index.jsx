@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "components/Layout";
 import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
-import Logo from "logo/logo-no-text.png";
 import CartItem from "components/CartItem";
 import { products } from "data/products";
 
@@ -12,12 +12,13 @@ import Divider from "@mui/material/Divider";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { grey } from "@mui/material/colors";
 import { useShoppingCart } from "context/ShoppingCartContext";
-import { fontSize } from "@mui/system";
 import { formatCurrency } from "utils/formatCurrency";
+import { Button } from "techhype-components";
 
 const Cart = () => {
   const [lang] = useContext(LangContext);
   const { cartItems } = useShoppingCart();
+  const navigate = useNavigate();
 
   const SHIPPING_COST = 59;
 
@@ -38,7 +39,7 @@ const Cart = () => {
                     marginLeft: "auto !important",
                   }}
                 >
-                  Shipping{" "}
+                  {content[lang]["shipping"]}{" "}
                   {formatCurrency(
                     cartItems.reduce((total, cartItem) => {
                       const item = products.find(
@@ -75,6 +76,7 @@ const Cart = () => {
                         : SHIPPING_COST)
                   )}
                 </Box>
+                <Button size="small" style={{ display: "flex", alignSelf: "end"}} onClick={() => navigate("/checkout")}>{content[lang]["checkout"]}</Button>
               </>
             ) : (
               <Box

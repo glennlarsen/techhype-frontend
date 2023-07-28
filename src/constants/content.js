@@ -83,11 +83,20 @@ export const content = {
     productButton: "Select",
     //Login Page
     loginHeading: "Login",
+    userEmail: "Email",
+    password: "Password",
+    loginButton: "Login",
+    forgotPassword: "Forgot Password?",
+    loginOr: "Or",
+    loginFacebook: "Login with Facebook",
+    loginGoogle: "Login With Google",
     //Cart Page
     cartHeading: "Cart",
     cartEmpty: "You have no items in the shopping cart",
     cartTotal: "Total",
     cartRemove: "Remove",
+    shipping: "Shipping",
+    checkout: "Checkout",
     //BreadCrumbs
     home: "Home",
     shop: "Get Started",
@@ -119,6 +128,8 @@ export const content = {
     cartTotal: "Total",
     closeModalButton: "Close",
     GoToCartModalButton: "Go to Cart",
+    //Checkout
+    checkoutHeading: "Checkout",
   },
   no: {
     //Heading Home and navigation
@@ -201,11 +212,20 @@ export const content = {
     productButton: "Velg",
     //Login Page
     loginHeading: "Logg Inn",
+    userEmail: "E-post",
+    password: "Passord",
+    loginButton: "Logg Inn",
+    forgotPassword: "Glemt Passord?",
+    loginOr: "Eller",
+    loginFacebook: "Logg inn med Facebook",
+    loginGoogle: "Logg inn med Google",
     //Cart Page
     cartHeading: "Handlevogn",
     cartEmpty: "Du har ingen varer i handlevognen",
     cartTotal: "Totalt",
     cartRemove: "Fjern",
+    shipping: "Frakt",
+    checkout: "Til Betaling",
     //BreadCrumbs
     home: "Hjem",
     shop: "Kom i Gang",
@@ -237,5 +257,7 @@ export const content = {
     cartTotal: "Totalt",
     closeModalButton: "Lukk",
     GoToCartModalButton: "Til Handlevogn",
+    //Checkout
+    checkoutHeading: "Kasse",
   },
 };

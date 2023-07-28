@@ -6,4 +6,15 @@
     color: $color-dark;
     text-align: center;
   }
+
+  .forgot-password-link {
+    text-decoration: none;
+    color: $color-hover;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.2s ease-in-out;
+  }
+
+  .forgot-password-link:hover {
+    border-bottom: 1px solid $color-hover;
+  }
 }

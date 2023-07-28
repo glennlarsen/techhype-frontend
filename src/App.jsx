@@ -6,6 +6,7 @@ import Shop from "pages/Shop";
 import Login from "pages/Login";
 import Cart from "pages/Cart";
 import ProductDetails from "pages/ProductDetails";
+import Checkout from "pages/Checkout";
 import { LangProvider } from "context/LangContext";
 import ScrollToTop from "components/ScrollToTop";
 import { ShoppingCartProvider } from "context/ShoppingCartContext";
@@ -23,6 +24,7 @@ function App() {
             <Route path="/shop/:id" element={<ProductDetails />} />
             <Route path="/login" element={<Login />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </Router>
       </ShoppingCartProvider>

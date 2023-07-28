@@ -336,7 +336,7 @@ const ProductDetails = () => {
               >
                 {content[lang]["closeModalButton"]}
               </Button>
-              <Button size="small" onClick={(quantity) => navigate("/cart")}>
+              <Button size="small" onClick={() => navigate("/cart")}>
                 {content[lang]["GoToCartModalButton"]}
               </Button>
             </Box>

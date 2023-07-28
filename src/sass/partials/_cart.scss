@@ -8,10 +8,16 @@
     display: flex;
     align-items: center;
     gap: 1em;
+    width: 355px;
+
+    @media (max-width: 700px) {
+      width: auto;
+    }
   }
   
   .cart-container {
     color: $color-dark;
     text-align: center;
   }
+
 }
