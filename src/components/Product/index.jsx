@@ -5,6 +5,8 @@ import { content } from "constants/content";
 import { Button } from "techhype-components";
 import { Fade } from "react-awesome-reveal";
 import { formatCurrency } from "utils/formatCurrency";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Product = ({ name, image, price, id }) => {
   const [lang] = useContext(LangContext);
@@ -14,7 +16,13 @@ const Product = ({ name, image, price, id }) => {
     <Fade direction="up" triggerOnce>
       <div className="product-item">
         <div className="product-image">
-          <img src={image} alt={name} />
+          <LazyLoadImage
+            alt={name}
+            src={image}
+            effect="blur" // Adds a blur effect for the placeholder image
+            height="100%" // Set the desired height to avoid layout shifts
+            width="100%" // Set the desired width to avoid layout shifts
+          />
         </div>
         <div className="product-info">
           <div className="product-text">

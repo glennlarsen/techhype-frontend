@@ -84,6 +84,22 @@
     }
   }
 
+  @media screen and (min-width: 900px) {
+    .image-gallery-bullet {
+      display: none;
+    }
+  }
+
+  .image-gallery-bullet:hover {
+    background: $color-hover;
+    border-color: $color-hover;
+  }
+
+  .image-gallery-bullet.active {
+    background: $color-primary;
+    border-color: $color-primary;
+  }
+
   .image-gallery-right-nav .image-gallery-svg,
   .image-gallery-left-nav .image-gallery-svg {
     height: 60px;

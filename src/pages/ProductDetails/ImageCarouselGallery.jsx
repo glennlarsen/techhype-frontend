@@ -11,7 +11,7 @@ function ImageCarouselGallery({ items }) {
     };
   });
 
-  return <ImageGallery items={images}  />;
+  return <ImageGallery items={images} lazyLoad showBullets />;
 }
 
 export default ImageCarouselGallery;

@@ -68,9 +68,6 @@ const ProductDetails = () => {
   const {
     getItemQuantity,
     addToCart,
-    increaseCartQuantity,
-    decreaseCartQuantity,
-    removeFromCart,
   } = useShoppingCart();
 
   const cartQuantity = getItemQuantity(id);
