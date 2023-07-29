@@ -125,6 +125,8 @@ const Cart = () => {
                       gap: "1em",
                       maxWidth: "500px",
                       textAlign: "left",
+                      fontStyle: "italic",
+                      fontSize: ".9rem",
                     }}
                   >
                     <DesignServicesIcon sx={{ color: "#54d4c6" }} />
