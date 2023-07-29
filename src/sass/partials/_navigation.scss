@@ -19,6 +19,7 @@
 }
 
 .nav-container.sticky {
+  -webkit-transform: translate3d(0,0,0);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -76,16 +77,12 @@
 
 @keyframes fadeDownDesktop {
   from {
-    top: 0;
     opacity: 0;
-    height: 123px;
     background-color: $color-darker;
     transform: translateY(-100%);
   }
   to {
-    top: 0;
     opacity: 1;
-    height: 62px;
     background-color: $color-dark;
     transform: translateY(0);
   }
@@ -93,16 +90,12 @@
 
 @keyframes fadeDownMobile {
   from {
-    top: 0;
     opacity: 0;
-    height: 76px;
     background-color: $color-darker;
     transform: translateY(-100%);
   }
   to {
-    top: 0;
     opacity: 1;
-    height: 49.19px;
     background-color: $color-dark;
     transform: translateY(0);
   }
