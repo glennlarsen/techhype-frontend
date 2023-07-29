@@ -90,6 +90,10 @@
     }
   }
 
+  .image-gallery-bullet {
+    padding: 3px;
+  }
+
   .image-gallery-bullet:hover {
     background: $color-hover;
     border-color: $color-hover;
@@ -98,6 +102,11 @@
   .image-gallery-bullet.active {
     background: $color-primary;
     border-color: $color-primary;
+
+    &:hover {
+      background: $color-hover;
+      border-color: $color-hover;
+    }
   }
 
   .image-gallery-right-nav .image-gallery-svg,

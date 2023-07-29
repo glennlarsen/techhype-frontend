@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "components/Layout";
 import { LangContext } from "context/LangContext";
@@ -13,14 +13,25 @@ import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { grey } from "@mui/material/colors";
 import { useShoppingCart } from "context/ShoppingCartContext";
 import { formatCurrency } from "utils/formatCurrency";
-import { Button } from "techhype-components";
+import { Button, Card } from "techhype-components";
 import HelpIcon from "@mui/icons-material/Help";
 import Tooltip from "@mui/material/Tooltip";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
 
 const Cart = () => {
   const [lang] = useContext(LangContext);
   const { cartItems } = useShoppingCart();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    setOpen(true);
+  };
 
   const SHIPPING_COST = 59;
 
@@ -44,15 +55,24 @@ const Cart = () => {
                     gap: ".2em",
                   }}
                 >
-                  <Tooltip title={content[lang]["shippingInfo"]}>
-                    <HelpIcon
-                      sx={{
-                        maxWidth: "16px",
-                        maxHeight: "16px",
-                        color: "#1f2427",
-                      }}
-                    />
-                  </Tooltip>
+                  <ClickAwayListener onClickAway={handleTooltipClose}>
+                    <Tooltip
+                      onClose={handleTooltipClose}
+                      disableTouchListener
+                      open={open}
+                      title={content[lang]["shippingInfo"]}
+                    >
+                      <HelpIcon
+                        onClick={handleTooltipOpen}
+                        sx={{
+                          maxWidth: "16px",
+                          maxHeight: "16px",
+                          color: "#1f2427",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </Tooltip>
+                  </ClickAwayListener>
                   {content[lang]["shipping"]}{" "}
                   {formatCurrency(
                     cartItems.reduce((total, cartItem) => {
@@ -90,13 +110,30 @@ const Cart = () => {
                         : SHIPPING_COST)
                   )}
                 </Box>
-                <Button
-                  size="small"
-                  style={{ display: "flex", alignSelf: "end" }}
-                  onClick={() => navigate("/checkout")}
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: { xs: "end", sm: "start" },
+                    flexDirection: { xs: "column-reverse", sm: "row" },
+                    gap: "2em",
+                  }}
                 >
-                  {content[lang]["checkout"]}
-                </Button>
+                  <Card
+                    style={{
+                      flexDirection: "row",
+                      gap: "1em",
+                      maxWidth: "500px",
+                      textAlign: "left",
+                    }}
+                  >
+                    <DesignServicesIcon sx={{ color: "#54d4c6" }} />
+                    {content[lang]["cartTip"]}
+                  </Card>
+                  <Button size="small" onClick={() => navigate("/checkout")}>
+                    {content[lang]["checkout"]}
+                  </Button>
+                </Box>
               </>
             ) : (
               <Box

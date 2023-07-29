@@ -48,8 +48,8 @@ const Login = () => {
       <section className="login top-overlay">
         <div className="container-inner login-container">
           <Paper elevation={3} sx={{ maxWidth: "500px", margin: "2em auto" }}>
-            <h1 style={{ margin: "0px" }}>{content[lang]["loginHeading"]}</h1>
             <Box p={4}>
+              <h1 style={{ margin: ".1em" }}>{content[lang]["loginHeading"]}</h1>
               <form
                 onSubmit={handleSubmit(onSubmit)}
                 style={{
