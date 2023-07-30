@@ -19,10 +19,8 @@ import Select from "@mui/material/Select";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
-import Link from '@mui/material/Link';
-import {
-  Link as RouterLink,
-} from 'react-router-dom';
+import Link from "@mui/material/Link";
+import { Link as RouterLink } from "react-router-dom";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -34,15 +32,17 @@ import Fade from "@mui/material/Fade";
 import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
 import { useShoppingCart } from "context/ShoppingCartContext";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import { color_primary, color_dark, color_hover } from "constants/colors";
 
-const style = {
+const modalStyle = {
   position: "relative",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   minWidth: "270px",
   maxWidth: "450px",
-  bgcolor: "#1f2427",
+  bgcolor: color_dark,
   boxShadow: 24,
   color: "white",
   borderRadius: "10px",
@@ -65,10 +65,7 @@ const ProductDetails = () => {
     return <Link {...props} component={RouterLink} />;
   }
 
-  const {
-    getItemQuantity,
-    addToCart,
-  } = useShoppingCart();
+  const { getItemQuantity, addToCart } = useShoppingCart();
 
   const cartQuantity = getItemQuantity(id);
 
@@ -83,7 +80,7 @@ const ProductDetails = () => {
         styleOverrides: {
           outlined: {
             borderRadius: "10px",
-            background: "#1f2427",
+            background: color_dark,
             color: "white",
             width: "60px",
             borderColor: "white",
@@ -95,10 +92,10 @@ const ProductDetails = () => {
             },
             "&:focus": {
               "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "#54d4c6",
+                borderColor: color_primary,
               },
               "& .MuiInputLabel-outlined": {
-                color: "#54d4c6",
+                color: color_primary,
               },
             },
           },
@@ -107,7 +104,7 @@ const ProductDetails = () => {
     },
     palette: {
       primary: {
-        main: "#54d4c6",
+        main: color_primary,
       },
     },
   });
@@ -289,13 +286,16 @@ const ProductDetails = () => {
         }}
       >
         <Fade in={open}>
-          <Box sx={style}>
+          <Box sx={modalStyle}>
             <Typography
               id="modal-modal-title"
               variant="h5"
               component="h2"
               mb={2}
+              display="flex"
+              gap={1}
             >
+              <CheckCircleOutlineIcon />
               {content[lang]["addedToCart"]}
             </Typography>
             <CardHeader
@@ -324,7 +324,7 @@ const ProductDetails = () => {
               <Button
                 style={{
                   background: "transparent",
-                  border: "2px solid #249ca3",
+                  border: `2px solid ${color_hover}`,
                   margin: "1em 0",
                   color: "white",
                 }}

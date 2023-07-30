@@ -183,6 +183,7 @@ function Navigation() {
           <Tooltip title={content[lang]["cartToolTip"]}>
             <Link
               to="/cart"
+              className="cart-icon"
               style={{ position: "relative", textDecoration: "none" }}
             >
               {windowWidth <= 900 ? (

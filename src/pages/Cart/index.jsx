@@ -18,12 +18,16 @@ import HelpIcon from "@mui/icons-material/Help";
 import Tooltip from "@mui/material/Tooltip";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
+import { color_primary, color_dark } from "constants/colors";
+import { SHIPPING_COST } from "constants/validationRules";
+import { useMediaQuery } from "react-responsive";
 
 const Cart = () => {
   const [lang] = useContext(LangContext);
   const { cartItems } = useShoppingCart();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const isMobile = useMediaQuery({ maxWidth: 500 });
 
   const handleTooltipClose = () => {
     setOpen(false);
@@ -32,8 +36,6 @@ const Cart = () => {
   const handleTooltipOpen = () => {
     setOpen(true);
   };
-
-  const SHIPPING_COST = 59;
 
   return (
     <Layout page="Cart" description="Your shopping Cart">
@@ -67,7 +69,7 @@ const Cart = () => {
                         sx={{
                           maxWidth: "16px",
                           maxHeight: "16px",
-                          color: "#1f2427",
+                          color: color_dark,
                           cursor: "pointer",
                         }}
                       />
@@ -129,10 +131,10 @@ const Cart = () => {
                       fontSize: ".9rem",
                     }}
                   >
-                    <DesignServicesIcon sx={{ color: "#54d4c6" }} />
+                    <DesignServicesIcon sx={{ color: color_primary }} />
                     {content[lang]["cartTip"]}
                   </Card>
-                  <Button size="small" onClick={() => navigate("/checkout")}>
+                  <Button size={!isMobile ? "small" : ""} onClick={() => navigate("/checkout")}>
                     {content[lang]["checkout"]}
                   </Button>
                 </Box>

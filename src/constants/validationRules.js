@@ -5,3 +5,5 @@ export const MIN_MESSAGE_CHARACTERS = 10;
 export const MIN_TITLE_CHARACTERS = 4;
 export const MIN_PRICE = 100;
 export const MIN_ABOUT_CHARACTERS = 10;
+
+export const SHIPPING_COST = 59;
