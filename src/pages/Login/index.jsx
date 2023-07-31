@@ -26,6 +26,7 @@ import IconButton from "@mui/material/IconButton";
 const Login = () => {
   const [lang] = useContext(LangContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [isPasswordFieldEmpty, setIsPasswordFieldEmpty] = useState(true);
 
   const {
     control,
@@ -100,6 +101,7 @@ const Login = () => {
                         variant="standard"
                         fullWidth
                         error={!!errors.password}
+                        onChange={(e) => setIsPasswordFieldEmpty(e.target.value === '')}
                         InputProps={{
                           endAdornment: (
                             <IconButton
@@ -108,6 +110,7 @@ const Login = () => {
                               onClick={() => setShowPassword(!showPassword)}
                               onMouseDown={(e) => e.preventDefault()}
                               size="small"
+                              style={{ visibility: isPasswordFieldEmpty ? 'hidden' : 'visible' }}
                             >
                               {showPassword ? (
                                 <VisibilityOff style={{ fontSize: "1.3rem" }} />
