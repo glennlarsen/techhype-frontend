@@ -10,6 +10,9 @@ import { TabletAndDesktop } from "components/ScreenViewSize";
 import "@animated-burgers/burger-rotate/dist/styles.css";
 import Tooltip from "@mui/material/Tooltip";
 import { useShoppingCart } from "context/ShoppingCartContext";
+import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+import { color_primary, color_dark } from "constants/colors";
 
 function debounce(func, delay) {
   let timeoutId;
@@ -20,6 +23,16 @@ function debounce(func, delay) {
     }, delay);
   };
 }
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    background: color_primary,
+    color: color_dark,
+    right: 1,
+    top: 4,
+    height: "18px",
+  },
+}));
 
 function Navigation() {
   const [lang] = useContext(LangContext);
@@ -173,11 +186,7 @@ function Navigation() {
         <div className="nav-icons">
           <Tooltip title={content[lang]["loginTooltip"]}>
             <Link to="/login">
-              {windowWidth <= 900 ? (
-                <UilUserCircle size={28} color="white" />
-              ) : (
-                <UilUserCircle size={38} color="white" />
-              )}
+                <UilUserCircle size={25} color="white" />
             </Link>
           </Tooltip>
           <Tooltip title={content[lang]["cartToolTip"]}>
@@ -186,12 +195,9 @@ function Navigation() {
               className="cart-icon"
               style={{ position: "relative", textDecoration: "none" }}
             >
-              {windowWidth <= 900 ? (
-                <UilShoppingBag size={28} color="white" />
-              ) : (
-                <UilShoppingBag size={38} color="white" />
-              )}
-              {cartQuantity > 0 && <div className="cart-counter">{cartQuantity}</div>}
+                <StyledBadge badgeContent={cartQuantity} max={99}>
+                  <UilShoppingBag size={25} color="white" />
+                </StyledBadge>
             </Link>
           </Tooltip>
         </div>

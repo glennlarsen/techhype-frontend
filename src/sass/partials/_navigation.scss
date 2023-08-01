@@ -10,10 +10,7 @@
     align-items: center;
   }
 
-  svg {
-    height: 27px;
-    width: 27px;
-  }
+
 }
 
 .nav-container.sticky {
@@ -22,8 +19,8 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background-color: $color-dark;
-  box-shadow: 0 -6px 10px 5px rgba(0, 0, 0, 0.5);
+  background-color: $color-darker;
+  box-shadow: 0 -4px 10px 6px rgba(0, 0, 0, 0.5);
   transition: all 0.4s ease 0s;
   animation: fadeDown 0.6s ease forwards;
 
@@ -35,11 +32,6 @@
 
     .nav-icons {
       gap: 2em;
-
-      svg {
-        width: 22px;
-        height: 22px;
-      }
     }
   }
 
@@ -78,7 +70,7 @@
   }
   to {
     opacity: 1;
-    background-color: $color-dark;
+    background-color: $color-darker;
     transform: translateY(0);
   }
 }
@@ -101,7 +93,7 @@
     a {
       text-decoration: none;
       color: white;
-      font-size: 1rem;
+      font-size: .95rem;
       font-weight: bold;
       transition: 0.2s ease-in-out;
       overflow: hidden;
@@ -149,23 +141,6 @@
     .cart-icon:hover svg {
       transition: 0.2s ease-in-out;
       fill: $color-hover;
-    }
-
-    .cart-counter {
-      background: $color-primary;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 0.7rem;
-      font-weight: bold;
-      color: $color-dark;
-      width: 17px;
-      height: 17px;
-      position: absolute;
-      top: 0;
-      right: 0;
-      transform: translate(35%, -20%);
     }
   }
 
@@ -271,7 +246,7 @@
 }
 
 .logo {
-  width: 75px;
+  width: 60px;
   transition: filter 0.3s ease-in-out;
 
   &:hover {
@@ -279,11 +254,11 @@
   }
 
   @media only screen and (max-width: 900px) {
-    width: 60px;
+    width: 50px;
   }
 
   @media only screen and (max-width: 600px) {
-    width: 60px;
+    width: 50px;
   }
 }
 

@@ -6,7 +6,11 @@ import Glenn from "images/glenn.jpg";
 import { Stack } from "@mui/system";
 import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
-import { color_primary } from "constants/colors";
+import { color_primary, color_dark, color_hover } from "constants/colors";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Box from "@mui/material/Box";
 
 const ContactDetails = () => {
   // Replace these with your actual contact information
@@ -19,6 +23,7 @@ const ContactDetails = () => {
     postcode: "5011",
     country: "Norway",
     website: "https://www.techhype.no",
+    title: "Co-Founder & CTO",
     // Add other contact details as needed
   };
 
@@ -44,6 +49,7 @@ const ContactDetails = () => {
         vCard.addName(contactInfo.name);
         vCard.addPhoneNumber(contactInfo.phone, "CELL"); // Set phone number as mobile
         vCard.addEmail(contactInfo.email, "INTERNET"); // Set email as email
+        vCard.addJobtitle(contactInfo.title);
 
         // Add the address to the vCard
         vCard.addAddress(
@@ -65,16 +71,13 @@ const ContactDetails = () => {
         // Convert the vCard to a text string
         const vCardText = vCard.toString();
 
-        // Check if the device is iPhone (iOS)
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
         // Create a Blob with the vCard data
         const vCardBlob = new Blob([vCardText], { type: "text/vcard" });
 
         // Trigger the download
         const link = document.createElement("a");
         link.href = URL.createObjectURL(vCardBlob);
-        link.download = "contact.vcf";
+        link.download = `${contactInfo.name}.vcf`;
         link.click();
         URL.revokeObjectURL(link.href);
       };
@@ -105,97 +108,98 @@ const ContactDetails = () => {
           objectPosition: "top",
         }}
       />
-      <h1>{contactInfo.name}</h1>
-      <Divider
-        sx={{
-          width: "100%",
-          borderColor: "rgba(255, 255, 255, 0.12)",
-          "&::before": { borderColor: "rgba(255, 255, 255, 0.12)" },
-          "&::after": { borderColor: "rgba(255, 255, 255, 0.12)" },
-        }}
-      >
-        <Chip
-          variant="outlined"
-          label="PHONE"
-          size="small"
+      <Box mb={4}>
+        <h1 style={{ marginBottom: 0, marginTop: ".3em" }}>
+          {contactInfo.name}
+        </h1>
+        <span>{contactInfo.title}</span>
+      </Box>
+      <List>
+        <Divider
           sx={{
-            backgroundColor: color_primary,
-            borderColor: color_primary,
+            width: "100%",
+            borderColor: "rgba(255, 255, 255, 0.12)",
           }}
         />
-      </Divider>
-      <p>{contactInfo.phone}</p>
-      <Divider
-        sx={{
-          width: "100%",
-          borderColor: "rgba(255, 255, 255, 0.12)",
-          "&::before": { borderColor: "rgba(255, 255, 255, 0.12)" },
-          "&::after": { borderColor: "rgba(255, 255, 255, 0.12)" },
-        }}
-      >
-        <Chip
-          variant="outlined"
-          label="EMAIL"
-          size="small"
+        <ListItem sx={{ padding: "1em 0" }}>
+          <Chip
+            label="Phone"
+            style={{
+              color: "white",
+              background: color_dark,
+              marginRight: "1em",
+              width: "80px",
+            }}
+          />
+          <ListItemText primary={contactInfo.phone} />
+        </ListItem>
+        <Divider
           sx={{
-            backgroundColor: color_primary,
-            borderColor: color_primary,
+            width: "100%",
+            borderColor: "rgba(255, 255, 255, 0.12)",
           }}
         />
-      </Divider>
-      <p>{contactInfo.email}</p>
-      <Divider
-        sx={{
-          width: "100%",
-          borderColor: "rgba(255, 255, 255, 0.12)",
-          "&::before": { borderColor: "rgba(255, 255, 255, 0.12)" },
-          "&::after": { borderColor: "rgba(255, 255, 255, 0.12)" },
-        }}
-      >
-        <Chip
-          variant="outlined"
-          label="ADDRESS"
-          size="small"
+        <ListItem sx={{ padding: "1em 0" }}>
+          <Chip
+            label="Email"
+            style={{
+              color: "white",
+              background: color_dark,
+              marginRight: "1em",
+              width: "80px",
+            }}
+          />
+          <ListItemText primary={contactInfo.email} />
+        </ListItem>
+        <Divider
           sx={{
-            backgroundColor: color_primary,
-            borderColor: color_primary,
+            width: "100%",
+            borderColor: "rgba(255, 255, 255, 0.12)",
           }}
         />
-      </Divider>
-      <p>
-        {`${contactInfo.address}, ${contactInfo.postcode} ${contactInfo.city}, ${contactInfo.country}`}
-      </p>
-      <Divider
-        sx={{
-          width: "100%",
-          borderColor: "rgba(255, 255, 255, 0.12)",
-          "&::before": { borderColor: "rgba(255, 255, 255, 0.12)" },
-          "&::after": { borderColor: "rgba(255, 255, 255, 0.12)" },
-        }}
-      >
-        <Chip
-          variant="outlined"
-          label="WEBSITE"
-          size="small"
+        <ListItem sx={{ padding: "1em 0" }}>
+          <Chip
+            label="Address"
+            style={{
+              color: "white",
+              background: color_dark,
+              marginRight: "1em",
+              width: "80px",
+            }}
+          />
+          <ListItemText
+            primary={`${contactInfo.address}, ${contactInfo.postcode} ${contactInfo.city}, ${contactInfo.country}`}
+          />
+        </ListItem>
+        <Divider
           sx={{
-            backgroundColor: color_primary,
-            borderColor: color_primary,
+            width: "100%",
+            borderColor: "rgba(255, 255, 255, 0.12)",
           }}
         />
-      </Divider>
-      <p>{contactInfo.website}</p>
-      <Divider
-        sx={{
-          width: "100%",
-          borderColor: "rgba(255, 255, 255, 0.12)",
-          "&::before": { borderColor: "rgba(255, 255, 255, 0.12)" },
-          "&::after": { borderColor: "rgba(255, 255, 255, 0.12)" },
-        }}
-      ></Divider>
-      {/* Add other contact details as needed */}
-      <Button style={{ marginTop: "2em" }} onClick={handleDownloadContact}>
-        Save Contact
-      </Button>
+        <ListItem sx={{ padding: "1em 0" }}>
+          <Chip
+            label="Website"
+            style={{
+              color: "white",
+              background: color_dark,
+              marginRight: "1em",
+              width: "80px",
+            }}
+          />
+          <ListItemText primary={contactInfo.website} />
+        </ListItem>
+        <Divider
+          sx={{
+            width: "100%",
+            borderColor: "rgba(255, 255, 255, 0.12)",
+          }}
+        />
+        {/* Add other contact details as needed */}
+        <Button style={{ marginTop: "2em" }} onClick={handleDownloadContact}>
+          Save Contact
+        </Button>
+      </List>
     </Stack>
   );
 };
