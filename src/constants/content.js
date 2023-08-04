@@ -160,6 +160,11 @@ export const content = {
     //Phone Input
     phoneInputLabel: "Phone Number",
     phoneInputError: "Phone number is to long",
+    //Payment
+    paymentHeading: "Payment",
+    paymentReturnToCheckout: "Return to Checkout",
+    paymentButton: "Pay Now",
+    changeInfo: "Change",
   },
   no: {
     //Heading Home and navigation
@@ -320,5 +325,10 @@ export const content = {
     //Phone Input
     phoneInputLabel: "Telefon",
     phoneInputError: "Telefon Nummer er for langt",
+    //Payment
+    paymentHeading: "Betaling",
+    paymentReturnToCheckout: "Til Kasse",
+    paymentButton: "Betal Nå",
+    changeInfo: "Endre",
   },
 };

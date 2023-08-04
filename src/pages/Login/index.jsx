@@ -102,7 +102,7 @@ const Login = () => {
                         variant="standard"
                         fullWidth
                         error={!!errors.password}
-                        onChange={(e) => setIsPasswordFieldEmpty(e.target.value === '')}
+                        onBlur={(e) => setIsPasswordFieldEmpty(e.target.value === '')}
                         InputProps={{
                           endAdornment: (
                             <IconButton

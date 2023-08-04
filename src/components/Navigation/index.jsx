@@ -44,7 +44,7 @@ function Navigation() {
   const { cartQuantity } = useShoppingCart();
 
   // Define an array of paths that should trigger the sticky navigation
-  const stickyPaths = ["/checkout", "/cart", "/login"]; // Add other paths as needed
+  const stickyPaths = ["/checkout", "/cart", "/login", "/payment"]; // Add other paths as needed
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);

@@ -8,6 +8,7 @@ import Cart from "pages/Cart";
 import ProductDetails from "pages/ProductDetails";
 import Checkout from "pages/Checkout";
 import ContactDetails from "pages/ContactDetails";
+import Payment from "pages/Payment";
 
 import { LangProvider } from "context/LangContext";
 import ScrollToTop from "components/ScrollToTop";
@@ -27,6 +28,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/payment" element={<Payment />} />
             <Route path="/contactDetails" element={<ContactDetails />} />
           </Routes>
         </Router>

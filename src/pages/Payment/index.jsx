@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Layout from "components/Layout";
@@ -66,15 +65,14 @@ const theme = createTheme({
   },
 });
 
-const Checkout = () => {
+const Payment = () => {
   const [lang] = useContext(LangContext);
   const [defaultCallingCode, setDefaultCallingCode] = useState("NO");
   const [defaultCountry, setDefaultCountry] = useState("Norway");
   const { cartItems } = useShoppingCart();
   const isMobile = useMediaQuery({ maxWidth: 990 });
   const [showOrderSummary, setShowOrderSummary] = useState(false);
-  const navigate = useNavigate();
-
+  console.log(cartItems);
   // Form state for storing input values
   const [contactInfo, setContactInfo] = useState({
     email: "",
@@ -121,7 +119,7 @@ const Checkout = () => {
 
   return (
     <Layout
-      page={content[lang]["checkoutHeading"]}
+      page={content[lang]["paymentHeading"]}
       description="Checkout, pay and wait for your cards to be shipped as fast as possible"
     >
       {isMobile ? (
@@ -296,8 +294,8 @@ const Checkout = () => {
         ""
       )}
       <ThemeProvider theme={theme}>
-        <section className="checkout top-overlay">
-          <div className="container-inner checkout-container">
+        <section className="payment top-overlay">
+          <div className="container-inner payment-container">
             <Box
               sx={{
                 display: "flex",
@@ -309,7 +307,7 @@ const Checkout = () => {
               }}
             >
               <h1 style={{ marginTop: isMobile ? 0 : "" }}>
-                {content[lang]["checkoutHeading"]}
+                {content[lang]["paymentHeading"]}
               </h1>
               <Stack
                 direction="column"
@@ -319,31 +317,59 @@ const Checkout = () => {
                 padding={isMobile ? 0 : "0 2em"}
                 sx={{ width: "100%" }}
               >
+                <Paper elevation={3} sx={{ justifyContent: "space-between", width: "100%", padding: "1em", borderRadius: "10px" }}>
                 <Box
                   sx={{
                     display: "flex",
                     justifyContent: "space-between",
                     width: "100%",
                     alignItems: "center",
-                    flexWrap: "wrap",
                     gap: ".5em",
                   }}
                 >
-                  <Typography
-                    variant="h2"
-                    sx={{ fontWeight: "500", fontSize: "1rem" }}
-                  >
-                    {isMobile
-                      ? content[lang]["contactInfoShort"]
-                      : content[lang]["contactInfoLong"]}
-                  </Typography>
-                  <Typography variant="subtitle1" sx={{ fontSize: ".8rem" }}>
-                    {content[lang]["checkoutHaveAccount"]}{" "}
-                    <RouterLink to="/login" className="checkout-login">
-                      {content[lang]["checkoutLogin"]}
-                    </RouterLink>
-                  </Typography>
+                  <Box sx={{ textAlign: "left" }}>
+                    <Typography
+                      sx={{ opacity: 0.8 }}
+                      variant="caption"
+                      gutterBottom
+                    >
+                      Contact
+                    </Typography>
+                    <Typography variant="body2">
+                      glenn_lar@hotmail.com | +47 91771028
+                    </Typography>
+                  </Box>
+                  <RouterLink to="/checkout" className="payment-change">
+                    {content[lang]["changeInfo"]}
+                  </RouterLink>
                 </Box>
+                <Divider sx={{margin: ".8em 0"}} />
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "100%",
+                    alignItems: "center",
+                    gap: ".5em",
+                  }}
+                >
+                  <Box sx={{ textAlign: "left" }}>
+                    <Typography
+                      sx={{ opacity: 0.8 }}
+                      variant="caption"
+                      gutterBottom
+                    >
+                      Ship to
+                    </Typography>
+                    <Typography variant="body2">
+                      Vestre Holbergsallmenningen 10, 5011 Bergen, Norway
+                    </Typography>
+                  </Box>
+                  <RouterLink to="/checkout" className="payment-change">
+                    {content[lang]["changeInfo"]}
+                  </RouterLink>
+                </Box>
+                </Paper>
                 <form onSubmit={handleSubmit} style={{ width: "100%" }}>
                   <Stack spacing={3}>
                     {/* Contact Info */}
@@ -455,20 +481,17 @@ const Checkout = () => {
                         flexDirection: isMobile ? "column-reverse" : "row",
                       }}
                     >
-                      <RouterLink to="/cart" className="back-link">
+                      <RouterLink to="/checkout" className="back-link">
                         <ArrowBackIosNewIcon sx={{ fontSize: "12px" }} />{" "}
-                        {content[lang]["checkoutReturnToCart"]}
+                        {content[lang]["paymentReturnToCheckout"]}
                       </RouterLink>
                       <Button
                         size={isMobile ? "" : "small"}
                         type="submit"
                         variant="contained"
                         color="primary"
-                        onClick={() => navigate("/payment")}
                       >
-                        {isMobile
-                          ? content[lang]["paymentButtonLong"]
-                          : content[lang]["paymentButtonShort"]}
+                        {content[lang]["paymentButton"]}
                       </Button>
                     </Box>
                   </Stack>
@@ -627,4 +650,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default Payment;
