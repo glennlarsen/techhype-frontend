@@ -126,57 +126,170 @@ const Checkout = () => {
     >
       {isMobile ? (
         <Box
-          onClick={handleToggleOrderSummary}
           sx={{
-            display: "flex",
-            alignItems: "center",
-            padding: "1.3em",
-            marginBottom: "-2em",
-            zIndex: 100,
-            width: "100%",
-            background: color_light,
-            color: color_dark,
-            cursor: "pointer",
+            background: "white",
             borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
             borderTop: "1px solid rgba(0, 0, 0, 0.12)",
           }}
         >
-          <UilShoppingBag />
-          <Typography
-            ml={1}
-            variant="subtitle1"
-            sx={{ fontSize: ".8rem", display: "flex", alignItems: "center" }}
+          <Box
+            onClick={handleToggleOrderSummary}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              padding: "1.3em",
+              marginTop: "1em",
+              zIndex: 100,
+              width: "100%",
+              background: color_light,
+              color: color_dark,
+              cursor: "pointer",
+              borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
+              borderTop: "1px solid rgba(0, 0, 0, 0.12)",
+            }}
           >
-            {showOrderSummary ? (
-              <>
-                {content[lang]["hideOrderSummary"]}
-                <KeyboardArrowUpIcon />
-              </>
-            ) : (
-              <>
-                {content[lang]["showOrderSummary"]}
-                <KeyboardArrowDownIcon />
-              </>
-            )}
-          </Typography>
-          <Typography sx={{ fontWeight: "500", marginLeft: "auto" }}>
-            {formatCurrency(
-              cartItems.reduce((total, cartItem) => {
-                const item = products.find(
-                  (i) => i.id === parseInt(cartItem.id)
-                );
-                return total + (item?.price || 0) * cartItem.quantity;
-              }, 0) +
-                (cartItems.reduce((total, cartItem) => {
+            <UilShoppingBag />
+            <Typography
+              ml={1}
+              variant="subtitle1"
+              sx={{ fontSize: ".8rem", display: "flex", alignItems: "center" }}
+            >
+              {showOrderSummary ? (
+                <>
+                  {content[lang]["hideOrderSummary"]}
+                  <KeyboardArrowUpIcon />
+                </>
+              ) : (
+                <>
+                  {content[lang]["showOrderSummary"]}
+                  <KeyboardArrowDownIcon />
+                </>
+              )}
+            </Typography>
+            <Typography sx={{ fontWeight: "500", marginLeft: "auto" }}>
+              {formatCurrency(
+                cartItems.reduce((total, cartItem) => {
                   const item = products.find(
                     (i) => i.id === parseInt(cartItem.id)
                   );
                   return total + (item?.price || 0) * cartItem.quantity;
-                }, 0) > 500
-                  ? 0
-                  : SHIPPING_COST)
-            )}
-          </Typography>
+                }, 0) +
+                  (cartItems.reduce((total, cartItem) => {
+                    const item = products.find(
+                      (i) => i.id === parseInt(cartItem.id)
+                    );
+                    return total + (item?.price || 0) * cartItem.quantity;
+                  }, 0) > 500
+                    ? 0
+                    : SHIPPING_COST)
+              )}
+            </Typography>
+          </Box>
+          <Collapse in={showOrderSummary} sx={{ width: "100%" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                backgroundColor: color_light,
+                alignItems: "center",
+                flex: 1,
+                padding: "1.5em",
+                color: color_dark,
+              }}
+            >
+              <Stack spacing={3} sx={{ width: "100%" }}>
+                {/* Map through the cartItems array and find the corresponding product */}
+                {cartItems.map((item) => {
+                  const product = products.find(
+                    (product) => product.id === parseInt(item.id)
+                  );
+                  const { quantity } = item;
+
+                  // Pass item and product information to the CartItemSummary component
+                  return (
+                    <CartItemSummary
+                      key={product.id}
+                      quantity={quantity}
+                      {...product}
+                    />
+                  );
+                })}
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: "1em",
+                    alignItems: "center",
+                    padding: ".5em 0",
+                  }}
+                >
+                  <FormTextField
+                    placeholder={content[lang]["discountCode"]}
+                    fullWidth
+                    size="small"
+                  />
+                  <Button
+                    style={{
+                      background: "transparent",
+                      border: `2px solid ${color_primary}`,
+                      color: color_dark,
+                    }}
+                    size="small"
+                  >
+                    {content[lang]["DiscountButton"]}
+                  </Button>
+                </Box>
+                <Divider />
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography>{content[lang]["checkoutShipping"]}</Typography>
+                  {formatCurrency(
+                    cartItems.reduce((total, cartItem) => {
+                      const item = products.find(
+                        (i) => i.id === parseInt(cartItem.id)
+                      );
+                      return total + (item?.price || 0) * cartItem.quantity;
+                    }, 0) > 500
+                      ? 0
+                      : SHIPPING_COST
+                  )}
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography sx={{ fontWeight: "500" }}>
+                    {content[lang]["checkoutTotal"]}
+                  </Typography>
+                  <Typography sx={{ fontWeight: "500" }}>
+                    {formatCurrency(
+                      cartItems.reduce((total, cartItem) => {
+                        const item = products.find(
+                          (i) => i.id === parseInt(cartItem.id)
+                        );
+                        return total + (item?.price || 0) * cartItem.quantity;
+                      }, 0) +
+                        (cartItems.reduce((total, cartItem) => {
+                          const item = products.find(
+                            (i) => i.id === parseInt(cartItem.id)
+                          );
+                          return total + (item?.price || 0) * cartItem.quantity;
+                        }, 0) > 500
+                          ? 0
+                          : SHIPPING_COST)
+                    )}
+                  </Typography>
+                </Box>
+              </Stack>
+            </Box>
+          </Collapse>
         </Box>
       ) : (
         ""
@@ -194,7 +307,9 @@ const Checkout = () => {
                 paddingBottom: "2em",
               }}
             >
-              <h1>{content[lang]["checkoutHeading"]}</h1>
+              <h1 style={{ marginTop: isMobile ? 0 : "" }}>
+                {content[lang]["checkoutHeading"]}
+              </h1>
               <Stack
                 direction="column"
                 justifyContent="center"
@@ -213,8 +328,10 @@ const Checkout = () => {
                     gap: ".5em",
                   }}
                 >
-                  <Typography variant="subtitle1" sx={{ fontWeight: "500" }}>
-                    {isMobile ? content[lang]["contactInfoShort"] : content[lang]["contactInfoLong"]}
+                  <Typography variant="h2" sx={{ fontWeight: "500", fontSize: "1rem" }}>
+                    {isMobile
+                      ? content[lang]["contactInfoShort"]
+                      : content[lang]["contactInfoLong"]}
                   </Typography>
                   <Typography variant="subtitle1" sx={{ fontSize: ".8rem" }}>
                     {content[lang]["checkoutHaveAccount"]}{" "}
@@ -249,9 +366,9 @@ const Checkout = () => {
 
                     {/* Shipping Address */}
                     <Typography
-                      sx={{ marginTop: "2em !important", fontWeight: "500" }}
+                      sx={{ marginTop: "2em !important", fontWeight: "500", fontSize: "1rem" }}
                       alignSelf="start"
-                      variant="subtitle1"
+                      variant="h2"
                     >
                       {content[lang]["shippingAddress"]}
                     </Typography>
@@ -340,7 +457,9 @@ const Checkout = () => {
                         variant="contained"
                         color="primary"
                       >
-                        {isMobile ? content[lang]["paymentButtonLong"] : content[lang]["paymentButtonShort"]}
+                        {isMobile
+                          ? content[lang]["paymentButtonLong"]
+                          : content[lang]["paymentButtonShort"]}
                       </Button>
                     </Box>
                   </Stack>
@@ -349,129 +468,7 @@ const Checkout = () => {
             </Box>
 
             {/* Order Summary */}
-            {isMobile ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  flex: 1,
-                  padding: isMobile ? 0 : "2em",
-                  marginTop: "1em",
-                }}
-              >
-                <Collapse in={showOrderSummary} sx={{ width: "100%" }}>
-                  <Stack spacing={3} sx={{ width: "100%" }}>
-                    {/* Map through the cartItems array and find the corresponding product */}
-                    {cartItems.map((item) => {
-                      const product = products.find(
-                        (product) => product.id === parseInt(item.id)
-                      );
-                      const { quantity } = item;
-
-                      // Pass item and product information to the CartItemSummary component
-                      return (
-                        <CartItemSummary
-                          key={product.id}
-                          quantity={quantity}
-                          {...product}
-                        />
-                      );
-                    })}
-                    <Box
-                      sx={{
-                        display: "flex",
-                        gap: "1em",
-                        alignItems: "center",
-                        padding: ".5em 0",
-                      }}
-                    >
-                      <FormTextField
-                        placeholder={content[lang]["discountCode"]}
-                        fullWidth
-                        size="small"
-                      />
-                      <Button
-                        style={{
-                          background: "transparent",
-                          border: `2px solid ${color_primary}`,
-                          color: color_dark,
-                        }}
-                        size="small"
-                      >
-                        {content[lang]["DiscountButton"]}
-                      </Button>
-                    </Box>
-                    <Divider />
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Typography>{content[lang]["checkoutShipping"]}</Typography>
-                      {formatCurrency(
-                        cartItems.reduce((total, cartItem) => {
-                          const item = products.find(
-                            (i) => i.id === parseInt(cartItem.id)
-                          );
-                          return total + (item?.price || 0) * cartItem.quantity;
-                        }, 0) > 500
-                          ? 0
-                          : SHIPPING_COST
-                      )}
-                    </Box>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Typography sx={{ fontWeight: "500" }}>{content[lang]["checkoutTotal"]}</Typography>
-                      <Typography sx={{ fontWeight: "500" }}>
-                        {formatCurrency(
-                          cartItems.reduce((total, cartItem) => {
-                            const item = products.find(
-                              (i) => i.id === parseInt(cartItem.id)
-                            );
-                            return (
-                              total + (item?.price || 0) * cartItem.quantity
-                            );
-                          }, 0) +
-                            (cartItems.reduce((total, cartItem) => {
-                              const item = products.find(
-                                (i) => i.id === parseInt(cartItem.id)
-                              );
-                              return (
-                                total + (item?.price || 0) * cartItem.quantity
-                              );
-                            }, 0) > 500
-                              ? 0
-                              : SHIPPING_COST)
-                        )}
-                      </Typography>
-                    </Box>
-                    <Divider style={{ margin: "1em -1.5em" }} />
-                    <Box
-                      sx={{
-                        flexDirection: "row",
-                        marginTop: "2em",
-                        gap: "1em",
-                        justifyContent: "center",
-                        fontStyle: "italic",
-                        fontSize: ".9rem",
-                        display: isMobile ? "none" : "flex",
-                      }}
-                    >
-                      <DesignServicesIcon sx={{ color: color_primary }} />
-                      {content[lang]["cartTip"]}
-                    </Box>
-                  </Stack>
-                </Collapse>
-              </Box>
-            ) : (
+            {!isMobile && (
               <Box
                 sx={{
                   display: "flex",
@@ -499,7 +496,7 @@ const Checkout = () => {
                       variant="subtitle1"
                       sx={{ fontWeight: "500" }}
                     >
-                    {content[lang]["checkoutOrderSummary"]}
+                      {content[lang]["checkoutOrderSummary"]}
                     </Typography>
                   </Box>
                   {/* Map through the cartItems array and find the corresponding product */}
@@ -569,7 +566,9 @@ const Checkout = () => {
                       alignItems: "center",
                     }}
                   >
-                    <Typography sx={{ fontWeight: "500" }}>{content[lang]["checkoutTotal"]}</Typography>
+                    <Typography sx={{ fontWeight: "500" }}>
+                      {content[lang]["checkoutTotal"]}
+                    </Typography>
                     <Typography sx={{ fontWeight: "500" }}>
                       {formatCurrency(
                         cartItems.reduce((total, cartItem) => {
