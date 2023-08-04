@@ -43,6 +43,9 @@ function Navigation() {
   const location = useLocation();
   const { cartQuantity } = useShoppingCart();
 
+  // Define an array of paths that should trigger the sticky navigation
+  const stickyPaths = ["/checkout", "/cart", "/login"]; // Add other paths as needed
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -69,8 +72,11 @@ function Navigation() {
         window.location.hash = "";
       }
 
-      setIsScrolled(scrollPosition >= scrollThreshold);
-    }, 50); // Adjust the debounce delay as needed
+     // Check if the current path is in the stickyPaths array or if isScrolled is true
+     setIsScrolled(
+      stickyPaths.includes(location.pathname) || scrollPosition >= scrollThreshold
+    );
+  }, 50); // Adjust the debounce delay as needed
 
     window.addEventListener("scroll", handleScroll);
 
@@ -79,12 +85,18 @@ function Navigation() {
     };
   }, []);
 
+  // Effect to set isScrolled based on the initial path
+  useEffect(() => {
+    setIsScrolled(stickyPaths.includes(location.pathname));
+  }, [location.pathname]);
+
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
 
   return (
     <div className={`nav-container${isScrolled ? " sticky " : " "}`}>
@@ -186,7 +198,7 @@ function Navigation() {
         <div className="nav-icons">
           <Tooltip title={content[lang]["loginTooltip"]}>
             <Link to="/login">
-                <UilUserCircle size={25} color="white" />
+              <UilUserCircle size={25} color="white" />
             </Link>
           </Tooltip>
           <Tooltip title={content[lang]["cartToolTip"]}>
@@ -195,9 +207,9 @@ function Navigation() {
               className="cart-icon"
               style={{ position: "relative", textDecoration: "none" }}
             >
-                <StyledBadge badgeContent={cartQuantity} max={99}>
-                  <UilShoppingBag size={25} color="white" />
-                </StyledBadge>
+              <StyledBadge badgeContent={cartQuantity} max={99}>
+                <UilShoppingBag size={25} color="white" />
+              </StyledBadge>
             </Link>
           </Tooltip>
         </div>

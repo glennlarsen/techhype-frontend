@@ -18,7 +18,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 200;
   background-color: $color-darker;
   box-shadow: 0 -4px 10px 6px rgba(0, 0, 0, 0.5);
   transition: all 0.4s ease 0s;
@@ -246,7 +246,7 @@
 }
 
 .logo {
-  width: 60px;
+  width: 75px;
   transition: filter 0.3s ease-in-out;
 
   &:hover {
@@ -254,10 +254,6 @@
   }
 
   @media only screen and (max-width: 900px) {
-    width: 50px;
-  }
-
-  @media only screen and (max-width: 600px) {
     width: 50px;
   }
 }

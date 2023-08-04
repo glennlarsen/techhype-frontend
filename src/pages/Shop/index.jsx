@@ -11,6 +11,7 @@ import Link from '@mui/material/Link';
 import {
   Link as RouterLink,
 } from 'react-router-dom';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const Shop = () => {
   const [lang] = useContext(LangContext);
@@ -29,6 +30,7 @@ const Shop = () => {
           <div role="presentation">
             <Breadcrumbs
               aria-label="breadcrumb"
+              separator={<NavigateNextIcon fontSize="small" />}
               sx={{ ol: { justifyContent: "center" } }}
             >
               <LinkRouter

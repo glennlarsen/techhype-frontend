@@ -25,6 +25,7 @@ import { useMediaQuery } from "react-responsive";
 const Cart = () => {
   const [lang] = useContext(LangContext);
   const { cartItems } = useShoppingCart();
+  console.log(cartItems);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 500 });
@@ -121,19 +122,21 @@ const Cart = () => {
                     gap: "2em",
                   }}
                 >
-                  <Card
-                    style={{
-                      flexDirection: "row",
+                  <Box
+                    sx={{
+                      display: "flex",
                       gap: "1em",
-                      maxWidth: "500px",
-                      textAlign: "left",
+                      padding: "1.5em",
+                      borderRadius: "10px",
+                      alignItems: "center",
                       fontStyle: "italic",
                       fontSize: ".9rem",
+                      boxShadow: "rgba(0, 0, 0, 0.16) 0px 2px 10px",
                     }}
                   >
                     <DesignServicesIcon sx={{ color: color_primary }} />
                     {content[lang]["cartTip"]}
-                  </Card>
+                  </Box>
                   <Button size={!isMobile ? "small" : ""} onClick={() => navigate("/checkout")}>
                     {content[lang]["checkout"]}
                   </Button>

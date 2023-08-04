@@ -1,10 +1,29 @@
 .checkout {
     background-color: white;
     padding: 1.5em;
+    margin-top: 0;
   
     .checkout-container {
       color: $color-dark;
       text-align: center;
+      display: flex;
+      max-width: 1000px;
+
+      @media (max-width: 990px) {
+        flex-direction: column-reverse;
+        max-width: 650px;
+      }
+    }
+
+    .checkout-login {
+      color: $color-hover;
+      margin-left: 3px;
+      text-decoration: none;
+
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
     }
   }
   

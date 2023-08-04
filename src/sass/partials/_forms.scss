@@ -1,0 +1,21 @@
+//Phone input styles
+.custom-phone-input img {
+    width: 25px;
+}
+
+.MuiTelInput-ListItemIcon-flag img {
+    width: 20px;
+}
+
+.MuiTelInput-IconButton {
+    box-shadow: none;
+    padding-right: 2em !important;
+    position: absolute !important;
+    height: 30px;
+  }
+
+  .MuiInputAdornment-root {
+    p {
+      margin-left: 3em !important;
+    }
+  }

@@ -34,6 +34,7 @@ import Avatar from "@mui/material/Avatar";
 import { useShoppingCart } from "context/ShoppingCartContext";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { color_primary, color_dark, color_hover } from "constants/colors";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const modalStyle = {
   position: "relative",
@@ -143,6 +144,7 @@ const ProductDetails = () => {
           <div role="presentation">
             <Breadcrumbs
               aria-label="breadcrumb"
+              separator={<NavigateNextIcon fontSize="small" />}
               sx={{ ol: { justifyContent: "center" } }}
             >
               <LinkRouter
