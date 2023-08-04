@@ -16,6 +16,14 @@ const FormTextField = styled(TextField)({
   "& fieldset": {
     borderRadius: "10px",
   },
+  "& .MuiOutlinedInput-root": {
+    // Set the border-radius for the outlined input
+    borderRadius: "10px",
+    "&.Mui-focused fieldset": {
+      // Set the border color for the outlined input when focused
+      borderColor: color_primary,
+    },
+  },
 });
 
 export default FormTextField;

@@ -7,9 +7,8 @@ import { content } from "constants/content";
 import { Box } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
-import { Button, Card } from "techhype-components";
-import { FormControl, InputLabel, Input, Stack } from "@mui/material";
-import InputsTheme from "components/forms/InputsTheme";
+import { Button } from "techhype-components";
+import { FormControl, InputLabel, Input, Stack, Paper } from "@mui/material";
 import {
   color_hover,
   color_primary,
@@ -24,7 +23,6 @@ import { UilShoppingBag } from "@iconscout/react-unicons";
 import { useShoppingCart } from "context/ShoppingCartContext";
 import CartItemSummary from "components/CartItemSummary";
 import { products } from "data/products";
-import { WidthFull } from "@mui/icons-material";
 import FormTextField from "components/forms/FormTextField";
 import { SHIPPING_COST } from "constants/validationRules";
 import { formatCurrency } from "utils/formatCurrency";
@@ -226,6 +224,7 @@ const Checkout = () => {
                     placeholder={content[lang]["discountCode"]}
                     fullWidth
                     size="small"
+                    sx={{ backgroundColor: "white" }}
                   />
                   <Button
                     style={{
@@ -328,7 +327,10 @@ const Checkout = () => {
                     gap: ".5em",
                   }}
                 >
-                  <Typography variant="h2" sx={{ fontWeight: "500", fontSize: "1rem" }}>
+                  <Typography
+                    variant="h2"
+                    sx={{ fontWeight: "500", fontSize: "1rem" }}
+                  >
                     {isMobile
                       ? content[lang]["contactInfoShort"]
                       : content[lang]["contactInfoLong"]}
@@ -366,7 +368,11 @@ const Checkout = () => {
 
                     {/* Shipping Address */}
                     <Typography
-                      sx={{ marginTop: "2em !important", fontWeight: "500", fontSize: "1rem" }}
+                      sx={{
+                        marginTop: "2em !important",
+                        fontWeight: "500",
+                        fontSize: "1rem",
+                      }}
                       alignSelf="start"
                       variant="h2"
                     >
@@ -527,6 +533,7 @@ const Checkout = () => {
                       placeholder={content[lang]["discountCode"]}
                       fullWidth
                       size="small"
+                      sx={{ backgroundColor: "white" }}
                     />
                     <Button
                       style={{
@@ -590,8 +597,10 @@ const Checkout = () => {
                       )}
                     </Typography>
                   </Box>
-                  <Box
+                  <Paper
+                    elevation={3}
                     sx={{
+                      background: "transparent",
                       marginTop: "2em",
                       gap: "1em",
                       padding: "1.5em",
@@ -599,13 +608,12 @@ const Checkout = () => {
                       alignItems: "center",
                       fontStyle: "italic",
                       fontSize: ".9rem",
-                      boxShadow: "rgba(0, 0, 0, 0.16) 0px 2px 10px",
                       display: isMobile ? "none" : "flex",
                     }}
                   >
                     <DesignServicesIcon sx={{ color: color_primary }} />
                     {content[lang]["cartTip"]}
-                  </Box>
+                  </Paper>
                 </Stack>
               </Box>
             )}

@@ -5,7 +5,7 @@ import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import CartItem from "components/CartItem";
 import { products } from "data/products";
-
+import { Paper } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -122,22 +122,25 @@ const Cart = () => {
                     gap: "2em",
                   }}
                 >
-                  <Box
+                  <Paper
+                    elevation={3}
                     sx={{
-                      display: "flex",
                       gap: "1em",
                       padding: "1.5em",
                       borderRadius: "10px",
                       alignItems: "center",
                       fontStyle: "italic",
                       fontSize: ".9rem",
-                      boxShadow: "rgba(0, 0, 0, 0.16) 0px 2px 10px",
+                      display: "flex",
                     }}
                   >
                     <DesignServicesIcon sx={{ color: color_primary }} />
                     {content[lang]["cartTip"]}
-                  </Box>
-                  <Button size={!isMobile ? "small" : ""} onClick={() => navigate("/checkout")}>
+                  </Paper>
+                  <Button
+                    size={!isMobile ? "small" : ""}
+                    onClick={() => navigate("/checkout")}
+                  >
                     {content[lang]["checkout"]}
                   </Button>
                 </Box>

@@ -48,7 +48,7 @@ const Login = () => {
     <Layout page="Login" description="Login to your Techhype account">
       <section className="login top-overlay">
         <div className="container-inner login-container">
-          <Paper elevation={3} sx={{ maxWidth: "500px", margin: "2em auto" }}>
+          <Paper elevation={3} sx={{ maxWidth: "500px", margin: "2em auto", borderRadius: "10px" }}>
             <Box p={4}>
               <h1 style={{ margin: ".1em" }}>{content[lang]["loginHeading"]}</h1>
               <form
@@ -57,6 +57,7 @@ const Login = () => {
                   display: "flex",
                   gap: "1.5em",
                   flexDirection: "column",
+                  borderRadius: "10px",
                 }}
               >
                 <Controller
