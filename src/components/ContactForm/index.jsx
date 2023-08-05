@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import styles from "./contactForm.module.scss";
 import schemaContact from "./schemaContact";
 import PostMessage from "utils/PostMessage";
-import InputsTheme from "components/forms/InputsTheme";
+import AppTheme from "components/forms/AppTheme";
 import AlertMessage from "components/forms/AlertMessage";
 import { Button } from "techhype-components";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -73,7 +73,7 @@ const ContactForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       noValidate
     >
-      <InputsTheme>
+      <AppTheme>
         <FormControl variant="standard">
           <InputLabel id="subject-label">
             {content[lang]["selectLabel"]}
@@ -183,7 +183,7 @@ const ContactForm = () => {
               : null
           }
         />
-      </InputsTheme>
+      </AppTheme>
       {submitted && (
         <AlertMessage
           variant="success"

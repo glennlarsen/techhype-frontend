@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 import { formatCurrency } from "utils/formatCurrency";
 
-const CartItemSummary = ({ id, name, price, image, quantity }) => {
+const OrderSummaryItems = ({ id, name, price, image, quantity }) => {
   return (
     <Box
       sx={{
@@ -39,4 +39,4 @@ const CartItemSummary = ({ id, name, price, image, quantity }) => {
   );
 };
 
-export default CartItemSummary;
+export default OrderSummaryItems;
