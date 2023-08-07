@@ -20,7 +20,21 @@ const OrderSummaryToggle = ({
 }) => {
   const isMobile = useMediaQuery({ maxWidth: 990 });
   const [lang] = useContext(LangContext);
-  const HomeDeliveryCost = shippingMethod === "shop" ? 0 : 99;
+
+  // Calculate the final shipping cost based on the selected shipping method
+  const calculateShippingCost = () => {
+    if (shippingMethod === "home") {
+      return 99; // Home delivery cost
+    }
+
+    // Calculate the base shipping cost
+    return cartItems.reduce((total, cartItem) => {
+      const item = products.find((i) => i.id === parseInt(cartItem.id));
+      return total + (item?.price || 0) * cartItem.quantity;
+    }, 0) > 500
+      ? 0
+      : SHIPPING_COST;
+  };
 
   return (
     <>
@@ -77,17 +91,7 @@ const OrderSummaryToggle = ({
                     (i) => i.id === parseInt(cartItem.id)
                   );
                   return total + (item?.price || 0) * cartItem.quantity;
-                }, 0) +
-                  (cartItems.reduce((total, cartItem) => {
-                    const item = products.find(
-                      (i) => i.id === parseInt(cartItem.id)
-                    );
-                    return total + (item?.price || 0) * cartItem.quantity;
-                  }, 0) > 500
-                    ? HomeDeliveryCost
-                    : HomeDeliveryCost === 0
-                    ? SHIPPING_COST
-                    : HomeDeliveryCost)
+                }, 0) + calculateShippingCost()
               )}
             </Typography>
           </Box>

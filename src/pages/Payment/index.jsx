@@ -88,6 +88,13 @@ const Payment = () => {
     city: "",
   });
 
+  const [paymentInfo, setPaymentInfo] = useState({
+    cardNumber: "",
+    nameOnCard: "",
+    exp: "",
+    security: "",
+  });
+
   const handleToggleOrderSummary = () => {
     setShowOrderSummary((prevValue) => !prevValue);
   };
@@ -102,6 +109,12 @@ const Payment = () => {
   const handleShippingAddressChange = (e) => {
     const { name, value } = e.target;
     setShippingAddress((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  // Event handler for handling changes in the payment info fields
+  const handlePaymentInfoChange = (e) => {
+    const { name, value } = e.target;
+    setPaymentInfo((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const {
@@ -326,61 +339,89 @@ const Payment = () => {
                           onCountrySelect={setDefaultCallingCode}
                           value={shippingAddress.country}
                           countryLabel={content[lang]["checkoutCountry"]}
+                          variant="outlined"
+                          fontSize={14}
+                          inputBackgroundColor="white"
                         />
                         <FormControl variant="standard">
-                          <InputLabel htmlFor="name">
-                            {content[lang]["checkoutName"]}
-                          </InputLabel>
-                          <Input
+                          <FormTextField
+                            sx={{ backgroundColor: "white" }}
+                            label={content[lang]["checkoutName"]}
                             id="name"
                             name="name"
                             value={shippingAddress.name}
                             onChange={handleShippingAddressChange}
+                            InputLabelProps={{
+                              style: { fontSize: 14 }, // Adjust the fontSize for the label
+                            }}
+                            inputProps={{
+                              style: { fontSize: 14 }, // Adjust the fontSize for the input text
+                            }}
                           />
                         </FormControl>
                         <FormControl variant="standard">
-                          <InputLabel htmlFor="company">
-                            {content[lang]["checkoutCompany"]}
-                          </InputLabel>
-                          <Input
+                          <FormTextField
+                            sx={{ backgroundColor: "white" }}
+                            label={content[lang]["checkoutCompany"]}
                             id="company"
                             name="company"
                             value={shippingAddress.company}
                             onChange={handleShippingAddressChange}
+                            InputLabelProps={{
+                              style: { fontSize: 14 }, // Adjust the fontSize for the label
+                            }}
+                            inputProps={{
+                              style: { fontSize: 14 }, // Adjust the fontSize for the input text
+                            }}
                           />
                         </FormControl>
                         <FormControl variant="standard">
-                          <InputLabel htmlFor="street">
-                            {content[lang]["checkoutStreet"]}
-                          </InputLabel>
-                          <Input
+                          <FormTextField
+                            sx={{ backgroundColor: "white" }}
+                            label={content[lang]["checkoutStreet"]}
                             id="street"
                             name="street"
                             value={shippingAddress.street}
                             onChange={handleShippingAddressChange}
+                            InputLabelProps={{
+                              style: { fontSize: 14 }, // Adjust the fontSize for the label
+                            }}
+                            inputProps={{
+                              style: { fontSize: 14 }, // Adjust the fontSize for the input text
+                            }}
                           />
                         </FormControl>
                         <Box gap={2} display="flex">
                           <FormControl variant="standard">
-                            <InputLabel htmlFor="postalCode">
-                              {content[lang]["checkoutPostal"]}
-                            </InputLabel>
-                            <Input
+                            <FormTextField
+                              sx={{ backgroundColor: "white" }}
+                              label={content[lang]["checkoutPostal"]}
                               id="postalCode"
                               name="postalCode"
                               value={shippingAddress.postalCode}
                               onChange={handleShippingAddressChange}
+                              InputLabelProps={{
+                                style: { fontSize: 14 }, // Adjust the fontSize for the label
+                              }}
+                              inputProps={{
+                                style: { fontSize: 14 }, // Adjust the fontSize for the input text
+                              }}
                             />
                           </FormControl>
                           <FormControl variant="standard" fullWidth>
-                            <InputLabel htmlFor="city">
-                              {content[lang]["checkoutCity"]}
-                            </InputLabel>
-                            <Input
+                            <FormTextField
+                              sx={{ backgroundColor: "white" }}
+                              label={content[lang]["checkoutCity"]}
                               id="city"
                               name="city"
                               value={shippingAddress.city}
                               onChange={handleShippingAddressChange}
+                              InputLabelProps={{
+                                style: { fontSize: 14 }, // Adjust the fontSize for the label
+                              }}
+                              inputProps={{
+                                style: { fontSize: 14 }, // Adjust the fontSize for the input text
+                              }}
                             />
                           </FormControl>
                         </Box>
@@ -563,16 +604,20 @@ const Payment = () => {
                           paddingBottom: "2em",
                         }}
                       >
-                        {/* Billing Address form */}
+                        {/* Payment form */}
                         <FormControl variant="outlined">
                           <FormTextField
                             sx={{ backgroundColor: "white" }}
                             label="Card number"
-                            id="name"
-                            name="name"
-                            value={shippingAddress.name}
-                            onChange={handleShippingAddressChange}
+                            id="cardNumber"
+                            name="cardNumber"
+                            value={paymentInfo.cardNumber}
+                            onChange={handlePaymentInfoChange}
                             InputProps={{
+                              inputProps: {
+                                type: "number", // Set the input type to number
+                                min: 0, // Optionally set a minimum value
+                              },
                               endAdornment: (
                                 <InputAdornment position="end">
                                   <Tooltip
@@ -593,12 +638,15 @@ const Payment = () => {
                           <FormTextField
                             sx={{ backgroundColor: "white" }}
                             label="Name on card"
-                            id="name"
-                            name="name"
-                            value={shippingAddress.name}
-                            onChange={handleShippingAddressChange}
+                            id="nameOnCard"
+                            name="nameOnCard"
+                            value={paymentInfo.nameOnCard}
+                            onChange={handlePaymentInfoChange}
                             InputLabelProps={{
                               style: { fontSize: 14, marginTop: 4 }, // Adjust the fontSize for the label
+                            }}
+                            inputProps={{
+                              style: { fontSize: 14 }, // Adjust the fontSize for the input text
                             }}
                           />
                         </FormControl>
@@ -607,12 +655,18 @@ const Payment = () => {
                             <FormTextField
                               sx={{ backgroundColor: "white" }}
                               label="Exp (MM / YY)"
-                              id="name"
-                              name="name"
-                              value={shippingAddress.name}
-                              onChange={handleShippingAddressChange}
+                              id="exp"
+                              name="exp"
+                              value={paymentInfo.exp}
+                              onChange={handlePaymentInfoChange}
                               InputLabelProps={{
                                 style: { fontSize: 14, marginTop: 4 }, // Adjust the fontSize for the label
+                              }}
+                              InputProps={{
+                                inputProps: {
+                                  type: "number", // Set the input type to number
+                                  min: 0, // Optionally set a minimum value
+                                },
                               }}
                             />
                           </FormControl>
@@ -620,11 +674,15 @@ const Payment = () => {
                             <FormTextField
                               sx={{ backgroundColor: "white" }}
                               label="Security code"
-                              id="name"
-                              name="name"
-                              value={shippingAddress.name}
-                              onChange={handleShippingAddressChange}
+                              id="security"
+                              name="security"
+                              value={paymentInfo.security}
+                              onChange={handlePaymentInfoChange}
                               InputProps={{
+                                inputProps: {
+                                  type: "number", // Set the input type to number
+                                  min: 0, // Optionally set a minimum value
+                                },
                                 endAdornment: (
                                   <InputAdornment position="end">
                                     <Tooltip

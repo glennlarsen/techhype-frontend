@@ -12,6 +12,9 @@ const CountryInput = ({
   errors,
   defaultValue,
   onCountrySelect,
+  variant,
+  fontSize,
+  inputBackgroundColor,
 }) => {
   const [lang] = useContext(LangContext);
 
@@ -61,14 +64,19 @@ const CountryInput = ({
           renderInput={(params) => (
             <FormTextField
               {...params}
+              sx={{ backgroundColor: inputBackgroundColor }}
               label={content[lang]["countryInputLabel"]}
-              variant="standard"
+              variant={variant ? variant : "standard"}
               placeholder={content[lang]["countryInputPlaceholder"]}
               error={Boolean(errors.country)}
               helperText={errors.country ? errors.country.message : ""}
               inputProps={{
                 ...params.inputProps,
+                style: { fontSize: fontSize},
                 autoComplete: "new-password",
+              }}
+              InputLabelProps={{
+                style: { fontSize: fontSize }, // Adjust the fontSize for the label
               }}
             />
           )}
