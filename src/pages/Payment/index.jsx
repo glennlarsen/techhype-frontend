@@ -17,6 +17,8 @@ import {
   Box,
   Divider,
   Collapse,
+  InputAdornment,
+  Tooltip,
 } from "@mui/material";
 import CountryInput from "components/forms/CountryInput";
 import schema from "constants/schema";
@@ -31,6 +33,12 @@ import OrderSummaryToggle from "components/OrderSummaryToggle";
 import Radio from "@mui/material/Radio";
 import { formatCurrency } from "utils/formatCurrency";
 import { color_light } from "constants/colors";
+import { SHIPPING_COST } from "constants/validationRules";
+import { products } from "data/products";
+import vippsLogo from "images/vipps_logo.png";
+import FormTextField from "components/forms/FormTextField";
+import LockIcon from "@mui/icons-material/Lock";
+import HelpIcon from "@mui/icons-material/Help";
 
 const Payment = () => {
   const [lang] = useContext(LangContext);
@@ -41,12 +49,28 @@ const Payment = () => {
   const [showOrderSummary, setShowOrderSummary] = useState(false);
   const [billingAddress, setBillingAddress] = useState(false);
   const [selectBilling, setSelectBilling] = useState(false);
-  const [shippingMethod, setShippingMethod] = useState("shop");
+  const [shippingMethod, setShippingMethod] = useState("standard");
+  const [paymentType, setPaymentType] = useState(true);
+  const [selectPayment, setSelectPayment] = useState(true);
   const navigate = useNavigate();
+
+  const calculateShopShipping = () => {
+    return cartItems.reduce((total, cartItem) => {
+      const item = products.find((i) => i.id === parseInt(cartItem.id));
+      return total + (item?.price || 0) * cartItem.quantity;
+    }, 0) > 500
+      ? 0
+      : SHIPPING_COST;
+  };
 
   const handleBillingAddressChange = (event) => {
     setSelectBilling(event.target.value === "true");
     setBillingAddress(event.target.value === "true");
+  };
+
+  const handlePaymentChange = (event) => {
+    setSelectPayment(event.target.value === "true");
+    setPaymentType(event.target.value === "true");
   };
 
   // Form state for storing input values
@@ -103,6 +127,7 @@ const Payment = () => {
           handleToggleOrderSummary={handleToggleOrderSummary}
           showOrderSummary={showOrderSummary}
           cartItems={cartItems}
+          shippingMethod={shippingMethod}
         />
         <section className="payment top-overlay">
           <div className="container-inner payment-container">
@@ -224,6 +249,7 @@ const Payment = () => {
                         onChange={handleBillingAddressChange}
                         value={false}
                         name="radio-buttons"
+                        size="small"
                         sx={{ paddingLeft: 0 }}
                         inputProps={{
                           "aria-label": "Same as shipping address",
@@ -256,6 +282,7 @@ const Payment = () => {
                         onChange={handleBillingAddressChange}
                         value={true}
                         name="radio-buttons"
+                        size="small"
                         sx={{ paddingLeft: 0 }}
                         inputProps={{
                           "aria-label": "Same as shipping address",
@@ -382,19 +409,20 @@ const Payment = () => {
                     control={
                       <>
                         <Radio
-                          checked={shippingMethod === "shop"}
+                          checked={shippingMethod === "standard"}
                           onChange={(event) =>
                             setShippingMethod(event.target.value)
                           }
-                          value="shop"
+                          value="standard"
                           name="radio-buttons"
+                          size="small"
                           sx={{ paddingLeft: 0 }}
                           inputProps={{
                             "aria-label": "Til Butikk (1-5 virkedager)",
                           }}
                         />
                         <Typography variant="body2">
-                          Til Butikk (1-5 virkedager)
+                          Standard (1-5 Days)
                         </Typography>
                       </>
                     }
@@ -406,7 +434,7 @@ const Payment = () => {
                           marginLeft: "auto",
                         }}
                       >
-                        Free
+                        {formatCurrency(calculateShopShipping())}
                       </Typography>
                     }
                     sx={{
@@ -432,13 +460,14 @@ const Payment = () => {
                           }
                           value="home"
                           name="radio-buttons"
+                          size="small"
                           sx={{ paddingLeft: 0 }}
                           inputProps={{
                             "aria-label": "Hjemlevering (1-3 virkedager)",
                           }}
                         />
                         <Typography variant="body2">
-                          Hjemlevering (1-3 virkedager)
+                          Home Delivery (1-3 Days)
                         </Typography>
                       </>
                     }
@@ -487,61 +516,167 @@ const Payment = () => {
                   sx={{
                     justifyContent: "space-between",
                     width: "100%",
-                    padding: "1em",
                     borderRadius: "10px",
+                    marginBottom: "1em !important",
                   }}
                 >
-                  <Box
+                  <FormControlLabel
+                    control={
+                      <Radio
+                        checked={selectPayment}
+                        onChange={handlePaymentChange}
+                        value={true}
+                        name="radio-buttons"
+                        size="small"
+                        sx={{ paddingLeft: 0 }}
+                        inputProps={{
+                          "aria-label": "Same as shipping address",
+                        }}
+                      />
+                    }
+                    label={
+                      <Typography
+                        variant="body2"
+                        sx={{ fontWeight: "500", fontSize: ".8rem" }}
+                      >
+                        Credit Card
+                      </Typography>
+                    }
                     sx={{
                       display: "flex",
-                      justifyContent: "space-between",
+                      justifyContent: "flex-start",
                       width: "100%",
                       alignItems: "center",
                       gap: ".5em",
+                      padding: ".5em 1em",
+                      margin: 0,
                     }}
-                  >
-                    <Box sx={{ textAlign: "left" }}>
-                      <Typography
-                        sx={{ opacity: 0.8 }}
-                        variant="caption"
-                        gutterBottom
+                  />
+                  <Collapse in={paymentType}>
+                    <form onSubmit={handleSubmit}>
+                      <Divider />
+                      <Stack
+                        spacing={3}
+                        padding={2}
+                        sx={{
+                          backgroundColor: "#fcfbfb",
+                          paddingBottom: "2em",
+                        }}
                       >
-                        Contact
-                      </Typography>
-                      <Typography variant="body2">
-                        glenn_lar@hotmail.com | +47 91771028
-                      </Typography>
-                    </Box>
-                    <RouterLink to="/checkout" className="payment-change">
-                      {content[lang]["changeInfo"]}
-                    </RouterLink>
-                  </Box>
-                  <Divider sx={{ margin: ".8em 0" }} />
-                  <Box
+                        {/* Billing Address form */}
+                        <FormControl variant="outlined">
+                          <FormTextField
+                            sx={{ backgroundColor: "white" }}
+                            label="Card number"
+                            id="name"
+                            name="name"
+                            value={shippingAddress.name}
+                            onChange={handleShippingAddressChange}
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <Tooltip
+                                    arrow
+                                    title="All transactions are secure and encrypted."
+                                  >
+                                    <LockIcon style={{ fontSize: 18 }} />
+                                  </Tooltip>
+                                </InputAdornment>
+                              ),
+                            }}
+                            InputLabelProps={{
+                              style: { fontSize: 14, marginTop: 4 }, // Adjust the fontSize for the label
+                            }}
+                          />
+                        </FormControl>
+                        <FormControl variant="outlined">
+                          <FormTextField
+                            sx={{ backgroundColor: "white" }}
+                            label="Name on card"
+                            id="name"
+                            name="name"
+                            value={shippingAddress.name}
+                            onChange={handleShippingAddressChange}
+                            InputLabelProps={{
+                              style: { fontSize: 14, marginTop: 4 }, // Adjust the fontSize for the label
+                            }}
+                          />
+                        </FormControl>
+                        <Box gap={2} display="flex">
+                          <FormControl variant="outlined" fullWidth>
+                            <FormTextField
+                              sx={{ backgroundColor: "white" }}
+                              label="Exp (MM / YY)"
+                              id="name"
+                              name="name"
+                              value={shippingAddress.name}
+                              onChange={handleShippingAddressChange}
+                              InputLabelProps={{
+                                style: { fontSize: 14, marginTop: 4 }, // Adjust the fontSize for the label
+                              }}
+                            />
+                          </FormControl>
+                          <FormControl variant="outlined" fullWidth>
+                            <FormTextField
+                              sx={{ backgroundColor: "white" }}
+                              label="Security code"
+                              id="name"
+                              name="name"
+                              value={shippingAddress.name}
+                              onChange={handleShippingAddressChange}
+                              InputProps={{
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <Tooltip
+                                      arrow
+                                      title="3-digit security code usually found on the back of your card. "
+                                    >
+                                      <HelpIcon style={{ fontSize: 18 }} />
+                                    </Tooltip>
+                                  </InputAdornment>
+                                ),
+                              }}
+                              InputLabelProps={{
+                                style: { fontSize: 14, marginTop: 4 }, // Adjust the fontSize for the label
+                              }}
+                            />
+                          </FormControl>
+                        </Box>
+                      </Stack>
+                    </form>
+                  </Collapse>
+                  <Divider />
+                  <FormControlLabel
+                    control={
+                      <Radio
+                        checked={!selectPayment}
+                        onChange={handlePaymentChange}
+                        value={false}
+                        size="small"
+                        name="radio-buttons"
+                        sx={{ paddingLeft: 0 }}
+                        inputProps={{
+                          "aria-label": "Same as shipping address",
+                        }}
+                      />
+                    }
+                    label={
+                      <img
+                        style={{ width: "60px" }}
+                        src={vippsLogo}
+                        alt="Vipps Logo"
+                      />
+                    }
                     sx={{
                       display: "flex",
-                      justifyContent: "space-between",
+                      justifyContent: "flex-start",
                       width: "100%",
-                      alignItems: "center",
+                      alignItems: "baseline",
                       gap: ".5em",
+                      padding: ".5em 1em",
+                      margin: 0,
                     }}
-                  >
-                    <Box sx={{ textAlign: "left" }}>
-                      <Typography
-                        sx={{ opacity: 0.8 }}
-                        variant="caption"
-                        gutterBottom
-                      >
-                        Ship to
-                      </Typography>
-                      <Typography variant="body2">
-                        Vestre Holbergsallmenningen 10, 5011 Bergen, Norway
-                      </Typography>
-                    </Box>
-                    <RouterLink to="/checkout" className="payment-change">
-                      {content[lang]["changeInfo"]}
-                    </RouterLink>
-                  </Box>
+                  />
                 </Paper>
                 <Box
                   sx={{
@@ -574,6 +709,7 @@ const Payment = () => {
               <OrderSummary
                 cartItems={cartItems}
                 showOrderSummary={showOrderSummary}
+                shippingMethod={shippingMethod}
               />
             )}
           </div>

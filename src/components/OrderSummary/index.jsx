@@ -20,10 +20,23 @@ import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import { UilShoppingBag } from "@iconscout/react-unicons";
 import OrderSummaryItems from "components/OrderSummaryItems";
 
-const OrderSummary = ({ showOrderSummary, cartItems }) => {
+const OrderSummary = ({ showOrderSummary, cartItems, shippingMethod }) => {
   const isMobile = useMediaQuery({ maxWidth: 990 });
   const [lang] = useContext(LangContext);
   const [discountValue, setDiscountValue] = useState("");
+
+      // Calculate the final shipping cost based on the selected shipping method
+      const calculateShippingCost = () => {
+        if (shippingMethod === "home") {
+          return 99; // Home delivery cost
+        }
+        
+        // Calculate the base shipping cost
+        return cartItems.reduce((total, cartItem) => {
+          const item = products.find((i) => i.id === parseInt(cartItem.id));
+          return total + (item?.price || 0) * cartItem.quantity;
+        }, 0) > 500 ? 0 : SHIPPING_COST;
+      };
 
   return (
     <>
@@ -98,16 +111,7 @@ const OrderSummary = ({ showOrderSummary, cartItems }) => {
                 }}
               >
                 <Typography>{content[lang]["checkoutShipping"]}</Typography>
-                {formatCurrency(
-                  cartItems.reduce((total, cartItem) => {
-                    const item = products.find(
-                      (i) => i.id === parseInt(cartItem.id)
-                    );
-                    return total + (item?.price || 0) * cartItem.quantity;
-                  }, 0) > 500
-                    ? 0
-                    : SHIPPING_COST
-                )}
+                {formatCurrency(calculateShippingCost())}
               </Box>
               <Box
                 sx={{
@@ -126,15 +130,7 @@ const OrderSummary = ({ showOrderSummary, cartItems }) => {
                         (i) => i.id === parseInt(cartItem.id)
                       );
                       return total + (item?.price || 0) * cartItem.quantity;
-                    }, 0) +
-                      (cartItems.reduce((total, cartItem) => {
-                        const item = products.find(
-                          (i) => i.id === parseInt(cartItem.id)
-                        );
-                        return total + (item?.price || 0) * cartItem.quantity;
-                      }, 0) > 500
-                        ? 0
-                        : SHIPPING_COST)
+                    }, 0) + calculateShippingCost()
                   )}
                 </Typography>
               </Box>
@@ -224,16 +220,7 @@ const OrderSummary = ({ showOrderSummary, cartItems }) => {
               }}
             >
               <Typography>{content[lang]["checkoutShipping"]}</Typography>
-              {formatCurrency(
-                cartItems.reduce((total, cartItem) => {
-                  const item = products.find(
-                    (i) => i.id === parseInt(cartItem.id)
-                  );
-                  return total + (item?.price || 0) * cartItem.quantity;
-                }, 0) > 500
-                  ? 0
-                  : SHIPPING_COST
-              )}
+              {formatCurrency(calculateShippingCost())}
             </Box>
             <Box
               sx={{
@@ -252,15 +239,7 @@ const OrderSummary = ({ showOrderSummary, cartItems }) => {
                       (i) => i.id === parseInt(cartItem.id)
                     );
                     return total + (item?.price || 0) * cartItem.quantity;
-                  }, 0) +
-                    (cartItems.reduce((total, cartItem) => {
-                      const item = products.find(
-                        (i) => i.id === parseInt(cartItem.id)
-                      );
-                      return total + (item?.price || 0) * cartItem.quantity;
-                    }, 0) > 500
-                      ? 0
-                      : SHIPPING_COST)
+                  }, 0) + calculateShippingCost()
                 )}
               </Typography>
             </Box>

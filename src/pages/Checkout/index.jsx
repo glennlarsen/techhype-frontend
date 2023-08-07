@@ -88,6 +88,7 @@ const Checkout = () => {
           handleToggleOrderSummary={handleToggleOrderSummary}
           showOrderSummary={showOrderSummary}
           cartItems={cartItems}
+          shippingMethod="standard"
         />
         <section className="checkout top-overlay">
           <div className="container-inner checkout-container">
@@ -274,6 +275,7 @@ const Checkout = () => {
               <OrderSummary
                 cartItems={cartItems}
                 showOrderSummary={showOrderSummary}
+                shippingMethod="standard"
               />
             )}
           </div>

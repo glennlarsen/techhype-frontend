@@ -12,9 +12,15 @@ import { Box, Typography } from "@mui/material";
 import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 
-const OrderSummaryToggle = ({ handleToggleOrderSummary, showOrderSummary, cartItems }) => {
+const OrderSummaryToggle = ({
+  handleToggleOrderSummary,
+  showOrderSummary,
+  cartItems,
+  shippingMethod,
+}) => {
   const isMobile = useMediaQuery({ maxWidth: 990 });
   const [lang] = useContext(LangContext);
+  const HomeDeliveryCost = shippingMethod === "shop" ? 0 : 99;
 
   return (
     <>
@@ -78,14 +84,17 @@ const OrderSummaryToggle = ({ handleToggleOrderSummary, showOrderSummary, cartIt
                     );
                     return total + (item?.price || 0) * cartItem.quantity;
                   }, 0) > 500
-                    ? 0
-                    : SHIPPING_COST)
+                    ? HomeDeliveryCost
+                    : HomeDeliveryCost === 0
+                    ? SHIPPING_COST
+                    : HomeDeliveryCost)
               )}
             </Typography>
           </Box>
           <OrderSummary
             cartItems={cartItems}
             showOrderSummary={showOrderSummary}
+            shippingMethod={shippingMethod}
           />
         </Box>
       )}
