@@ -9,15 +9,20 @@ import ProductDetails from "pages/ProductDetails";
 import Checkout from "pages/Checkout";
 import ContactDetails from "pages/ContactDetails";
 import Payment from "pages/Payment";
+import Terms from "pages/Terms";
+import Privacy from "pages/Privacy";
+import Faq from "pages/Faq";
 
 import { LangProvider } from "context/LangContext";
 import ScrollToTop from "components/ScrollToTop";
 import { ShoppingCartProvider } from "context/ShoppingCartContext";
+import { FormProvider } from "context/FormContext";
 
 function App() {
   return (
     <LangProvider>
       <ShoppingCartProvider>
+        <FormProvider>
         <Router>
           <ScrollToTop />
           <Routes>
@@ -30,8 +35,12 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/contactDetails" element={<ContactDetails />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/faq" element={<Faq />} />
           </Routes>
         </Router>
+        </FormProvider>
       </ShoppingCartProvider>
     </LangProvider>
   );

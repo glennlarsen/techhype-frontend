@@ -40,6 +40,7 @@
     "react-scripts": "^5.0.1",
     "react-scroll": "^1.8.9",
     "react-simply-carousel": "^9.0.3",
+    "react-sticky-el": "^2.1.0",
     "sass": "^1.59.2",
     "techhype-components": "^1.24.6",
     "vcard-creator": "^0.6.0",

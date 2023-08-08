@@ -18,7 +18,7 @@ const OrderSummaryToggle = ({
   cartItems,
   shippingMethod,
 }) => {
-  const isMobile = useMediaQuery({ maxWidth: 990 });
+  const isMobile = useMediaQuery({ maxWidth: 900 });
   const [lang] = useContext(LangContext);
 
   // Calculate the final shipping cost based on the selected shipping method
@@ -44,6 +44,12 @@ const OrderSummaryToggle = ({
             background: "white",
             borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
             borderTop: "1px solid rgba(0, 0, 0, 0.12)",
+            position: "fixed",
+            top: "49.188px",
+            right: 0,
+            left: 0,
+            zIndex: 200,
+            boxShadow: "0 -4px 5px 5px rgba(0, 0, 0, 0.2)",
           }}
         >
           <Box
@@ -51,15 +57,13 @@ const OrderSummaryToggle = ({
             sx={{
               display: "flex",
               alignItems: "center",
-              padding: "1.3em",
-              marginTop: "1em",
-              zIndex: 100,
+              padding: "1em",
+              zIndex: 199,
               width: "100%",
               background: color_light,
               color: color_dark,
               cursor: "pointer",
               borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
-              borderTop: "1px solid rgba(0, 0, 0, 0.12)",
             }}
           >
             <UilShoppingBag />

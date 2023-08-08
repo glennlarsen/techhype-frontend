@@ -99,7 +99,7 @@ function Navigation() {
 
 
   return (
-    <div className={`nav-container${isScrolled ? " sticky " : " "}`}>
+    <div id="navbar" className={`nav-container${isScrolled ? " sticky " : " "}`}>
       <div className="navigation container-inner">
         <Link to="/">
           <img

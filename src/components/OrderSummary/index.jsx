@@ -21,7 +21,7 @@ import { UilShoppingBag } from "@iconscout/react-unicons";
 import OrderSummaryItems from "components/OrderSummaryItems";
 
 const OrderSummary = ({ showOrderSummary, cartItems, shippingMethod }) => {
-  const isMobile = useMediaQuery({ maxWidth: 990 });
+  const isMobile = useMediaQuery({ maxWidth: 900 });
   const [lang] = useContext(LangContext);
   const [discountValue, setDiscountValue] = useState("");
 

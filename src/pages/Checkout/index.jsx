@@ -24,20 +24,22 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import OrderSummary from "components/OrderSummary";
 import AppTheme from "components/forms/AppTheme";
 import OrderSummaryToggle from "components/OrderSummaryToggle";
+import { useFormContext } from "context/FormContext";
 
 const Checkout = () => {
   const [lang] = useContext(LangContext);
   const [defaultCallingCode, setDefaultCallingCode] = useState("NO");
   const [defaultCountry, setDefaultCountry] = useState("Norway");
   const { cartItems } = useShoppingCart();
-  const isMobile = useMediaQuery({ maxWidth: 990 });
+  const isMobile = useMediaQuery({ maxWidth: 900 });
   const [showOrderSummary, setShowOrderSummary] = useState(false);
   const navigate = useNavigate();
+  const { updateFormData } = useFormContext();
 
   // Form state for storing input values
   const [contactInfo, setContactInfo] = useState({
     email: "",
-    phone: "",
+    tel: "",
   });
 
   const [shippingAddress, setShippingAddress] = useState({
@@ -77,6 +79,18 @@ const Checkout = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const onSubmit = (data) => {
+    const formData = {
+      ...contactInfo,
+      ...shippingAddress,
+      ...data,
+    };
+    // Update the form data in the context
+    updateFormData(formData);
+    // Navigate to the payment page
+    navigate("/payment"); // Assuming navigate is defined somewhere
+  };
 
   return (
     <Layout
@@ -138,7 +152,10 @@ const Checkout = () => {
                     </RouterLink>
                   </Typography>
                 </Box>
-                <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  style={{ width: "100%" }}
+                >
                   <Stack spacing={3}>
                     {/* Contact Info */}
                     <FormControl variant="standard">
@@ -258,7 +275,6 @@ const Checkout = () => {
                         type="submit"
                         variant="contained"
                         color="primary"
-                        onClick={() => navigate("/payment")}
                       >
                         {isMobile
                           ? content[lang]["paymentButtonLong"]

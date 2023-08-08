@@ -10,8 +10,6 @@ import { Button } from "techhype-components";
 import {
   FormControlLabel,
   FormControl,
-  InputLabel,
-  Input,
   Stack,
   Paper,
   Box,
@@ -22,7 +20,6 @@ import {
 } from "@mui/material";
 import CountryInput from "components/forms/CountryInput";
 import schema from "constants/schema";
-import PhoneInput from "components/forms/PhoneInput";
 import { useShoppingCart } from "context/ShoppingCartContext";
 import { Link as RouterLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
@@ -32,20 +29,20 @@ import AppTheme from "components/forms/AppTheme";
 import OrderSummaryToggle from "components/OrderSummaryToggle";
 import Radio from "@mui/material/Radio";
 import { formatCurrency } from "utils/formatCurrency";
-import { color_light } from "constants/colors";
 import { SHIPPING_COST } from "constants/validationRules";
 import { products } from "data/products";
 import vippsLogo from "images/vipps_logo.png";
 import FormTextField from "components/forms/FormTextField";
 import LockIcon from "@mui/icons-material/Lock";
 import HelpIcon from "@mui/icons-material/Help";
+import { useFormContext } from "context/FormContext";
 
 const Payment = () => {
   const [lang] = useContext(LangContext);
   const [defaultCallingCode, setDefaultCallingCode] = useState("NO");
   const [defaultCountry, setDefaultCountry] = useState("Norway");
   const { cartItems } = useShoppingCart();
-  const isMobile = useMediaQuery({ maxWidth: 990 });
+  const isMobile = useMediaQuery({ maxWidth: 900 });
   const [showOrderSummary, setShowOrderSummary] = useState(false);
   const [billingAddress, setBillingAddress] = useState(false);
   const [selectBilling, setSelectBilling] = useState(false);
@@ -53,6 +50,7 @@ const Payment = () => {
   const [paymentType, setPaymentType] = useState(true);
   const [selectPayment, setSelectPayment] = useState(true);
   const navigate = useNavigate();
+  const { formData } = useFormContext();
 
   const calculateShopShipping = () => {
     return cartItems.reduce((total, cartItem) => {
@@ -136,6 +134,7 @@ const Payment = () => {
       description="Checkout, pay and wait for your cards to be shipped as fast as possible"
     >
       <AppTheme>
+        {/* Your OrderSummaryToggle component */}
         <OrderSummaryToggle
           handleToggleOrderSummary={handleToggleOrderSummary}
           showOrderSummary={showOrderSummary}
@@ -191,10 +190,10 @@ const Payment = () => {
                         variant="caption"
                         gutterBottom
                       >
-                        Contact
+                        {content[lang]["paymentContact"]}
                       </Typography>
                       <Typography variant="body2">
-                        glenn_lar@hotmail.com | +47 91771028
+                        {`${formData.email} | ${formData.tel}`}
                       </Typography>
                     </Box>
                     <RouterLink to="/checkout" className="payment-change">
@@ -217,10 +216,10 @@ const Payment = () => {
                         variant="caption"
                         gutterBottom
                       >
-                        Ship to
+                        {content[lang]["paymentShipTo"]}
                       </Typography>
                       <Typography variant="body2">
-                        Vestre Holbergsallmenningen 10, 5011 Bergen, Norway
+                        {`${formData.street}, ${formData.postalCode} ${formData.city}, ${formData.country}`}
                       </Typography>
                     </Box>
                     <RouterLink to="/checkout" className="payment-change">
@@ -234,7 +233,7 @@ const Payment = () => {
                   variant="h2"
                   sx={{ fontWeight: "500", fontSize: "1rem" }}
                 >
-                  Billing Address
+                  {content[lang]["billingAddressHeader"]}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -244,7 +243,7 @@ const Payment = () => {
                     textAlign: "left",
                   }}
                 >
-                  Select the address that matches your card or payment method.
+                  {content[lang]["billingAddressSubheader"]}
                 </Typography>
                 <Paper
                   elevation={3}
@@ -274,7 +273,7 @@ const Payment = () => {
                         variant="body2"
                         sx={{ fontWeight: "500", fontSize: ".8rem" }}
                       >
-                        Same as shipping address
+                        {content[lang]["billingOption1"]}
                       </Typography>
                     }
                     sx={{
@@ -307,7 +306,7 @@ const Payment = () => {
                         variant="body2"
                         sx={{ fontWeight: "500", fontSize: ".8rem" }}
                       >
-                        Use a different address
+                        {content[lang]["billingOption2"]}
                       </Typography>
                     }
                     sx={{
@@ -435,7 +434,7 @@ const Payment = () => {
                   variant="h2"
                   sx={{ fontWeight: "500", fontSize: "1rem" }}
                 >
-                  Shipping Method
+                  {content[lang]["shippingMethodHeader"]}
                 </Typography>
                 <Paper
                   elevation={3}
@@ -462,8 +461,8 @@ const Payment = () => {
                             "aria-label": "Til Butikk (1-5 virkedager)",
                           }}
                         />
-                        <Typography variant="body2">
-                          Standard (1-5 Days)
+                        <Typography variant="body2" fontSize={14}>
+                          {content[lang]["shippingOption1"]}
                         </Typography>
                       </>
                     }
@@ -507,8 +506,8 @@ const Payment = () => {
                             "aria-label": "Hjemlevering (1-3 virkedager)",
                           }}
                         />
-                        <Typography variant="body2">
-                          Home Delivery (1-3 Days)
+                        <Typography variant="body2" fontSize={14}>
+                          {content[lang]["shippingOption2"]}
                         </Typography>
                       </>
                     }
@@ -540,7 +539,7 @@ const Payment = () => {
                   variant="h2"
                   sx={{ fontWeight: "500", fontSize: "1rem" }}
                 >
-                  Payment
+                  {content[lang]["paymentHeader"]}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -550,7 +549,7 @@ const Payment = () => {
                     textAlign: "left",
                   }}
                 >
-                  All transactions are secure and encrypted.
+                  {content[lang]["paymentSubheader"]}
                 </Typography>
                 <Paper
                   elevation={3}
@@ -580,7 +579,7 @@ const Payment = () => {
                         variant="body2"
                         sx={{ fontWeight: "500", fontSize: ".8rem" }}
                       >
-                        Credit Card
+                        {content[lang]["paymentOption1"]}
                       </Typography>
                     }
                     sx={{
@@ -608,7 +607,7 @@ const Payment = () => {
                         <FormControl variant="outlined">
                           <FormTextField
                             sx={{ backgroundColor: "white" }}
-                            label="Card number"
+                            label={content[lang]["paymentCardNumberLabel"]}
                             id="cardNumber"
                             name="cardNumber"
                             value={paymentInfo.cardNumber}
@@ -637,7 +636,7 @@ const Payment = () => {
                         <FormControl variant="outlined">
                           <FormTextField
                             sx={{ backgroundColor: "white" }}
-                            label="Name on card"
+                            label={content[lang]["paymentNameOnCardLabel"]}
                             id="nameOnCard"
                             name="nameOnCard"
                             value={paymentInfo.nameOnCard}
@@ -654,7 +653,11 @@ const Payment = () => {
                           <FormControl variant="outlined" fullWidth>
                             <FormTextField
                               sx={{ backgroundColor: "white" }}
-                              label="Exp (MM / YY)"
+                              label={
+                                isMobile
+                                  ? content[lang]["paymentExpiryDateLabelShort"]
+                                  : content[lang]["paymentExpiryDateLabelLong"]
+                              }
                               id="exp"
                               name="exp"
                               value={paymentInfo.exp}
@@ -673,7 +676,7 @@ const Payment = () => {
                           <FormControl variant="outlined" fullWidth>
                             <FormTextField
                               sx={{ backgroundColor: "white" }}
-                              label="Security code"
+                              label={content[lang]["paymentCVCCodeLabel"]}
                               id="security"
                               name="security"
                               value={paymentInfo.security}

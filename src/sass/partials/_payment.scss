@@ -1,29 +1,33 @@
 .payment {
-    background-color: white;
-    padding: 1.5em;
-    margin-top: 0;
-  
-    .payment-container {
-      color: $color-dark;
-      text-align: center;
-      display: flex;
-      max-width: 1000px;
+  background-color: white;
+  padding: 1.5em;
+  margin-top: 0;
 
-      @media (max-width: 990px) {
-        flex-direction: column-reverse;
-        max-width: 650px;
-      }
-    }
+  @media (max-width: 900px) {
+    padding-top: 4.5em;
+  }
 
-    .payment-change {
-      color: $color-hover;
-      margin-left: 3px;
-      text-decoration: none;
-      font-size: .8rem;
+  .payment-container {
+    color: $color-dark;
+    text-align: center;
+    display: flex;
+    max-width: 1000px;
 
-      &:hover {
-        cursor: pointer;
-        text-decoration: underline;
-      }
+    @media (max-width: 900px) {
+      flex-direction: column-reverse;
+      max-width: 650px;
     }
   }
+
+  .payment-change {
+    color: $color-hover;
+    margin-left: 3px;
+    text-decoration: none;
+    font-size: 0.8rem;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
