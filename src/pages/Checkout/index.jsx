@@ -29,26 +29,25 @@ import { useFormContext } from "context/FormContext";
 const Checkout = () => {
   const [lang] = useContext(LangContext);
   const [defaultCallingCode, setDefaultCallingCode] = useState("NO");
-  const [defaultCountry, setDefaultCountry] = useState("Norway");
   const { cartItems } = useShoppingCart();
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const [showOrderSummary, setShowOrderSummary] = useState(false);
   const navigate = useNavigate();
-  const { updateFormData } = useFormContext();
+  const { updateFormData, formData } = useFormContext();
 
   // Form state for storing input values
   const [contactInfo, setContactInfo] = useState({
-    email: "",
-    tel: "",
+    email: formData.email || "",
+    tel: formData.tel || "",
   });
 
   const [shippingAddress, setShippingAddress] = useState({
-    country: "",
-    name: "",
-    company: "",
-    street: "",
-    postalCode: "",
-    city: "",
+    country: formData.country || "",
+    name: formData.name || "",
+    company: formData.company || "",
+    street: formData.street || "",
+    postalCode: formData.postalCode || "",
+    city: formData.city || "",
   });
 
   const handleToggleOrderSummary = () => {
@@ -75,16 +74,22 @@ const Checkout = () => {
     reset,
     setValue,
     control,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async () => {
+    // Retrieve values from PhoneInput and CountryInput components
+    const phoneInputValue = watch("tel");
+    const countryInputValue = watch("country");
+
     const formData = {
       ...contactInfo,
       ...shippingAddress,
-      ...data,
+      tel: phoneInputValue,
+      country: countryInputValue,
     };
     // Update the form data in the context
     updateFormData(formData);
@@ -174,9 +179,9 @@ const Checkout = () => {
                     <PhoneInput
                       control={control}
                       errors={errors}
-                      defaultValue="NO"
+                      defaultCountryCode="NO"
+                      defaultValue={contactInfo.tel}
                       phoneLabel={content[lang]["checkoutPhone"]}
-                      onPhoneSelect={setDefaultCountry}
                     />
 
                     {/* Shipping Address */}
@@ -194,7 +199,7 @@ const Checkout = () => {
                     <CountryInput
                       control={control}
                       errors={errors}
-                      defaultValue={defaultCountry}
+                      defaultValue={shippingAddress.country || "Norway"}
                       onCountrySelect={setDefaultCallingCode}
                       value={shippingAddress.country}
                       countryLabel={content[lang]["checkoutCountry"]}

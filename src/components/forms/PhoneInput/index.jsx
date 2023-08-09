@@ -17,19 +17,19 @@ const MuiTelInputStyled = styled(MuiTelInput)({
   },
 });
 
-const PhoneInput = ({ control, errors, defaultValue, onClick, onPhoneSelect }) => {
+const PhoneInput = ({ control, errors, defaultValue, onClick, defaultCountryCode }) => {
   const [lang] = useContext(LangContext);
 
   return (
     <Controller
       name="tel"
-      defaultValue=""
+      defaultValue={defaultValue}
       control={control}
       render={({ field }) => (
         <div className="custom-phone-input">
           <MuiTelInputStyled
             {...field}
-            defaultCountry={defaultValue}
+            defaultCountryCode={defaultCountryCode}
             forceCallingCode
             id="tel"
             onClick={onClick}
