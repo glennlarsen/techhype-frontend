@@ -156,6 +156,9 @@ const Cart = () => {
               >
                 {content[lang]["cartEmpty"]}
                 <ShoppingBasketIcon sx={{ color: grey[300], fontSize: 50 }} />
+                <Button onClick={() => navigate("/shop")} size="small">
+                  Go to shop
+                </Button>
               </Box>
             )}
           </Stack>
