@@ -18,7 +18,7 @@ function Footer() {
   return (
     <footer>
       <div className="footer-container container-inner">
-
+        <div className="footer-text">
           <div className="footer-links">
             <strong>{content[lang]["footerHeading"]}</strong>
             <Link to="/shop">{content[lang]["footerLink1"]}</Link>
@@ -33,6 +33,7 @@ function Footer() {
             <Link to="/privacy">Privacy Policy</Link>
             <Link to="/faq">FAQ</Link>
           </div>
+        </div>
 
         <div className="footer-info">
           <img src={LogoLong} alt="Techhype Logo" onClick={handleLogoClick} />

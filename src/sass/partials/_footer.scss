@@ -4,7 +4,7 @@ footer {
   z-index: 10;
   margin-top: auto;
 
-  @media only screen and (max-width: 740px) {
+  @media only screen and (max-width: 850px) {
     padding: 6em 1.5em 0 1.5em;
   }
 
@@ -14,8 +14,23 @@ footer {
     justify-content: space-between;
     align-items: center;
 
-    @media only screen and (max-width: 740px) {
+    @media only screen and (max-width: 850px) {
       flex-direction: column;
+    }
+  }
+
+  .footer-text {
+    display: flex;
+    width: 100%;
+
+    &>* {
+      flex: 1;
+    }
+
+    @media only screen and (max-width: 850px) {
+      flex-direction: column;
+      margin: auto;
+      max-width: 140px;
     }
   }
 
@@ -53,7 +68,7 @@ footer {
       cursor: pointer;
     }
 
-    @media only screen and (max-width: 740px) {
+    @media only screen and (max-width: 850px) {
       align-items: center;
       padding: 2em 0 4em 0;
     }
@@ -74,7 +89,7 @@ footer {
       margin-top: 1em;
     }
 
-    @media only screen and (max-width: 740px) {
+    @media only screen and (max-width: 850px) {
       font-size: 0.7rem;
     }
   }
