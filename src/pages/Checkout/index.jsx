@@ -28,7 +28,7 @@ import { useFormContext } from "context/FormContext";
 
 const Checkout = () => {
   const [lang] = useContext(LangContext);
-  const [defaultCallingCode, setDefaultCallingCode] = useState("NO");
+  const [defaultCountry, setDefaultCountry] = useState("Norway");
   const { cartItems } = useShoppingCart();
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const [showOrderSummary, setShowOrderSummary] = useState(false);
@@ -199,9 +199,7 @@ const Checkout = () => {
                     <CountryInput
                       control={control}
                       errors={errors}
-                      defaultValue={shippingAddress.country || "Norway"}
-                      onCountrySelect={setDefaultCallingCode}
-                      value={shippingAddress.country}
+                      defaultValue={shippingAddress.country || defaultCountry}
                       countryLabel={content[lang]["checkoutCountry"]}
                     />
                     <FormControl variant="standard">

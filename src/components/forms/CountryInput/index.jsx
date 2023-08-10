@@ -11,14 +11,11 @@ const CountryInput = ({
   control,
   errors,
   defaultValue,
-  onCountrySelect,
   variant,
   fontSize,
   inputBackgroundColor,
 }) => {
   const [lang] = useContext(LangContext);
-
-
 
   return (
     <Controller
@@ -32,9 +29,6 @@ const CountryInput = ({
             onChange(option);
           }}
           inputValue={value}
-          onChange={(event, value) =>
-            onCountrySelect(value ? value.code : "NO")
-          }
           options={countries}
           autoHighlight
           disablePortal
@@ -45,7 +39,12 @@ const CountryInput = ({
             <Box
               component="li"
               sx={{
-                "& > img": { mr: 2, flexShrink: 0, width: "20px", height: "20px" }, // Set the width and height of the flag
+                "& > img": {
+                  mr: 2,
+                  flexShrink: 0,
+                  width: "20px",
+                  height: "20px",
+                }, // Set the width and height of the flag
                 "& > span": { lineHeight: "20px" }, // Center the country text vertically
               }}
               {...props}
@@ -72,7 +71,7 @@ const CountryInput = ({
               helperText={errors.country ? errors.country.message : ""}
               inputProps={{
                 ...params.inputProps,
-                style: { fontSize: fontSize},
+                style: { fontSize: fontSize },
                 autoComplete: "new-password",
               }}
               InputLabelProps={{
