@@ -20,10 +20,17 @@ import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import { UilShoppingBag } from "@iconscout/react-unicons";
 import OrderSummaryItems from "components/OrderSummaryItems";
 
-const OrderSummary = ({ showOrderSummary, cartItems, shippingMethod }) => {
+const OrderSummary = ({
+  showOrderSummary,
+  cartItems,
+  shippingMethod,
+  confirmationPage,
+}) => {
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const [lang] = useContext(LangContext);
   const [discountValue, setDiscountValue] = useState("");
+
+  console.log(confirmationPage);
 
   // Calculate the final shipping cost based on the selected shipping method
   const calculateShippingCost = () => {
@@ -73,38 +80,43 @@ const OrderSummary = ({ showOrderSummary, cartItems, shippingMethod }) => {
                   />
                 );
               })}
-              <Box
-                sx={{
-                  display: "flex",
-                  gap: "1em",
-                  alignItems: "center",
-                  padding: ".5em 0",
-                }}
-              >
-                <FormTextField
-                  placeholder={content[lang]["discountCode"]}
-                  fullWidth
-                  size="small"
-                  value={discountValue}
-                  onChange={(event) => setDiscountValue(event.target.value)}
-                  sx={{ backgroundColor: "white" }}
-                />
-                <Button
-                  style={{
-                    background: "transparent",
-                    border: `2px solid ${
-                      discountValue != "" ? color_primary : "grey"
-                    }`,
-                    color: color_dark,
-                    opacity: discountValue != "" ? 1 : 0.7,
-                  }}
-                  size="small"
-                  disabled={discountValue != "" ? false : true}
-                >
-                  {content[lang]["DiscountButton"]}
-                </Button>
-              </Box>
-              <Divider />
+              {!confirmationPage && (
+                <>
+                  {" "}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: "1em",
+                      alignItems: "center",
+                      padding: ".5em 0",
+                    }}
+                  >
+                    <FormTextField
+                      placeholder={content[lang]["discountCode"]}
+                      fullWidth
+                      size="small"
+                      value={discountValue}
+                      onChange={(event) => setDiscountValue(event.target.value)}
+                      sx={{ backgroundColor: "white" }}
+                    />
+                    <Button
+                      style={{
+                        background: "transparent",
+                        border: `2px solid ${
+                          discountValue != "" ? color_primary : "grey"
+                        }`,
+                        color: color_dark,
+                        opacity: discountValue != "" ? 1 : 0.7,
+                      }}
+                      size="small"
+                      disabled={discountValue != "" ? false : true}
+                    >
+                      {content[lang]["DiscountButton"]}
+                    </Button>
+                  </Box>
+                  <Divider />{" "}
+                </>
+              )}
               <Box
                 sx={{
                   display: "flex",
@@ -182,38 +194,43 @@ const OrderSummary = ({ showOrderSummary, cartItems, shippingMethod }) => {
                 />
               );
             })}
-            <Box
-              sx={{
-                display: "flex",
-                gap: "1em",
-                alignItems: "center",
-                padding: ".5em 0",
-              }}
-            >
-              <FormTextField
-                placeholder={content[lang]["discountCode"]}
-                fullWidth
-                size="small"
-                value={discountValue}
-                onChange={(event) => setDiscountValue(event.target.value)}
-                sx={{ backgroundColor: "white" }}
-              />
-              <Button
-                style={{
-                  background: "transparent",
-                  border: `2px solid ${
-                    discountValue != "" ? color_primary : "grey"
-                  }`,
-                  color: color_dark,
-                  opacity: discountValue != "" ? 1 : 0.7,
-                }}
-                size="small"
-                disabled={discountValue != "" ? false : true}
-              >
-                {content[lang]["DiscountButton"]}
-              </Button>
-            </Box>
-            <Divider />
+            {!confirmationPage && (
+              <>
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: "1em",
+                    alignItems: "center",
+                    padding: ".5em 0",
+                  }}
+                >
+                  <FormTextField
+                    placeholder={content[lang]["discountCode"]}
+                    fullWidth
+                    size="small"
+                    value={discountValue}
+                    onChange={(event) => setDiscountValue(event.target.value)}
+                    sx={{ backgroundColor: "white" }}
+                  />
+                  <Button
+                    style={{
+                      background: "transparent",
+                      border: `2px solid ${
+                        discountValue != "" ? color_primary : "grey"
+                      }`,
+                      color: color_dark,
+                      opacity: discountValue != "" ? 1 : 0.7,
+                    }}
+                    size="small"
+                    disabled={discountValue != "" ? false : true}
+                  >
+                    {content[lang]["DiscountButton"]}
+                  </Button>
+                </Box>
+                <Divider />
+              </>
+            )}
+
             <Box
               sx={{
                 display: "flex",
@@ -260,7 +277,7 @@ const OrderSummary = ({ showOrderSummary, cartItems, shippingMethod }) => {
               }}
             >
               <DesignServicesIcon sx={{ color: color_primary }} />
-              {content[lang]["cartTip"]}
+              {!confirmationPage ? content[lang]["cartTip"] : "Create your profile now and start designing your business card!"}
             </Paper>
           </Stack>
         </Box>

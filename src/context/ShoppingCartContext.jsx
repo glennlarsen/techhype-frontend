@@ -9,11 +9,15 @@ export function useShoppingCart() {
 
 export function ShoppingCartProvider({ children }) {
   const [cartItems, setCartItems] = useLocalStorage("shopping-cart", []);
+  const [purchasedItems, setPurchasedItems] = useLocalStorage(
+    "purchased-items",
+    []
+  );
 
   const cartQuantity = cartItems.reduce(
     (quantity, item) => item.quantity + quantity,
     0
-  )
+  );
 
   function getItemQuantity(id) {
     return cartItems.find((item) => item.id === id)?.quantity || 0;
@@ -73,6 +77,15 @@ export function ShoppingCartProvider({ children }) {
     });
   }
 
+  function clearCart() {
+    setCartItems([]);
+  }
+
+  function markAsPurchased(id) {
+    setPurchasedItems([...cartItems]);
+    removeFromCart(id);
+  }
+
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -81,8 +94,11 @@ export function ShoppingCartProvider({ children }) {
         increaseCartQuantity,
         decreaseCartQuantity,
         removeFromCart,
+        clearCart,
         cartItems,
         cartQuantity,
+        purchasedItems,
+        markAsPurchased,
       }}
     >
       {children}

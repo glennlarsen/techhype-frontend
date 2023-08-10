@@ -12,6 +12,7 @@ import Payment from "pages/Payment";
 import Terms from "pages/Terms";
 import Privacy from "pages/Privacy";
 import Faq from "pages/Faq";
+import OrderConfirmation from "pages/OrderConfirmation";
 
 import { LangProvider } from "context/LangContext";
 import ScrollToTop from "components/ScrollToTop";
@@ -34,6 +35,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/orderConfirmation" element={<OrderConfirmation />} />
             <Route path="/contactDetails" element={<ContactDetails />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />

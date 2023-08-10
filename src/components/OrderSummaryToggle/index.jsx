@@ -17,6 +17,7 @@ const OrderSummaryToggle = ({
   showOrderSummary,
   cartItems,
   shippingMethod,
+  confirmationPage,
 }) => {
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const [lang] = useContext(LangContext);
@@ -103,6 +104,7 @@ const OrderSummaryToggle = ({
             cartItems={cartItems}
             showOrderSummary={showOrderSummary}
             shippingMethod={shippingMethod}
+            confirmationPage={confirmationPage}
           />
         </Box>
       )}
