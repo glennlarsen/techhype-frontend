@@ -30,7 +30,7 @@ const theme = createTheme({
   breakpoints: {
     values: {
       xs: 0, // Change this value to adjust the breakpoint for xs screens
-      sm: 500, // Change this value to adjust the breakpoint for sm screens
+      sm: 410, // Change this value to adjust the breakpoint for sm screens
       md: 960,
       lg: 1280,
       xl: 1920,
@@ -40,10 +40,9 @@ const theme = createTheme({
 
 const OrderConfirmation = () => {
   const [lang] = useContext(LangContext);
-  const { purchasedItems  } = useShoppingCart();
+  const { purchasedItems } = useShoppingCart();
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const [showOrderSummary, setShowOrderSummary] = useState(false);
-  const [shippingMethod, setShippingMethod] = useState("standard");
   const navigate = useNavigate();
   const { formData } = useFormContext();
 
@@ -62,7 +61,7 @@ const OrderConfirmation = () => {
           handleToggleOrderSummary={handleToggleOrderSummary}
           showOrderSummary={showOrderSummary}
           cartItems={purchasedItems}
-          shippingMethod={shippingMethod}
+          shippingMethod={formData.shippingMethod}
           confirmationPage
         />
         <section className="payment top-overlay">
@@ -123,7 +122,7 @@ const OrderConfirmation = () => {
                         Order Details
                       </Typography>
                       <Box sx={{ width: "100%" }}>
-                        <Grid container rowSpacing={2} columnSpacing={3}>
+                        <Grid container rowSpacing={2} columnSpacing={2}>
                           <Grid item xs={12} sm={6}>
                             <Typography variant="subtitle2" gutterBottom>
                               Contact Information
@@ -134,7 +133,7 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              {formData.email}
+                              {formData.contactInfo.email}
                             </Typography>
                             <Typography
                               variant="body2"
@@ -142,7 +141,7 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              {formData.tel}
+                              {formData.contactInfo.tel}
                             </Typography>
                           </Grid>
                           <Grid item xs={12} sm={6}>
@@ -155,7 +154,7 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              Visa ending with ***4429
+                              Visa ending with ***{formData.paymentInfo.cardNumber.slice(-4)}
                             </Typography>
                           </Grid>
                           <Grid item xs={12} sm={6}>
@@ -168,7 +167,7 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              {formData.name}
+                              {formData.shippingAddress.name}
                             </Typography>
                             <Typography
                               variant="body2"
@@ -176,7 +175,7 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              {formData.street}
+                              {formData.shippingAddress.company}
                             </Typography>
                             <Typography
                               variant="body2"
@@ -184,7 +183,7 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              {formData.postalCode}, {formData.city}
+                              {formData.shippingAddress.street}
                             </Typography>
                             <Typography
                               variant="body2"
@@ -192,7 +191,15 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              {formData.country}
+                              {formData.shippingAddress.postalCode}, {formData.shippingAddress.city}
+                            </Typography>
+                            <Typography
+                              variant="body2"
+                              gutterBottom
+                              align="left"
+                              fontSize={14}
+                            >
+                              {formData.shippingAddress.country}
                             </Typography>
                           </Grid>
                           <Grid item xs={12} sm={6}>
@@ -205,7 +212,7 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              {formData.name}
+                              {formData.billingAddress.name}
                             </Typography>
                             <Typography
                               variant="body2"
@@ -213,7 +220,7 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              {formData.street}
+                              {formData.billingAddress.company}
                             </Typography>
                             <Typography
                               variant="body2"
@@ -221,7 +228,7 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              {formData.postalCode}, {formData.city}
+                              {formData.billingAddress.street}
                             </Typography>
                             <Typography
                               variant="body2"
@@ -229,7 +236,15 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              {formData.country}
+                              {formData.billingAddress.postalCode}, {formData.billingAddress.city}
+                            </Typography>
+                            <Typography
+                              variant="body2"
+                              gutterBottom
+                              align="left"
+                              fontSize={14}
+                            >
+                              {formData.billingAddress.country}
                             </Typography>
                           </Grid>
                           <Grid item xs={12} sm={6}>
@@ -242,7 +257,7 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              Standard (1-5 business days)
+                              {formData.shippingMethod === "standard" ? "Standard (1-5 business days)" : "Home Delivery (1-3 Business days)"}
                             </Typography>
                           </Grid>
                         </Grid>
@@ -299,7 +314,7 @@ const OrderConfirmation = () => {
               <OrderSummary
                 cartItems={purchasedItems}
                 showOrderSummary={showOrderSummary}
-                shippingMethod={shippingMethod}
+                shippingMethod={formData.shippingMethod}
                 confirmationPage
               />
             )}

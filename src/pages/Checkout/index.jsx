@@ -36,18 +36,26 @@ const Checkout = () => {
   const { updateFormData, formData } = useFormContext();
 
   // Form state for storing input values
-  const [contactInfo, setContactInfo] = useState({
-    email: formData.email || "",
-    tel: formData.tel || "",
+  const [contactInfo, setContactInfo] = useState(() => {
+    const initialContactInfo = formData.contactInfo || {};
+
+    return {
+      email: initialContactInfo.email || "",
+      tel: initialContactInfo.tel || "",
+    };
   });
 
-  const [shippingAddress, setShippingAddress] = useState({
-    country: formData.country || "",
-    name: formData.name || "",
-    company: formData.company || "",
-    street: formData.street || "",
-    postalCode: formData.postalCode || "",
-    city: formData.city || "",
+  const [shippingAddress, setShippingAddress] = useState(() => {
+    const initialShippingAddress = formData.shippingAddress || {};
+
+    return {
+      country: initialShippingAddress.country || "",
+      name: initialShippingAddress.name || "",
+      company: initialShippingAddress.company || "",
+      street: initialShippingAddress.street || "",
+      postalCode: initialShippingAddress.postalCode || "",
+      city: initialShippingAddress.city || "",
+    };
   });
 
   const handleToggleOrderSummary = () => {
@@ -85,12 +93,21 @@ const Checkout = () => {
     const phoneInputValue = watch("tel");
     const countryInputValue = watch("country");
 
-    const formData = {
-      ...contactInfo,
+    const updatedShippingAddress = {
       ...shippingAddress,
-      tel: phoneInputValue,
-      country: countryInputValue,
+      country: countryInputValue, // Set the country here
     };
+
+    const updatedContactInfo = {
+      ...contactInfo,
+      tel: phoneInputValue,
+    };
+
+    const formData = {
+      contactInfo: updatedContactInfo,
+      shippingAddress: updatedShippingAddress,
+    };
+
     // Update the form data in the context
     updateFormData(formData);
     // Navigate to the payment page

@@ -36,6 +36,8 @@ import FormTextField from "components/forms/FormTextField";
 import LockIcon from "@mui/icons-material/Lock";
 import HelpIcon from "@mui/icons-material/Help";
 import { useFormContext } from "context/FormContext";
+import Visa from "images/Visa.png";
+import MasterCard from "images/MasterCard.png";
 
 const Payment = () => {
   const [lang] = useContext(LangContext);
@@ -44,13 +46,13 @@ const Payment = () => {
   const { cartItems, markAsPurchased } = useShoppingCart();
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const [showOrderSummary, setShowOrderSummary] = useState(false);
-  const [billingAddress, setBillingAddress] = useState(false);
+  const [billingAddressSelected, setBillingAddressSelected] = useState(false);
   const [selectBilling, setSelectBilling] = useState(false);
   const [shippingMethod, setShippingMethod] = useState("standard");
   const [paymentType, setPaymentType] = useState(true);
   const [selectPayment, setSelectPayment] = useState(true);
   const navigate = useNavigate();
-  const { formData } = useFormContext();
+  const { formData, updateFormData } = useFormContext();
 
   const calculateShopShipping = () => {
     return cartItems.reduce((total, cartItem) => {
@@ -63,7 +65,7 @@ const Payment = () => {
 
   const handleBillingAddressChange = (event) => {
     setSelectBilling(event.target.value === "true");
-    setBillingAddress(event.target.value === "true");
+    setBillingAddressSelected(event.target.value === "true");
   };
 
   const handlePaymentChange = (event) => {
@@ -72,18 +74,17 @@ const Payment = () => {
   };
 
   // Form state for storing input values
-  const [contactInfo, setContactInfo] = useState({
-    email: "",
-    phone: "",
-  });
+  const [billingAddress, setBillingAddress] = useState(() => {
+    const initialBillingAddress = formData.billingAddress || {};
 
-  const [shippingAddress, setShippingAddress] = useState({
-    country: "",
-    name: "",
-    company: "",
-    street: "",
-    postalCode: "",
-    city: "",
+    return {
+      country: initialBillingAddress.country || "",
+      name: initialBillingAddress.name || "",
+      company: initialBillingAddress.company || "",
+      street: initialBillingAddress.street || "",
+      postalCode: initialBillingAddress.postalCode || "",
+      city: initialBillingAddress.city || "",
+    };
   });
 
   const [paymentInfo, setPaymentInfo] = useState({
@@ -97,16 +98,10 @@ const Payment = () => {
     setShowOrderSummary((prevValue) => !prevValue);
   };
 
-  // Event handler for handling changes in the contact info fields
-  const handleContactInfoChange = (e) => {
-    const { name, value } = e.target;
-    setContactInfo((prevState) => ({ ...prevState, [name]: value }));
-  };
-
   // Event handler for handling changes in the shipping address fields
-  const handleShippingAddressChange = (e) => {
+  const handleBillingAddress = (e) => {
     const { name, value } = e.target;
-    setShippingAddress((prevState) => ({ ...prevState, [name]: value }));
+    setBillingAddress((prevState) => ({ ...prevState, [name]: value }));
   };
 
   // Event handler for handling changes in the payment info fields
@@ -121,6 +116,7 @@ const Payment = () => {
     handleSubmit,
     trigger,
     reset,
+    watch,
     setValue,
     control,
     formState: { errors },
@@ -135,6 +131,25 @@ const Payment = () => {
     cartItems.forEach((cartItem) => {
       markAsPurchased(cartItem.id);
     });
+
+    // Retrieve values from CountryInput component
+    const countryInputValue = watch("country");
+
+    const updatedBillingAddress = {
+      ...billingAddress,
+      country: countryInputValue, // Set the country here
+    };
+
+    // Update the form context with billing address, shipping method, and payment details
+    const updatedFormData = {
+      ...formData,
+      billingAddress: updatedBillingAddress,
+      shippingMethod: shippingMethod,
+      paymentInfo: paymentInfo,
+    };
+
+    // Set the updated form data to the form context
+    updateFormData(updatedFormData);
 
     // Navigate to the orderConfirmation page
     navigate("/orderConfirmation"); // Assuming navigate is defined somewhere
@@ -206,7 +221,8 @@ const Payment = () => {
                           {content[lang]["paymentContact"]}
                         </Typography>
                         <Typography variant="body2">
-                          {formData.email} | {formData.tel}
+                          {formData.contactInfo.email} |{" "}
+                          {formData.contactInfo.tel}
                         </Typography>
                       </Box>
                       <RouterLink to="/checkout" className="payment-change">
@@ -232,7 +248,7 @@ const Payment = () => {
                           {content[lang]["paymentShipTo"]}
                         </Typography>
                         <Typography variant="body2">
-                          {`${formData.street}, ${formData.postalCode} ${formData.city}, ${formData.country}`}
+                          {`${formData.shippingAddress.street}, ${formData.shippingAddress.postalCode} ${formData.shippingAddress.city}, ${formData.shippingAddress.country}`}
                         </Typography>
                       </Box>
                       <RouterLink to="/checkout" className="payment-change">
@@ -334,7 +350,7 @@ const Payment = () => {
                         margin: 0,
                       }}
                     />
-                    <Collapse in={billingAddress}>
+                    <Collapse in={billingAddressSelected}>
                       <Divider />
                       <Stack
                         spacing={3}
@@ -350,7 +366,7 @@ const Payment = () => {
                           errors={errors}
                           defaultValue={defaultCountry}
                           onCountrySelect={setDefaultCallingCode}
-                          value={shippingAddress.country}
+                          value={billingAddress.country}
                           countryLabel={content[lang]["checkoutCountry"]}
                           variant="outlined"
                           fontSize={14}
@@ -362,8 +378,8 @@ const Payment = () => {
                             label={content[lang]["checkoutName"]}
                             id="name"
                             name="name"
-                            value={shippingAddress.name}
-                            onChange={handleShippingAddressChange}
+                            value={billingAddress.name}
+                            onChange={handleBillingAddress}
                             InputLabelProps={{
                               style: { fontSize: 14 }, // Adjust the fontSize for the label
                             }}
@@ -378,8 +394,8 @@ const Payment = () => {
                             label={content[lang]["checkoutCompany"]}
                             id="company"
                             name="company"
-                            value={shippingAddress.company}
-                            onChange={handleShippingAddressChange}
+                            value={billingAddress.company}
+                            onChange={handleBillingAddress}
                             InputLabelProps={{
                               style: { fontSize: 14 }, // Adjust the fontSize for the label
                             }}
@@ -394,8 +410,8 @@ const Payment = () => {
                             label={content[lang]["checkoutStreet"]}
                             id="street"
                             name="street"
-                            value={shippingAddress.street}
-                            onChange={handleShippingAddressChange}
+                            value={billingAddress.street}
+                            onChange={handleBillingAddress}
                             InputLabelProps={{
                               style: { fontSize: 14 }, // Adjust the fontSize for the label
                             }}
@@ -411,8 +427,8 @@ const Payment = () => {
                               label={content[lang]["checkoutPostal"]}
                               id="postalCode"
                               name="postalCode"
-                              value={shippingAddress.postalCode}
-                              onChange={handleShippingAddressChange}
+                              value={billingAddress.postalCode}
+                              onChange={handleBillingAddress}
                               InputLabelProps={{
                                 style: { fontSize: 14 }, // Adjust the fontSize for the label
                               }}
@@ -427,8 +443,8 @@ const Payment = () => {
                               label={content[lang]["checkoutCity"]}
                               id="city"
                               name="city"
-                              value={shippingAddress.city}
-                              onChange={handleShippingAddressChange}
+                              value={billingAddress.city}
+                              onChange={handleBillingAddress}
                               InputLabelProps={{
                                 style: { fontSize: 14 }, // Adjust the fontSize for the label
                               }}
@@ -577,31 +593,52 @@ const Payment = () => {
                   >
                     <FormControlLabel
                       control={
-                        <Radio
-                          checked={selectPayment}
-                          onChange={handlePaymentChange}
-                          value={true}
-                          name="radio-buttons"
-                          size="small"
-                          sx={{ paddingLeft: 0 }}
-                          inputProps={{
-                            "aria-label": "Same as shipping address",
-                          }}
-                        />
+                        <>
+                          <Radio
+                            checked={selectPayment}
+                            onChange={handlePaymentChange}
+                            value={true}
+                            name="radio-buttons"
+                            size="small"
+                            sx={{ paddingLeft: 0 }}
+                            inputProps={{
+                              "aria-label": "Same as shipping address",
+                            }}
+                          />
+                          <Typography
+                            variant="body2"
+                            sx={{ fontWeight: "500", fontSize: ".8rem", marginRight: "auto" }}
+                          >
+                            {content[lang]["paymentOption1"]}
+                          </Typography>
+                        </>
                       }
                       label={
-                        <Typography
-                          variant="body2"
-                          sx={{ fontWeight: "500", fontSize: ".8rem" }}
+                        <Box
+                          sx={{
+                            marginLeft: "auto",
+                            display: "flex",
+                            gap: ".3em",
+                          }}
                         >
-                          {content[lang]["paymentOption1"]}
-                        </Typography>
+                          <img
+                            src={Visa}
+                            style={{ width: "40px", height: "25px" }}
+                            alt="Visa logo"
+                          />
+                          <img
+                            src={MasterCard}
+                            style={{ width: "40px", height: "25px" }}
+                            alt="Mastercard logo"
+                          />
+                        </Box>
                       }
                       sx={{
                         display: "flex",
                         justifyContent: "flex-start",
                         width: "100%",
                         alignItems: "center",
+                        textAlign: "left",
                         gap: ".5em",
                         padding: ".5em 1em",
                         margin: 0,
