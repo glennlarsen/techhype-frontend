@@ -6,7 +6,6 @@ import ImageCarouselGallery from "./ImageCarouselGallery";
 import { products } from "data/products";
 import { Button } from "techhype-components";
 import { yupResolver } from "@hookform/resolvers/yup";
-import schema from "constants/schema";
 import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import { useNavigate } from "react-router-dom";
@@ -116,9 +115,7 @@ const ProductDetails = () => {
     reset,
     control,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  } = useForm({});
 
   const handleChange = (event) => {
     setQuantity(event.target.value);

@@ -19,7 +19,6 @@ import { useShoppingCart } from "context/ShoppingCartContext";
 import { Link as RouterLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import OrderSummary from "components/OrderSummary";
-import AppTheme from "components/forms/AppTheme";
 import OrderSummaryToggle from "components/OrderSummaryToggle";
 import { formatCurrency } from "utils/formatCurrency";
 import { SHIPPING_COST } from "constants/validationRules";
@@ -138,6 +137,7 @@ const OrderConfirmation = () => {
                               gutterBottom
                               align="left"
                               fontSize={14}
+                              sx={{overflowWrap: "break-word"}}
                             >
                               {formData.contactInfo.email}
                             </Typography>

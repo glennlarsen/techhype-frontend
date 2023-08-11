@@ -1,7 +1,7 @@
 import * as yup from "yup";
-import { MIN_NAME_CHARACTERS, EMAIL_REGEX, MAX_PHONE_NUMBERS, MIN_MESSAGE_CHARACTERS } from "../../constants/validationRules";
+import { MIN_NAME_CHARACTERS, EMAIL_REGEX, MAX_PHONE_NUMBERS, MIN_MESSAGE_CHARACTERS } from "constants/validationRules";
 
-const schemaContact = yup.object().shape({
+const contactSchema = yup.object().shape({
   name: yup
     .string()
     .required("Please enter your name")
@@ -17,4 +17,4 @@ const schemaContact = yup.object().shape({
     .min(MIN_MESSAGE_CHARACTERS, `Message must be at least ${MIN_MESSAGE_CHARACTERS} characters`),
 });
 
-export default schemaContact;
+export default contactSchema;

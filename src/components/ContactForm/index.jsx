@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import styles from "./contactForm.module.scss";
-import schemaContact from "./schemaContact";
+import contactSchema from "constants/contactSchema";
 import PostMessage from "utils/PostMessage";
 import AppTheme from "components/forms/AppTheme";
 import AlertMessage from "components/forms/AlertMessage";
@@ -33,7 +33,7 @@ const ContactForm = () => {
     control,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schemaContact),
+    resolver: yupResolver(contactSchema),
   });
 
   // Function that will run when form is submitted
