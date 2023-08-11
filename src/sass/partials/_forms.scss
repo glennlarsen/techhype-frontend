@@ -19,3 +19,9 @@
       margin-left: 3em !important;
     }
   }
+
+  .error-message {
+    text-align: left;
+    font-size: .8rem;
+    color: $color-error;
+  }

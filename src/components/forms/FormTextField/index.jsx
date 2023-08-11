@@ -1,29 +1,35 @@
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
-import { color_primary } from "constants/colors";
+import { color_primary, color_error } from "constants/colors";
 
-const FormTextField = styled(TextField)({
+const FormTextField = styled(TextField)(({ error }) => ({
   "& label.Mui-focused": {
-    color: color_primary,
+    color: error ? color_error : color_primary, // Set label color to red on error and on focus
   },
   "& .MuiInput-underline:after": {
     borderBottomColor: color_primary,
   },
-  // Add the borderRadius property to change the border-radius
   borderRadius: "10px",
-
-  // Set the border-radius for the fieldset element
   "& fieldset": {
     borderRadius: "10px",
+    borderColor: error ? color_error : "rgba(0, 0, 0, 0.23)",
   },
-  "& .MuiOutlinedInput-root": {
-    // Set the border-radius for the outlined input
-    borderRadius: "10px",
-    "&.Mui-focused fieldset": {
-      // Set the border color for the outlined input when focused
-      borderColor: color_primary,
+  "& .MuiInputLabel-root": {
+    color: error ? color_error : "rgba(0, 0, 0, 0.54)",
+    "&.Mui-focused": {
+      color: error ? color_error : color_primary, // Set label color to red on focus
     },
   },
-});
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "10px",
+    borderColor: "rgba(0, 0, 0, 0.23)", // Default border color
+    "&.Mui-focused fieldset": {
+      borderColor: color_primary,
+    },
+    "&.Mui-error fieldset": {
+      borderColor: color_error,
+    },
+  },
+}));
 
 export default FormTextField;

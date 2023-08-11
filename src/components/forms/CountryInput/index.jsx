@@ -6,6 +6,9 @@ import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import FormTextField from "components/forms/FormTextField";
 import countries from "data/countries";
+import InputAdornment from "@mui/material/InputAdornment";
+import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
+import { color_error } from "constants/colors";
 
 const CountryInput = ({
   control,
@@ -69,13 +72,30 @@ const CountryInput = ({
               placeholder={content[lang]["countryInputPlaceholder"]}
               error={Boolean(errors.country)}
               helperText={errors.country ? errors.country.message : ""}
-              inputProps={{
-                ...params.inputProps,
-                style: { fontSize: fontSize },
-                autoComplete: "new-password",
+              InputProps={{
+                ...params.InputProps,
+                style: {
+                  ...params.InputProps.style,
+                  fontSize: fontSize,
+                  borderBottomColor: errors.country ? color_error : "inherit", // Set underline color to red on error
+                },
+                endAdornment: (
+                  <>
+                    {params.InputProps.endAdornment}
+                    {errors.country ? (
+                      <InputAdornment position="end">
+                        <ErrorRoundedIcon color="error" />
+                      </InputAdornment>
+                    ) : null}
+                  </>
+                ),
               }}
               InputLabelProps={{
-                style: { fontSize: fontSize }, // Adjust the fontSize for the label
+                style: {
+                  ...params.InputLabelProps.style,
+                  fontSize: fontSize,
+                  color: errors.country ? color_error : "inherit", // Set label color to red on error
+                },
               }}
             />
           )}

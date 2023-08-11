@@ -23,6 +23,7 @@ const PhoneInput = ({
   defaultValue,
   onClick,
   defaultCountryCode,
+  placeholder,
 }) => {
   const [lang] = useContext(LangContext);
 
@@ -39,6 +40,7 @@ const PhoneInput = ({
             forceCallingCode
             id="tel"
             onClick={onClick}
+            placeholder={placeholder}
             fullWidth
             focusOnSelectCountry
             preferredCountries={[

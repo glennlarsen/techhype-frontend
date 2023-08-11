@@ -46,6 +46,12 @@ const OrderConfirmation = () => {
   const navigate = useNavigate();
   const { formData } = useFormContext();
 
+  // Function to generate a random 5-digit number as order number temporarily until database store data is working.
+  const generateRandomNumber = () => {
+    return Math.floor(Math.random() * 90000) + 10000;
+  };
+  const orderNumber = generateRandomNumber();
+
   const handleToggleOrderSummary = () => {
     setShowOrderSummary((prevValue) => !prevValue);
   };
@@ -85,7 +91,7 @@ const OrderConfirmation = () => {
               >
                 Your order is confirmed!
               </h1>
-              <Typography variant="subtitle1">Order #34786</Typography>
+              <Typography variant="subtitle1">Order #{orderNumber}</Typography>
               <Stack
                 direction="column"
                 justifyContent="center"
@@ -154,7 +160,8 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              Visa ending with ***{formData.paymentInfo.cardNumber.slice(-4)}
+                              Visa ending with ***
+                              {formData.paymentInfo.cardNumber.slice(-4)}
                             </Typography>
                           </Grid>
                           <Grid item xs={12} sm={6}>
@@ -191,7 +198,8 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              {formData.shippingAddress.postalCode}, {formData.shippingAddress.city}
+                              {formData.shippingAddress.postalCode},{" "}
+                              {formData.shippingAddress.city}
                             </Typography>
                             <Typography
                               variant="body2"
@@ -236,7 +244,8 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              {formData.billingAddress.postalCode}, {formData.billingAddress.city}
+                              {formData.billingAddress.postalCode},{" "}
+                              {formData.billingAddress.city}
                             </Typography>
                             <Typography
                               variant="body2"
@@ -257,7 +266,9 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              {formData.shippingMethod === "standard" ? "Standard (1-5 business days)" : "Home Delivery (1-3 Business days)"}
+                              {formData.shippingMethod === "standard"
+                                ? "Standard (1-5 business days)"
+                                : "Home Delivery (1-3 Business days)"}
                             </Typography>
                           </Grid>
                         </Grid>

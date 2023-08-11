@@ -65,7 +65,6 @@ function Navigation() {
   useEffect(() => {
     const handleScroll = debounce(() => {
       const scrollPosition = window.scrollY;
-      console.log("scroll Position: ", scrollPosition);
       const scrollThreshold = 10; // Adjust this value as needed
 
       if (scrollPosition < 1) {

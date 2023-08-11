@@ -1,0 +1,29 @@
+import * as yup from "yup";
+
+const billingAddressSchema = yup.object().shape({
+  country: yup.string().required("Country is required"),
+  name: yup
+    .string()
+    .required("Name is required")
+    .test(
+      "fullName",
+      "Name must contain first and last name",
+      (value) => value.trim().split(" ").length >= 2
+    ),
+  company: yup.string(),
+  street: yup
+    .string()
+    .required("Street is required")
+    .min(5, "Street must be at least 5 characters")
+    .matches(/^.*\d{1,4}.*$/, "Street must contain 'street' and 'house nr'"),
+  postalCode: yup
+    .string()
+    .required("Postal code is required")
+    .max(8, "Postal code can't be more than 8 characters"),
+  city: yup
+    .string()
+    .required("City is required")
+    .min(2, "City must be at least 2 characters"),
+});
+
+export default billingAddressSchema;
