@@ -1,7 +1,7 @@
 .nav-container {
   width: 100%;
   background-color: $color-darker;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.3s ease-in-out;
   backface-visibility: hidden;
 
   a {
@@ -31,7 +31,7 @@
   z-index: 200;
   background-color: $color-darker;
   box-shadow: 0 -4px 10px 6px rgba(0, 0, 0, 0.5);
-  transition: all 0.5s ease 0s;
+  transition: all 0.3s ease 0s;
   transform: translateY(0px);
 
   @media (max-width: 899px) {
