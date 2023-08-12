@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Layout from "components/Layout";
@@ -16,11 +16,9 @@ import {
   Divider,
   Collapse,
   InputAdornment,
-  Tooltip,
   FormHelperText,
 } from "@mui/material";
 import CountryInput from "components/forms/CountryInput";
-import checkoutSchema from "constants/checkoutSchema";
 import { useShoppingCart } from "context/ShoppingCartContext";
 import { Link as RouterLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
@@ -34,21 +32,21 @@ import { SHIPPING_COST } from "constants/validationRules";
 import { products } from "data/products";
 import vippsLogo from "images/vipps_logo.png";
 import FormTextField from "components/forms/FormTextField";
-import LockIcon from "@mui/icons-material/Lock";
-import HelpIcon from "@mui/icons-material/Help";
 import { useFormContext } from "context/FormContext";
 import Visa from "images/Visa.png";
 import MasterCard from "images/MasterCard.png";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
 import { color_error } from "constants/colors";
-import emptySchema from "constants/emptySchema";
-import billingAddressSchema from "constants/billingAddressSchema";
+import billingAddressSchema from "formValidationSchemas/billingAddressSchema";
+import paymentSchema from "formValidationSchemas/paymentSchema";
+import CreditCardInput from "components/forms/CreditCardInput";
+import ExpirationDateInput from "components/forms/ExpirationDateInput";
+import SecurityCodeInput from "components/forms/securityCodeInput";
+import emptySchema from "formValidationSchemas/emptySchema";
 
 const Payment = () => {
   const [lang] = useContext(LangContext);
   const { formData, updateFormData } = useFormContext();
-  const [defaultCallingCode, setDefaultCallingCode] = useState("NO");
-  const [defaultCountry, setDefaultCountry] = useState("Norway");
   const { cartItems, markAsPurchased } = useShoppingCart();
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const [showOrderSummary, setShowOrderSummary] = useState(false);
@@ -112,7 +110,7 @@ const Payment = () => {
 
   const [paymentInfo, setPaymentInfo] = useState({
     cardNumber: "",
-    nameOnCard: "",
+    cardName: "",
     exp: "",
     security: "",
   });
@@ -139,7 +137,11 @@ const Payment = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(
-      differentBillingAddress ? billingAddressSchema : emptySchema
+      differentBillingAddress
+        ? billingAddressSchema
+        : !vipps
+        ? paymentSchema
+        : emptySchema
     ),
     defaultValues: {
       country: billingAddress.country || formData.shippingAddress.country,
@@ -148,6 +150,10 @@ const Payment = () => {
       street: billingAddress.street,
       postalCode: billingAddress.postalCode,
       city: billingAddress.city,
+      cardNumber: "",
+      cardName: "",
+      exp: "",
+      security: "",
     },
   });
 
@@ -159,7 +165,7 @@ const Payment = () => {
       markAsPurchased(cartItem.id);
     });
 
-    // Retrieve values from CountryInput component
+    // Retrieve values from react hook form
     const countryInputValue = watch("country");
     const nameInputValue = watch("name");
     const companyInputValue = watch("company");
@@ -177,6 +183,19 @@ const Payment = () => {
       city: cityInputValue,
     };
 
+    const cardNumberInputValue = watch("cardNumber");
+    const cardNameInputValue = watch("cardName");
+    const expInputValue = watch("exp");
+    const securityInputValue = watch("security");
+
+    const updatedPaymentInfo = {
+      ...paymentInfo,
+      cardNumber: cardNumberInputValue && cardNumberInputValue.slice(-4),
+      cardName: cardNameInputValue,
+      exp: expInputValue,
+      security: securityInputValue,
+    };
+
     // Update the form context with billing address, shipping method, and payment details
     const updatedFormData = {
       ...formData,
@@ -185,8 +204,8 @@ const Payment = () => {
         ? formData.shippingAddress
         : updatedBillingAddress,
       shippingMethod: shippingMethod,
-      paymentInfo: paymentInfo,
-      paymentMethod: creditCard ? "CreditCard" : "Vipps",
+      paymentInfo: updatedPaymentInfo,
+      paymentMethod: creditCard ? "creditCard" : "Vipps",
     };
 
     // Set the updated form data to the form context
@@ -810,104 +829,94 @@ const Payment = () => {
                         }}
                       >
                         {/* Payment form */}
-                        <FormControl variant="outlined">
+                        <Controller
+                          name="cardNumber"
+                          control={control}
+                          render={({ field }) => (
+                            <CreditCardInput
+                              label={content[lang]["paymentCardNumberLabel"]}
+                              value={field.value}
+                              onChange={field.onChange}
+                              error={Boolean(errors.cardNumber)}
+                            />
+                          )}
+                        />
+                        <FormControl
+                          variant="outlined"
+                          error={Boolean(errors.cardName)}
+                        >
                           <FormTextField
-                            sx={{ backgroundColor: "white" }}
-                            label={content[lang]["paymentCardNumberLabel"]}
-                            id="cardNumber"
-                            name="cardNumber"
-                            value={paymentInfo.cardNumber}
-                            onChange={handlePaymentInfoChange}
-                            InputProps={{
-                              inputProps: {
-                                type: "number", // Set the input type to number
-                                min: 0, // Optionally set a minimum value
-                              },
-                              endAdornment: (
-                                <InputAdornment position="end">
-                                  <Tooltip
-                                    arrow
-                                    title="All transactions are secure and encrypted."
-                                  >
-                                    <LockIcon style={{ fontSize: 18 }} />
-                                  </Tooltip>
-                                </InputAdornment>
-                              ),
-                            }}
-                            InputLabelProps={{
-                              style: { fontSize: 14, marginTop: 4 }, // Adjust the fontSize for the label
-                            }}
-                          />
-                        </FormControl>
-                        <FormControl variant="outlined">
-                          <FormTextField
-                            sx={{ backgroundColor: "white" }}
+                            sx={{ background: "white" }}
                             label={content[lang]["paymentNameOnCardLabel"]}
-                            id="nameOnCard"
-                            name="nameOnCard"
-                            value={paymentInfo.nameOnCard}
-                            onChange={handlePaymentInfoChange}
+                            id="cardName"
+                            name="cardName"
+                            error={Boolean(errors.cardName)}
+                            {...register("cardName")} // Use register to link the input to validation schema
                             InputLabelProps={{
-                              style: { fontSize: 14, marginTop: 4 }, // Adjust the fontSize for the label
+                              style: { fontSize: 14 }, // Adjust the fontSize for the label
                             }}
                             inputProps={{
                               style: { fontSize: 14 }, // Adjust the fontSize for the input text
                             }}
+                            InputProps={{
+                              endAdornment: errors.cardName ? (
+                                <InputAdornment position="end">
+                                  <ErrorRoundedIcon color="error" />
+                                </InputAdornment>
+                              ) : null,
+                              style: {
+                                borderColor: errors.cardName
+                                  ? color_error
+                                  : "inherit", // Set underline color to red on error
+                              },
+                            }}
+                            variant="outlined"
                           />
+                          {/* Display the name error message if there is one */}
+                          {errors.cardName && (
+                            <FormHelperText>
+                              {errors.cardName.message}
+                            </FormHelperText>
+                          )}
                         </FormControl>
+
                         <Box gap={2} display="flex">
-                          <FormControl variant="outlined" fullWidth>
-                            <FormTextField
-                              sx={{ backgroundColor: "white" }}
-                              label={
-                                isMobile
-                                  ? content[lang]["paymentExpiryDateLabelShort"]
-                                  : content[lang]["paymentExpiryDateLabelLong"]
-                              }
-                              id="exp"
-                              name="exp"
-                              value={paymentInfo.exp}
-                              onChange={handlePaymentInfoChange}
-                              InputLabelProps={{
-                                style: { fontSize: 14, marginTop: 4 }, // Adjust the fontSize for the label
-                              }}
-                              InputProps={{
-                                inputProps: {
-                                  type: "number", // Set the input type to number
-                                  min: 0, // Optionally set a minimum value
-                                },
-                              }}
-                            />
-                          </FormControl>
-                          <FormControl variant="outlined" fullWidth>
-                            <FormTextField
-                              sx={{ backgroundColor: "white" }}
-                              label={content[lang]["paymentCVCCodeLabel"]}
-                              id="security"
-                              name="security"
-                              value={paymentInfo.security}
-                              onChange={handlePaymentInfoChange}
-                              InputProps={{
-                                inputProps: {
-                                  type: "number", // Set the input type to number
-                                  min: 0, // Optionally set a minimum value
-                                },
-                                endAdornment: (
-                                  <InputAdornment position="end">
-                                    <Tooltip
-                                      arrow
-                                      title="3-digit security code usually found on the back of your card. "
-                                    >
-                                      <HelpIcon style={{ fontSize: 18 }} />
-                                    </Tooltip>
-                                  </InputAdornment>
-                                ),
-                              }}
-                              InputLabelProps={{
-                                style: { fontSize: 14, marginTop: 4 }, // Adjust the fontSize for the label
-                              }}
-                            />
-                          </FormControl>
+                          <Controller
+                            fullWidth
+                            name="exp"
+                            control={control}
+                            error={Boolean(errors.exp)}
+                            render={({ field }) => (
+                              <ExpirationDateInput
+                                value={field.value}
+                                onChange={field.onChange}
+                                label={
+                                  isMobile
+                                    ? content[lang][
+                                        "paymentExpiryDateLabelShort"
+                                      ]
+                                    : content[lang][
+                                        "paymentExpiryDateLabelLong"
+                                      ]
+                                }
+                                error={Boolean(errors.exp)}
+                              />
+                            )}
+                          />
+                          <Controller
+                            fullWidth
+                            name="security"
+                            control={control}
+                            error={Boolean(errors.security)}
+                            render={({ field }) => (
+                              <SecurityCodeInput
+                                value={field.value}
+                                onChange={field.onChange}
+                                label={content[lang]["paymentCVCCodeLabel"]}
+                                error={Boolean(errors.security)}
+                              />
+                            )}
+                          />
                         </Box>
                       </Stack>
                     </Collapse>

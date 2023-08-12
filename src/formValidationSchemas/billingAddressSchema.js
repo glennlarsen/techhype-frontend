@@ -1,12 +1,7 @@
 import * as yup from "yup";
-import { EMAIL_REGEX } from "constants/regex";
+import { MAX_POSTAL_CODE, MIN_CITY_CHARACTERS, MIN_STREET, FULL_NAME } from "constants/validationRules";
 
-const checkoutSchema = yup.object().shape({
-  email: yup
-    .string()
-    .required("Email is required")
-    .matches(EMAIL_REGEX, "Enter a valid email"),
-  tel: yup.string().max(16, "Phone number can't be more than 16 characters"),
+const billingAddressSchema = yup.object().shape({
   country: yup.string().required("Country is required"),
   name: yup
     .string()
@@ -14,22 +9,22 @@ const checkoutSchema = yup.object().shape({
     .test(
       "fullName",
       "Name must contain first and last name",
-      (value) => value.trim().split(" ").length >= 2
+      (value) => value.trim().split(" ").length >= FULL_NAME
     ),
   company: yup.string(),
   street: yup
     .string()
     .required("Street is required")
-    .min(5, "Street must be at least 5 characters")
+    .min(MIN_STREET, `Street must be at least ${MIN_STREET} characters`)
     .matches(/^.*\d{1,4}.*$/, "Street must contain 'street' and 'house nr'"),
   postalCode: yup
     .string()
     .required("Postal code is required")
-    .max(8, "Postal code can't be more than 8 characters"),
+    .max(MAX_POSTAL_CODE, `Postal code can't be more than ${MAX_POSTAL_CODE} characters`),
   city: yup
     .string()
     .required("City is required")
-    .min(2, "City must be at least 2 characters"),
+    .min(MIN_CITY_CHARACTERS, `City must be at least ${MIN_CITY_CHARACTERS} characters`),
 });
 
-export default checkoutSchema;
+export default billingAddressSchema;

@@ -137,7 +137,7 @@ const OrderConfirmation = () => {
                               gutterBottom
                               align="left"
                               fontSize={14}
-                              sx={{overflowWrap: "break-word"}}
+                              sx={{ overflowWrap: "break-word" }}
                             >
                               {formData.contactInfo.email}
                             </Typography>
@@ -160,8 +160,9 @@ const OrderConfirmation = () => {
                               align="left"
                               fontSize={14}
                             >
-                              Visa ending with ***
-                              {formData.paymentInfo.cardNumber.slice(-4)}
+                              {formData.paymentMethod === "creditCard"
+                                ? `Card ending with ***${formData.paymentInfo.cardNumber}`
+                                : "Vipps"}
                             </Typography>
                           </Grid>
                           <Grid item xs={12} sm={6}>

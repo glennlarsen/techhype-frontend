@@ -15,7 +15,7 @@ import {
   FormHelperText,
 } from "@mui/material";
 import CountryInput from "components/forms/CountryInput";
-import checkoutSchema from "constants/checkoutSchema";
+import checkoutSchema from "formValidationSchemas/checkoutSchema";
 import PhoneInput from "components/forms/PhoneInput";
 import { useMediaQuery } from "react-responsive";
 import { Link as RouterLink } from "react-router-dom";

@@ -5,7 +5,7 @@ const contactSchema = yup.object().shape({
   name: yup
     .string()
     .required("Please enter your name")
-    .min(MIN_NAME_CHARACTERS, `First Name must be at least ${MIN_NAME_CHARACTERS} characters`),
+    .min(MIN_NAME_CHARACTERS, `Name must be at least ${MIN_NAME_CHARACTERS} characters`),
   email: yup
     .string()
     .required("Please enter your email")
