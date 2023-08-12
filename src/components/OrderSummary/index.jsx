@@ -30,8 +30,6 @@ const OrderSummary = ({
   const [lang] = useContext(LangContext);
   const [discountValue, setDiscountValue] = useState("");
 
-  console.log(confirmationPage);
-
   // Calculate the final shipping cost based on the selected shipping method
   const calculateShippingCost = () => {
     if (shippingMethod === "home") {

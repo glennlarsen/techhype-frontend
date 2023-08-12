@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Layout from "components/Layout";
 import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
-import { Stack, Box, Typography } from "@mui/material";
+import { Stack, Box } from "@mui/material";
 import { useShoppingCart } from "context/ShoppingCartContext";
-import { Link as RouterLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import OrderSummary from "components/OrderSummary";
 import AppTheme from "components/forms/AppTheme";
@@ -65,32 +64,7 @@ const Checkout = () => {
                 padding={isMobile ? 0 : "0 2em"}
                 sx={{ width: "100%" }}
               >
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    width: "100%",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                    gap: ".5em",
-                  }}
-                >
-                  <Typography
-                    variant="h2"
-                    sx={{ fontWeight: "500", fontSize: "1rem" }}
-                  >
-                    {isMobile
-                      ? content[lang]["contactInfoShort"]
-                      : content[lang]["contactInfoLong"]}
-                  </Typography>
-                  <Typography variant="subtitle1" sx={{ fontSize: ".8rem" }}>
-                    {content[lang]["checkoutHaveAccount"]}{" "}
-                    <RouterLink to="/login" className="checkout-login">
-                      {content[lang]["checkoutLogin"]}
-                    </RouterLink>
-                  </Typography>
-                </Box>
-               <CheckoutForm />
+                <CheckoutForm />
               </Stack>
             </Box>
 

@@ -18,7 +18,6 @@ import {
   InputAdornment,
   FormHelperText,
 } from "@mui/material";
-import CountryInput from "components/forms/CountryInput";
 import { useShoppingCart } from "context/ShoppingCartContext";
 import { Link as RouterLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
@@ -43,6 +42,8 @@ import CreditCardInput from "components/forms/CreditCardInput";
 import ExpirationDateInput from "components/forms/ExpirationDateInput";
 import SecurityCodeInput from "components/forms/securityCodeInput";
 import emptySchema from "formValidationSchemas/emptySchema";
+import ContactInfoDisplay from "components/ContactInfoDisplay";
+import BillingAddressForm from "components/BillingAddressForm";
 
 const Payment = () => {
   const [lang] = useContext(LangContext);
@@ -50,9 +51,7 @@ const Payment = () => {
   const { cartItems, markAsPurchased } = useShoppingCart();
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const [showOrderSummary, setShowOrderSummary] = useState(false);
-  const [billingAddressSelected, setBillingAddressSelected] = useState(
-    formData.differentBillingAddress || false
-  );
+
   const [differentBillingAddress, setDifferentBillingAddress] = useState(
     formData.differentBillingAddress || false
   );
@@ -79,11 +78,9 @@ const Payment = () => {
       : SHIPPING_COST;
   };
 
-  const handleBillingAddressChange = (event) => {
-    setDifferentBillingAddress(event.target.value === "true");
-    setBillingAddressSelected(event.target.value === "true");
-  };
 
+
+  //Vipps or Credit card payment
   const handlePaymentChange = (event) => {
     if (event.target.value === "creditCard") {
       setCreditCard(true);
@@ -108,31 +105,14 @@ const Payment = () => {
     };
   });
 
-  const [paymentInfo, setPaymentInfo] = useState({
-    cardNumber: "",
-    cardName: "",
-    exp: "",
-    security: "",
-  });
-
   const handleToggleOrderSummary = () => {
     setShowOrderSummary((prevValue) => !prevValue);
   };
 
-  // Event handler for handling changes in the payment info fields
-  const handlePaymentInfoChange = (e) => {
-    const { name, value } = e.target;
-    setPaymentInfo((prevState) => ({ ...prevState, [name]: value }));
-  };
-
   const {
     register,
-    unregister,
     handleSubmit,
-    trigger,
-    reset,
     watch,
-    setValue,
     control,
     formState: { errors },
   } = useForm({
@@ -189,7 +169,6 @@ const Payment = () => {
     const securityInputValue = watch("security");
 
     const updatedPaymentInfo = {
-      ...paymentInfo,
       cardNumber: cardNumberInputValue && cardNumberInputValue.slice(-4),
       cardName: cardNameInputValue,
       exp: expInputValue,
@@ -253,69 +232,7 @@ const Payment = () => {
                   sx={{ width: "100%" }}
                 >
                   {/* Contact Info */}
-                  <Paper
-                    elevation={3}
-                    sx={{
-                      justifyContent: "space-between",
-                      width: "100%",
-                      padding: "1em",
-                      borderRadius: "10px",
-                      marginBottom: "1em",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        width: "100%",
-                        alignItems: "center",
-                        gap: ".5em",
-                      }}
-                    >
-                      <Box sx={{ textAlign: "left" }}>
-                        <Typography
-                          sx={{ opacity: 0.8 }}
-                          variant="caption"
-                          gutterBottom
-                        >
-                          {content[lang]["paymentContact"]}
-                        </Typography>
-                        <Typography variant="body2">
-                          {formData.contactInfo.email} |{" "}
-                          {formData.contactInfo.tel}
-                        </Typography>
-                      </Box>
-                      <RouterLink to="/checkout" className="payment-change">
-                        {content[lang]["changeInfo"]}
-                      </RouterLink>
-                    </Box>
-                    <Divider sx={{ margin: ".8em 0" }} />
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        width: "100%",
-                        alignItems: "center",
-                        gap: ".5em",
-                      }}
-                    >
-                      <Box sx={{ textAlign: "left" }}>
-                        <Typography
-                          sx={{ opacity: 0.8 }}
-                          variant="caption"
-                          gutterBottom
-                        >
-                          {content[lang]["paymentShipTo"]}
-                        </Typography>
-                        <Typography variant="body2">
-                          {`${formData.shippingAddress.street}, ${formData.shippingAddress.postalCode} ${formData.shippingAddress.city}, ${formData.shippingAddress.country}`}
-                        </Typography>
-                      </Box>
-                      <RouterLink to="/checkout" className="payment-change">
-                        {content[lang]["changeInfo"]}
-                      </RouterLink>
-                    </Box>
-                  </Paper>
+                  <ContactInfoDisplay formData={formData} lang={lang} />
 
                   {/* Billing Address */}
                   <Typography
@@ -334,299 +251,15 @@ const Payment = () => {
                   >
                     {content[lang]["billingAddressSubheader"]}
                   </Typography>
-                  <Paper
-                    elevation={3}
-                    sx={{
-                      justifyContent: "space-between",
-                      width: "100%",
-                      borderRadius: "10px",
-                      marginBottom: "1em !important",
-                    }}
-                  >
-                    <FormControlLabel
-                      control={
-                        <Radio
-                          checked={!differentBillingAddress}
-                          onChange={handleBillingAddressChange}
-                          value={false}
-                          name="radio-buttons"
-                          size="small"
-                          sx={{ paddingLeft: 0 }}
-                          inputProps={{
-                            "aria-label": "Same as shipping address",
-                          }}
-                        />
-                      }
-                      label={
-                        <Typography
-                          variant="body2"
-                          sx={{ fontWeight: "500", fontSize: ".8rem" }}
-                        >
-                          {content[lang]["billingOption1"]}
-                        </Typography>
-                      }
-                      sx={{
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        width: "100%",
-                        alignItems: "center",
-                        textAlign: "left",
-                        gap: ".5em",
-                        padding: ".5em 1em",
-                        margin: 0,
-                      }}
-                    />
-                    <Divider />
-                    <FormControlLabel
-                      control={
-                        <Radio
-                          checked={differentBillingAddress}
-                          onChange={handleBillingAddressChange}
-                          value={true}
-                          name="radio-buttons"
-                          size="small"
-                          sx={{ paddingLeft: 0 }}
-                          inputProps={{
-                            "aria-label": "Same as shipping address",
-                          }}
-                        />
-                      }
-                      label={
-                        <Typography
-                          variant="body2"
-                          sx={{ fontWeight: "500", fontSize: ".8rem" }}
-                        >
-                          {content[lang]["billingOption2"]}
-                        </Typography>
-                      }
-                      sx={{
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        width: "100%",
-                        alignItems: "center",
-                        textAlign: "left",
-                        gap: ".5em",
-                        padding: ".5em 1em",
-                        margin: 0,
-                      }}
-                    />
-                    <Collapse in={billingAddressSelected}>
-                      <Divider />
-                      <Stack
-                        spacing={3}
-                        padding={2}
-                        sx={{
-                          backgroundColor: "#fcfbfb",
-                          paddingBottom: "2em",
-                        }}
-                      >
-                        {/* Billing Address form */}
-                        <CountryInput
-                          control={control}
-                          errors={errors}
-                          defaultValue={formData.shippingAddress.country}
-                          countryLabel={content[lang]["checkoutCountry"]}
-                          variant="outlined"
-                          fontSize={14}
-                          inputBackgroundColor="white"
-                        />
-                        <FormControl
-                          variant="outlined"
-                          error={Boolean(errors.name)}
-                        >
-                          <FormTextField
-                            sx={{ backgroundColor: "white" }}
-                            label={content[lang]["checkoutName"]}
-                            id="name"
-                            name="name"
-                            error={Boolean(errors.name)}
-                            {...register("name")} // Use register to link the input to validation schema
-                            InputLabelProps={{
-                              style: { fontSize: 14 }, // Adjust the fontSize for the label
-                            }}
-                            inputProps={{
-                              style: { fontSize: 14 }, // Adjust the fontSize for the input text
-                            }}
-                            InputProps={{
-                              endAdornment: errors.name ? (
-                                <InputAdornment position="end">
-                                  <ErrorRoundedIcon color="error" />
-                                </InputAdornment>
-                              ) : null,
-                              style: {
-                                borderColor: errors.name
-                                  ? color_error
-                                  : "inherit", // Set underline color to red on error
-                              },
-                            }}
-                            variant="outlined"
-                          />
-                          {/* Display the name error message if there is one */}
-                          {errors.name && (
-                            <FormHelperText>
-                              {errors.name.message}
-                            </FormHelperText>
-                          )}
-                        </FormControl>
-                        <FormControl
-                          variant="outlined"
-                          error={Boolean(errors.company)}
-                        >
-                          <FormTextField
-                            sx={{ backgroundColor: "white" }}
-                            label={content[lang]["checkoutCompany"]}
-                            id="company"
-                            name="company"
-                            error={Boolean(errors.company)}
-                            {...register("company")} // Use register to link the input to validation schema
-                            InputLabelProps={{
-                              style: { fontSize: 14 }, // Adjust the fontSize for the label
-                            }}
-                            inputProps={{
-                              style: { fontSize: 14 }, // Adjust the fontSize for the input text
-                            }}
-                            InputProps={{
-                              endAdornment: errors.company ? (
-                                <InputAdornment position="end">
-                                  <ErrorRoundedIcon color="error" />
-                                </InputAdornment>
-                              ) : null,
-                              style: {
-                                borderColor: errors.company
-                                  ? color_error
-                                  : "inherit", // Set underline color to red on error
-                              },
-                            }}
-                            variant="outlined"
-                          />
-                          {/* Display the name error message if there is one */}
-                          {errors.company && (
-                            <FormHelperText>
-                              {errors.company.message}
-                            </FormHelperText>
-                          )}
-                        </FormControl>
-                        <FormControl
-                          variant="outlined"
-                          error={Boolean(errors.street)}
-                        >
-                          <FormTextField
-                            sx={{ backgroundColor: "white" }}
-                            label={content[lang]["checkoutStreet"]}
-                            id="street"
-                            name="street"
-                            error={Boolean(errors.street)}
-                            {...register("street")} // Use register to link the input to validation schema
-                            InputLabelProps={{
-                              style: { fontSize: 14 }, // Adjust the fontSize for the label
-                            }}
-                            inputProps={{
-                              style: { fontSize: 14 }, // Adjust the fontSize for the input text
-                            }}
-                            InputProps={{
-                              endAdornment: errors.street ? (
-                                <InputAdornment position="end">
-                                  <ErrorRoundedIcon color="error" />
-                                </InputAdornment>
-                              ) : null,
-                              style: {
-                                borderColor: errors.street
-                                  ? color_error
-                                  : "inherit", // Set underline color to red on error
-                              },
-                            }}
-                            variant="outlined"
-                          />
-                          {/* Display the name error message if there is one */}
-                          {errors.street && (
-                            <FormHelperText>
-                              {errors.street.message}
-                            </FormHelperText>
-                          )}
-                        </FormControl>
-                        <Box gap={2} display="flex">
-                          <FormControl
-                            variant="outlined"
-                            error={Boolean(errors.postalCode)}
-                            fullWidth
-                          >
-                            <FormTextField
-                              sx={{ backgroundColor: "white" }}
-                              label={content[lang]["checkoutPostal"]}
-                              id="postalCode"
-                              name="postalCode"
-                              error={Boolean(errors.postalCode)}
-                              {...register("postalCode")} // Use register to link the input to validation schema
-                              InputLabelProps={{
-                                style: { fontSize: 14 }, // Adjust the fontSize for the label
-                              }}
-                              inputProps={{
-                                style: { fontSize: 14 }, // Adjust the fontSize for the input text
-                              }}
-                              InputProps={{
-                                endAdornment: errors.postalCode ? (
-                                  <InputAdornment position="end">
-                                    <ErrorRoundedIcon color="error" />
-                                  </InputAdornment>
-                                ) : null,
-                                style: {
-                                  borderColor: errors.postalCode
-                                    ? color_error
-                                    : "inherit", // Set underline color to red on error
-                                },
-                              }}
-                              variant="outlined"
-                            />
-                            {/* Display the name error message if there is one */}
-                            {errors.postalCode && (
-                              <FormHelperText>
-                                {errors.postalCode.message}
-                              </FormHelperText>
-                            )}
-                          </FormControl>
-                          <FormControl
-                            variant="outlined"
-                            error={Boolean(errors.city)}
-                            fullWidth
-                          >
-                            <FormTextField
-                              sx={{ backgroundColor: "white" }}
-                              label={content[lang]["checkoutCity"]}
-                              id="city"
-                              name="city"
-                              error={Boolean(errors.city)}
-                              {...register("city")} // Use register to link the input to validation schema
-                              InputLabelProps={{
-                                style: { fontSize: 14 }, // Adjust the fontSize for the label
-                              }}
-                              inputProps={{
-                                style: { fontSize: 14 }, // Adjust the fontSize for the input text
-                              }}
-                              InputProps={{
-                                endAdornment: errors.city ? (
-                                  <InputAdornment position="end">
-                                    <ErrorRoundedIcon color="error" />
-                                  </InputAdornment>
-                                ) : null,
-                                style: {
-                                  borderColor: errors.city
-                                    ? color_error
-                                    : "inherit", // Set underline color to red on error
-                                },
-                              }}
-                              variant="outlined"
-                            />
-                            {/* Display the name error message if there is one */}
-                            {errors.city && (
-                              <FormHelperText>
-                                {errors.city.message}
-                              </FormHelperText>
-                            )}
-                          </FormControl>
-                        </Box>
-                      </Stack>
-                    </Collapse>
-                  </Paper>
+                  <BillingAddressForm
+                    control={control}
+                    errors={errors}
+                    lang={lang}
+                    register={register}
+                    formData={formData}
+                    differentBillingAddress={differentBillingAddress}
+                    setDifferentBillingAddress={setDifferentBillingAddress}
+                  />
 
                   {/* Shipping Method */}
                   <Typography
