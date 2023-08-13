@@ -108,7 +108,7 @@ const ShippingAddressForm = ({ control, errors, lang, shippingAddress }) => {
         />
       </FormControl>
       <Box gap={2} display="flex">
-        <FormControl variant="standard">
+        <FormControl variant="standard" fullWidth>
           <InputLabel htmlFor="postalCode" error={Boolean(errors.postalCode)}>
             {content[lang]["checkoutPostal"]}
           </InputLabel>
@@ -136,7 +136,7 @@ const ShippingAddressForm = ({ control, errors, lang, shippingAddress }) => {
             )}
           />
         </FormControl>
-        <FormControl variant="standard">
+        <FormControl variant="standard" fullWidth>
           <InputLabel htmlFor="city" error={Boolean(errors.city)}>
             {content[lang]["checkoutCity"]}
           </InputLabel>
