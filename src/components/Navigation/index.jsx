@@ -103,6 +103,7 @@ function Navigation() {
   return (
     <>
       <div
+        id="navbar"
         className={`nav-container sticky ${isScrolled ? "  " : "onHide "} ${
           isShow ? " stickyForce " : " "
         }`}
