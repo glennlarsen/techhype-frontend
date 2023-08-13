@@ -77,7 +77,7 @@ function Navigation() {
         stickyPaths.includes(location.pathname) ||
           scrollPosition >= scrollThreshold
       );
-    }, 10); // Adjust the debounce delay as needed
+    }, 100); // Adjust the debounce delay as needed
 
     window.addEventListener("scroll", handleScroll);
 
