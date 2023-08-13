@@ -244,7 +244,7 @@ const Payment = () => {
                     setShippingMethod={setShippingMethod}
                     content={content}
                     lang={lang}
-                    calculateStandardShipping={calculateStandardShipping}
+                    calculateStandardShipping={calculateStandardShipping(cartItems)}
                   />
 
                   {/* Payment */}

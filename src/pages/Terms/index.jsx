@@ -8,7 +8,7 @@ const Terms = () => {
   return (
     <Layout page="Terms" description="Terms and Conditions for Techhype">
       <section className="terms top-overlay">
-        <Container maxWidth="md" className="terms-container">
+        <Container maxWidth="md" className="terms-container" sx={{padding: "0 1.5em"}}>
           <h1 style={{ textAlign: "center" }}>Terms and Conditions</h1>
           <Stack spacing={3} sx={{ paddingTop: 2, paddingBottom: 2 }}>
             <Typography>Last Updated: {lastUpdate}</Typography>

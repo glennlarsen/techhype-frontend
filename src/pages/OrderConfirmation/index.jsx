@@ -6,12 +6,7 @@ import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import Typography from "@mui/material/Typography";
 import { Button } from "techhype-components";
-import {
-  Stack,
-  Box,
-  ThemeProvider,
-  createTheme,
-} from "@mui/material";
+import { Stack, Box, ThemeProvider, createTheme } from "@mui/material";
 import { useShoppingCart } from "context/ShoppingCartContext";
 import { Link as RouterLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
@@ -91,7 +86,13 @@ const OrderConfirmation = () => {
                 padding={isMobile ? 0 : "0 2em"}
                 sx={{ width: "100%" }}
               >
-                <OrderDetails formData={formData} lang={lang} content={content} />
+                <OrderDetails
+                  formData={formData}
+                  lang={lang}
+                  content={content}
+                  purchasedItems={purchasedItems}
+                  shippingMethod={formData.shippingMethod}
+                />
                 <Box
                   sx={{
                     display: "flex",

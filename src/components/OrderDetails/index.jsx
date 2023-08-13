@@ -1,7 +1,33 @@
-import React from "react";
-import { Paper, Box, Typography, Grid, Divider } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Paper,
+  Box,
+  Typography,
+  Grid,
+  Divider,
+  Collapse,
+  useMediaQuery,
+} from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import calculateTotalPrice from "utils/calculateTotalPrice";
 
-const OrderDetails = ({ formData, lang, content }) => {
+const OrderDetails = ({
+  formData,
+  lang,
+  content,
+  purchasedItems,
+  shippingMethod,
+}) => {
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+  const [billingAddressOpen, setBillingAddressOpen] = useState(
+    isSmallScreen ? false : true
+  );
+
+  const handleBillingAddressToggle = () => {
+    setBillingAddressOpen(!billingAddressOpen);
+  };
+
   return (
     <Paper
       elevation={3}
@@ -68,9 +94,25 @@ const OrderDetails = ({ formData, lang, content }) => {
                     ? `Card ending with ***${formData.paymentInfo.cardNumber}`
                     : "Vipps"}
                 </Typography>
+                <Typography
+                  variant="body2"
+                  gutterBottom
+                  align="left"
+                  fontSize={14}
+                >
+                  {calculateTotalPrice(shippingMethod, purchasedItems)}
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle2" gutterBottom>
+                <Typography
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
                   Shipping address
                 </Typography>
                 <Typography
@@ -116,50 +158,71 @@ const OrderDetails = ({ formData, lang, content }) => {
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle2" gutterBottom>
-                  Billing address
-                </Typography>
                 <Typography
-                  variant="body2"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    cursor: isSmallScreen ? "pointer" : "",
+                  }}
+                  variant="subtitle2"
                   gutterBottom
-                  align="left"
-                  fontSize={14}
+                  onClick={isSmallScreen ? handleBillingAddressToggle : null}
                 >
-                  {formData.billingAddress.name}
+                  Billing address{" "}
+                  {isSmallScreen ? (
+                    billingAddressOpen ? (
+                      <KeyboardArrowUpIcon />
+                    ) : (
+                      <KeyboardArrowDownIcon />
+                    )
+                  ) : (
+                    ""
+                  )}
                 </Typography>
-                <Typography
-                  variant="body2"
-                  gutterBottom
-                  align="left"
-                  fontSize={14}
-                >
-                  {formData.billingAddress.company}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  gutterBottom
-                  align="left"
-                  fontSize={14}
-                >
-                  {formData.billingAddress.street}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  gutterBottom
-                  align="left"
-                  fontSize={14}
-                >
-                  {formData.billingAddress.postalCode},{" "}
-                  {formData.billingAddress.city}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  gutterBottom
-                  align="left"
-                  fontSize={14}
-                >
-                  {formData.billingAddress.country}
-                </Typography>
+                <Collapse in={billingAddressOpen}>
+                  <Typography
+                    variant="body2"
+                    gutterBottom
+                    align="left"
+                    fontSize={14}
+                  >
+                    {formData.billingAddress.name}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    gutterBottom
+                    align="left"
+                    fontSize={14}
+                  >
+                    {formData.billingAddress.company}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    gutterBottom
+                    align="left"
+                    fontSize={14}
+                  >
+                    {formData.billingAddress.street}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    gutterBottom
+                    align="left"
+                    fontSize={14}
+                  >
+                    {formData.billingAddress.postalCode},{" "}
+                    {formData.billingAddress.city}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    gutterBottom
+                    align="left"
+                    fontSize={14}
+                  >
+                    {formData.billingAddress.country}
+                  </Typography>
+                </Collapse>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle2" gutterBottom>

@@ -47,7 +47,7 @@ const ShippingMethodSelection = ({
           <Typography
             sx={{ fontSize: ".8rem", fontWeight: "500", marginLeft: "auto" }}
           >
-            {formatCurrency(calculateStandardShipping())}
+            {formatCurrency(calculateStandardShipping)}
           </Typography>
         }
         sx={{

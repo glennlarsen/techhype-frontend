@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
   Stack,
   Paper,
   Box,
-  Divider,
   Collapse,
   Typography,
 } from "@mui/material";
@@ -11,14 +10,14 @@ import { useMediaQuery } from "react-responsive";
 import { products } from "data/products";
 import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
-import { Button } from "techhype-components";
 import { color_primary, color_dark, color_light } from "constants/colors";
-import FormTextField from "components/forms/FormTextField";
-import { SHIPPING_COST } from "constants/validationRules";
 import { formatCurrency } from "utils/formatCurrency";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import { UilShoppingBag } from "@iconscout/react-unicons";
 import OrderSummaryItems from "components/OrderSummaryItems";
+import calculateFinalShippingCost from "utils/calculateFinalShipping";
+import calculateTotalPrice from "utils/calculateTotalPrice";
+import DiscountCode from "components/DiscountCode";
 
 const OrderSummary = ({
   showOrderSummary,
@@ -28,22 +27,6 @@ const OrderSummary = ({
 }) => {
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const [lang] = useContext(LangContext);
-  const [discountValue, setDiscountValue] = useState("");
-
-  // Calculate the final shipping cost based on the selected shipping method
-  const calculateShippingCost = () => {
-    if (shippingMethod === "home") {
-      return 99; // Home delivery cost
-    }
-
-    // Calculate the base shipping cost
-    return cartItems.reduce((total, cartItem) => {
-      const item = products.find((i) => i.id === parseInt(cartItem.id));
-      return total + (item?.price || 0) * cartItem.quantity;
-    }, 0) > 500
-      ? 0
-      : SHIPPING_COST;
-  };
 
   return (
     <>
@@ -78,43 +61,7 @@ const OrderSummary = ({
                   />
                 );
               })}
-              {!confirmationPage && (
-                <>
-                  {" "}
-                  <Box
-                    sx={{
-                      display: "flex",
-                      gap: "1em",
-                      alignItems: "center",
-                      padding: ".5em 0",
-                    }}
-                  >
-                    <FormTextField
-                      placeholder={content[lang]["discountCode"]}
-                      fullWidth
-                      size="small"
-                      value={discountValue}
-                      onChange={(event) => setDiscountValue(event.target.value)}
-                      sx={{ backgroundColor: "white" }}
-                    />
-                    <Button
-                      style={{
-                        background: "transparent",
-                        border: `2px solid ${
-                          discountValue != "" ? color_primary : "grey"
-                        }`,
-                        color: color_dark,
-                        opacity: discountValue != "" ? 1 : 0.7,
-                      }}
-                      size="small"
-                      disabled={discountValue != "" ? false : true}
-                    >
-                      {content[lang]["DiscountButton"]}
-                    </Button>
-                  </Box>
-                  <Divider />{" "}
-                </>
-              )}
+              <DiscountCode confirmationPage={confirmationPage} lang={lang} />
               <Box
                 sx={{
                   display: "flex",
@@ -123,7 +70,9 @@ const OrderSummary = ({
                 }}
               >
                 <Typography>{content[lang]["checkoutShipping"]}</Typography>
-                {formatCurrency(calculateShippingCost())}
+                {formatCurrency(
+                  calculateFinalShippingCost(shippingMethod, cartItems)
+                )}
               </Box>
               <Box
                 sx={{
@@ -136,14 +85,7 @@ const OrderSummary = ({
                   {content[lang]["checkoutTotal"]}
                 </Typography>
                 <Typography sx={{ fontWeight: "500" }}>
-                  {formatCurrency(
-                    cartItems.reduce((total, cartItem) => {
-                      const item = products.find(
-                        (i) => i.id === parseInt(cartItem.id)
-                      );
-                      return total + (item?.price || 0) * cartItem.quantity;
-                    }, 0) + calculateShippingCost()
-                  )}
+                  {calculateTotalPrice(shippingMethod, cartItems)}
                 </Typography>
               </Box>
             </Stack>
@@ -192,43 +134,7 @@ const OrderSummary = ({
                 />
               );
             })}
-            {!confirmationPage && (
-              <>
-                <Box
-                  sx={{
-                    display: "flex",
-                    gap: "1em",
-                    alignItems: "center",
-                    padding: ".5em 0",
-                  }}
-                >
-                  <FormTextField
-                    placeholder={content[lang]["discountCode"]}
-                    fullWidth
-                    size="small"
-                    value={discountValue}
-                    onChange={(event) => setDiscountValue(event.target.value)}
-                    sx={{ backgroundColor: "white" }}
-                  />
-                  <Button
-                    style={{
-                      background: "transparent",
-                      border: `2px solid ${
-                        discountValue != "" ? color_primary : "grey"
-                      }`,
-                      color: color_dark,
-                      opacity: discountValue != "" ? 1 : 0.7,
-                    }}
-                    size="small"
-                    disabled={discountValue != "" ? false : true}
-                  >
-                    {content[lang]["DiscountButton"]}
-                  </Button>
-                </Box>
-                <Divider />
-              </>
-            )}
-
+            <DiscountCode confirmationPage={confirmationPage} lang={lang} />
             <Box
               sx={{
                 display: "flex",
@@ -237,7 +143,9 @@ const OrderSummary = ({
               }}
             >
               <Typography>{content[lang]["checkoutShipping"]}</Typography>
-              {formatCurrency(calculateShippingCost())}
+              {formatCurrency(
+                calculateFinalShippingCost(shippingMethod, cartItems)
+              )}
             </Box>
             <Box
               sx={{
@@ -250,14 +158,7 @@ const OrderSummary = ({
                 {content[lang]["checkoutTotal"]}
               </Typography>
               <Typography sx={{ fontWeight: "500" }}>
-                {formatCurrency(
-                  cartItems.reduce((total, cartItem) => {
-                    const item = products.find(
-                      (i) => i.id === parseInt(cartItem.id)
-                    );
-                    return total + (item?.price || 0) * cartItem.quantity;
-                  }, 0) + calculateShippingCost()
-                )}
+                {calculateTotalPrice(shippingMethod, cartItems)}
               </Typography>
             </Box>
             <Paper
@@ -275,7 +176,9 @@ const OrderSummary = ({
               }}
             >
               <DesignServicesIcon sx={{ color: color_primary }} />
-              {!confirmationPage ? content[lang]["cartTip"] : "Create your profile now and start designing your business card!"}
+              {!confirmationPage
+                ? content[lang]["cartTip"]
+                : "Create your profile now and start designing your business card!"}
             </Paper>
           </Stack>
         </Box>

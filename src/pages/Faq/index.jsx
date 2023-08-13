@@ -6,7 +6,7 @@ const Faq = () => {
   return (
     <Layout page="FAQ" description="Frequently asked questions about Techhype">
       <section className="faq top-overlay">
-        <Container maxWidth="md" className="terms-container">
+        <Container maxWidth="md" className="terms-container" sx={{padding: "0 1.5em"}}>
           <h1 style={{ textAlign: "center" }}>Frequently asked questions</h1>
           <Stack spacing={3} sx={{ paddingTop: 2, paddingBottom: 2 }}>
             <Typography variant="h2" fontSize={28}>

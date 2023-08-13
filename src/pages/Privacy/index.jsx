@@ -8,7 +8,7 @@ const Privacy = () => {
   return (
     <Layout page="Privacy" description="Privacy for Techhype">
       <section className="privacy top-overlay">
-        <Container maxWidth="md" className="terms-container">
+        <Container maxWidth="md" className="terms-container" sx={{padding: "0 1.5em"}}>
           <h1 style={{ textAlign: "center" }}>Privacy Policy</h1>
           <Stack spacing={3} sx={{ paddingTop: 2, paddingBottom: 2 }}>
             <Typography paragraph>
