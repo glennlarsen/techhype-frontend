@@ -1,13 +1,6 @@
 import * as yup from "yup";
-import validator from "validator";
 import { FULL_NAME } from "constants/validationRules";
-
-const isValidCreditCardNumber = (value) => {
-  // Remove all non-numeric characters
-  const numericValue = value.replace(/\D/g, "");
-  // Use validator to check if the card number is valid
-  return validator.isCreditCard(numericValue);
-};
+import { isValidCreditCardNumber } from "utils/isValidCreditCardNumber";
 
 const paymentSchema = yup.object().shape({
   cardNumber: yup

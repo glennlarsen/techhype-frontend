@@ -28,7 +28,7 @@ const checkoutSchema = yup.object().shape({
     .string()
     .required("Please enter your street")
     .min(MIN_STREET, `Street must be at least ${MIN_STREET} characters`)
-    .matches(/^.*\d{1,4}.*$/, "Street must contain 'street' and 'house nr'"),
+    .matches(/^.*\d{1,4}.*$/, "Please enter your street and house nr"),
   postalCode: yup
     .string()
     .required("Please enter your postal code")

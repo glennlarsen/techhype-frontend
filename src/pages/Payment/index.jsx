@@ -1,49 +1,32 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { yupResolver } from "@hookform/resolvers/yup";
-import Layout from "components/Layout";
-import { LangContext } from "context/LangContext";
-import { content } from "constants/content";
-import Typography from "@mui/material/Typography";
-import { Button } from "techhype-components";
-import {
-  FormControlLabel,
-  FormControl,
-  Stack,
-  Paper,
-  Box,
-  Divider,
-  Collapse,
-  InputAdornment,
-  FormHelperText,
-} from "@mui/material";
-import { useShoppingCart } from "context/ShoppingCartContext";
 import { Link as RouterLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import Typography from "@mui/material/Typography";
+import { Stack, Box } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+
+import { LangContext } from "context/LangContext";
+import { content } from "constants/content";
+import { useShoppingCart } from "context/ShoppingCartContext";
+import { Button } from "techhype-components";
+import Layout from "components/Layout";
 import OrderSummary from "components/OrderSummary";
 import AppTheme from "components/forms/AppTheme";
 import OrderSummaryToggle from "components/OrderSummaryToggle";
-import Radio from "@mui/material/Radio";
-import { formatCurrency } from "utils/formatCurrency";
 import { SHIPPING_COST } from "constants/validationRules";
 import { products } from "data/products";
-import vippsLogo from "images/vipps_logo.png";
-import FormTextField from "components/forms/FormTextField";
 import { useFormContext } from "context/FormContext";
-import Visa from "images/Visa.png";
-import MasterCard from "images/MasterCard.png";
-import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
-import { color_error } from "constants/colors";
 import billingAddressSchema from "formValidationSchemas/billingAddressSchema";
 import paymentSchema from "formValidationSchemas/paymentSchema";
-import CreditCardInput from "components/forms/CreditCardInput";
-import ExpirationDateInput from "components/forms/ExpirationDateInput";
-import SecurityCodeInput from "components/forms/securityCodeInput";
 import emptySchema from "formValidationSchemas/emptySchema";
 import ContactInfoDisplay from "components/ContactInfoDisplay";
 import BillingAddressForm from "components/BillingAddressForm";
+import ShippingMethodSelection from "components/ShippingMethodSelection";
+import PaymentMethodSelection from "components/PaymentMethodSelection";
 
 const Payment = () => {
   const [lang] = useContext(LangContext);
@@ -77,8 +60,6 @@ const Payment = () => {
       ? 0
       : SHIPPING_COST;
   };
-
-
 
   //Vipps or Credit card payment
   const handlePaymentChange = (event) => {
@@ -118,7 +99,7 @@ const Payment = () => {
   } = useForm({
     resolver: yupResolver(
       differentBillingAddress
-        ? billingAddressSchema
+        ? billingAddressSchema.concat(vipps ? emptySchema : paymentSchema)
         : !vipps
         ? paymentSchema
         : emptySchema
@@ -268,105 +249,13 @@ const Payment = () => {
                   >
                     {content[lang]["shippingMethodHeader"]}
                   </Typography>
-                  <Paper
-                    elevation={3}
-                    sx={{
-                      justifyContent: "space-between",
-                      width: "100%",
-                      borderRadius: "10px",
-                      marginBottom: "1em !important",
-                    }}
-                  >
-                    <FormControlLabel
-                      control={
-                        <>
-                          <Radio
-                            checked={shippingMethod === "standard"}
-                            onChange={(event) =>
-                              setShippingMethod(event.target.value)
-                            }
-                            value="standard"
-                            name="radio-buttons"
-                            size="small"
-                            sx={{ paddingLeft: 0 }}
-                            inputProps={{
-                              "aria-label": "Til Butikk (1-5 virkedager)",
-                            }}
-                          />
-                          <Typography variant="body2" fontSize={14}>
-                            {content[lang]["shippingOption1"]}
-                          </Typography>
-                        </>
-                      }
-                      label={
-                        <Typography
-                          sx={{
-                            fontSize: ".8rem",
-                            fontWeight: "500",
-                            marginLeft: "auto",
-                          }}
-                        >
-                          {formatCurrency(calculateShopShipping())}
-                        </Typography>
-                      }
-                      sx={{
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        width: "100%",
-                        alignItems: "center",
-                        textAlign: "left",
-                        gap: ".5em",
-                        padding: ".5em 1em",
-                        margin: 0,
-                      }}
-                    />
-
-                    <Divider />
-
-                    <FormControlLabel
-                      control={
-                        <>
-                          <Radio
-                            checked={shippingMethod === "home"}
-                            onChange={(event) =>
-                              setShippingMethod(event.target.value)
-                            }
-                            value="home"
-                            name="radio-buttons"
-                            size="small"
-                            sx={{ paddingLeft: 0 }}
-                            inputProps={{
-                              "aria-label": "Hjemlevering (1-3 virkedager)",
-                            }}
-                          />
-                          <Typography variant="body2" fontSize={14}>
-                            {content[lang]["shippingOption2"]}
-                          </Typography>
-                        </>
-                      }
-                      label={
-                        <Typography
-                          sx={{
-                            fontSize: ".8rem",
-                            fontWeight: "500",
-                            marginLeft: "auto",
-                          }}
-                        >
-                          {formatCurrency(99)}
-                        </Typography>
-                      }
-                      sx={{
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        width: "100%",
-                        alignItems: "center",
-                        textAlign: "left",
-                        gap: ".5em",
-                        padding: ".5em 1em",
-                        margin: 0,
-                      }}
-                    />
-                  </Paper>
+                  <ShippingMethodSelection
+                    shippingMethod={shippingMethod}
+                    setShippingMethod={setShippingMethod}
+                    content={content}
+                    lang={lang}
+                    calculateShopShipping={calculateShopShipping}
+                  />
 
                   {/* Payment */}
                   <Typography
@@ -385,207 +274,17 @@ const Payment = () => {
                   >
                     {content[lang]["paymentSubheader"]}
                   </Typography>
-                  <Paper
-                    elevation={3}
-                    sx={{
-                      justifyContent: "space-between",
-                      width: "100%",
-                      borderRadius: "10px",
-                      marginBottom: "1em !important",
-                    }}
-                  >
-                    <FormControlLabel
-                      control={
-                        <>
-                          <Radio
-                            checked={creditCard}
-                            onChange={handlePaymentChange}
-                            value="creditCard"
-                            name="radio-buttons"
-                            size="small"
-                            sx={{ paddingLeft: 0 }}
-                            inputProps={{
-                              "aria-label": "Same as shipping address",
-                            }}
-                          />
-                          <Typography
-                            variant="body2"
-                            sx={{
-                              fontWeight: "500",
-                              fontSize: ".8rem",
-                              marginRight: "auto",
-                            }}
-                          >
-                            {content[lang]["paymentOption1"]}
-                          </Typography>
-                        </>
-                      }
-                      label={
-                        <Box
-                          sx={{
-                            marginLeft: "auto",
-                            display: "flex",
-                            gap: ".3em",
-                          }}
-                        >
-                          <img
-                            src={Visa}
-                            style={{ width: "40px", height: "25px" }}
-                            alt="Visa logo"
-                          />
-                          <img
-                            src={MasterCard}
-                            style={{ width: "40px", height: "25px" }}
-                            alt="Mastercard logo"
-                          />
-                        </Box>
-                      }
-                      sx={{
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        width: "100%",
-                        alignItems: "center",
-                        textAlign: "left",
-                        gap: ".5em",
-                        padding: ".5em 1em",
-                        margin: 0,
-                      }}
-                    />
-                    <Collapse in={creditCard}>
-                      <Divider />
-                      <Stack
-                        spacing={3}
-                        padding={2}
-                        sx={{
-                          backgroundColor: "#fcfbfb",
-                          paddingBottom: "2em",
-                        }}
-                      >
-                        {/* Payment form */}
-                        <Controller
-                          name="cardNumber"
-                          control={control}
-                          render={({ field }) => (
-                            <CreditCardInput
-                              label={content[lang]["paymentCardNumberLabel"]}
-                              value={field.value}
-                              onChange={field.onChange}
-                              error={Boolean(errors.cardNumber)}
-                            />
-                          )}
-                        />
-                        <FormControl
-                          variant="outlined"
-                          error={Boolean(errors.cardName)}
-                        >
-                          <FormTextField
-                            sx={{ background: "white" }}
-                            label={content[lang]["paymentNameOnCardLabel"]}
-                            id="cardName"
-                            name="cardName"
-                            error={Boolean(errors.cardName)}
-                            {...register("cardName")} // Use register to link the input to validation schema
-                            InputLabelProps={{
-                              style: { fontSize: 14 }, // Adjust the fontSize for the label
-                            }}
-                            inputProps={{
-                              style: { fontSize: 14 }, // Adjust the fontSize for the input text
-                            }}
-                            InputProps={{
-                              endAdornment: errors.cardName ? (
-                                <InputAdornment position="end">
-                                  <ErrorRoundedIcon color="error" />
-                                </InputAdornment>
-                              ) : null,
-                              style: {
-                                borderColor: errors.cardName
-                                  ? color_error
-                                  : "inherit", // Set underline color to red on error
-                              },
-                            }}
-                            variant="outlined"
-                          />
-                          {/* Display the name error message if there is one */}
-                          {errors.cardName && (
-                            <FormHelperText>
-                              {errors.cardName.message}
-                            </FormHelperText>
-                          )}
-                        </FormControl>
-
-                        <Box gap={2} display="flex">
-                          <Controller
-                            fullWidth
-                            name="exp"
-                            control={control}
-                            error={Boolean(errors.exp)}
-                            render={({ field }) => (
-                              <ExpirationDateInput
-                                value={field.value}
-                                onChange={field.onChange}
-                                label={
-                                  isMobile
-                                    ? content[lang][
-                                        "paymentExpiryDateLabelShort"
-                                      ]
-                                    : content[lang][
-                                        "paymentExpiryDateLabelLong"
-                                      ]
-                                }
-                                error={Boolean(errors.exp)}
-                              />
-                            )}
-                          />
-                          <Controller
-                            fullWidth
-                            name="security"
-                            control={control}
-                            error={Boolean(errors.security)}
-                            render={({ field }) => (
-                              <SecurityCodeInput
-                                value={field.value}
-                                onChange={field.onChange}
-                                label={content[lang]["paymentCVCCodeLabel"]}
-                                error={Boolean(errors.security)}
-                              />
-                            )}
-                          />
-                        </Box>
-                      </Stack>
-                    </Collapse>
-                    <Divider />
-                    <FormControlLabel
-                      control={
-                        <Radio
-                          checked={vipps}
-                          onChange={handlePaymentChange}
-                          value="vipps"
-                          size="small"
-                          name="radio-buttons"
-                          sx={{ paddingLeft: 0 }}
-                          inputProps={{
-                            "aria-label": "Same as shipping address",
-                          }}
-                        />
-                      }
-                      label={
-                        <img
-                          style={{ width: "60px" }}
-                          src={vippsLogo}
-                          alt="Vipps Logo"
-                        />
-                      }
-                      sx={{
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        width: "100%",
-                        alignItems: "baseline",
-                        gap: ".5em",
-                        padding: ".5em 1em",
-                        margin: 0,
-                      }}
-                    />
-                  </Paper>
+                  <PaymentMethodSelection
+                    creditCard={creditCard}
+                    handlePaymentChange={handlePaymentChange}
+                    vipps={vipps}
+                    content={content}
+                    lang={lang}
+                    isMobile={isMobile}
+                    errors={errors}
+                    control={control}
+                    register={register}
+                  />
                   <Box
                     sx={{
                       display: "flex",
