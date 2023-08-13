@@ -25,9 +25,6 @@ const theme = createTheme({
     values: {
       xs: 0, // Change this value to adjust the breakpoint for xs screens
       sm: 410, // Change this value to adjust the breakpoint for sm screens
-      md: 960,
-      lg: 1280,
-      xl: 1920,
     },
   },
 });
