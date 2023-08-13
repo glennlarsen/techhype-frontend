@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { color_primary, color_dark, color_light } from "constants/colors";
+import { color_primary } from "constants/colors";
 
 const primaryTheme = createTheme({
   palette: {

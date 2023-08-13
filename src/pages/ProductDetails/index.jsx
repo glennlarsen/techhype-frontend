@@ -5,7 +5,6 @@ import Layout from "components/Layout";
 import ImageCarouselGallery from "./ImageCarouselGallery";
 import { products } from "data/products";
 import { Button } from "techhype-components";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +14,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
@@ -29,11 +27,11 @@ import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import CardHeader from "@mui/material/CardHeader";
-import Avatar from "@mui/material/Avatar";
 import { useShoppingCart } from "context/ShoppingCartContext";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import { color_primary, color_dark, color_hover } from "constants/colors";
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { color_dark, color_hover } from "constants/colors";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import SelectTheme from "components/forms/SelectTheme";
 
 const modalStyle = {
   position: "relative",
@@ -65,49 +63,10 @@ const ProductDetails = () => {
     return <Link {...props} component={RouterLink} />;
   }
 
-  const { getItemQuantity, addToCart } = useShoppingCart();
-
-  const cartQuantity = getItemQuantity(id);
-
-  console.log("Cart Quantity: ", cartQuantity);
+  const { addToCart } = useShoppingCart();
 
   // Find the product with the matching id
   const product = products.find((product) => product.id === parseInt(id, 10));
-
-  const selectTheme = createTheme({
-    components: {
-      MuiSelect: {
-        styleOverrides: {
-          outlined: {
-            borderRadius: "10px",
-            background: color_dark,
-            color: "white",
-            width: "60px",
-            borderColor: "white",
-            "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: "white",
-            },
-            "& .MuiInputLabel-outlined": {
-              color: "white",
-            },
-            "&:focus": {
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: color_primary,
-              },
-              "& .MuiInputLabel-outlined": {
-                color: color_primary,
-              },
-            },
-          },
-        },
-      },
-    },
-    palette: {
-      primary: {
-        main: color_primary,
-      },
-    },
-  });
 
   const {
     register,
@@ -173,7 +132,7 @@ const ProductDetails = () => {
               </span>
 
               <div className="details-add">
-                <ThemeProvider theme={selectTheme}>
+                <SelectTheme>
                   <FormControl variant="outlined">
                     <InputLabel id="quantity-label" sx={{ color: "white" }}>
                       {content[lang]["quantity"]}
@@ -203,7 +162,7 @@ const ProductDetails = () => {
                       defaultValue={1}
                     />
                   </FormControl>
-                </ThemeProvider>
+                </SelectTheme>
                 <Button size="small" onClick={() => handleAddToCart(id)}>
                   {content[lang]["addToCart"]}
                 </Button>

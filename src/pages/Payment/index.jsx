@@ -13,16 +13,15 @@ import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import { useShoppingCart } from "context/ShoppingCartContext";
 import { Button } from "techhype-components";
-import Layout from "components/Layout";
-import OrderSummary from "components/OrderSummary";
-import AppTheme from "components/forms/AppTheme";
-import OrderSummaryToggle from "components/OrderSummaryToggle";
-import { SHIPPING_COST } from "constants/validationRules";
-import { products } from "data/products";
+import calculateStandardShipping from "utils/calculateStandardShipping";
 import { useFormContext } from "context/FormContext";
 import billingAddressSchema from "formValidationSchemas/billingAddressSchema";
 import paymentSchema from "formValidationSchemas/paymentSchema";
 import emptySchema from "formValidationSchemas/emptySchema";
+import Layout from "components/Layout";
+import OrderSummary from "components/OrderSummary";
+import AppTheme from "components/forms/AppTheme";
+import OrderSummaryToggle from "components/OrderSummaryToggle";
 import ContactInfoDisplay from "components/ContactInfoDisplay";
 import BillingAddressForm from "components/BillingAddressForm";
 import ShippingMethodSelection from "components/ShippingMethodSelection";
@@ -51,15 +50,6 @@ const Payment = () => {
       navigate("/");
     }
   }, [cartItems, navigate]);
-
-  const calculateShopShipping = () => {
-    return cartItems.reduce((total, cartItem) => {
-      const item = products.find((i) => i.id === parseInt(cartItem.id));
-      return total + (item?.price || 0) * cartItem.quantity;
-    }, 0) > 500
-      ? 0
-      : SHIPPING_COST;
-  };
 
   //Vipps or Credit card payment
   const handlePaymentChange = (event) => {
@@ -181,7 +171,7 @@ const Payment = () => {
       description="Checkout, pay and wait for your cards to be shipped as fast as possible"
     >
       <AppTheme>
-        {/* Your OrderSummaryToggle component */}
+        {/* Your OrderSummaryToggle component on mobile */}
         <OrderSummaryToggle
           handleToggleOrderSummary={handleToggleOrderSummary}
           showOrderSummary={showOrderSummary}
@@ -254,7 +244,7 @@ const Payment = () => {
                     setShippingMethod={setShippingMethod}
                     content={content}
                     lang={lang}
-                    calculateShopShipping={calculateShopShipping}
+                    calculateStandardShipping={calculateStandardShipping}
                   />
 
                   {/* Payment */}
