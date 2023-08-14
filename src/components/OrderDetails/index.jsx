@@ -54,13 +54,13 @@ const OrderDetails = ({
             gutterBottom
             sx={{ marginBottom: ".8em" }}
           >
-            Order Details
+            {content[lang]["orderDetails"]}
           </Typography>
           <Box sx={{ width: "100%" }}>
             <Grid container rowSpacing={2} columnSpacing={2}>
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle2" gutterBottom>
-                  Contact Information
+                  {content[lang]["contactInformationHeader"]}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -82,7 +82,7 @@ const OrderDetails = ({
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle2" gutterBottom>
-                  Payment Method
+                  {content[lang]["paymentMethodHeader"]}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -91,7 +91,7 @@ const OrderDetails = ({
                   fontSize={14}
                 >
                   {formData.paymentMethod === "creditCard"
-                    ? `Card ending with ***${formData.paymentInfo.cardNumber}`
+                    ? `${content[lang]["paymentMethodCard"]} ***${formData.paymentInfo.cardNumber}`
                     : "Vipps"}
                 </Typography>
                 <Typography
@@ -113,7 +113,7 @@ const OrderDetails = ({
                   variant="subtitle2"
                   gutterBottom
                 >
-                  Shipping address
+                  {content[lang]["shippingAddressHeader"]}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -169,7 +169,7 @@ const OrderDetails = ({
                   gutterBottom
                   onClick={isSmallScreen ? handleBillingAddressToggle : null}
                 >
-                  Billing address{" "}
+                  {content[lang]["billingAddressHeader"]}{" "}
                   {isSmallScreen ? (
                     billingAddressOpen ? (
                       <KeyboardArrowUpIcon />
@@ -224,9 +224,9 @@ const OrderDetails = ({
                   </Typography>
                 </Collapse>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={12}>
                 <Typography variant="subtitle2" gutterBottom>
-                  Shipping method
+                  {content[lang]["shippingMethodHeader"]}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -235,8 +235,8 @@ const OrderDetails = ({
                   fontSize={14}
                 >
                   {formData.shippingMethod === "standard"
-                    ? "Standard (1-5 business days)"
-                    : "Home Delivery (1-3 Business days)"}
+                    ? content[lang]["shippingOption1"]
+                    : content[lang]["shippingOption2"]}
                 </Typography>
               </Grid>
             </Grid>
@@ -245,7 +245,7 @@ const OrderDetails = ({
       </Box>
       <Divider sx={{ margin: ".8em 0" }} />
       <Typography variant="body2" gutterBottom align="left" fontSize={14}>
-        You will receive a confirmation email with your order shortly.
+        {content[lang]["confirmationByEmail"]}
       </Typography>
     </Paper>
   );

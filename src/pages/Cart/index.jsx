@@ -4,7 +4,6 @@ import Layout from "components/Layout";
 import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import CartItem from "components/CartItem";
-import { products } from "data/products";
 import { Paper } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -13,19 +12,19 @@ import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { grey } from "@mui/material/colors";
 import { useShoppingCart } from "context/ShoppingCartContext";
 import { formatCurrency } from "utils/formatCurrency";
-import { Button, Card } from "techhype-components";
+import { Button } from "techhype-components";
 import HelpIcon from "@mui/icons-material/Help";
 import Tooltip from "@mui/material/Tooltip";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import { color_primary, color_dark } from "constants/colors";
-import { SHIPPING_COST } from "constants/validationRules";
 import { useMediaQuery } from "react-responsive";
+import calculateStandardShipping from "utils/calculateStandardShipping";
+import calculateTotalPrice from "utils/calculateTotalPrice";
 
 const Cart = () => {
   const [lang] = useContext(LangContext);
   const { cartItems } = useShoppingCart();
-  console.log(cartItems);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 500 });
@@ -77,16 +76,7 @@ const Cart = () => {
                     </Tooltip>
                   </ClickAwayListener>
                   {content[lang]["shipping"]}{" "}
-                  {formatCurrency(
-                    cartItems.reduce((total, cartItem) => {
-                      const item = products.find(
-                        (i) => i.id === parseInt(cartItem.id)
-                      );
-                      return total + (item?.price || 0) * cartItem.quantity;
-                    }, 0) > 500
-                      ? 0
-                      : SHIPPING_COST
-                  )}
+                  {formatCurrency(calculateStandardShipping(cartItems))}
                 </Box>
                 <Box
                   sx={{
@@ -96,22 +86,7 @@ const Cart = () => {
                   }}
                 >
                   {content[lang]["cartTotal"]}{" "}
-                  {formatCurrency(
-                    cartItems.reduce((total, cartItem) => {
-                      const item = products.find(
-                        (i) => i.id === parseInt(cartItem.id)
-                      );
-                      return total + (item?.price || 0) * cartItem.quantity;
-                    }, 0) +
-                      (cartItems.reduce((total, cartItem) => {
-                        const item = products.find(
-                          (i) => i.id === parseInt(cartItem.id)
-                        );
-                        return total + (item?.price || 0) * cartItem.quantity;
-                      }, 0) > 500
-                        ? 0
-                        : SHIPPING_COST)
-                  )}
+                  {calculateTotalPrice(null, cartItems)}
                 </Box>
                 <Box
                   sx={{

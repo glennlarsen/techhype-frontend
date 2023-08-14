@@ -1,11 +1,5 @@
 import React, { useContext } from "react";
-import {
-  Stack,
-  Paper,
-  Box,
-  Collapse,
-  Typography,
-} from "@mui/material";
+import { Stack, Paper, Box, Collapse, Typography } from "@mui/material";
 import { useMediaQuery } from "react-responsive";
 import { products } from "data/products";
 import { LangContext } from "context/LangContext";
@@ -178,7 +172,7 @@ const OrderSummary = ({
               <DesignServicesIcon sx={{ color: color_primary }} />
               {!confirmationPage
                 ? content[lang]["cartTip"]
-                : "Create your profile now and start designing your business card!"}
+                : content[lang]["confirmationTooltip"]}
             </Paper>
           </Stack>
         </Box>

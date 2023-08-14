@@ -185,6 +185,23 @@ export const content = {
     paymentExpiryDateLabelLong: "Expiration date (MM / YY)",
     paymentExpiryDateLabelShort: "Exp date (MM / YY)",
     paymentCVCCodeLabel: "CVC",
+    //Confirmation Page
+    confirmationPageTitle: "Your order is confirmed!",
+    orderNumber: "Order #",
+    orderDetails: "Order Details",
+    contactInformationHeader: "Contact Information",
+    paymentMethodHeader: "Payment Method",
+    paymentMethodCard: "Card ending with",
+    shippingAddressHeader: "Shipping Address",
+    billingAddressHeader: "Billing Address",
+    shippingMethodHeader: "Shipping Method",
+    confirmationByEmail:
+      "You will receive a confirmation email with your order shortly.",
+    needHelp: "Need help?",
+    confirmationPageContactUs: "Contact Us",
+    confirmationCreateProfileButton: "Create Your Profile",
+    confirmationTooltip:
+      "Create your profile now and start designing your business card!",
   },
   no: {
     //Heading Home and navigation
@@ -370,5 +387,22 @@ export const content = {
     paymentExpiryDateLabelLong: "Utløpsdato (MM / ÅÅ)",
     paymentExpiryDateLabelShort: "Utløpsdato (MM / ÅÅ)",
     paymentCVCCodeLabel: "CVC",
+    //Confirmation Page
+    confirmationPageTitle: "Din Bestilling er bekreftet!",
+    orderNumber: "Ordre #",
+    orderDetails: "Ordredetaljer",
+    contactInformationHeader: "Kontaktinformasjon",
+    paymentMethodHeader: "Betalingsmetode",
+    paymentMethodCard: "Kort ender med",
+    shippingAddressHeader: "Leveringsadresse",
+    billingAddressHeader: "Faktureringsadresse",
+    shippingMethodHeader: "Leveringsmetode",
+    confirmationByEmail:
+      "Du vil motta en bekreftelses-e-post med din ordre innen kort tid",
+    needHelp: "Trenger du hjelp?",
+    confirmationPageContactUs: "Kontakt oss",
+    confirmationCreateProfileButton: "Opprett din profil",
+    confirmationTooltip:
+      "Opprett profilen din nå og begynn å designe visittkortet ditt!",
   },
 };

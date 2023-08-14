@@ -75,9 +75,9 @@ const OrderConfirmation = () => {
                   marginBottom: 0,
                 }}
               >
-                Your order is confirmed!
+              {content[lang]["confirmationPageTitle"]}
               </h1>
-              <Typography variant="subtitle1">Order #{orderNumber}</Typography>
+              <Typography variant="subtitle1"> {content[lang]["orderNumber"]}{orderNumber}</Typography>
               <Stack
                 direction="column"
                 justifyContent="center"
@@ -105,13 +105,13 @@ const OrderConfirmation = () => {
                   }}
                 >
                   <Box className="back-link">
-                    Need help?
+                  {content[lang]["needHelp"]}
                     <RouterLink
                       to="/contact"
                       className="back-link"
                       style={{ fontWeight: "bold" }}
                     >
-                      Contact Us
+                     {content[lang]["confirmationPageContactUs"]}
                     </RouterLink>
                   </Box>
                   <Button
@@ -120,7 +120,7 @@ const OrderConfirmation = () => {
                     color="primary"
                     onClick={() => navigate("/login")}
                   >
-                    Create your profile
+                    {content[lang]["confirmationCreateProfileButton"]}
                   </Button>
                 </Box>
               </Stack>
