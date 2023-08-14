@@ -90,6 +90,8 @@ export const content = {
     loginOr: "Or",
     loginFacebook: "Login with Facebook",
     loginGoogle: "Login With Google",
+    dontHaveAnAccount: "Don't have an account?",
+    signUp: "Sign up",
     //Cart Page
     cartHeading: "Cart",
     cartEmpty: "You have no items in the shopping cart",
@@ -291,6 +293,8 @@ export const content = {
     loginOr: "Eller",
     loginFacebook: "Logg inn med Facebook",
     loginGoogle: "Logg inn med Google",
+    dontHaveAnAccount: "Ikke en konto?",
+    signUp: "Registrer deg",
     //Cart Page
     cartHeading: "Handlevogn",
     cartEmpty: "Du har ingen varer i handlevognen",
