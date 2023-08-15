@@ -34,6 +34,18 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
+function isSectionInView(sectionId, offsetTop = 0, offsetBottom = 0) {
+  const section = document.getElementById(sectionId);
+  if (!section) return false;
+
+  const rect = section.getBoundingClientRect();
+  return (
+    rect.top >= -offsetBottom &&
+    rect.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) - offsetTop
+  );
+}
+
 function Navigation() {
   const [lang] = useContext(LangContext);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -43,6 +55,7 @@ function Navigation() {
   const [isShow, setIsShow] = useState(false);
   const location = useLocation();
   const { cartQuantity } = useShoppingCart();
+  const [activeSection, setActiveSection] = useState();
 
   // Define an array of paths that should trigger the sticky navigation
   const stickyPaths = [
@@ -83,6 +96,16 @@ function Navigation() {
         stickyPaths.includes(location.pathname) ||
           scrollPosition >= scrollThreshold
       );
+
+      const sections = [
+        { id: "howItWorks", offsetBottom: 600, offsetTop: 170 }, // Adjust the offset value as needed
+        { id: "reviews", offsetBottom: 660, offsetTop: 90 }, // Adjust the offset value as needed
+      ];
+
+      const activeSection = sections.find((section) =>
+        isSectionInView(section.id, section.offsetTop, section.offsetBottom)
+      );
+      setActiveSection(activeSection ? activeSection.id : null);
     }, 100); // Adjust the debounce delay as needed
 
     window.addEventListener("scroll", handleScroll);
@@ -144,7 +167,10 @@ function Navigation() {
                 <Link
                   to="/#howItWorks"
                   className={
-                    location.pathname === "/" && location.hash === "#howItWorks"
+                    (location.pathname === "/" &&
+                      location.hash === "#howItWorks" &&
+                      activeSection === "howItWorks") ||
+                    activeSection === "howItWorks"
                       ? "active"
                       : ""
                   }
@@ -157,7 +183,10 @@ function Navigation() {
                 <Link
                   to="/#reviews"
                   className={
-                    location.pathname === "/" && location.hash === "#reviews"
+                    (location.pathname === "/" &&
+                      location.hash === "#reviews" &&
+                      activeSection === "reviews") ||
+                    activeSection === "reviews"
                       ? "active"
                       : ""
                   }
@@ -187,7 +216,10 @@ function Navigation() {
             <Link
               to="/#howItWorks"
               className={
-                location.pathname === "/" && location.hash === "#howItWorks"
+                (location.pathname === "/" &&
+                  location.hash === "#howItWorks" &&
+                  activeSection === "howItWorks") ||
+                activeSection === "howItWorks"
                   ? "active"
                   : ""
               }
@@ -197,7 +229,10 @@ function Navigation() {
             <Link
               to="/#reviews"
               className={
-                location.pathname === "/" && location.hash === "#reviews"
+                (location.pathname === "/" &&
+                  location.hash === "#reviews" &&
+                  activeSection === "reviews") ||
+                activeSection === "reviews"
                   ? "active"
                   : ""
               }
@@ -267,7 +302,10 @@ function Navigation() {
                 <Link
                   to="/#howItWorks"
                   className={
-                    location.pathname === "/" && location.hash === "#howItWorks"
+                    (location.pathname === "/" &&
+                      location.hash === "#howItWorks" &&
+                      activeSection === "howItWorks") ||
+                    activeSection === "howItWorks"
                       ? "active"
                       : ""
                   }
@@ -280,7 +318,10 @@ function Navigation() {
                 <Link
                   to="/#reviews"
                   className={
-                    location.pathname === "/" && location.hash === "#reviews"
+                    (location.pathname === "/" &&
+                      location.hash === "#reviews" &&
+                      activeSection === "reviews") ||
+                    activeSection === "reviews"
                       ? "active"
                       : ""
                   }
@@ -308,7 +349,10 @@ function Navigation() {
               <Link
                 to="/#howItWorks"
                 className={
-                  location.pathname === "/" && location.hash === "#howItWorks"
+                  (location.pathname === "/" &&
+                    location.hash === "#howItWorks" &&
+                    activeSection === "howItWorks") ||
+                  activeSection === "howItWorks"
                     ? "active"
                     : ""
                 }
@@ -318,7 +362,10 @@ function Navigation() {
               <Link
                 to="/#reviews"
                 className={
-                  location.pathname === "/" && location.hash === "#reviews"
+                  (location.pathname === "/" &&
+                    location.hash === "#reviews" &&
+                    activeSection === "reviews") ||
+                  activeSection === "reviews"
                     ? "active"
                     : ""
                 }
