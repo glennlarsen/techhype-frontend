@@ -45,7 +45,13 @@ function Navigation() {
   const { cartQuantity } = useShoppingCart();
 
   // Define an array of paths that should trigger the sticky navigation
-  const stickyPaths = ["/checkout", "/cart", "/login", "/payment", "/orderConfirmation"]; // Add other paths as needed
+  const stickyPaths = [
+    "/checkout",
+    "/cart",
+    "/login",
+    "/payment",
+    "/orderConfirmation",
+  ]; // Add other paths as needed
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -118,6 +124,58 @@ function Navigation() {
           <TabletAndDesktop>
             <LanguageSelector />
           </TabletAndDesktop>
+          {isShow && (
+            <div
+              className={`mobile-menu ${isMobileMenuOpen ? "open" : ""} ${
+                isClosing ? "close" : ""
+              }`}
+            >
+              <LanguageSelector />
+              <div className="close-button" onClick={closeMenu}>
+                <span>&times;</span>
+              </div>
+              <nav>
+                <Link
+                  to="/shop"
+                  className={location.pathname === "/shop" ? "active" : ""}
+                >
+                  {content[lang]["menuItem1"]}
+                </Link>
+                <Link
+                  to="/#howItWorks"
+                  className={
+                    location.pathname === "/" && location.hash === "#howItWorks"
+                      ? "active"
+                      : ""
+                  }
+                  onClick={() => {
+                    closeMenu();
+                  }}
+                >
+                  {content[lang]["menuItem2"]}
+                </Link>
+                <Link
+                  to="/#reviews"
+                  className={
+                    location.pathname === "/" && location.hash === "#reviews"
+                      ? "active"
+                      : ""
+                  }
+                  onClick={() => {
+                    closeMenu();
+                  }}
+                >
+                  {content[lang]["menuItem3"]}
+                </Link>
+                <Link
+                  to="/contact"
+                  className={location.pathname === "/contact" ? "active" : ""}
+                >
+                  {content[lang]["menuItem4"]}
+                </Link>
+              </nav>
+            </div>
+          )}
 
           <nav className="desktop-menu">
             <Link
