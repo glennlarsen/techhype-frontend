@@ -20,7 +20,7 @@ import FormTextField from "components/forms/FormTextField";
 const RegistrationForm = ({ control, errors, lang, onSubmit, onLogin }) => {
   return (
     <Box p={4}>
-      <h1 style={{ margin: ".1em" }}>Register</h1>
+      <h1 style={{ margin: ".1em" }}>{content[lang]["registerHeading"]}</h1>
       <form
         onSubmit={onSubmit}
         noValidate
@@ -39,7 +39,7 @@ const RegistrationForm = ({ control, errors, lang, onSubmit, onLogin }) => {
               render={({ field }) => (
                 <>
                   <FormTextField
-                    label="Name"
+                    label={content[lang]["registerName"]}
                     variant="standard"
                     id="name"
                     type="text"
@@ -62,9 +62,9 @@ const RegistrationForm = ({ control, errors, lang, onSubmit, onLogin }) => {
           <EmailFormField control={control} errors={errors} lang={lang} />
           <PasswordFormField control={control} errors={errors} lang={lang} />
         </AppTheme>
-        <Button type="submit">Register</Button>
+        <Button type="submit">{content[lang]["registerButton"]}</Button>
         <Box>
-          Already have an account?{" "}
+          {content[lang]["alreadyHaveAnAccount"]}{" "}
           <Link
             to=""
             className="forgot-password-link"
@@ -74,7 +74,7 @@ const RegistrationForm = ({ control, errors, lang, onSubmit, onLogin }) => {
             }}
             onClick={onLogin}
           >
-            log in
+            <strong>{content[lang]["haveAccountLogin"]}</strong>
           </Link>
         </Box>
       </form>

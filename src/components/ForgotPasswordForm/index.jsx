@@ -8,7 +8,9 @@ import { content } from "constants/content";
 const ForgotPasswordForm = ({ control, errors, lang, onSubmit, onLogin }) => {
   return (
     <Box p={4}>
-      <h1 style={{ margin: ".1em" }}>Forgot Password</h1>
+      <h1 style={{ margin: ".1em" }}>
+        {content[lang]["forgotPasswordHeader"]}
+      </h1>
       <form
         onSubmit={onSubmit}
         noValidate
@@ -20,7 +22,7 @@ const ForgotPasswordForm = ({ control, errors, lang, onSubmit, onLogin }) => {
         }}
       >
         <EmailFormField control={control} errors={errors} lang={lang} />
-        <Button type="submit">Reset Password</Button>
+        <Button type="submit">{content[lang]["resetPasswordButton"]}</Button>
         <Box>
           <Link
             to=""
@@ -31,7 +33,7 @@ const ForgotPasswordForm = ({ control, errors, lang, onSubmit, onLogin }) => {
             }}
             onClick={onLogin}
           >
-            Back to login
+            {content[lang]["backToLoginLink"]}
           </Link>
         </Box>
       </form>

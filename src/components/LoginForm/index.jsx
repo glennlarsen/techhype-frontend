@@ -63,7 +63,7 @@ const LoginForm = ({
               }}
               onClick={onSignUp}
             >
-              {content[lang]["signUp"]}
+              <strong>{content[lang]["signUp"]}</strong>
             </Link>
           </Box>
         </Box>

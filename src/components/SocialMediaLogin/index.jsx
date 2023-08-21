@@ -16,12 +16,12 @@ const loginWithGoogleStyle = {
 const SocialMediaLogin = ({ lang }) => {
   return (
     <Grid container spacing={2} justifyContent="center">
-      <Grid item>
+      <Grid item sm={6}>
         <MuiButton variant="contained" startIcon={<Facebook />}>
           {content[lang]["loginFacebook"]}
         </MuiButton>
       </Grid>
-      <Grid item>
+      <Grid item sm={6}>
         <MuiButton
           variant="contained"
           startIcon={<Google />}
