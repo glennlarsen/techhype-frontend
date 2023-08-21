@@ -20,7 +20,7 @@ const Reviews = () => {
   };
 
   return (
-    <section className="reviews" id="reviews">
+    <section className="reviews" data-section id="reviews" >
       <Fade direction="up" triggerOnce>
         <h2>{content[lang]["reviewsHeading"]}</h2>
       </Fade>

@@ -76,19 +76,7 @@
 }
 .stickyForce {
   position: sticky !important;
-}
-
-@keyframes fadeDown {
-  from {
-    opacity: 0;
-    background-color: $color-darker;
-    transform: translateY(-100%);
-  }
-  to {
-    opacity: 1;
-    background-color: $color-darker;
-    transform: translateY(0);
-  }
+  transition: none !important; //to avoid navbar fading down on page load for sticky force pages
 }
 
 .navigation {

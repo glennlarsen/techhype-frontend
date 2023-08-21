@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { content } from "constants/content";
 import { UilUserCircle, UilShoppingBag } from "@iconscout/react-unicons";
@@ -34,18 +34,6 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-function isSectionInView(sectionId, offsetTop = 0, offsetBottom = 0) {
-  const section = document.getElementById(sectionId);
-  if (!section) return false;
-
-  const rect = section.getBoundingClientRect();
-  return (
-    rect.top >= -offsetBottom &&
-    rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) - offsetTop
-  );
-}
-
 function Navigation() {
   const [lang] = useContext(LangContext);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -55,7 +43,8 @@ function Navigation() {
   const [isShow, setIsShow] = useState(false);
   const location = useLocation();
   const { cartQuantity } = useShoppingCart();
-  const [activeSection, setActiveSection] = useState();
+  const sectionsRef = useRef([]);
+  const [activeSection, setActiveSection] = useState(null);
 
   // Define an array of paths that should trigger the sticky navigation
   const stickyPaths = [
@@ -85,7 +74,24 @@ function Navigation() {
   useEffect(() => {
     const handleScroll = debounce(() => {
       const scrollPosition = window.scrollY;
-      const scrollThreshold = 150; // Adjust this value as needed
+      const scrollThreshold = 150; // at what scroll point should the navigation become sticky Adjust this value as needed
+      const pageYOffset = window.pageYOffset;
+      const offset = 80; // offset for each section top and bottom Adjust this value as needed
+      let newActiveSection = null;
+
+      sectionsRef.current.forEach((section) => {
+        const sectionOffsetTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+
+        if (
+          pageYOffset + offset >= sectionOffsetTop &&
+          pageYOffset < sectionOffsetTop + sectionHeight - offset
+        ) {
+          newActiveSection = section.id;
+        }
+      });
+
+      setActiveSection(newActiveSection);
 
       if (scrollPosition < 1) {
         window.location.hash = "";
@@ -96,18 +102,9 @@ function Navigation() {
         stickyPaths.includes(location.pathname) ||
           scrollPosition >= scrollThreshold
       );
-
-      const sections = [
-        { id: "howItWorks", offsetBottom: 600, offsetTop: 170 }, // Adjust the offset value as needed
-        { id: "reviews", offsetBottom: 660, offsetTop: 90 }, // Adjust the offset value as needed
-      ];
-
-      const activeSection = sections.find((section) =>
-        isSectionInView(section.id, section.offsetTop, section.offsetBottom)
-      );
-      setActiveSection(activeSection ? activeSection.id : null);
     }, 100); // Adjust the debounce delay as needed
 
+    sectionsRef.current = document.querySelectorAll("[data-section]");
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -123,6 +120,7 @@ function Navigation() {
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
+
     return () => {
       window.removeEventListener("resize", handleResize);
     };

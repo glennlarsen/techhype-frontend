@@ -26,7 +26,7 @@ const HowItWorks = () => {
   }, []);
 
   return (
-    <section className="howItWorks" id="howItWorks">
+    <section className="howItWorks" data-section id="howItWorks">
       <Fade direction="up" triggerOnce>
         <p className="pre-heading">{content[lang]["howPreHeading"]}</p>
         <h2>{content[lang]["howHeading"]}</h2>
