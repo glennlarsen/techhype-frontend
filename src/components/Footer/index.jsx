@@ -28,10 +28,10 @@ function Footer() {
             <Link to="/login">{content[lang]["footerLink5"]}</Link>
           </div>
           <div className="footer-links">
-            <strong>Terms & FAQ</strong>
-            <Link to="/terms">Terms and Conditions</Link>
-            <Link to="/privacy">Privacy Policy</Link>
-            <Link to="/faq">FAQ</Link>
+            <strong>{content[lang]["footerTermsHeading"]}</strong>
+            <Link to="/terms">{content[lang]["footerTerms"]}</Link>
+            <Link to="/privacy">{content[lang]["footerPrivacy"]}</Link>
+            <Link to="/faq">{content[lang]["footerFaq"]}</Link>
           </div>
         </div>
 

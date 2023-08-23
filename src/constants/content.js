@@ -63,6 +63,10 @@ export const content = {
     footerInfo:
       "Contactless Business card using NFC technology to simplify networking and sharing contact details.",
     copyRights: "Copyright ©Techhype 2023. All rights reserved.",
+    footerTermsHeading: "Terms and Privacy",
+    footerTerms: "Terms and Conditions",
+    footerPrivacy: "Privacy Policy",
+    footerFaq: "FAQ",
     //Contact Page
     contactHeading: "Contact Us",
     contactSubHeading:
@@ -109,6 +113,7 @@ export const content = {
     checkout: "Checkout",
     shippingInfo: "Free shipping for orders above 500 Kr",
     cartTip: "Create your profile and design your card after Checkout.",
+    goToShopButton: "Go To Shop",
     //BreadCrumbs
     home: "Home",
     shop: "Get Started",
@@ -274,6 +279,10 @@ export const content = {
     footerInfo:
       "Kontaktløs visittkort som bruker NFC-teknologi for å forenkle nettverking og deling av kontaktinformasjon.",
     copyRights: "Copyright ©Techhype 2023. Alle rettigheter reservert.",
+    footerTermsHeading: "Vilkår og Personvern",
+    footerTerms: "Vilkår og betingelser",
+    footerPrivacy: "Personvernerklæring",
+    footerFaq: "Ofte stilte spørsmål",
     //Contact Page
     contactHeading: "Kontakt Oss",
     contactSubHeading:
@@ -320,6 +329,7 @@ export const content = {
     checkout: "Til Kasse",
     shippingInfo: "Fri frakt for ordre over 500 Kr",
     cartTip: "Opprett din profil og design kortet ditt etter Betaling.",
+    goToShopButton: "Gå til butikken",
     //BreadCrumbs
     home: "Hjem",
     shop: "Kom i Gang",
