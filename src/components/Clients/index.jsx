@@ -5,12 +5,7 @@ import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import { color_primary } from "constants/colors";
 
-import Sixt from "images/sixt.png";
-import Demokratene from "images/demokratene.png";
-import Frydenbo from "images/frydenbo.png";
-import Hamre from "images/hamre.png";
-import Techhype from "images/techhype.png";
-import Vipps from "images/vipps_logo.png";
+import { clientsData } from "./data/clientsData";
 
 const Clients = () => {
   const [lang] = useContext(LangContext);
@@ -53,7 +48,7 @@ const Clients = () => {
                   border: 0,
                   borderRadius: "2px",
                   margin: "30px 2px",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 },
               },
               activeItemBtnProps: {
@@ -64,7 +59,7 @@ const Clients = () => {
                   borderRadius: "2px",
                   margin: "30px 2px",
                   background: color_primary,
-                  cursor: "pointer"
+                  cursor: "pointer",
                 },
               },
             }}
@@ -86,36 +81,13 @@ const Clients = () => {
               },
             ]}
           >
-            <div className="client-box-container">
-              <div className="client-box-inner">
-                <img src={Sixt} alt="Sixt" />
+            {clientsData.map((client, index) => (
+              <div className="client-box-container" key={index}>
+                <div className="client-box-inner">
+                  <img src={client.image} alt={client.label} />
+                </div>
               </div>
-            </div>
-            <div className="client-box-container">
-              <div className="client-box-inner">
-                <img src={Demokratene} alt="Demokratene" />
-              </div>
-            </div>
-            <div className="client-box-container">
-              <div className="client-box-inner">
-                <img src={Hamre} alt="Hamre Frilanstjenester" />
-              </div>
-            </div>
-            <div className="client-box-container">
-              <div className="client-box-inner">
-                <img src={Frydenbo} alt="Frydenbø" />
-              </div>
-            </div>
-            <div className="client-box-container">
-              <div className="client-box-inner">
-                <img src={Techhype} alt="Techhype" />
-              </div>
-            </div>
-            <div className="client-box-container">
-              <div className="client-box-inner">
-                <img src={Vipps} alt="Vipps" />
-              </div>
-            </div>
+            ))}
           </ReactSimplyCarousel>
         </Fade>
       </div>
