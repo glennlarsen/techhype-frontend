@@ -3,15 +3,14 @@ import { Fade } from "react-awesome-reveal";
 import ReactSimplyCarousel from "react-simply-carousel";
 import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
-
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { color_primary } from "constants/colors";
 
 import Sixt from "images/sixt.png";
 import Demokratene from "images/demokratene.png";
-import Frydenbo from "images/frydenbo.jpg";
+import Frydenbo from "images/frydenbo.png";
 import Hamre from "images/hamre.png";
 import Techhype from "images/techhype.png";
+import Vipps from "images/vipps_logo.png";
 
 const Clients = () => {
   const [lang] = useContext(LangContext);
@@ -30,33 +29,44 @@ const Clients = () => {
             onRequestChange={setActiveSlideIndex}
             itemsToShow={1}
             itemsToScroll={1}
-            preventScrollOnSwipe
+            autoplay
+            autoplayDelay={5000}
+            speed={400}
             forwardBtnProps={{
               //here you can also pass className, or any other button element attributes
               style: {
-                alignSelf: "center",
-                background: "transparent",
-                border: "none",
-                cursor: "pointer",
-                height: 30,
-                width: 30,
-                padding: 5,
+                display: "none",
               },
-              children: (
-                <ArrowForwardIosIcon fontSize="large" color="#1f2427" />
-              ),
             }}
             backwardBtnProps={{
               //here you can also pass className, or any other button element attributes
               style: {
-                alignSelf: "center",
-                background: "transparent",
-                border: "none",
-                cursor: "pointer",
-                height: 30,
-                width: 30,
+                display: "none",
               },
-              children: <ArrowBackIosIcon fontSize="large" color="#1f2427" />,
+            }}
+            dotsNav={{
+              show: true,
+              itemBtnProps: {
+                style: {
+                  height: 14,
+                  width: 14,
+                  border: 0,
+                  borderRadius: "2px",
+                  margin: "30px 2px",
+                  cursor: "pointer"
+                },
+              },
+              activeItemBtnProps: {
+                style: {
+                  height: 14,
+                  width: 14,
+                  border: 0,
+                  borderRadius: "2px",
+                  margin: "30px 2px",
+                  background: color_primary,
+                  cursor: "pointer"
+                },
+              },
             }}
             responsiveProps={[
               {
@@ -75,7 +85,6 @@ const Clients = () => {
                 minWidth: 1300,
               },
             ]}
-            speed={400}
           >
             <div className="client-box-container">
               <div className="client-box-inner">
@@ -100,6 +109,11 @@ const Clients = () => {
             <div className="client-box-container">
               <div className="client-box-inner">
                 <img src={Techhype} alt="Techhype" />
+              </div>
+            </div>
+            <div className="client-box-container">
+              <div className="client-box-inner">
+                <img src={Vipps} alt="Vipps" />
               </div>
             </div>
           </ReactSimplyCarousel>

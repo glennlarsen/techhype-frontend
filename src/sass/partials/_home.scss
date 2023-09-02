@@ -265,7 +265,6 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 2em;
     padding: 0 1.5em 3em 1.5em;
-    
 
     @media only screen and (max-width: 900px) {
       grid-template-columns: repeat(1, 1fr);
@@ -282,7 +281,6 @@
       display: flex;
     }
   }
-
 }
 
 //Clients section
@@ -309,7 +307,7 @@
   }
 
   .client-box-container {
-    width: 300px;
+    width: 340px;
     height: 200px;
     border: 20px solid white;
     line-height: 240px;
@@ -319,7 +317,7 @@
     margin: 0 1em;
 
     @media only screen and (max-width: 410px) {
-      width: 250px;
+      width: 300px;
     }
 
     @media only screen and (max-width: 359px) {
@@ -336,8 +334,10 @@
     width: 100%;
 
     img {
-      max-height: 110px;
+      height: 110px;
       object-fit: contain;
+      width: 60%;
+      margin: auto;
     }
   }
 }
