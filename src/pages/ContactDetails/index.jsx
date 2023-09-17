@@ -5,14 +5,16 @@ import Glenn from "images/glenn.jpg";
 
 import { Stack } from "@mui/system";
 import Divider from "@mui/material/Divider";
-import Chip from "@mui/material/Chip";
-import { color_primary, color_dark, color_hover } from "constants/colors";
+import { color_primary, color_dark, color_darker } from "constants/colors";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { useMediaQuery } from "react-responsive";
 
 const ContactDetails = () => {
+  const isTablet = useMediaQuery({ minWidth: 710 });
+
   // Replace these with your actual contact information
   const contactInfo = {
     name: "Glenn Larsen",
@@ -86,15 +88,42 @@ const ContactDetails = () => {
     }
   };
 
+  const inputProps = {
+    readOnly: true,
+    style: {
+      color: "white", // Text input color
+      border: "none", // No borders
+      paddingBottom: 0,
+    },
+  };
+
+  const labelProps = {
+    style: {
+      color: color_primary, // Label color (you might need to replace 'color_primary' with the actual color value)
+    },
+  };
+
+
+
+  // Set focused border color to transparent
+  const focusedBorderStyle = {
+    "& fieldset": {
+      borderColor: "transparent !important",
+    },
+  };
+
   return (
+  <Box sx={{background: color_dark, height: "100vh", display: "flex", flexFlow: "column"}}>
     <Stack
       style={{
         padding: "1em",
         alignItems: "center",
-        maxWidth: "700px",
-        margin: "0 auto",
-        width: "100%",
+        margin: "1em auto",
         textAlign: "center",
+        background: color_darker,
+        width: "100%",
+        maxWidth: "700px",
+        borderRadius: isTablet ? "10px" : 0,
       }}
     >
       <img
@@ -109,90 +138,95 @@ const ContactDetails = () => {
         }}
       />
       <Box mb={4}>
-        <h1 style={{ marginBottom: 0, marginTop: ".3em" }}>
+        <h1 style={{ marginBottom: 0, marginTop: ".3em", fontSize: "2rem" }}>
           {contactInfo.name}
         </h1>
         <span>{contactInfo.title}</span>
       </Box>
-      <List>
+      <List sx={{width: "100%"}}>
         <Divider
           sx={{
-            width: "100%",
+            width: "calc(100% + 2em)",
             borderColor: "rgba(255, 255, 255, 0.12)",
+            margin: ".5em 0",
+            marginLeft: "-1em",
+            marginRight: "-1em",
           }}
         />
-        <ListItem sx={{ padding: "1em 0" }}>
-          <Chip
+        <ListItem sx={{ padding: "1em 0 .5em 0" }}>
+        <TextField
             label="Phone"
-            style={{
-              color: "white",
-              background: color_dark,
-              marginRight: "1em",
-              width: "80px",
-            }}
+            multiline
+            value={contactInfo.phone}
+            InputProps={inputProps}
+            InputLabelProps={labelProps}
+            sx={{ ...focusedBorderStyle, flex: 1, whiteSpace: 'pre-line' }} // Apply styles to remove hover and focus styles
           />
-          <ListItemText primary={contactInfo.phone} />
         </ListItem>
         <Divider
           sx={{
-            width: "100%",
+            width: "calc(100% + 2em)",
             borderColor: "rgba(255, 255, 255, 0.12)",
+            margin: ".5em 0",
+            marginLeft: "-1em",
+            marginRight: "-1em",
           }}
         />
-        <ListItem sx={{ padding: "1em 0" }}>
-          <Chip
+        <ListItem sx={{ padding: "1em 0 .5em 0" }}>
+        <TextField
             label="Email"
-            style={{
-              color: "white",
-              background: color_dark,
-              marginRight: "1em",
-              width: "80px",
-            }}
-          />
-          <ListItemText primary={contactInfo.email} />
-        </ListItem>
-        <Divider
-          sx={{
-            width: "100%",
-            borderColor: "rgba(255, 255, 255, 0.12)",
-          }}
-        />
-        <ListItem sx={{ padding: "1em 0" }}>
-          <Chip
-            label="Address"
-            style={{
-              color: "white",
-              background: color_dark,
-              marginRight: "1em",
-              width: "80px",
-            }}
-          />
-          <ListItemText
-            primary={`${contactInfo.address}, ${contactInfo.postcode} ${contactInfo.city}, ${contactInfo.country}`}
+            multiline
+            value={contactInfo.email}
+            InputProps={inputProps}
+            InputLabelProps={labelProps}
+            sx={{ ...focusedBorderStyle, flex: 1, whiteSpace: 'pre-line' }} // Apply styles to remove hover and focus styles
           />
         </ListItem>
         <Divider
           sx={{
-            width: "100%",
+            width: "calc(100% + 2em)",
             borderColor: "rgba(255, 255, 255, 0.12)",
+            margin: ".5em 0",
+            marginLeft: "-1em",
+            marginRight: "-1em",
           }}
         />
-        <ListItem sx={{ padding: "1em 0" }}>
-          <Chip
+        <ListItem sx={{ padding: "1em 0 .5em 0" }}>
+        <TextField
+          label="Address"
+          multiline
+          value={`${contactInfo.address}, ${contactInfo.postcode} ${contactInfo.city}, ${contactInfo.country}`}
+          InputProps={inputProps}
+          InputLabelProps={labelProps}
+          sx={{ ...focusedBorderStyle, flex: 1, whiteSpace: 'pre-line' }}
+        />
+        </ListItem>
+        <Divider
+          sx={{
+            width: "calc(100% + 2em)",
+            borderColor: "rgba(255, 255, 255, 0.12)",
+            margin: ".5em 0",
+            marginLeft: "-1em",
+            marginRight: "-1em",
+          }}
+        />
+        <ListItem sx={{ padding: "1em 0 .5em 0" }}>
+        <TextField
             label="Website"
-            style={{
-              color: "white",
-              background: color_dark,
-              marginRight: "1em",
-              width: "80px",
-            }}
+            multiline
+            value={contactInfo.website}
+            InputProps={inputProps}
+            InputLabelProps={labelProps}
+            sx={{ ...focusedBorderStyle, flex: 1, whiteSpace: 'pre-line' }} // Apply styles to remove hover and focus styles
           />
-          <ListItemText primary={contactInfo.website} />
         </ListItem>
         <Divider
           sx={{
-            width: "100%",
+            width: "calc(100% + 2em)",
             borderColor: "rgba(255, 255, 255, 0.12)",
+            margin: ".5em 0",
+            marginLeft: "-1em",
+            marginRight: "-1em",
           }}
         />
         {/* Add other contact details as needed */}
@@ -201,6 +235,7 @@ const ContactDetails = () => {
         </Button>
       </List>
     </Stack>
+    </Box>
   );
 };
 
