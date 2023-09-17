@@ -1,19 +1,12 @@
 import React, { useContext, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 
-import { Box, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 
 import Layout from "components/Layout";
 import { LangContext } from "context/LangContext";
-import { content } from "constants/content";
-import { Button } from "techhype-components";
-import AppTheme from "components/forms/AppTheme";
 import loginSchema from "formValidationSchemas/loginSchema";
-import EmailFormField from "components/forms/EmailFormField";
-import PasswordFormField from "components/forms/PasswordFormField";
-import SocialMediaLogin from "components/SocialMediaLogin";
 import LoginForm from "components/LoginForm";
 import RegistrationForm from "components/RegistrationForm";
 import ForgotPasswordForm from "components/ForgotPasswordForm";
@@ -26,11 +19,12 @@ const Login = () => {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = (data) => {
+  const onLoginSubmit = (data) => {
     console.log(data); // Handle login logic here
   };
 
@@ -45,6 +39,7 @@ const Login = () => {
   // Function to toggle the form mode
   const toggleFormMode = (mode) => {
     setFormMode(mode);
+    reset();
   };
 
   // Define the forms for each mode
@@ -54,7 +49,7 @@ const Login = () => {
         control={control}
         errors={errors}
         lang={lang}
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onLoginSubmit)}
         onForgotPassword={() => toggleFormMode("forgotPassword")}
         onSignUp={() => toggleFormMode("register")}
       />
@@ -64,7 +59,7 @@ const Login = () => {
         control={control}
         errors={errors}
         lang={lang}
-        onSubmit={onRegistrationSubmit}
+        onSubmit={handleSubmit(onRegistrationSubmit)}
         onLogin={() => toggleFormMode("login")}
       />
     ),
@@ -73,7 +68,7 @@ const Login = () => {
         control={control}
         errors={errors}
         lang={lang}
-        onSubmit={onForgotPasswordSubmit}
+        onSubmit={handleSubmit(onForgotPasswordSubmit)}
         onLogin={() => toggleFormMode("login")}
       />
     ),
