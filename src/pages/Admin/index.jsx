@@ -7,6 +7,7 @@ const Admin = () => {
   useEffect(() => {
     // Retrieve the token from local storage
     const token = localStorage.getItem("token");
+    console.log("Token:", token);
 
     if (token) {
       // Include the token in the headers
