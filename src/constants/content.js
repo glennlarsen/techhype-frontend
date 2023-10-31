@@ -21,7 +21,7 @@ export const content = {
     menuItem2: "How it Works",
     menuItem3: "Reviews",
     menuItem4: "Contact Us",
-    loginTooltip: "Login",
+    loginTooltip: "My Account",
     cartToolTip: "Cart",
     //How it works section
     howPreHeading: "3 easy steps",
@@ -237,7 +237,7 @@ export const content = {
     menuItem2: "Hvordan det Fungerer",
     menuItem3: "Anmeldelser",
     menuItem4: "Kontakt Oss",
-    loginTooltip: "Logg Inn",
+    loginTooltip: "Min Konto",
     cartToolTip: "Handlevogn",
     //How it works section
     howPreHeading: "3 enkle steg",

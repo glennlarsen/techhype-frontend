@@ -13,6 +13,7 @@ import Terms from "pages/Terms";
 import Privacy from "pages/Privacy";
 import Faq from "pages/Faq";
 import OrderConfirmation from "pages/OrderConfirmation";
+import Admin from "pages/Admin";
 
 import { LangProvider } from "context/LangContext";
 import ScrollToTop from "components/ScrollToTop";
@@ -40,6 +41,7 @@ function App() {
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/faq" element={<Faq />} />
+            <Route path="/dashboard" element={<Admin />} />
           </Routes>
         </Router>
         </FormProvider>
