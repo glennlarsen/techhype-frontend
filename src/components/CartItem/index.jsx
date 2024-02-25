@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useShoppingCart } from "context/ShoppingCartContext";
-import { products } from "data/products";
 import { formatCurrency } from "utils/formatCurrency";
 import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
@@ -11,6 +10,8 @@ import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import useProducts from "utils/useProducts";
 
 // Define your custom breakpoints
 const customBreakpoints = {
@@ -32,9 +33,10 @@ const theme = createTheme({
 const CartItem = ({ id, quantity }) => {
   const [lang] = useContext(LangContext);
   const isMobile = useMediaQuery({ maxWidth: 700 });
+  const { products, loading, error } = useProducts(); // Use the hook
   const { removeFromCart, increaseCartQuantity, decreaseCartQuantity } =
     useShoppingCart();
-  const item = products.find((i) => i.id === parseInt(id));
+  const item = products.find((i) => i.id.split("/").pop() === id);
   console.log("item: ", item);
   console.log("id:", id);
   if (item == null) return null;
@@ -60,7 +62,7 @@ const CartItem = ({ id, quantity }) => {
           >
             <Link to={`/shop/${id}`}>
               <img
-                src={item.image[0]}
+                src={item.images[0].src}
                 style={{
                   width: "135px",
                   height: "85px",
@@ -77,7 +79,7 @@ const CartItem = ({ id, quantity }) => {
                   )}
                 </Box>
                 <Box sx={{ fontSize: ".80rem" }}>
-                  {formatCurrency(item.price)}
+                  {formatCurrency(item.variants[0].price.amount)}
                 </Box>
               </Box>
             </Link>
@@ -134,7 +136,7 @@ const CartItem = ({ id, quantity }) => {
                 }}
                 className="item-price-mobile"
               >
-                {formatCurrency(item.price * quantity)}
+                {formatCurrency(item.variants[0].price.amount * quantity)}
               </div>
             </Box>
             <Box
@@ -149,7 +151,7 @@ const CartItem = ({ id, quantity }) => {
                 style={{ minWidth: "100px", textAlign: "right" }}
                 className="item-price-desktop"
               >
-                {formatCurrency(item.price * quantity)}
+                {formatCurrency(item.variants[0].price.amount * quantity)}
               </div>
               <Tooltip title={content[lang]["cartRemove"]}>
                 <Button
@@ -174,14 +176,14 @@ const CartItem = ({ id, quantity }) => {
             {" "}
             <Link to={`/shop/${id}`}>
               <img
-                src={item.image[0]}
+                src={item.images[0].src}
                 style={{
                   width: "135px",
                   height: "85px",
                   objectFit: "cover",
                   borderRadius: "10px",
                 }}
-                alt={item.name}
+                alt={item.title}
               />
               <Box sx={{ textAlign: "left" }}>
                 <Box sx={{ fontSize: "1.1rem" }}>
@@ -191,7 +193,7 @@ const CartItem = ({ id, quantity }) => {
                   )}
                 </Box>
                 <Box sx={{ fontSize: ".80rem" }}>
-                  {formatCurrency(item.price)}
+                  {formatCurrency(item.variants[0].price.amount)}
                 </Box>
               </Box>
             </Link>
@@ -248,7 +250,7 @@ const CartItem = ({ id, quantity }) => {
                 }}
                 className="item-price-mobile"
               >
-                {formatCurrency(item.price * quantity)}
+                {formatCurrency(item.variants[0].price.amount * quantity)}
               </div>
             </Box>
             <Box
@@ -263,7 +265,7 @@ const CartItem = ({ id, quantity }) => {
                 style={{ minWidth: "100px", textAlign: "right" }}
                 className="item-price-desktop"
               >
-                {formatCurrency(item.price * quantity)}
+                {formatCurrency(item.variants[0].price.amount * quantity)}
               </div>
               <Tooltip title={content[lang]["cartRemove"]}>
                 <Button

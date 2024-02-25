@@ -21,10 +21,12 @@ import { color_primary, color_dark } from "constants/colors";
 import { useMediaQuery } from "react-responsive";
 import calculateStandardShipping from "utils/calculateStandardShipping";
 import calculateTotalPrice from "utils/calculateTotalPrice";
+import useProducts from "utils/useProducts";
 
 const Cart = () => {
   const [lang] = useContext(LangContext);
   const { cartItems } = useShoppingCart();
+  const { products, loading, error } = useProducts(); // Use the hook
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 500 });
@@ -86,7 +88,7 @@ const Cart = () => {
                   }}
                 >
                   {content[lang]["cartTotal"]}{" "}
-                  {calculateTotalPrice(null, cartItems)}
+                  {calculateTotalPrice(null, cartItems, products)}
                 </Box>
                 <Box
                   sx={{

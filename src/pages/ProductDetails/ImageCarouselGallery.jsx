@@ -6,8 +6,8 @@ function ImageCarouselGallery({ items }) {
 
   const images = itemsArray.map((image) => {
     return {
-      original: `${image}`,
-      thumbnail: `${image}`,
+      original: `${image.src}`,
+      thumbnail: `${image.src}`,
     };
   });
 

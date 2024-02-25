@@ -5,7 +5,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const ProductAccordions = ({ lang, content }) => {
+const ProductAccordions = ({ lang, content, description }) => {
   const [expandedAccordion, setExpandedAccordion] = useState(0);
 
   const handleAccordionChange = (index) => {
@@ -32,9 +32,7 @@ const ProductAccordions = ({ lang, content }) => {
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <p style={{ marginTop: 0 }}>{content[lang]["details1"]}</p>
-          <p>{content[lang]["details2"]}</p>
-          <p>{content[lang]["details3"]}</p>
+          <p style={{ marginTop: 0 }}>{description}</p>
         </AccordionDetails>
       </Accordion>
       <Accordion

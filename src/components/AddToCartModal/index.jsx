@@ -53,16 +53,16 @@ const AddToCartModal = ({ open, handleClose, lang, product, quantity, navigate }
             avatar={
               <img
                 style={{ width: "90px" }}
-                src={product.image[0]}
-                alt={product.name}
+                src={product.images[0].src}
+                alt={product.title}
               />
             }
-            title={`${quantity} x ${product.name}`}
-            subheader={formatCurrency(product.price)}
+            title={`${quantity} x ${product.title}`}
+            subheader={formatCurrency(product.variants[0].price.amount)}
           />
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <strong>{content[lang]["cartTotal"]}</strong>{" "}
-            {formatCurrency(product.price * quantity)}
+            {formatCurrency(product.variants[0].price.amount * quantity)}
           </Typography>
           <Box
             sx={{

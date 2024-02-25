@@ -13,6 +13,7 @@ import { useShoppingCart } from "context/ShoppingCartContext";
 import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import { color_primary, color_dark } from "constants/colors";
+import AuthContext from "utils/AuthContext";
 
 function debounce(func, delay) {
   let timeoutId;
@@ -45,6 +46,7 @@ function Navigation() {
   const { cartQuantity } = useShoppingCart();
   const sectionsRef = useRef([]);
   const [activeSection, setActiveSection] = useState(null);
+  const [auth, setAuth] = useContext(AuthContext);
 
   // Define an array of paths that should trigger the sticky navigation
   const stickyPaths = [
@@ -246,7 +248,7 @@ function Navigation() {
           </nav>
           <div className="nav-icons">
             <Tooltip title={content[lang]["loginTooltip"]}>
-              <Link to="/login">
+            <Link to={auth ? "/dashboard" : "/login"}>
                 <UilUserCircle size={25} color="white" />
               </Link>
             </Tooltip>
@@ -379,7 +381,7 @@ function Navigation() {
             </nav>
             <div className="nav-icons">
               <Tooltip title={content[lang]["loginTooltip"]}>
-                <Link to="/login">
+              <Link to={auth ? "/dashboard" : "/login"}>
                   <UilUserCircle size={25} color="white" />
                 </Link>
               </Tooltip>
