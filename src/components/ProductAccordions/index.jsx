@@ -32,7 +32,10 @@ const ProductAccordions = ({ lang, content, description }) => {
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <p style={{ marginTop: 0 }}>{description}</p>
+          <div
+            dangerouslySetInnerHTML={{ __html: description }}
+            style={{ marginTop: 0 }}
+          />
         </AccordionDetails>
       </Accordion>
       <Accordion

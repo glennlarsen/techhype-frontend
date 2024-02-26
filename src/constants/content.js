@@ -145,6 +145,7 @@ export const content = {
     cartTotal: "Total",
     closeModalButton: "Close",
     GoToCartModalButton: "Go to Cart",
+    outOfStock: "Out of Stock",
     //Checkout
     checkoutHeading: "Checkout",
     hideOrderSummary: "Hide Order Summary",
@@ -356,6 +357,7 @@ export const content = {
     faqQuestion3: "Hva skal jeg gjøre hvis jeg mister kortet mitt?",
     faqAnswer3:
       "Hvis du mister kortet ditt, kan du enkelt gå til kontoen din og blokkere det for å sikre at det ikke blir misbrukt.",
+      outOfStock: "Utsolgt",
     //Added to cart modal
     addedToCart: "Lagt i Handlevogn!",
     cartTotal: "Totalt",

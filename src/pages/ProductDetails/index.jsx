@@ -27,7 +27,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   const { products, loading, error } = useProducts(); // Use the hook
   console.log("numericId: ", id);
-  products.forEach(product => {
+  products.forEach((product) => {
     const productId = product.id.split("/").pop();
     console.log("Product id:", productId);
   });
@@ -40,8 +40,6 @@ const ProductDetails = () => {
   );
 
   console.log("product: ", product);
-
-
 
   const {
     register,
@@ -60,17 +58,16 @@ const ProductDetails = () => {
     handleOpen(quantity);
   };
 
-    // Optional: Handle loading and error states *fix better loading later*
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error loading products: {error.message}</div>;
-    if (!product) return <div>Product not found</div>;
+  // Optional: Handle loading and error states *fix better loading later*
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error loading products: {error.message}</div>;
+  if (!product) return <div>Product not found</div>;
 
   const breadcrumbsLinks = [
     { to: "/", label: content[lang]["home"] },
     { to: "/shop", label: content[lang]["shop"] },
     { to: "", label: product.title }, // You can modify this according to your needs
   ];
-  
 
   return (
     <Layout
@@ -89,6 +86,11 @@ const ProductDetails = () => {
               <span className="details-price">
                 {formatCurrency(product.variants[0].price.amount)}
               </span>
+              {product.variants[0].compareAtPrice ? (
+                <span className="price-compare">
+                  {formatCurrency(product.variants[0].compareAtPrice.amount)}
+                </span>
+              ) : null}
               <div className="details-add">
                 <SelectQuantityPicker
                   lang={lang}
@@ -96,11 +98,21 @@ const ProductDetails = () => {
                   quantity={quantity}
                   handleChange={handleChange}
                 />
-                <Button size="small" onClick={() => handleAddToCart(id)}>
-                  {content[lang]["addToCart"]}
+                <Button
+                  disabled={!product.availableForSale}
+                  size="small"
+                  onClick={() => handleAddToCart(id)}
+                >
+                  {product.availableForSale
+                    ? content[lang]["addToCart"]
+                    : content[lang]["outOfStock"]}
                 </Button>
               </div>
-              <ProductAccordions lang={lang} content={content} description={product.description} />
+              <ProductAccordions
+                lang={lang}
+                content={content}
+                description={product.descriptionHtml}
+              />
             </div>
           </div>
         </div>

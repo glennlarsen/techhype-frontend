@@ -25,8 +25,8 @@ import useProducts from "utils/useProducts";
 
 const Cart = () => {
   const [lang] = useContext(LangContext);
-  const { cartItems } = useShoppingCart();
   const { products, loading, error } = useProducts(); // Use the hook
+  const { cartItems } = useShoppingCart();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 500 });
@@ -38,6 +38,11 @@ const Cart = () => {
   const handleTooltipOpen = () => {
     setOpen(true);
   };
+
+   // Wait for the products to be loaded before rendering the cost calculations
+   if (loading) return <div>Loading...</div>;
+   if (error) return <div>Error: {error.message}</div>;
+   if (!products) return <div>Products not loaded</div>;
 
   return (
     <Layout page="Cart" description="Your shopping Cart">
@@ -78,7 +83,7 @@ const Cart = () => {
                     </Tooltip>
                   </ClickAwayListener>
                   {content[lang]["shipping"]}{" "}
-                  {formatCurrency(calculateStandardShipping(cartItems))}
+                  {formatCurrency(calculateStandardShipping(cartItems, products))}
                 </Box>
                 <Box
                   sx={{

@@ -8,15 +8,18 @@ import { formatCurrency } from "utils/formatCurrency";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-const Product = ({ title, image, variants, id }) => {
+const Product = ({ title, image, variants, id, availableForSale }) => {
   const [lang] = useContext(LangContext);
   const navigate = useNavigate();
-  const numericId = id.split('/').pop(); // Extracts the numeric ID part
+  const numericId = id.split("/").pop(); // Extracts the numeric ID part
 
   return (
     <Fade direction="up" triggerOnce>
       <div className="product-item">
         <div className="product-image">
+          {!availableForSale && (
+            <div className="product-label">{content[lang]["outOfStock"]}</div> // Label for unavailability
+          )}
           <LazyLoadImage
             alt={title}
             src={image}
@@ -28,7 +31,14 @@ const Product = ({ title, image, variants, id }) => {
         <div className="product-info">
           <div className="product-text">
             <h2>{title}</h2>
-            <span>{formatCurrency(variants[0].price.amount)}</span>
+            <div>
+              <span>{formatCurrency(variants[0].price.amount)}</span>
+              {variants[0].compareAtPrice ? (
+                <span className="price-compare">
+                  {formatCurrency(variants[0].compareAtPrice.amount)}
+                </span>
+              ) : null}
+            </div>
           </div>
           <Button
             size="small"
