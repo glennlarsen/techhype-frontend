@@ -10,15 +10,19 @@ import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import calculateTotalPrice from "utils/calculateTotalPrice";
 
+
+
 const OrderSummaryToggle = ({
   handleToggleOrderSummary,
   showOrderSummary,
   cartItems,
   shippingMethod,
   confirmationPage,
+  products
 }) => {
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const [lang] = useContext(LangContext);
+
 
   return (
     <>
@@ -73,7 +77,7 @@ const OrderSummaryToggle = ({
               )}
             </Typography>
             <Typography sx={{ fontWeight: "500", marginLeft: "auto" }}>
-              {calculateTotalPrice(shippingMethod, cartItems)}
+              {calculateTotalPrice(shippingMethod, cartItems, products)}
             </Typography>
           </Box>
           <OrderSummary
@@ -81,6 +85,7 @@ const OrderSummaryToggle = ({
             showOrderSummary={showOrderSummary}
             shippingMethod={shippingMethod}
             confirmationPage={confirmationPage}
+            products={products}
           />
         </Box>
       )}

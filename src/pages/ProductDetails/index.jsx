@@ -53,8 +53,8 @@ const ProductDetails = () => {
     setQuantity(event.target.value);
   };
 
-  const handleAddToCart = (id) => {
-    addToCart(id, quantity);
+  const handleAddToCart = (id, variantId) => {
+    addToCart(id, quantity, variantId);
     handleOpen(quantity);
   };
 
@@ -101,7 +101,7 @@ const ProductDetails = () => {
                 <Button
                   disabled={!product.availableForSale}
                   size="small"
-                  onClick={() => handleAddToCart(id)}
+                  onClick={() => handleAddToCart(id, product.variants[0].id)}
                 >
                   {product.availableForSale
                     ? content[lang]["addToCart"]

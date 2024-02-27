@@ -8,7 +8,7 @@ export const MAX_POSTAL_CODE = 8;
 export const MIN_STREET = 5;
 export const FULL_NAME = 2;
 export const MIN_CITY_CHARACTERS = 2;
-export const SHIPPING_COST = 59;
+export const SHIPPING_COST = 69;
 
 //Regex
 export const EMAIL_REGEX = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;

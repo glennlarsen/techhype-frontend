@@ -11,9 +11,12 @@ import AppTheme from "components/forms/AppTheme";
 import OrderSummaryToggle from "components/OrderSummaryToggle";
 import CheckoutForm from "components/CheckoutForm";
 
+import useProducts from "utils/useProducts";
+
 const Checkout = () => {
   const [lang] = useContext(LangContext);
   const { cartItems } = useShoppingCart();
+  const { products, loading, error } = useProducts(); // Use the hook
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const [showOrderSummary, setShowOrderSummary] = useState(false);
   const navigate = useNavigate();
@@ -39,6 +42,7 @@ const Checkout = () => {
           handleToggleOrderSummary={handleToggleOrderSummary}
           showOrderSummary={showOrderSummary}
           cartItems={cartItems}
+          products={products}
           shippingMethod="standard"
         />
         <section className="checkout top-overlay">
@@ -74,6 +78,7 @@ const Checkout = () => {
                 cartItems={cartItems}
                 showOrderSummary={showOrderSummary}
                 shippingMethod="standard"
+                products={products}
               />
             )}
           </div>

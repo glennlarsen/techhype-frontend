@@ -23,14 +23,14 @@ export function ShoppingCartProvider({ children }) {
     return cartItems.find((item) => item.id === id)?.quantity || 0;
   }
 
-  function addToCart(id, amount) {
+  function addToCart(id, amount, variantId) {
     setCartItems((currItems) => {
       if (currItems.find((item) => item.id === id) == null) {
-        return [...currItems, { id, quantity: amount }];
+        return [...currItems, { id, quantity: amount, variantId }];
       } else {
         return currItems.map((item) => {
           if (item.id === id) {
-            return { ...item, quantity: item.quantity + amount };
+            return { ...item, quantity: item.quantity + amount, variantId };
           } else {
             return item;
           }

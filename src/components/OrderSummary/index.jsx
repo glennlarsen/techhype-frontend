@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Stack, Paper, Box, Collapse, Typography } from "@mui/material";
 import { useMediaQuery } from "react-responsive";
-import { products } from "data/products";
 import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 import { color_primary, color_dark, color_light } from "constants/colors";
@@ -18,6 +17,7 @@ const OrderSummary = ({
   cartItems,
   shippingMethod,
   confirmationPage,
+  products,
 }) => {
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const [lang] = useContext(LangContext);
@@ -42,14 +42,15 @@ const OrderSummary = ({
               {/* Map through the cartItems array and find the corresponding product */}
               {cartItems.map((item) => {
                 const product = products.find(
-                  (product) => product.id === parseInt(item.id)
+                  (product) => product.id.split("/").pop() === item.id
                 );
                 const { quantity } = item;
+                const productId = product.id.split("/").pop();
 
                 // Pass item and product information to the CartItemSummary component
                 return (
                   <OrderSummaryItems
-                    key={product.id}
+                    key={productId}
                     quantity={quantity}
                     {...product}
                   />
@@ -65,7 +66,11 @@ const OrderSummary = ({
               >
                 <Typography>{content[lang]["checkoutShipping"]}</Typography>
                 {formatCurrency(
-                  calculateFinalShippingCost(shippingMethod, cartItems)
+                  calculateFinalShippingCost(
+                    shippingMethod,
+                    cartItems,
+                    products
+                  )
                 )}
               </Box>
               <Box
@@ -79,7 +84,7 @@ const OrderSummary = ({
                   {content[lang]["checkoutTotal"]}
                 </Typography>
                 <Typography sx={{ fontWeight: "500" }}>
-                  {calculateTotalPrice(shippingMethod, cartItems)}
+                  {calculateTotalPrice(shippingMethod, cartItems, products)}
                 </Typography>
               </Box>
             </Stack>
@@ -115,14 +120,15 @@ const OrderSummary = ({
             {/* Map through the cartItems array and find the corresponding product */}
             {cartItems.map((item) => {
               const product = products.find(
-                (product) => product.id === parseInt(item.id)
+                (product) => product.id.split("/").pop() === item.id
               );
               const { quantity } = item;
+              const productId = product.id.split("/").pop();
 
               // Pass item and product information to the CartItemSummary component
               return (
                 <OrderSummaryItems
-                  key={product.id}
+                  key={productId}
                   quantity={quantity}
                   {...product}
                 />
@@ -138,7 +144,7 @@ const OrderSummary = ({
             >
               <Typography>{content[lang]["checkoutShipping"]}</Typography>
               {formatCurrency(
-                calculateFinalShippingCost(shippingMethod, cartItems)
+                calculateFinalShippingCost(shippingMethod, cartItems, products)
               )}
             </Box>
             <Box
@@ -152,7 +158,7 @@ const OrderSummary = ({
                 {content[lang]["checkoutTotal"]}
               </Typography>
               <Typography sx={{ fontWeight: "500" }}>
-                {calculateTotalPrice(shippingMethod, cartItems)}
+                {calculateTotalPrice(shippingMethod, cartItems, products)}
               </Typography>
             </Box>
             <Paper

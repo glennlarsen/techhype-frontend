@@ -13,7 +13,7 @@ const calculateStandardShipping = (cartItems, products) => {
     const item = products.find((i) => i.id.split("/").pop() === cartItem.id);
     console.log("item shipping: ", item);
     return total + (item?.variants[0].price.amount || 0) * cartItem.quantity;
-  }, 0) > 500
+  }, 0) > 2001
     ? 0
     : SHIPPING_COST;
 };

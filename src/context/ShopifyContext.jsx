@@ -6,7 +6,7 @@ import Client from 'shopify-buy';
 // Initialize the client
 const shopifyClient = Client.buildClient({
   domain: 'techhype-business-card.myshopify.com',
-  storefrontAccessToken: 'c83d1af304caf10c50caa78b014c2d44'
+  storefrontAccessToken: '5c08c7f290e432e9edf0d04e84ea329d'
 });
 
 // Create a context

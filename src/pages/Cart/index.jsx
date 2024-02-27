@@ -22,6 +22,7 @@ import { useMediaQuery } from "react-responsive";
 import calculateStandardShipping from "utils/calculateStandardShipping";
 import calculateTotalPrice from "utils/calculateTotalPrice";
 import useProducts from "utils/useProducts";
+import createShopifyCheckout from "utils/shopifyCheckout";
 
 const Cart = () => {
   const [lang] = useContext(LangContext);
@@ -38,6 +39,23 @@ const Cart = () => {
   const handleTooltipOpen = () => {
     setOpen(true);
   };
+
+  // In your Cart component or where you handle the checkout process
+async function handleCheckout() {
+  try {
+    const checkout = await createShopifyCheckout(cartItems);
+    if (checkout && checkout.webUrl) {
+      // Redirect user to Shopify Checkout
+      window.location.href = checkout.webUrl;
+    } else {
+      // Handle errors (e.g., display a message to the user)
+      console.error('Failed to create Shopify checkout.');
+    }
+  } catch (error) {
+    console.error('Error during checkout creation:', error);
+  }
+}
+
 
    // Wait for the products to be loaded before rendering the cost calculations
    if (loading) return <div>Loading...</div>;
@@ -93,7 +111,7 @@ const Cart = () => {
                   }}
                 >
                   {content[lang]["cartTotal"]}{" "}
-                  {calculateTotalPrice(null, cartItems, products)}
+                  {calculateTotalPrice(cartItems, products)}
                 </Box>
                 <Box
                   sx={{
@@ -121,7 +139,7 @@ const Cart = () => {
                   </Paper>
                   <Button
                     size={!isMobile ? "small" : ""}
-                    onClick={() => navigate("/checkout")}
+                    onClick={() => handleCheckout()}
                   >
                     {content[lang]["checkout"]}
                   </Button>
