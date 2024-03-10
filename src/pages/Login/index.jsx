@@ -21,7 +21,7 @@ import AlertMessage from "components/forms/AlertMessage";
 import useApi from "utils/useApi";
 
 
-const Login = () => {
+const Login = ({ toggleDrawer}) => {
   const [lang] = useContext(LangContext);
   const [formMode, setFormMode] = useState("login");
   const [pageTitle, setPageTitle] = useState("Login");
@@ -195,7 +195,7 @@ const Login = () => {
   };
 
   return (
-    <Layout page={pageTitle} description={metaDescription}>
+    <Layout page={pageTitle} description={metaDescription} toggleDrawer={toggleDrawer}>
       <section className="login top-overlay">
         <div className="container-inner login-container">
           <Paper

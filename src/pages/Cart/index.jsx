@@ -24,7 +24,7 @@ import calculateTotalPrice from "utils/calculateTotalPrice";
 import useProducts from "utils/useProducts";
 import createShopifyCheckout from "utils/shopifyCheckout";
 
-const Cart = () => {
+const Cart = ({ toggleDrawer}) => {
   const [lang] = useContext(LangContext);
   const { products, loading, error } = useProducts(); // Use the hook
   const { cartItems } = useShoppingCart();
@@ -63,7 +63,7 @@ async function handleCheckout() {
    if (!products) return <div>Products not loaded</div>;
 
   return (
-    <Layout page="Cart" description="Your shopping Cart">
+    <Layout page="Cart" description="Your shopping Cart" toggleDrawer={toggleDrawer}>
       <section className="cart top-overlay">
         <div className="container-inner cart-container">
           <h1>{content[lang]["cartHeading"]}</h1>

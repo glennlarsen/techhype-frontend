@@ -1,12 +1,13 @@
 // src/contexts/ShopifyContext.js
 
+import { SHOPIFY_ACCESS_TOKEN } from 'constants/apiKeys';
 import React, { createContext, useContext } from 'react';
 import Client from 'shopify-buy';
 
 // Initialize the client
 const shopifyClient = Client.buildClient({
   domain: 'techhype-business-card.myshopify.com',
-  storefrontAccessToken: '5c08c7f290e432e9edf0d04e84ea329d'
+  storefrontAccessToken: SHOPIFY_ACCESS_TOKEN
 });
 
 // Create a context

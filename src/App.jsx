@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import "./sass/style.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "pages/Home";
@@ -20,8 +21,14 @@ import { LangProvider } from "context/LangContext";
 import ScrollToTop from "components/ScrollToTop";
 import { ShoppingCartProvider } from "context/ShoppingCartContext";
 import { FormProvider } from "context/FormContext";
+import CartDrawer from "components/CartDrawer";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
   return (
     <AuthProvider>
       <LangProvider>
@@ -29,13 +36,14 @@ function App() {
           <FormProvider>
             <Router>
               <ScrollToTop />
+              <CartDrawer isOpen={isOpen} toggleDrawer={toggleDrawer} />
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/shop/:id" element={<ProductDetails />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/cart" element={<Cart />} />
+                <Route path="/" element={<Home toggleDrawer={toggleDrawer} />} />
+                <Route path="/contact" element={<Contact toggleDrawer={toggleDrawer} />} />
+                <Route path="/shop" element={<Shop toggleDrawer={toggleDrawer} />} />
+                <Route path="/shop/:id" element={<ProductDetails toggleDrawer={toggleDrawer} />} />
+                <Route path="/login" element={<Login toggleDrawer={toggleDrawer} />} />
+                <Route path="/cart" element={<Cart toggleDrawer={toggleDrawer} />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/payment" element={<Payment />} />
                 <Route
@@ -43,9 +51,9 @@ function App() {
                   element={<OrderConfirmation />}
                 />
                 <Route path="/contactDetails" element={<ContactDetails />} />
-                <Route path="/terms" element={<Terms />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/faq" element={<Faq />} />
+                <Route path="/terms" element={<Terms toggleDrawer={toggleDrawer} />} />
+                <Route path="/privacy" element={<Privacy toggleDrawer={toggleDrawer} />} />
+                <Route path="/faq" element={<Faq toggleDrawer={toggleDrawer} />} />
                 <Route path="/dashboard" element={<Admin />} />
                 <Route
                   path="*"

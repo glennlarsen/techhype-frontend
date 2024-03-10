@@ -2,11 +2,11 @@ import { Link as RouterLink } from "react-router-dom";
 import Layout from "components/Layout";
 import { Container, Typography, Stack } from "@mui/material";
 
-const Privacy = () => {
+const Privacy = ({ toggleDrawer}) => {
   const lastUpdate = "13.08.2023";
 
   return (
-    <Layout page="Privacy" description="Privacy for Techhype">
+    <Layout page="Privacy" description="Privacy for Techhype" toggleDrawer={toggleDrawer}>
       <section className="privacy top-overlay">
         <Container maxWidth="md" className="terms-container" sx={{padding: "0 1.5em"}}>
           <h1 style={{ textAlign: "center" }}>Privacy Policy</h1>

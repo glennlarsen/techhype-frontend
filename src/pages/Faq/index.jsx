@@ -2,9 +2,9 @@ import { Link as RouterLink } from "react-router-dom";
 import Layout from "components/Layout";
 import { Container, Typography, Stack } from "@mui/material";
 
-const Faq = () => {
+const Faq = ({ toggleDrawer}) => {
   return (
-    <Layout page="FAQ" description="Frequently asked questions about Techhype">
+    <Layout page="FAQ" description="Frequently asked questions about Techhype" toggleDrawer={toggleDrawer}>
       <section className="faq top-overlay">
         <Container maxWidth="md" className="terms-container" sx={{padding: "0 1.5em"}}>
           <h1 style={{ textAlign: "center" }}>Frequently asked questions</h1>

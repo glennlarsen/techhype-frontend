@@ -35,7 +35,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-function Navigation() {
+function Navigation( {toggleDrawer}) {
   const [lang] = useContext(LangContext);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -47,6 +47,7 @@ function Navigation() {
   const sectionsRef = useRef([]);
   const [activeSection, setActiveSection] = useState(null);
   const [auth, setAuth] = useContext(AuthContext);
+  
 
   // Define an array of paths that should trigger the sticky navigation
   const stickyPaths = [
@@ -254,7 +255,7 @@ function Navigation() {
             </Tooltip>
             <Tooltip title={content[lang]["cartToolTip"]}>
               <Link
-                to="/cart"
+                onClick={toggleDrawer}
                 className="cart-icon"
                 style={{ position: "relative", textDecoration: "none" }}
               >
@@ -387,7 +388,7 @@ function Navigation() {
               </Tooltip>
               <Tooltip title={content[lang]["cartToolTip"]}>
                 <Link
-                  to="/cart"
+                  onClick={toggleDrawer}
                   className="cart-icon"
                   style={{ position: "relative", textDecoration: "none" }}
                 >

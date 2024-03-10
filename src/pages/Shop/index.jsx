@@ -6,7 +6,7 @@ import Product from "components/Product";
 import BreadcrumbsComponent from "components/BreadcrumbsComponent";
 import useProducts from "utils/useProducts";
 
-const Shop = () => {
+const Shop = ({ toggleDrawer}) => {
   const [lang] = useContext(LangContext);
   const { products, loading, error } = useProducts(); // Use the hook
 
@@ -23,6 +23,7 @@ const Shop = () => {
     <Layout
       page="Shop"
       description="Get started by purchasing your first digital business card from Techhype."
+      toggleDrawer={toggleDrawer}
     >
       <section className="shop top-overlay">
         <div className="container-inner shop-container">

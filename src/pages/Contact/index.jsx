@@ -4,13 +4,14 @@ import ContactForm from "components/ContactForm";
 import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
 
-function Contact() {
+function Contact({ toggleDrawer}) {
   const [lang, ] = useContext(LangContext);
 
   return (
     <Layout
       page="Contact"
       description="Feel free to contact our team for any inqueries about your order or to get more information about Techhype cards."
+      toggleDrawer={toggleDrawer}
     >
       <section className="contact">
         <div className="container-inner contact-container">

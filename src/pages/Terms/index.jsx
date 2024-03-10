@@ -2,11 +2,11 @@ import { Link as RouterLink } from "react-router-dom";
 import Layout from "components/Layout";
 import { Container, Typography, Stack } from "@mui/material";
 
-const Terms = () => {
+const Terms = ({ toggleDrawer}) => {
   const lastUpdate = "13.08.2023";
 
   return (
-    <Layout page="Terms" description="Terms and Conditions for Techhype">
+    <Layout page="Terms" description="Terms and Conditions for Techhype" toggleDrawer={toggleDrawer}>
       <section className="terms top-overlay">
         <Container maxWidth="md" className="terms-container" sx={{padding: "0 1.5em"}}>
           <h1 style={{ textAlign: "center" }}>Terms and Conditions</h1>

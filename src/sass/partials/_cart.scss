@@ -35,3 +35,36 @@
     display: none;
   }
 }
+
+/* Global styles or specific CSS module */
+.cart-drawer-container {
+  width: 100%!important; /* Ensures max width on mobile */
+  color: white;
+  padding: 2em;
+  background: $color-dark !important;
+  height: 100% !important;
+
+  .cart-drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+
+    h3 {
+      margin: 0;
+    }
+  }
+
+  .remove-item-button {
+    text-decoration: underline;
+    cursor: pointer;;
+  }
+}
+
+@media (min-width: 501px) { /* Adjusts for screens larger than mobile */
+  .cart-drawer-container {
+    width: fit-content !important; /* Fixed width on desktop */
+    min-width: 400px;
+    max-width: 500px;
+  }
+}

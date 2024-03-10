@@ -111,7 +111,7 @@ export const content = {
     cartRemove: "Remove",
     shipping: "Shipping",
     checkout: "Checkout",
-    shippingInfo: "Free shipping for orders above 500 Kr",
+    shippingInfo: "Free shipping for orders above 2000 Kr",
     cartTip: "Create your profile and design your card after Checkout.",
     goToShopButton: "Go To Shop",
     //BreadCrumbs
@@ -328,7 +328,7 @@ export const content = {
     cartRemove: "Fjern",
     shipping: "Frakt",
     checkout: "Til Kasse",
-    shippingInfo: "Fri frakt for ordre over 500 Kr",
+    shippingInfo: "Fri frakt for ordre over 2000 Kr",
     cartTip: "Opprett din profil og design kortet ditt etter Betaling.",
     goToShopButton: "Gå til butikken",
     //BreadCrumbs

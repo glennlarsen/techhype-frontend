@@ -16,30 +16,76 @@ import SelectQuantityPicker from "components/SelectQuantityPicker";
 import BreadcrumbsComponent from "components/BreadcrumbsComponent";
 
 import useProducts from "utils/useProducts";
+import {
+  SHOPIFY_ACCESS_TOKEN,
+  SHOPIFY_DOMAIN,
+  SHOPIFY_API_VERSION,
+} from "constants/apiKeys";
 
-const ProductDetails = () => {
+const ProductDetails = ({ toggleDrawer}) => {
   const [lang] = useContext(LangContext);
   const { id } = useParams(); // Get the cardId from the URL
   const [quantity, setQuantity] = useState(1);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
-  const { products, loading, error } = useProducts(); // Use the hook
-  console.log("numericId: ", id);
-  products.forEach((product) => {
-    const productId = product.id.split("/").pop();
-    console.log("Product id:", productId);
-  });
+  // Initialize metafield state
+  const [inventoryQuantity, setInventoryQuantity] = useState(null);
+  const { products, loading, error } = useProducts();
+
+  console.log("Inventory available: ", inventoryQuantity);
 
   const { addToCart } = useShoppingCart();
 
-  // Assuming `products` is an array of products with IDs in full GUID format
-  const product = products.find(
+  // Check if products are loaded and find the current product
+  const product = products?.find(
     (product) => product.id.split("/").pop() === id
   );
 
-  console.log("product: ", product);
+  useEffect(() => {
+    if (product) {
+      const fetchInventoryQuantity = async () => {
+        const query = JSON.stringify({
+          query: `
+            {
+              productByHandle(handle: "${product.handle}") {
+                metafield(namespace: "inventory", key: "quantity") {
+                  value
+                  type
+                }
+              }
+            }
+          `,
+        });
+
+        try {
+          const response = await fetch(
+            `${SHOPIFY_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "X-Shopify-Storefront-Access-Token": SHOPIFY_ACCESS_TOKEN,
+              },
+              body: query,
+            }
+          );
+
+          const jsonResponse = await response.json();
+          const inventoryMetafield =
+            jsonResponse.data.productByHandle.metafield;
+          setInventoryQuantity(
+            inventoryMetafield ? parseInt(inventoryMetafield.value) : null
+          );
+        } catch (error) {
+          console.error("Failed to fetch inventory quantity:", error);
+        }
+      };
+
+      fetchInventoryQuantity();
+    }
+  }, [product]);
 
   const {
     register,
@@ -55,7 +101,7 @@ const ProductDetails = () => {
 
   const handleAddToCart = (id, variantId) => {
     addToCart(id, quantity, variantId);
-    handleOpen(quantity);
+    toggleDrawer();
   };
 
   // Optional: Handle loading and error states *fix better loading later*
@@ -73,6 +119,7 @@ const ProductDetails = () => {
     <Layout
       page="Details"
       description="Get started by purchasing your first digital business card from Techhype."
+      toggleDrawer={toggleDrawer}
     >
       <section className="details top-overlay">
         <div className="container-inner details-container">
@@ -108,6 +155,12 @@ const ProductDetails = () => {
                     : content[lang]["outOfStock"]}
                 </Button>
               </div>
+              {inventoryQuantity < 10 && (
+                <div>
+                  <p className="low-inventory">Kun {inventoryQuantity} stk på lager</p>{" "}
+                  {/* Display available inventory */}
+                </div>
+              )}
               <ProductAccordions
                 lang={lang}
                 content={content}

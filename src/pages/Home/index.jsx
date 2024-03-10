@@ -13,7 +13,7 @@ import Benefits from "components/Benefits";
 import Reviews from "components/Reviews";
 import Clients from "components/Clients";
 
-function Home() {
+function Home({ toggleDrawer}) {
   const [lang] = useContext(LangContext);
   let location = useLocation();
 
@@ -48,6 +48,7 @@ function Home() {
     <Layout
       page="Home"
       description="Techhype is the next Generation digital Business Card. Tap and Share your contact details in one second."
+      toggleDrawer={toggleDrawer}
     >
       <section className="header" id="header">
         <div className="header-container container-inner">
