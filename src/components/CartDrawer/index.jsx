@@ -75,8 +75,8 @@ const CartDrawer = ({ isOpen, toggleDrawer }) => {
         <CloseIcon
           onClick={toggleDrawer}
           sx={{
-            maxWidth: "32px",
-            maxHeight: "32px",
+            maxWidth: "35px",
+            maxHeight: "35px",
             color: "white",
             cursor: "pointer",
           }}
@@ -93,7 +93,7 @@ const CartDrawer = ({ isOpen, toggleDrawer }) => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          height: "calc(100% - 70px)", // Adjust based on header height
+          height: cartItems.length > 0 ? "calc(100% - 70px)" : "inital", // Adjust based on header height
         }}
       >
         <Stack
@@ -164,8 +164,6 @@ const CartDrawer = ({ isOpen, toggleDrawer }) => {
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
-                alignItems: { xs: "end", sm: "start" },
-                flexDirection: { xs: "column-reverse", sm: "row" },
                 gap: "2em",
               }}
             >

@@ -75,7 +75,7 @@ const CartItem = ({ id, quantity }) => {
             >
               <Box
                 component="span"
-                sx={{ fontSize: "1.1rem", fontWeight: "bold" }}
+                sx={{ fontSize: "1rem", fontWeight: "bold" }}
               >
                 {item.title}
               </Box>

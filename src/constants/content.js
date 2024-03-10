@@ -239,7 +239,7 @@ export const content = {
     menuItem3: "Anmeldelser",
     menuItem4: "Kontakt Oss",
     loginTooltip: "Min Konto",
-    cartToolTip: "Handlevogn",
+    cartToolTip: "Handlekurv",
     //How it works section
     howPreHeading: "3 enkle steg",
     howHeading: "Hvordan Det Fungerer",
@@ -322,12 +322,12 @@ export const content = {
     resetPasswordButton: "Tilbakestill passord",
     backToLoginLink: "Tilbake til logg inn",
     //Cart Page
-    cartHeading: "Handlevogn",
-    cartEmpty: "Du har ingen varer i handlevognen",
+    cartHeading: "Handlekurv",
+    cartEmpty: "Du har ingen varer i Handlekurven",
     cartTotal: "Totalt",
     cartRemove: "Fjern",
     shipping: "Frakt",
-    checkout: "Til Kasse",
+    checkout: "Gå Til Kasse",
     shippingInfo: "Fri frakt for ordre over 2000 Kr",
     cartTip: "Opprett din profil og design kortet ditt etter Betaling.",
     goToShopButton: "Gå til butikken",
@@ -336,7 +336,7 @@ export const content = {
     shop: "Kom i Gang",
     //Product Details
     quantity: "Antall",
-    addToCart: "Legg i Handlevogn",
+    addToCart: "Legg i Handlekurv",
     detailsAccordionHeader: "Detaljer",
     details1:
       "Techhype tar det beskjedne visittkortet rett inn i det 21. århundret med fullt integrert NFC-teknologi.",
@@ -359,10 +359,10 @@ export const content = {
       "Hvis du mister kortet ditt, kan du enkelt gå til kontoen din og blokkere det for å sikre at det ikke blir misbrukt.",
       outOfStock: "Utsolgt",
     //Added to cart modal
-    addedToCart: "Lagt i Handlevogn!",
+    addedToCart: "Lagt i Handlekurv!",
     cartTotal: "Totalt",
     closeModalButton: "Lukk",
-    GoToCartModalButton: "Til Handlevogn",
+    GoToCartModalButton: "Til Handlekurv",
     //Checkout
     checkoutHeading: "Kasse",
     hideOrderSummary: "Skjul din Bestilling",
@@ -381,7 +381,7 @@ export const content = {
     checkoutStreet: "Gateadresse",
     checkoutPostal: "Postnummer",
     checkoutCity: "By",
-    checkoutReturnToCart: "Til Handlevogn",
+    checkoutReturnToCart: "Til Handlekurv",
     paymentButtonShort: "Betaling",
     paymentButtonLong: "Fortsett til Betaling",
     discountCode: "Rabatt Kode",
