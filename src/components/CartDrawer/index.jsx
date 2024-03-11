@@ -176,8 +176,14 @@ const CartDrawer = ({ isOpen, toggleDrawer }) => {
               gap: "1em",
             }}
           >
+            <Divider
+              variant="middle"
+              width="100%"
+              color="white"
+              sx={{ marginTop: ".5em" }}
+            />
             {content[lang]["cartEmpty"]}
-            <ShoppingBasketIcon sx={{ color: grey[300], fontSize: 50 }} />
+            <ShoppingBasketIcon sx={{ color: grey[300], fontSize: 40 }} />
             <Button onClick={() => handleGoToShop()} size="small">
               {content[lang]["goToShopButton"]}
             </Button>

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "components/Layout";
 import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
-import CartItem from "components/CartItem";
+import MainCartItem from "components/MainCartItem";
 import { Paper } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -69,7 +69,7 @@ async function handleCheckout() {
           <h1>{content[lang]["cartHeading"]}</h1>
           <Stack spacing={2} sx={{ maxWidth: 1000, margin: "0 auto" }}>
             {cartItems.map((item) => (
-              <CartItem key={item.id} {...item} />
+              <MainCartItem key={item.id} {...item} />
             ))}
             {cartItems.length > 0 ? (
               <>
@@ -155,7 +155,7 @@ async function handleCheckout() {
                 }}
               >
                 {content[lang]["cartEmpty"]}
-                <ShoppingBasketIcon sx={{ color: grey[300], fontSize: 50 }} />
+                <ShoppingBasketIcon sx={{ color: grey[300], fontSize: 40 }} />
                 <Button onClick={() => navigate("/shop")} size="small">
                   {content[lang]["goToShopButton"]}
                 </Button>
