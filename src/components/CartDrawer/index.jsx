@@ -67,6 +67,7 @@ const CartDrawer = ({ isOpen, toggleDrawer }) => {
       lockBackgroundScroll={true}
       direction="right"
       className="cart-drawer-container"
+      zIndex="300"
     >
       <div className="cart-drawer-header">
         <h3>
@@ -82,18 +83,11 @@ const CartDrawer = ({ isOpen, toggleDrawer }) => {
           }}
         />
       </div>
-
-      <Divider
-        variant="middle"
-        width="100%"
-        color="white"
-        sx={{ marginLeft: "0 !important", margin: "1em 0" }}
-      />
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
-          height: cartItems.length > 0 ? "calc(100% - 70px)" : "inital", // Adjust based on header height
+          height: cartItems.length > 0 ? "calc(100% - 50px)" : "inital", // Adjust based on header height
         }}
       >
         <Stack
@@ -106,7 +100,7 @@ const CartDrawer = ({ isOpen, toggleDrawer }) => {
           }}
         >
           {cartItems.map((item) => (
-            <CartItem key={item.id} {...item} />
+            <CartItem key={item.id} {...item} toggleDrawer={toggleDrawer} />
           ))}
         </Stack>
         {cartItems.length > 0 ? (
@@ -121,7 +115,7 @@ const CartDrawer = ({ isOpen, toggleDrawer }) => {
               variant="middle"
               width="100%"
               color="white"
-              sx={{ marginLeft: "0 !important" }}
+              className="cart-drawer-divider"
             />
             <Box
               sx={{
@@ -129,6 +123,7 @@ const CartDrawer = ({ isOpen, toggleDrawer }) => {
                 display: "flex",
                 alignItems: "center",
                 gap: ".2em",
+                fontSize: ".9rem",
               }}
             >
               <Tooltip
@@ -154,7 +149,7 @@ const CartDrawer = ({ isOpen, toggleDrawer }) => {
               sx={{
                 marginLeft: "auto !important",
                 fontWeight: "bold",
-                fontSize: "1.1rem",
+                fontSize: "1rem",
               }}
             >
               {content[lang]["cartTotal"]}{" "}

@@ -21,7 +21,6 @@
     color: $color-dark;
     text-align: center;
   }
-
 }
 
 @media (min-width: 700px) {
@@ -38,7 +37,7 @@
 
 /* Global styles or specific CSS module */
 .cart-drawer-container {
-  width: 90%!important; /* Ensures max width on mobile */
+  width: 85% !important; /* Ensures max width on mobile */
   color: white;
   padding: 2em;
   background: $color-dark !important;
@@ -55,13 +54,51 @@
     }
   }
 
-  .remove-item-button {
-    text-decoration: underline;
-    cursor: pointer;;
+  .cart-drawer-divider {
+    margin-left: -31px;
+    width: -webkit-fill-available;
+    margin-right: -31px;
   }
+
+  .remove-item-button {
+    position: relative; /* Required for positioning the pseudo-element */
+    cursor: pointer;
+    font-size: 13px;
+    text-decoration: none; /* Remove the underline from the link itself */
+    overflow: hidden; /* Ensure the pseudo-element's animation is contained */
+  }
+  
+  .remove-item-button {
+    position: relative; /* Required for positioning the pseudo-element */
+    cursor: pointer;
+    font-size: 13px;
+    text-decoration: none; /* Remove the underline from the link itself */
+    overflow: hidden; /* Ensure the pseudo-element's animation is contained */
+  }
+  
+  .remove-item-button::after {
+    content: ''; /* Required for the pseudo-element to show */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Make the pseudo-element as wide as the button */
+    height: 1px; /* Height of the underline */
+    background-color: currentColor; /* Use the button's text color for the underline */
+    transform: scaleX(1); /* Initially, the underline is fully visible */
+    transform-origin: bottom left; /* The transformation starts from the left */
+    transition: transform 0.3s ease-out; /* Smooth transition for the effect */
+  }
+  
+  .remove-item-button:hover::after {
+    transform: scaleX(0); /* On hover, scale the underline down to 0 making it disappear */
+    transform-origin: bottom right; /* The underline fades away towards the right */
+  }
+  
+  
 }
 
-@media (min-width: 501px) { /* Adjusts for screens larger than mobile */
+@media (min-width: 501px) {
+  /* Adjusts for screens larger than mobile */
   .cart-drawer-container {
     width: fit-content !important; /* Fixed width on desktop */
     min-width: 400px;

@@ -4,13 +4,12 @@ import { useShoppingCart } from "context/ShoppingCartContext";
 import { formatCurrency } from "utils/formatCurrency";
 import { LangContext } from "context/LangContext";
 import { content } from "constants/content";
-import { useMediaQuery } from "react-responsive";
-import { Stack, Paper, Box, Tooltip, Button, Grid } from "@mui/material";
+import { Box, Tooltip, Button, Grid, Divider } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import CloseIcon from "@mui/icons-material/Close";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 
 import useProducts from "utils/useProducts";
 
@@ -39,6 +38,7 @@ const CartItem = ({ id, quantity }) => {
   const item = products.find((i) => i.id.split("/").pop() === id);
   if (item == null) return null;
 
+
   return (
     <ThemeProvider theme={theme}>
       <Grid
@@ -47,8 +47,14 @@ const CartItem = ({ id, quantity }) => {
         alignItems="center"
         marginLeft={"-24px !important"}
       >
+              <Divider
+        variant="middle"
+        width="100%"
+        color="white"
+        sx={{ marginTop: "1em" }}
+      />
         <Grid item xs={4}>
-          <Link to={`/shop/${id}`}>
+          <a href={`/shop/${id}`} >
             <img
               src={item.images[0].src}
               alt={item.title}
@@ -59,7 +65,7 @@ const CartItem = ({ id, quantity }) => {
                 borderRadius: "8px",
               }}
             />
-          </Link>
+          </a>
         </Grid>
         <Grid
           item
@@ -97,7 +103,12 @@ const CartItem = ({ id, quantity }) => {
           >
             <IconButton
               size="small"
-              sx={{ color: "white" }}
+              sx={{
+                color: "white",
+                ":hover": {
+                  opacity: 0.6,
+                },
+              }}
               aria-label="Decrement"
               onClick={() => decreaseCartQuantity(id)}
             >
@@ -106,7 +117,12 @@ const CartItem = ({ id, quantity }) => {
             <span style={{ fontSize: "14px" }}>{quantity}</span>
             <IconButton
               size="small"
-              sx={{ color: "white" }}
+              sx={{
+                color: "white",
+                ":hover": {
+                  opacity: 0.6,
+                },
+              }}
               aria-label="Increment"
               onClick={() => increaseCartQuantity(id)}
             >
@@ -120,7 +136,11 @@ const CartItem = ({ id, quantity }) => {
               justifyContent: "space-between",
             }}
           >
-            <span className="remove-item-button" color="error" onClick={() => removeFromCart(id)}>
+            <span
+              className="remove-item-button"
+              color="error"
+              onClick={() => removeFromCart(id)}
+            >
               {content[lang]["cartRemove"]}
             </span>
           </Box>
