@@ -27,7 +27,7 @@ body {
 
 p {
   font-family: $font-body;
-  letter-spacing: .12px;
+  letter-spacing: 0.12px;
 }
 
 .wrapper {
@@ -42,7 +42,6 @@ li .MuiButtonBase-root {
   display: flex !important;
   padding: inherit !important;
 }
-
 
 @keyframes pulseAnimation {
   0% {
@@ -70,8 +69,23 @@ li .MuiButtonBase-root {
 }
 
 .price-compare {
-  margin-left: .8em;
-  color:white !important;
+  margin-left: 0.8em;
+  color: white !important;
   text-decoration: line-through;
-  opacity: .8;
+  opacity: 0.8;
+}
+
+.poweredby-container {
+  margin-top: 1.5em;
+  display: flex;
+  align-items: center;
+  text-wrap: nowrap;
+  max-width: 190px;
+  font-size: 12px;
+  gap: .7em;
+}
+
+.poweredBy {
+  display: flex;
+  max-width: 70px;
 }

@@ -1,6 +1,8 @@
+
 [{
   "id": 892346788234,
-  "name": "Glenn Larsen",
+  "firstName": "Glenn",
+  "lastName": "Larsen",
   "phone": "+47 91771028",
   "email": "glenn@techhype.no",
   "address": "Vestre Holbergsallmennigen 10",
@@ -8,11 +10,13 @@
   "postcode": "5011",
   "country": "Norway",
   "website": "https://www.techhype.no",
-  "title": "Co-Founder & CTO"
+  "title": "Co-Founder & CTO",
+  "company": "Techhype AS"
 },
 {
   "id": 592356784215,
-  "name": "Cato Christensen",
+  "firstName": "Cato",
+  "lastName": "Christensen",
   "phone": "+47 90043239",
   "email": "cato@printing.no",
   "address": "Postboks 81 Bryn",
@@ -20,5 +24,34 @@
   "postcode": "0611",
   "country": "Norway",
   "website": "https://printing.no",
-  "title": "Brand Manager/Sales"
-}]
+  "title": "Brand Manager/Sales",
+  "company": "Techhype AS"
+},
+{
+  "id": 592656784315,
+  "firstName": "Akam ",
+  "lastName": "Barzingey",
+  "phone": "+47 95451265",
+  "email": "akam@techhype.no",
+  "address": "Raveien 51",
+  "city": "Sandefjord",
+  "postcode": "3232",
+  "country": "Norway",
+  "website": "https://techhype.no",
+  "title": "Founder & CEO",
+  "company": "Techhype AS"
+},
+{
+  "id": 992656754335,
+  "firstName": "Gunnar",
+  "lastName": "Larsen",
+  "phone": "+47 48185018",
+  "email": "norwayon@gmail.com",
+  "address": "Skottesalen 14",
+  "city": "Bergen",
+  "postcode": "5011",
+  "country": "Norway",
+  "title": "Pensjonist & Politiker",
+  "company": "Norgesdemokratene"
+}
+]
