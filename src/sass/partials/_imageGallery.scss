@@ -9,25 +9,17 @@
   }
 
   &-slides {
-    height: 330px;
-
     @media only screen and (max-width: 500px) {
       border-radius: 0;
     }
   }
 
-  &-slide {
-    height: 330px;
-  }
+
 
   &-image {
     height: 100%;
     width: 100%;
     object-fit: cover !important;
-
-    @media screen and (min-width: 568px) {
-      object-fit: contain !important;
-    }
   }
 
   &-thumbnails-wrapper {
@@ -49,6 +41,7 @@
     border-radius: $border-radius-primary;
     height: 100%;
     height: 60px;
+    object-fit: cover;
   }
 
   &-thumbnail.active,

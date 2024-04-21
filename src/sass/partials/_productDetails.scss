@@ -3,6 +3,10 @@
   background-color: $color-darker;
   padding: 0 1.5em;
   padding-bottom: 3.7em;
+  
+  &-container {
+    max-width: 1260px;
+  }
 
   &-item {
     display: flex;

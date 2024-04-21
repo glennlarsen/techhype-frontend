@@ -50,7 +50,7 @@ function App() {
                   path="/orderConfirmation"
                   element={<OrderConfirmation />}
                 />
-                <Route path="/contactDetails" element={<ContactDetails />} />
+                <Route path="/contactDetails/:id" element={<ContactDetails />} />
                 <Route path="/terms" element={<Terms toggleDrawer={toggleDrawer} />} />
                 <Route path="/privacy" element={<Privacy toggleDrawer={toggleDrawer} />} />
                 <Route path="/faq" element={<Faq toggleDrawer={toggleDrawer} />} />

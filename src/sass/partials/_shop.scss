@@ -30,6 +30,11 @@
 
     .product-image {
       position: relative;
+
+      img {
+        border-radius: 10px;
+        max-height: 500px;
+      }
     }
 
     .product-label {

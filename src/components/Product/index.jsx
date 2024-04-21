@@ -20,6 +20,7 @@ const Product = ({ title, image, variants, id, availableForSale }) => {
           {!availableForSale && (
             <div className="product-label">{content[lang]["outOfStock"]}</div> // Label for unavailability
           )}
+          <a href={`/shop/${numericId}`}>
           <LazyLoadImage
             alt={title}
             src={image}
@@ -27,6 +28,7 @@ const Product = ({ title, image, variants, id, availableForSale }) => {
             height="100%" // Set the desired height to avoid layout shifts
             width="100%" // Set the desired width to avoid layout shifts
           />
+          </a>
         </div>
         <div className="product-info">
           <div className="product-text">

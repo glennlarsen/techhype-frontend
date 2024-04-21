@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { useParams } from "react-router-dom";
 import { Button } from "techhype-components";
 import VCard from "vcard-creator";
 import Glenn from "images/glenn.jpg";
+import Cato from "images/cato-printingas.jpg";
+import PlaceholderAvatar from "images/placeholder-avatar.jpg";
 
 import { Stack } from "@mui/system";
 import { color_dark, color_darker } from "constants/colors";
@@ -14,15 +17,49 @@ import ContactHeading from "./components/ContactHeading";
 import DividerComponent from "./components/DividerComponent";
 import TextFieldComponent from "./components/TextFieldComponent";
 
-import contactInfo from "./data/contactInfo.json";
+import contactInfoData  from "./data/contactInfo.json";
 
 const ContactDetails = () => {
   const isBigScreen = useMediaQuery({ minWidth: 710 });
+  const { id } = useParams();
+  const [contactInfo, setContactInfo] = useState(null);
+  const [contactImage, setContactImage] = useState(null);  
+
+  console.log("id param:", id);
+  console.log("Contact info:", contactInfo);
+
+    // Effect to load the contact information based on the ID
+    useEffect(() => {
+      const foundContact = contactInfoData.find(contact => contact.id.toString() === id);
+      if (foundContact) {
+        setContactInfo(foundContact);
+      } else {
+        // Handle the case where no contact is found
+        console.error("No contact found for ID:", id);
+      }
+    }, [id]);
+
+
+    useEffect(() => {
+      if (id === "892346788234") {
+        setContactImage(Glenn);
+      } else if (id === "592356784215") {
+        setContactImage(Cato);
+      } else {
+        setContactImage(PlaceholderAvatar);
+      }
+    }, [id]); // Depend on id to only run when id changes
+    
+
+     // If contactInfo is not yet set, you can render a loading indicator or return null
+  if (!contactInfo) {
+    return <div>No contact info found</div>; // or some loading spinner
+  }
 
   const handleDownloadContact = async () => {
     try {
       // Fetch the image as a Blob
-      const imageResponse = await fetch(Glenn);
+      const imageResponse = await fetch(contactImage);
       const imageBlob = await imageResponse.blob();
 
       // Read the image Blob as Base64
@@ -94,7 +131,7 @@ const ContactDetails = () => {
           borderRadius: isBigScreen ? "10px" : 0,
         }}
       >
-        <Avatar src={Glenn} />
+        <Avatar src={contactImage} />
         <ContactHeading title={contactInfo.title} value={contactInfo.name} />
         <List sx={{width: "100%"}}>
         <DividerComponent />
