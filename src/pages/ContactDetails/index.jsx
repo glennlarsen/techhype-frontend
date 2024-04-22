@@ -83,20 +83,20 @@ const ContactDetails = () => {
 
         // Set properties
         vCard.addName(contactInfo.lastName, contactInfo.firstName);
-        vCard.addCompany(contactInfo.company);
+        vCard.addCompany(contactInfo.company && contactInfo.company);
         vCard.addPhoneNumber(contactInfo.phone, "CELL"); // Set phone number as mobile
         vCard.addEmail(contactInfo.email, "INTERNET"); // Set email as email
-        vCard.addJobtitle(contactInfo.title);
+        vCard.addJobtitle(contactInfo.title && contactInfo.title);
 
         // Add the address to the vCard
         vCard.addAddress(
           "",
           "",
-          contactInfo.address,
-          contactInfo.city,
+          contactInfo.address && contactInfo.address,
+          contactInfo.city && contactInfo.city,
           "",
-          contactInfo.postcode,
-          contactInfo.country,
+          contactInfo.postcode && contactInfo.postcode,
+          contactInfo.country && contactInfo.country,
           "HOME"
         );
 
@@ -168,31 +168,31 @@ const ContactDetails = () => {
               <TextFieldComponent label="Phone" value={contactInfo.phone} />
               <DividerComponent />
             </>
-          ) : null}
+          ) : ""}
           {contactInfo.email ? (
             <>
               <TextFieldComponent label="Email" value={contactInfo.email} />
               <DividerComponent />
             </>
-          ) : null}
+          ) : ""}
           {addressString ? (
             <>
               <TextFieldComponent label="Address" value={addressString} />
               <DividerComponent />
             </>
-          ) : null}
+          ) : ""}
           {contactInfo.website ? (
             <>
               <TextFieldComponent label="Website" value={contactInfo.website} />
               <DividerComponent />
             </>
-          ) : null}
+          ) : ""}
           {contactInfo.company ? (
             <>
               <TextFieldComponent label="Company" value={contactInfo.company} />
               <DividerComponent />
             </>
-          ) : null}
+          ) : ""}
           {/* Add other contact details as needed */}
           <Button style={{ marginTop: "2em" }} onClick={handleDownloadContact}>
             Save Contact
