@@ -53,5 +53,33 @@
   "country": "Norway",
   "title": "Pensjonist & Politiker",
   "company": "Norgesdemokratene"
+},
+{
+  "id": 592456734385,
+  "firstName": "Njaal",
+  "lastName": "Soleng",
+  "phone": "+47 452 11 263",
+  "email": "njaal@appsalon.no",
+  "address": "Vaskerelven 39",
+  "city": "Bergen",
+  "postcode": "5014",
+  "country": "Norway",
+  "website": "https://appsalon.no",
+  "title": "CTO & Shopify Expert",
+  "company": "Appsalon AS"
+},
+{
+  "id": 572456134381,
+  "firstName": "Glenn",
+  "lastName": "Larsen",
+  "phone": "+47 917 71 028",
+  "email": "glenn@appsalon.no",
+  "address": "Vaskerelven 39",
+  "city": "Bergen",
+  "postcode": "5014",
+  "country": "Norway",
+  "website": "https://appsalon.no",
+  "title": "Utvikler & Shopify Expert",
+  "company": "Appsalon AS"
 }
 ]

@@ -7,6 +7,7 @@ import Cato from "images/cato-printingas.jpg";
 import Akam from "images/akam.jpg";
 import Gunnar from "images/Gunnar.jpg";
 import PlaceholderAvatar from "images/placeholder-avatar.jpg";
+import Njaal from "images/njaal.jpg";
 import Logo from "logo/logo-long.png";
 
 import { Stack } from "@mui/system";
@@ -45,7 +46,7 @@ const ContactDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    if (id === "892346788234") {
+    if (id === "892346788234" || id === "572456134381") {
       setContactImage(Glenn);
     } else if (id === "592356784215") {
       setContactImage(Cato);
@@ -53,7 +54,10 @@ const ContactDetails = () => {
       setContactImage(Akam);
     } else if (id === "992656754335") {
       setContactImage(Gunnar);
-    } else {
+    } else if (id === "592456734385") {
+      setContactImage(Njaal);
+    } 
+     else {
       setContactImage(PlaceholderAvatar);
     }
   }, [id]); // Depend on id to only run when id changes
@@ -147,7 +151,6 @@ const ContactDetails = () => {
           alignItems: "center",
           margin: "1em auto",
           textAlign: "center",
-          background: color_darker,
           width: "100%",
           maxWidth: "700px",
           borderRadius: isBigScreen ? "10px" : 0,
