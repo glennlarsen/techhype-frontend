@@ -81,5 +81,19 @@
   "website": "https://appsalon.no",
   "title": "Utvikler & Shopify Expert",
   "company": "Appsalon AS"
+},
+{
+  "id": 662456134381,
+  "firstName": "Andreas",
+  "lastName": "Totland",
+  "phone": "+47 909 18 109",
+  "email": "andreas@appsalon.no",
+  "address": "Vaskerelven 39",
+  "city": "Bergen",
+  "postcode": "5014",
+  "country": "Norway",
+  "website": "https://appsalon.no",
+  "title": "Sales Manager",
+  "company": "Appsalon AS"
 }
 ]

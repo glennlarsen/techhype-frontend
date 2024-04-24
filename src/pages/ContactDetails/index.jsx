@@ -8,6 +8,7 @@ import Akam from "images/akam.jpg";
 import Gunnar from "images/Gunnar.jpg";
 import PlaceholderAvatar from "images/placeholder-avatar.jpg";
 import Njaal from "images/njaal.jpg";
+import Andreas from "images/andreas.jpg";
 import Logo from "logo/logo-long.png";
 
 import { Stack } from "@mui/system";
@@ -56,8 +57,9 @@ const ContactDetails = () => {
       setContactImage(Gunnar);
     } else if (id === "592456734385") {
       setContactImage(Njaal);
-    } 
-     else {
+    } else if (id === "662456134381") {
+      setContactImage(Andreas);
+    } else {
       setContactImage(PlaceholderAvatar);
     }
   }, [id]); // Depend on id to only run when id changes
@@ -171,31 +173,41 @@ const ContactDetails = () => {
               <TextFieldComponent label="Phone" value={contactInfo.phone} />
               <DividerComponent />
             </>
-          ) : ""}
+          ) : (
+            ""
+          )}
           {contactInfo.email ? (
             <>
               <TextFieldComponent label="Email" value={contactInfo.email} />
               <DividerComponent />
             </>
-          ) : ""}
+          ) : (
+            ""
+          )}
           {addressString ? (
             <>
               <TextFieldComponent label="Address" value={addressString} />
               <DividerComponent />
             </>
-          ) : ""}
+          ) : (
+            ""
+          )}
           {contactInfo.website ? (
             <>
               <TextFieldComponent label="Website" value={contactInfo.website} />
               <DividerComponent />
             </>
-          ) : ""}
+          ) : (
+            ""
+          )}
           {contactInfo.company ? (
             <>
               <TextFieldComponent label="Company" value={contactInfo.company} />
               <DividerComponent />
             </>
-          ) : ""}
+          ) : (
+            ""
+          )}
           {/* Add other contact details as needed */}
           <Button style={{ marginTop: "2em" }} onClick={handleDownloadContact}>
             Save Contact
