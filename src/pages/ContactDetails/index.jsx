@@ -9,6 +9,7 @@ import Gunnar from "images/Gunnar.jpg";
 import PlaceholderAvatar from "images/placeholder-avatar.jpg";
 import Njaal from "images/njaal.jpg";
 import Andreas from "images/andreas.jpg";
+import Thomas from "images/thomas.jpg";
 import Logo from "logo/logo-long.png";
 
 import { Stack } from "@mui/system";
@@ -59,6 +60,8 @@ const ContactDetails = () => {
       setContactImage(Njaal);
     } else if (id === "662456134381") {
       setContactImage(Andreas);
+    } else if (id === "632456132271") {
+      setContactImage(Thomas);
     } else {
       setContactImage(PlaceholderAvatar);
     }
@@ -142,7 +145,7 @@ const ContactDetails = () => {
     <Box
       sx={{
         background: color_dark,
-        height: "100vh",
+        minHeight: "100vh",
         display: "flex",
         flexFlow: "column",
       }}
@@ -150,12 +153,13 @@ const ContactDetails = () => {
       <Stack
         style={{
           padding: "1em",
+          background: color_dark,
           alignItems: "center",
           margin: "1em auto",
           textAlign: "center",
           width: "100%",
           maxWidth: "700px",
-          borderRadius: isBigScreen ? "10px" : 0,
+          minHeight: "calc(100vh - 2em)",
         }}
       >
         <Avatar src={contactImage} />

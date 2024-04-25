@@ -95,5 +95,19 @@
   "website": "https://appsalon.no",
   "title": "Sales Manager",
   "company": "Appsalon AS"
+},
+{
+  "id": 632456132271,
+  "firstName": "Thomas Lillebror",
+  "lastName": "Finne",
+  "phone": "+47 406 26 262",
+  "email": "thomas@appsalon.no",
+  "address": "Kristian Augusts Gate 13",
+  "city": "Oslo",
+  "postcode": "0164",
+  "country": "Norway",
+  "website": "https://appsalon.no",
+  "title": "CEO & Co-Founder",
+  "company": "Appsalon AS"
 }
 ]

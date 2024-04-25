@@ -4,7 +4,7 @@ import React from "react";
 function ContactHeading({ title, value }) {
   return (
     <div>
-      <h1 style={{ marginBottom: 0, marginTop: ".3em", fontSize: "2rem" }}>
+      <h1 style={{ marginBottom: 0, marginTop: ".3em", fontSize: "1.9rem" }}>
         {value}
       </h1>
       <span>{title}</span>
