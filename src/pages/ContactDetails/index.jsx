@@ -94,6 +94,7 @@ const ContactDetails = () => {
         vCard.addName(contactInfo.lastName, contactInfo.firstName);
         vCard.addCompany(contactInfo.company && contactInfo.company);
         vCard.addPhoneNumber(contactInfo.phone, "CELL"); // Set phone number as mobile
+        vCard.addPhoneNumber(contactInfo.phone2, "WORK");
         vCard.addEmail(contactInfo.email, "INTERNET"); // Set email as email
         vCard.addJobtitle(contactInfo.title && contactInfo.title);
 
@@ -175,6 +176,14 @@ const ContactDetails = () => {
           {contactInfo.phone ? (
             <>
               <TextFieldComponent label="Phone" value={contactInfo.phone} />
+              <DividerComponent />
+            </>
+          ) : (
+            ""
+          )}
+          {contactInfo.phone2 ? (
+            <>
+              <TextFieldComponent label="Phone Work" value={contactInfo.phone2} />
               <DividerComponent />
             </>
           ) : (
