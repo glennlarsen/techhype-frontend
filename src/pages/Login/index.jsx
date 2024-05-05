@@ -96,7 +96,7 @@ const Login = ({ toggleDrawer}) => {
         email: data.email,
         password: data.password,
       };
-      const response = await post("/auth/signup", formData); // signup endpoint
+      const response = await post("/auth/signup", formData); // sign-up endpoint
       console.log("response register: ", response);
       if (response.status === "success") {
         // Registration was successful, set the message
