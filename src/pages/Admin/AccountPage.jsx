@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 import AdminMenu from "components/AdminMenu";
 
 
-const Admin = () => {
+const AccountPage = () => {
   const { post, get } = useApi(); // Destructure the post function for making get requests
   const [user, setUser] = useState(null);
   console.log(user);
@@ -70,37 +70,41 @@ const Admin = () => {
           flexDirection: "column",
         }}
       >
-        <h1 style={{ textAlign: "center" }}>Dashboard</h1>
+        <h1 style={{ textAlign: "center" }}>Konto</h1>
 
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            maxWidth: "800px",
+            marginTop: "2em",
           }}
         >
-          <p>Hei {user ? user.FirstName : "Not available"}, Velkommen til din Techhype side. Her har du kontroll på din Konto, samt dine visittkort. 
-          Etter du har kjøpt et kort så kan du sende oss ønsket design på kortets utside rett fra din side. Klikk på "Kort" oppe i menyen for å komme i gang. 
-          Husk at du må kjøpe et visittkort før du kan sende oss ditt design. Ta gjerne kontakt med oss om du trenger hjelp eller om du har spesielle ønsker. 
-          Kjøper du større kvantum for bedrift, vennligst kontakt oss så kan vi ordne en god deal.</p>
-
-          <span style={{ fontWeight: "bold", marginTop: "2em" }}>Oversikt:</span>
+          <strong>Din bruker Info:</strong>
           <ul>
-            <li>Antall visittkort: {user ? user.Cards.length : "Ingen"}</li>
-            <li>Din E-post: {user ? user.Email : "Not available"}</li>
-            <li>Epost Verifisert: {user && user.Verified ? "Ja" : "Nei"}</li>
-            <li>Antall taps siste 30 dager: {user ? "0" : "Not available"}</li>
+            <li>First Name: {user ? user.FirstName : "Not available"}</li>
+            <li>Last Name: {user ? user.LastName : "Not available"}</li>
+            <li>Email: {user ? user.Email : "Not available"}</li>
+            <li>Verified: {user && user.Verified ? "Yes" : "Not available"}</li>
+            <li>Id: {user ? user.id : "Not available"}</li>
+            <li>
+              Cards:{" "}
+              {user && user.Cards.length > 0
+                ? user.Cards.map((card) => (
+                    <div key={card.id}>
+                      <p>Card Name: {card.Name}</p>
+                      <p>Active: {card.Active ? "Yes" : "No"}</p>
+                      <p>Designed: {card.Designed ? "Yes" : "No"}</p>
+                      {/* Ensure that CardProfiles is also correctly rendered if it's an array */}
+                      {card.CardProfiles &&
+                        card.CardProfiles.map((profile) => (
+                          <p key={profile.id}>Profile Name: {profile.Name}</p>
+                        ))}
+                    </div>
+                  ))
+                : "No Cards available."}
+            </li>
           </ul>
-
-          {/* Logout Button */}
-          <Button
-            style={{ background: "#6b1d1d", color: "white" }}
-            size="small"
-            onClick={handleLogout}
-          >
-            Logg ut
-          </Button>
           <a
             style={{
               display: "flex",
@@ -119,4 +123,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default AccountPage;
