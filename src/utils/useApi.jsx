@@ -5,6 +5,7 @@ import AuthContext from "utils/AuthContext";
 import refreshToken from "./refreshToken";
 
 const API_URL = process.env.REACT_APP_API_URL;
+console.log("API_URL:", API_URL); // Add this line for debugging
 
 const useApi = () => {
   const navigate = useNavigate();
