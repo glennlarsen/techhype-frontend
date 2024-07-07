@@ -73,7 +73,7 @@ const FacebookLoginButton = () => {
         data-size="large"
         data-button-type="continue_with"
         data-layout="default"
-        data-auto-logout-link="true"
+        data-auto-logout-link="false"
         data-use-continue-as="true"
         data-scope="public_profile,email"
         data-onlogin="checkLoginState"
