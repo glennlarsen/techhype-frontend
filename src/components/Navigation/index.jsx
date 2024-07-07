@@ -13,7 +13,7 @@ import { useShoppingCart } from "context/ShoppingCartContext";
 import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import { color_primary, color_dark } from "constants/colors";
-import AuthContext from "utils/AuthContext";
+import { useUser } from "utils/UserContext";
 
 function debounce(func, delay) {
   let timeoutId;
@@ -37,6 +37,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 function Navigation( {toggleDrawer}) {
   const [lang] = useContext(LangContext);
+  const { user, logoutUser } = useUser();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -46,7 +47,7 @@ function Navigation( {toggleDrawer}) {
   const { cartQuantity } = useShoppingCart();
   const sectionsRef = useRef([]);
   const [activeSection, setActiveSection] = useState(null);
-  const [auth, setAuth] = useContext(AuthContext);
+
   
 
   // Define an array of paths that should trigger the sticky navigation
@@ -249,7 +250,7 @@ function Navigation( {toggleDrawer}) {
           </nav>
           <div className="nav-icons">
             <Tooltip title={content[lang]["loginTooltip"]}>
-            <Link to={auth ? "/dashboard" : "/login"}>
+            <Link to={user ? "/dashboard" : "/login"}>
                 <UilUserCircle size={25} color="white" />
               </Link>
             </Tooltip>
@@ -382,7 +383,7 @@ function Navigation( {toggleDrawer}) {
             </nav>
             <div className="nav-icons">
               <Tooltip title={content[lang]["loginTooltip"]}>
-              <Link to={auth ? "/dashboard" : "/login"}>
+              <Link to={user ? "/dashboard" : "/login"}>
                   <UilUserCircle size={25} color="white" />
                 </Link>
               </Tooltip>

@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Dna } from "react-loader-spinner";
-import AuthContext from "utils/AuthContext";
 
 import { Paper } from "@mui/material";
 
@@ -19,9 +18,10 @@ import ForgotPasswordForm from "components/ForgotPasswordForm";
 import AlertMessage from "components/forms/AlertMessage";
 
 import useApi from "utils/useApi";
+import { useUser } from "utils/UserContext";
 
 
-const Login = ({ toggleDrawer}) => {
+const Login = ({ toggleDrawer }) => {
   const [lang] = useContext(LangContext);
   const [formMode, setFormMode] = useState("login");
   const [pageTitle, setPageTitle] = useState("Login");
@@ -33,7 +33,8 @@ const Login = ({ toggleDrawer}) => {
   const [registrationMessage, setRegistrationMessage] = useState(null); // Add this state variable
   const navigate = useNavigate();
   const { post } = useApi(); // Destructure the post function for making POST requests
-  const [, setAuth] = useContext(AuthContext);
+  const { updateUser, fetchUserData  } = useUser();
+
 
   function getSchemaForFormMode(formMode) {
     switch (formMode) {
@@ -59,31 +60,32 @@ const Login = ({ toggleDrawer}) => {
 
   const onLoginSubmit = async (data) => {
     try {
-      setLoading(true);
-      const response = await post("/auth/login", data); // Assuming this is your login endpoint
-      console.log("response login: ", response);
-      if (response.data.token) {
-        // Successful login, handle the token and navigate
-        // Store the token in local storage
-        setAuth(response.data.token);
-
-        // You can also store user-related information in local storage if needed
-        /*         UseLocalStorage("user", JSON.stringify(response.data)); */
-        navigate("/dashboard");
+        setLoading(true);
+        const response = await post("/auth/login", data); // Assuming this is your login endpoint
+        console.log("response status: ", response);
+        // Ensure response is received and parse JSON to access internal status
+        if (response.status === "success") {
+            // Successful login, handle the token and navigate
+            localStorage.setItem('token', response.data.token);
+            await fetchUserData();
+            navigate("/dashboard");
+        } else {
+            // Handle login errors based on API response
+            const errorMessage = response.data?.message || "Login failed, Incorrect email or password";
+            console.log("Login failed:", errorMessage);
+            setRegistrationStatus("fail");
+            setRegistrationMessage(errorMessage);
+        }
         setLoading(false);
-      } else {
-        // Handle login errors
-        console.log("Login failed:", response);
-        setRegistrationStatus("fail");
-        setRegistrationMessage("Login failed, Incorrect email or password");
-        setLoading(false);
-      }
     } catch (error) {
-      // Handle network errors or other exceptions
-      console.error("Login error:", error);
-      setLoading(false);
+        // Handle network errors or other exceptions
+        console.error("Login error:", error);
+        setLoading(false);
+        setRegistrationStatus("fail");
+        setRegistrationMessage("Network error or server is unreachable.");
     }
-  };
+};
+
 
   const onRegistrationSubmit = async (data) => {
     try {
@@ -195,12 +197,16 @@ const Login = ({ toggleDrawer}) => {
   };
 
   return (
-    <Layout page={pageTitle} description={metaDescription} toggleDrawer={toggleDrawer}>
+    <Layout
+      page={pageTitle}
+      description={metaDescription}
+      toggleDrawer={toggleDrawer}
+    >
       <section className="login top-overlay">
         <div className="container-inner login-container">
           <Paper
             elevation={3}
-            sx={{ maxWidth: "500px", margin: "2em auto", borderRadius: "10px" }}
+            sx={{ maxWidth: "550px", margin: "2em auto", borderRadius: "10px" }}
           >
             {loading ? ( // Show loader when loading is true
               <div style={{ display: "flex", justifyContent: "center" }}>

@@ -1,56 +1,54 @@
 // useApi.js
-import { useState, useEffect } from "react";
-import isTokenExpired from "utils/isTokenExpired";
-import refreshToken from "./refreshToken";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "utils/AuthContext";
+import refreshToken from "./refreshToken";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 const useApi = () => {
   const navigate = useNavigate();
-  const get = async (url, customHeaders = {}) => {
-    let token = localStorage.getItem("auth");
-    if (isTokenExpired(token)) {
-      token = await refreshToken(); // refresh the token
-      if (!token) {
-        navigate("/login");
-        // handle case where token couldn't be refreshed
-        // maybe redirect to login
-        return;
+  const [, setAuth] = useContext(AuthContext);
+
+  const authFetch = async (url, options = {}) => {
+    let response = await fetch(`${API_URL}${url}`, {
+      ...options,
+      credentials: 'include', // Necessary to include cookies with the request
+    });
+
+    if (response.status === 401) {
+      // Attempt to refresh token
+      const refreshed = await refreshToken();
+      if (refreshed) {
+        // Retry the original request with the new access token
+        response = await fetch(`${API_URL}${url}`, {
+          ...options,
+          credentials: 'include',
+        });
+      } else {
+        navigate('/login'); // Redirect to login on refresh token failure
       }
     }
+    return response;
+  };
 
-    try {
-      const response = await fetch(`${API_URL}${url}`, {
-        headers: {
-          "Content-Type": "application/json",
-          ...customHeaders, // Merge custom headers with the default headers
-        },
-      });
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      throw new Error("API request failed.");
-    }
+  const get = async (url) => {
+    const response = await authFetch(url, {
+      method: 'GET',
+    });
+    console.log("response: " + JSON.stringify(response));
+    return response.json();
   };
 
   const post = async (url, body) => {
-    try {
-      const response = await fetch(`${API_URL}${url}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      throw new Error("API request failed.");
-    }
+    const response = await authFetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    console.log("response: ", response);
+    return response.json();
   };
-
-  // Add other methods like put and delete as needed
 
   return { get, post };
 };

@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import useApi from "utils/useApi";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "utils/AuthContext";
 import { Button, Card } from "techhype-components";
 
 import { styled } from "@mui/material/styles";
@@ -9,57 +8,28 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import AdminMenu from "components/AdminMenu";
+import { useUser } from 'utils/UserContext';
 
 const CardsPage = () => {
   const { post, get } = useApi(); // Destructure the post function for making get requests
-  const [user, setUser] = useState(null);
+  const { user, updateUser, logoutUser } = useUser();
   console.log(user);
-  const [auth, setAuth] = useContext(AuthContext);
   const navigate = useNavigate();
-  console.log("Auth: ", auth);
+
+
 
   useEffect(() => {
     // Redirect to /login if not authenticated
-    if (!auth) {
+    if (!user) {
       navigate("/login");
     }
-  }, [auth, navigate]);
+  }, [user, navigate]);
 
   // Function to handle user logout
   const handleLogout = () => {
-    // Clear the token and any user-related data from local storage
-    setAuth(null);
-
-    // Redirect to the login page or any other desired location
-    navigate("/");
+    logoutUser(() => navigate('/login'));  // Navigate to login after logout
   };
 
-  useEffect(() => {
-    if (auth) {
-      // Include the token in the headers
-      const headers = {
-        authorization: `Bearer ${auth}`,
-      };
-
-      getUser(headers);
-    }
-  }, []);
-
-  const getUser = async (headers) => {
-    console.log("headers: ", headers);
-    try {
-      const response = await get("/users", headers); // Include the headers in the request
-      console.log("response user: ", response);
-      if (response.data.result) {
-        setUser(response.data.result.user);
-      } else {
-        console.log("user failed:", response);
-      }
-    } catch (error) {
-      // Handle network errors or other exceptions
-      console.error("user error:", error);
-    }
-  };
 
   return (
     <AdminMenu onLogout={handleLogout}>
@@ -102,7 +72,7 @@ const CardsPage = () => {
               ))
             ) : (
               <>
-                <Button>Kjøp Kort</Button>
+                <Button onClick={() => navigate("/shop")}>Kjøp Kort</Button>
                 <span>
                   Allerede kjøpt kort? Det kan ta noen timer før kortet ditt
                   kommer opp på kontoen din, vennligst vent inntill 6 timer før

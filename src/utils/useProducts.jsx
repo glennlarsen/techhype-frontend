@@ -13,7 +13,7 @@ const useProducts = () => {
     shopify.product.fetchAll()
       .then((fetchedProducts) => {
         setProducts(fetchedProducts);
-        console.log(fetchedProducts)
+        console.log("Fetchedd products: ", fetchedProducts)
         setLoading(false);
       })
       .catch((err) => {

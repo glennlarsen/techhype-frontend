@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import { Button as MuiButton } from "@mui/material";
 import { Facebook, Google } from "@mui/icons-material";
 import { content } from "constants/content";
+import FacebookLoginButton from "components/FacebookLoginButton";
 
 // Custom style for the Login with Google button
 const buttonStyle = {
@@ -14,9 +15,7 @@ const SocialMediaLogin = ({ lang }) => {
   return (
     <Grid container spacing={2} justifyContent="center">
       <Grid item sm={6}>
-        <MuiButton variant="contained" startIcon={<Facebook />} sx={buttonStyle}>
-          {content[lang]["loginFacebook"]}
-        </MuiButton>
+      <FacebookLoginButton />
       </Grid>
       <Grid item sm={6}>
         <MuiButton
