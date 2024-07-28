@@ -11,6 +11,7 @@ const PhoneAnimation = () => {
         loop
         muted
         playing
+        playsinline
       />
     </div>
   );
