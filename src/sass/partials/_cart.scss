@@ -101,7 +101,7 @@
   /* Adjusts for screens larger than mobile */
   .cart-drawer-container {
     width: fit-content !important; /* Fixed width on desktop */
-    min-width: 400px;
-    max-width: 500px;
+    min-width: 500px;
+    max-width: 600px;
   }
 }

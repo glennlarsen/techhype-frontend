@@ -113,7 +113,7 @@ export const content = {
     checkout: "Checkout",
     shippingInfo: "Free shipping for orders above 2000 Kr",
     cartTip: "Create your profile and design your card after Checkout.",
-    goToShopButton: "Go To Shop",
+    goToShopButton: "Buy card",
     //BreadCrumbs
     home: "Home",
     shop: "Get Started",
@@ -330,7 +330,7 @@ export const content = {
     checkout: "Gå Til Kasse",
     shippingInfo: "Fri frakt for ordre over 2000 Kr",
     cartTip: "Opprett din profil og design kortet ditt etter Betaling.",
-    goToShopButton: "Gå til butikken",
+    goToShopButton: "Kjøp kort",
     //BreadCrumbs
     home: "Hjem",
     shop: "Kom i Gang",
