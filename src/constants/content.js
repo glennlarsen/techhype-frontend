@@ -104,6 +104,9 @@ export const content = {
     forgotPasswordHeader: "Forgot Password",
     resetPasswordButton: "Reset Password",
     backToLoginLink: "Back to login",
+    //Reset password Page
+    resetTitle: "New Password",
+    resetButton: "Update",
     //Cart Page
     cartHeading: "Cart",
     cartEmpty: "You have no items in the shopping cart",
@@ -321,6 +324,9 @@ export const content = {
     forgotPasswordHeader: "Glemt passord",
     resetPasswordButton: "Tilbakestill passord",
     backToLoginLink: "Tilbake til logg inn",
+    //Reset password Page
+    resetTitle: "Nytt Passord",
+    resetButton: "Oppdater",
     //Cart Page
     cartHeading: "Handlekurv",
     cartEmpty: "Du har ingen varer i Handlekurven",

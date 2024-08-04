@@ -24,7 +24,7 @@ import ScrollToTop from "components/ScrollToTop";
 import { ShoppingCartProvider } from "context/ShoppingCartContext";
 import { FormProvider } from "context/FormContext";
 import CartDrawer from "components/CartDrawer";
-import ResetPasswordForm from "components/ResetPasswordForm";
+import ResetPassword from "pages/ResetPassword";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -87,7 +87,7 @@ function App() {
                     path="/faq"
                     element={<Faq toggleDrawer={toggleDrawer} />}
                   />
-                   <Route path="/auth/resetpassword/:token" element={<ResetPasswordForm />} />
+                   <Route path="/resetpassword/:token" element={<ResetPassword />} />
                   <Route path="/dashboard" element={<Admin />} />
                   <Route path="/account" element={<AccountPage />} />
                   <Route path="/cards" element={<CardsPage />} />
