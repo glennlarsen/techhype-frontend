@@ -138,10 +138,36 @@ const Login = ({ toggleDrawer }) => {
     }
   };
 
-  const onForgotPasswordSubmit = (data) => {
-    console.log(data); // Handle forgot password logic here
+  const onForgotPasswordSubmit = async (data) => {
+    setLoading(true); // Show loading indicator
+    try {
+      // Send the forgot password request
+      const response = await post("/auth/forgotpassword", data);
+      console.log("Forgot Password Response: ", response);
+  
+      if (response.status === "success") {
+        // If successful, show a success message
+        setRegistrationStatus("success");
+        setRegistrationMessage(
+          "A password reset link has been sent to your email. Please check your inbox."
+        );
+      } else {
+        // Handle any errors returned by the server
+        const errorMessage = response.data?.message || "An error occurred. Please try again.";
+        console.log("Forgot Password failed:", errorMessage);
+        setRegistrationStatus("fail");
+        setRegistrationMessage(errorMessage);
+      }
+    } catch (error) {
+      // Handle network errors or other exceptions
+      console.error("Forgot Password error:", error);
+      setRegistrationStatus("fail");
+      setRegistrationMessage("Network error or server is unreachable.");
+    } finally {
+      setLoading(false); // Hide loading indicator
+    }
   };
-
+  
   // Function to toggle the form mode
   const toggleFormMode = (mode) => {
     setFormMode(mode);

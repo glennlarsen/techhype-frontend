@@ -10,23 +10,40 @@ const FacebookLoginButton = () => {
   const { fetchUserData } = useUser();
 
   useEffect(() => {
-    // Function to check FB SDK status
-    const checkFB = () => {
+    // Load Facebook SDK
+    const loadFacebookSDK = () => {
+      console.log('Loading Facebook SDK...');
       if (window.FB) {
-        console.log('Facebook SDK is loaded.');
-        window.FB.XFBML.parse();
-        window.FB.getLoginStatus((response) => {
-          console.log('Checking FB login status...');
-          statusChangeCallback(response);
-        });
+        console.log('Facebook SDK already loaded.');
+        initializeFacebookSDK();
       } else {
-        console.log('Retrying FB SDK load check...');
-        setTimeout(checkFB, 100);
+        window.fbAsyncInit = initializeFacebookSDK;
+        const script = document.createElement('script');
+        script.src = "https://connect.facebook.net/en_US/sdk.js";
+        script.async = true;
+        script.defer = true;
+        script.onload = () => console.log('Facebook SDK script loaded.');
+        document.body.appendChild(script);
       }
     };
 
+    // Initialize Facebook SDK
+    const initializeFacebookSDK = () => {
+      console.log('Initializing Facebook SDK...');
+      window.FB.init({
+        appId: '3880683602256013',
+        cookie: true,
+        xfbml: true,
+        version: 'v20.0'
+      });
+
+      window.FB.AppEvents.logPageView();
+      window.FB.XFBML.parse();
+      checkLoginState();
+    };
+
     // Check if the Facebook SDK is loaded
-    checkFB();
+    loadFacebookSDK();
 
     // Make checkLoginState globally accessible
     window.checkLoginState = checkLoginState;
@@ -38,16 +55,19 @@ const FacebookLoginButton = () => {
     if (response.status === 'connected') {
       console.log('User is logged in with Facebook');
       const { accessToken } = response.authResponse;
+      console.log('accessToken:', accessToken);
 
       // Send the accessToken to your backend for validation and to get a JWT
       try {
         const backendResponse = await post('/auth/facebook', { accessToken });
+        console.log('backend response:', backendResponse);
+         console.log('User is logged in with Facebook');
         if (backendResponse.status === 'success') {
           localStorage.setItem('token', backendResponse.data.token);
           await fetchUserData();
           navigate('/dashboard');
         } else {
-          console.log('Facebook login failed:', backendResponse.data.message);
+          console.log('Facebook login failed:', backendResponse.message);
         }
       } catch (error) {
         console.error('Backend error:', error);
